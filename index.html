@@ -6,1122 +6,8 @@
   <title>✨ Lis Belleza Total ✨</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <style>
-    :root {
-      --primary-color: #ff69b4;
-      --secondary-color: #d68ab1;
-      --accent-color: #a64d79;
-      --light-color: #fff8fb;
-      --text-color: #5a2a5c;
-      --white: #ffffff;
-      --shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background-color: var(--light-color);
-      color: var(--text-color);
-      overflow-x: hidden;
-    }
-    
-    /* Navegación mejorada */
-    header {
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      color: var(--white);
-      padding: 15px 0;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    
-    .header-content {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .logo {
-      display: flex;
-      align-items: center;
-    }
-    
-    .logo i {
-      font-size: 2rem;
-      color: var(--white);
-    }
-    
-    .logo h1 {
-      font-size: 1.5rem;
-      font-weight: 900;
-      margin-left: 10px;
-      white-space: nowrap;
-    }
-    
-    .nav-desktop {
-      display: flex;
-      gap: 15px;
-    }
-    
-    .nav-desktop a {
-      color: var(--white);
-      text-decoration: none;
-      padding: 8px 12px;
-      font-weight: 500;
-      border-radius: 20px;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-      white-space: nowrap;
-    }
-    
-    .nav-desktop a:hover {
-      background-color: rgba(255,255,255,0.2);
-      transform: translateY(-2px);
-    }
-    
-    .user-menu {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .login-btn {
-      background: rgba(255,255,255,0.2);
-      color: var(--white);
-      border: none;
-      padding: 8px 15px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-    }
-    
-    .login-btn:hover {
-      background: rgba(255,255,255,0.3);
-    }
-    
-    .user-info {
-      display: none;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .user-info.active {
-      display: flex;
-    }
-    
-    .logout-btn {
-      background: rgba(255,255,255,0.2);
-      color: var(--white);
-      border: none;
-      padding: 8px 15px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-    }
-    
-    .logout-btn:hover {
-      background: rgba(255,255,255,0.3);
-    }
-    
-    /* Menú móvil */
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--white);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    
-    .nav-mobile {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: var(--primary-color);
-      flex-direction: column;
-      padding: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      gap: 10px;
-    }
-    
-    .nav-mobile.active {
-      display: flex;
-    }
-    
-    .nav-mobile a {
-      color: var(--white);
-      text-decoration: none;
-      padding: 10px 15px;
-      font-weight: 500;
-      border-radius: 10px;
-      transition: all 0.3s ease;
-      font-size: 1rem;
-    }
-    
-    .nav-mobile a:hover {
-      background-color: rgba(255,255,255,0.2);
-    }
-    
-    /* Hero Section mejorado */
-    .hero {
-      margin-top: 80px;
-      padding: 80px 20px;
-      text-align: center;
-      background: linear-gradient(rgba(255,105,180,0.7), rgba(214,138,177,0.7)), url('https://images.unsplash.com/photo-1556228724-cabf8b6e204e?auto=format&fit=crop&w=1950&q=80');
-      background-size: cover;
-      background-position: center;
-      color: var(--white);
-      position: relative;
-      overflow: hidden;
-      min-height: 60vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,105,180,0.3) 100%);
-      z-index: 1;
-    }
-    
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    
-    .hero h2 {
-      font-size: 2.8rem;
-      margin-bottom: 20px;
-      font-weight: 900;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      animation: fadeInUp 1s ease-out;
-      line-height: 1.2;
-    }
-    
-    .hero p {
-      font-size: 1.3rem;
-      margin-bottom: 30px;
-      font-weight: 500;
-      text-shadow: 0 1px 5px rgba(0,0,0,0.2);
-      animation: fadeInUp 1s ease-out 0.2s;
-      animation-fill-mode: both;
-      line-height: 1.4;
-    }
-    
-    .hero-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      justify-content: center;
-      animation: fadeInUp 1s ease-out 0.4s;
-      animation-fill-mode: both;
-    }
-    
-    .btn {
-      display: inline-block;
-      padding: 12px 25px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .btn-primary {
-      background: var(--white);
-      color: var(--primary-color);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    }
-    
-    .btn-secondary {
-      background: transparent;
-      color: var(--white);
-      border: 2px solid var(--white);
-    }
-    
-    .btn-secondary:hover {
-      background: var(--white);
-      color: var(--primary-color);
-    }
-    
-    /* Contenedor principal */
-    main {
-      padding: 60px 20px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    
-    section {
-      margin-bottom: 60px;
-    }
-    
-    h2 {
-      font-size: 2.2rem;
-      margin-bottom: 25px;
-      font-weight: 700;
-      color: var(--text-color);
-      text-align: center;
-      position: relative;
-      padding-bottom: 15px;
-    }
-    
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 4px;
-      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-      border-radius: 2px;
-    }
-    
-    /* Sobre Nosotros mejorado */
-    #sobre-nosotros {
-      padding: 40px 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,182,193,0.3));
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-    }
-    
-    .sobre-content {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-    }
-    
-    .sobre-texto {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    
-    .sobre-texto p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      margin-bottom: 20px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    .servicios-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    
-    .servicio-item {
-      background: rgba(255,255,255,0.7);
-      padding: 20px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      transition: all 0.3s ease;
-    }
-    
-    .servicio-item:hover {
-      background: var(--white);
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    
-    .servicio-item i {
-      color: var(--primary-color);
-      margin-right: 15px;
-      font-size: 1.5rem;
-      width: 30px;
-      text-align: center;
-    }
-    
-    .servicio-item h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin: 0;
-    }
-    
-    /* Galería mejorada con carrusel */
-    #galeria {
-      padding: 40px 0;
-    }
-    
-    .galeria-container {
-      position: relative;
-      max-width: 1000px;
-      margin: 0 auto;
-      overflow: hidden;
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-    }
-    
-    .galeria-slider {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
-    
-    .galeria-slide {
-      min-width: 100%;
-      position: relative;
-    }
-    
-    .galeria-slide img {
-      width: 100%;
-      height: 400px;
-      object-fit: cover;
-      display: block;
-    }
-    
-    .galeria-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-      color: var(--white);
-      padding: 20px;
-      text-align: center;
-    }
-    
-    .galeria-caption h3 {
-      font-size: 1.3rem;
-      margin-bottom: 5px;
-    }
-    
-    .galeria-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255,255,255,0.8);
-      color: var(--accent-color);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    
-    .galeria-nav:hover {
-      background: var(--white);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    
-    .galeria-nav.prev {
-      left: 15px;
-    }
-    
-    .galeria-nav.next {
-      right: 15px;
-    }
-    
-    .galeria-indicators {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 20px;
-    }
-    
-    .galeria-indicator {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--secondary-color);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .galeria-indicator.active {
-      background: var(--primary-color);
-      transform: scale(1.2);
-    }
-    
-    /* Tienda mejorada */
-    #tienda {
-      padding: 40px 0;
-    }
-    
-    .tienda-intro {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    
-    .tienda-intro p {
-      font-size: 1.1rem;
-      max-width: 800px;
-      margin: 0 auto;
-      line-height: 1.8;
-    }
-    
-    .tienda-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
-    
-    .producto-card {
-      background: var(--white);
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
-      position: relative;
-    }
-    
-    .producto-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
-    
-    .producto-imagen {
-      height: 200px;
-      overflow: hidden;
-      position: relative;
-    }
-    
-    .producto-imagen img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-    
-    .producto-card:hover .producto-imagen img {
-      transform: scale(1.1);
-    }
-    
-    .producto-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: var(--primary-color);
-      color: var(--white);
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-    
-    .producto-info {
-      padding: 20px;
-    }
-    
-    .producto-info h3 {
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-      color: var(--text-color);
-    }
-    
-    .producto-info p {
-      font-size: 0.9rem;
-      color: #666;
-      margin-bottom: 12px;
-      line-height: 1.5;
-    }
-    
-    .producto-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .producto-precio {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--accent-color);
-    }
-    
-    .producto-btn {
-      background: var(--primary-color);
-      color: var(--white);
-      border: none;
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-    }
-    
-    .producto-btn:hover {
-      background: var(--accent-color);
-      transform: scale(1.05);
-    }
-    
-    /* Reserva mejorada */
-    #reserva {
-      padding: 40px 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,182,193,0.3));
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-    }
-    
-    .reserva-container {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-    }
-    
-    .reserva-form {
-      background: var(--white);
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    }
-    
-    .form-group {
-      margin-bottom: 20px;
-    }
-    
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: var(--text-color);
-      font-size: 0.95rem;
-    }
-    
-    .form-control {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid #eee;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-family: 'Montserrat', sans-serif;
-      transition: all 0.3s ease;
-    }
-    
-    .form-control:focus {
-      border-color: var(--primary-color);
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(255,105,180,0.1);
-    }
-    
-    .btn-submit {
-      background: var(--primary-color);
-      color: var(--white);
-      border: none;
-      padding: 12px 30px;
-      border-radius: 50px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      width: 100%;
-    }
-    
-    .btn-submit:hover {
-      background: var(--accent-color);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(166,77,121,0.3);
-    }
-    
-    .reserva-info {
-      padding: 20px;
-    }
-    
-    .reserva-info h3 {
-      font-size: 1.4rem;
-      margin-bottom: 15px;
-      color: var(--text-color);
-    }
-    
-    .reserva-info p {
-      margin-bottom: 15px;
-      line-height: 1.7;
-      font-size: 1rem;
-    }
-    
-    .contact-item {
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-    
-    .contact-item i {
-      font-size: 1.2rem;
-      color: var(--primary-color);
-      margin-right: 12px;
-      width: 25px;
-      text-align: center;
-    }
-    
-    .contact-item span {
-      font-size: 0.95rem;
-    }
-    
-    /* Confirmación de reserva */
-    .confirmacion-reserva {
-      display: none;
-      background: #e8f5e9;
-      border: 2px solid #4caf50;
-      border-radius: 10px;
-      padding: 20px;
-      margin-top: 20px;
-      text-align: center;
-    }
-    
-    .confirmacion-reserva.active {
-      display: block;
-    }
-    
-    .confirmacion-reserva h3 {
-      color: #2e7d32;
-      margin-bottom: 15px;
-      font-size: 1.2rem;
-    }
-    
-    /* Apartado de reservas oculto */
-    #reservas-ocultas {
-      display: none;
-      background: #f5f5f5;
-      border-radius: 15px;
-      padding: 25px;
-      margin-top: 30px;
-    }
-    
-    #reservas-ocultas.active {
-      display: block;
-    }
-    
-    #reservas-ocultas h3 {
-      color: var(--accent-color);
-      margin-bottom: 20px;
-      text-align: center;
-      font-size: 1.3rem;
-    }
-    
-    .lista-reservas {
-      display: grid;
-      gap: 15px;
-    }
-    
-    .reserva-item {
-      background: var(--white);
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    
-    .reserva-item h4 {
-      color: var(--accent-color);
-      margin-bottom: 10px;
-      font-size: 1.1rem;
-    }
-    
-    .reserva-item p {
-      margin: 5px 0;
-      font-size: 0.9rem;
-    }
-    
-    /* Testimonios mejorados */
-    #testimonios {
-      padding: 40px 0;
-    }
-    
-    .testimonios-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-    }
-    
-    .testimonio-card {
-      background: var(--white);
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      position: relative;
-      transition: all 0.3s ease;
-    }
-    
-    .testimonio-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
-    
-    .testimonio-card::before {
-      content: '"';
-      position: absolute;
-      top: 10px;
-      left: 15px;
-      font-size: 3.5rem;
-      color: var(--primary-color);
-      opacity: 0.2;
-      font-family: serif;
-    }
-    
-    .testimonio-text {
-      font-style: italic;
-      margin-bottom: 15px;
-      line-height: 1.7;
-      position: relative;
-      z-index: 1;
-      font-size: 1rem;
-    }
-    
-    .testimonio-rating {
-      margin-bottom: 12px;
-    }
-    
-    .testimonio-rating i {
-      color: #ffc107;
-      margin-right: 2px;
-      font-size: 0.9rem;
-    }
-    
-    .testimonio-autor {
-      display: flex;
-      align-items: center;
-    }
-    
-    .testimonio-avatar {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--white);
-      font-weight: 700;
-      margin-right: 12px;
-      font-size: 1.1rem;
-    }
-    
-    .testimonio-info h4 {
-      font-size: 1rem;
-      margin-bottom: 3px;
-      color: var(--text-color);
-    }
-    
-    .testimonio-info p {
-      font-size: 0.85rem;
-      color: #666;
-    }
-    
-    /* Contacto mejorado */
-    #contacto {
-      padding: 40px 0;
-    }
-    
-    .contact-container {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-    }
-    
-    .contact-info h3 {
-      font-size: 1.4rem;
-      margin-bottom: 20px;
-      color: var(--text-color);
-    }
-    
-    .contact-details {
-      margin-bottom: 25px;
-    }
-    
-    .contact-details p {
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      font-size: 0.95rem;
-    }
-    
-    .contact-details i {
-      color: var(--primary-color);
-      margin-right: 12px;
-      width: 22px;
-    }
-    
-    .social-links {
-      display: flex;
-      gap: 15px;
-      margin-top: 20px;
-      justify-content: center;
-    }
-    
-    .social-links a {
-      width: 40px;
-      height: 40px;
-      background: var(--white);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary-color);
-      font-size: 1.1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    }
-    
-    .social-links a:hover {
-      background: var(--primary-color);
-      color: var(--white);
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-    
-    .map-container {
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      height: 350px;
-    }
-    
-    .map-container iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    
-    /* Footer mejorado */
-    footer {
-      background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
-      color: var(--white);
-      padding: 40px 20px 20px;
-      margin-top: 60px;
-    }
-    
-    .footer-content {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-bottom: 30px;
-    }
-    
-    .footer-section h3 {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-      position: relative;
-      padding-bottom: 10px;
-    }
-    
-    .footer-section h3::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 40px;
-      height: 2px;
-      background: var(--white);
-    }
-    
-    .footer-section p, .footer-section li {
-      margin-bottom: 8px;
-      line-height: 1.6;
-      font-size: 0.9rem;
-    }
-    
-    .footer-section ul {
-      list-style: none;
-      padding: 0;
-    }
-    
-    .footer-section a {
-      color: rgba(255,255,255,0.8);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    
-    .footer-section a:hover {
-      color: var(--white);
-    }
-    
-    .footer-bottom {
-      text-align: center;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.7);
-    }
-    
-    /* Animaciones */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    /* Responsive */
-    @media (max-width: 992px) {
-      .hero h2 {
-        font-size: 2.5rem;
-      }
-      
-      .hero p {
-        font-size: 1.1rem;
-      }
-      
-      .servicios-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      }
-    }
-    
-    @media (max-width: 768px) {
-      header {
-        padding: 12px 0;
-      }
-      
-      .header-content {
-        justify-content: space-between;
-      }
-      
-      .logo h1 {
-        font-size: 1.3rem;
-      }
-      
-      .menu-toggle {
-        display: block;
-      }
-      
-      .nav-desktop {
-        display: none;
-      }
-      
-      .hero {
-        margin-top: 70px;
-        padding: 60px 15px;
-      }
-      
-      .hero h2 {
-        font-size: 2.2rem;
-      }
-      
-      .hero p {
-        font-size: 1rem;
-      }
-      
-      .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-      }
-      
-      .btn {
-        width: 100%;
-      }
-      
-      h2 {
-        font-size: 1.9rem;
-      }
-      
-      .galeria-slide img {
-        height: 300px;
-      }
-      
-      .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-      
-      .social-links {
-        justify-content: center;
-      }
-    }
-    
-    @media (max-width: 576px) {
-      .logo h1 {
-        font-size: 1.1rem;
-      }
-      
-      .logo i {
-        font-size: 1.6rem;
-      }
-      
-      .hero {
-        padding: 50px 15px;
-        min-height: 50vh;
-      }
-      
-      .hero h2 {
-        font-size: 1.8rem;
-      }
-      
-      .hero p {
-        font-size: 0.9rem;
-      }
-      
-      .hero-buttons {
-        gap: 10px;
-      }
-      
-      .btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-      }
-      
-      h2 {
-        font-size: 1.7rem;
-      }
-      
-      .galeria-slide img {
-        height: 250px;
-      }
-      
-      .servicios-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .tienda-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .testimonios-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .reserva-container {
-        gap: 30px;
-      }
-      
-      .map-container {
-        height: 250px;
-      }
-    }
+    :root{--p:#ff69b4;--s:#d68ab1;--a:#a64d79;--l:#fff8fb;--t:#5a2a5c;--w:#fff;--sh:0 4px 15px rgba(0,0,0,0.1)}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Montserrat,sans-serif;background-color:var(--l);color:var(--t);overflow-x:hidden}header{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);padding:15px 0;position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,0.1)}.header-content{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}.logo{display:flex;align-items:center}.logo i{font-size:2rem;color:var(--w)}.logo h1{font-size:1.5rem;font-weight:900;margin-left:10px;white-space:nowrap}.nav-desktop{display:flex;gap:15px}.nav-desktop a{color:var(--w);text-decoration:none;padding:8px 12px;font-weight:500;border-radius:20px;transition:all 0.3s ease;font-size:0.9rem;white-space:nowrap}.nav-desktop a:hover{background-color:rgba(255,255,255,0.2);transform:translateY(-2px)}.user-menu{display:flex;align-items:center;gap:10px}.login-btn{background:rgba(255,255,255,0.2);color:var(--w);border:none;padding:8px 15px;border-radius:20px;cursor:pointer;font-weight:600;transition:all 0.3s ease;font-size:0.9rem}.login-btn:hover{background:rgba(255,255,255,0.3)}.user-info{display:none;align-items:center;gap:10px}.user-info.active{display:flex}.logout-btn{background:rgba(255,255,255,0.2);color:var(--w);border:none;padding:8px 15px;border-radius:20px;cursor:pointer;font-weight:600;transition:all 0.3s ease;font-size:0.9rem}.logout-btn:hover{background:rgba(255,255,255,0.3)}.menu-toggle{display:none;background:none;border:none;color:var(--w);font-size:1.5rem;cursor:pointer}.nav-mobile{display:none;position:absolute;top:100%;left:0;right:0;background:var(--p);flex-direction:column;padding:15px;box-shadow:0 5px 15px rgba(0,0,0,0.2);gap:10px}.nav-mobile.active{display:flex}.nav-mobile a{color:var(--w);text-decoration:none;padding:10px 15px;font-weight:500;border-radius:10px;transition:all 0.3s ease;font-size:1rem}.nav-mobile a:hover{background-color:rgba(255,255,255,0.2)}.hero{margin-top:80px;padding:80px 20px;text-align:center;background:linear-gradient(rgba(255,105,180,0.7),rgba(214,138,177,0.7)),url('https://images.unsplash.com/photo-1556228724-cabf8b6e204e?auto=format&fit=crop&w=1950&q=80');background-size:cover;background-position:center;color:var(--w);position:relative;overflow:hidden;min-height:60vh;display:flex;align-items:center;justify-content:center}.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at center,rgba(255,255,255,0.1) 0%,rgba(255,105,180,0.3) 100%);z-index:1}.hero-content{position:relative;z-index:2;max-width:800px;margin:0 auto;text-align:center}.hero h2{font-size:2.8rem;margin-bottom:20px;font-weight:900;text-shadow:0 2px 10px rgba(0,0,0,0.2);animation:fadeInUp 1s ease-out;line-height:1.2}.hero p{font-size:1.3rem;margin-bottom:30px;font-weight:500;text-shadow:0 1px 5px rgba(0,0,0,0.2);animation:fadeInUp 1s ease-out 0.2s;animation-fill-mode:both;line-height:1.4}.hero-buttons{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;animation:fadeInUp 1s ease-out 0.4s;animation-fill-mode:both}.btn{display:inline-block;padding:12px 25px;border-radius:50px;text-decoration:none;font-weight:700;font-size:1rem;transition:all 0.3s ease;position:relative;overflow:hidden}.btn-primary{background:var(--w);color:var(--p);box-shadow:0 4px 15px rgba(0,0,0,0.2)}.btn-primary:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.btn-secondary{background:transparent;color:var(--w);border:2px solid var(--w)}.btn-secondary:hover{background:var(--w);color:var(--p)}main{padding:60px 20px;max-width:1100px;margin:0 auto}section{margin-bottom:60px}h2{font-size:2.2rem;margin-bottom:25px;font-weight:700;color:var(--t);text-align:center;position:relative;padding-bottom:15px}h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60px;height:4px;background:linear-gradient(to right,var(--p),var(--s));border-radius:2px}#sobre-nosotros{padding:40px 0;background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,182,193,0.3));border-radius:20px;box-shadow:var(--sh)}.sobre-content{display:flex;flex-direction:column;gap:30px}.sobre-texto{text-align:center;margin-bottom:20px}.sobre-texto p{font-size:1.1rem;line-height:1.8;margin-bottom:20px;max-width:800px;margin-left:auto;margin-right:auto}.servicios-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}.servicio-item{background:rgba(255,255,255,0.7);padding:20px;border-radius:10px;display:flex;align-items:center;transition:all 0.3s ease}.servicio-item:hover{background:var(--w);transform:translateY(-5px);box-shadow:0 5px 15px rgba(0,0,0,0.1)}.servicio-item i{color:var(--p);margin-right:15px;font-size:1.5rem;width:30px;text-align:center}.servicio-item h3{font-size:1.1rem;font-weight:600;margin:0}#galeria{padding:40px 0}.galeria-container{position:relative;max-width:1000px;margin:0 auto;overflow:hidden;border-radius:20px;box-shadow:var(--sh)}.galeria-slider{display:flex;transition:transform 0.5s ease}.galeria-slide{min-width:100%;position:relative}.galeria-slide img{width:100%;height:400px;object-fit:cover;display:block}.galeria-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent);color:var(--w);padding:20px;text-align:center}.galeria-caption h3{font-size:1.3rem;margin-bottom:5px}.galeria-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.8);color:var(--a);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;box-shadow:0 2px 10px rgba(0,0,0,0.1)}.galeria-nav:hover{background:var(--w);box-shadow:0 4px 15px rgba(0,0,0,0.2)}.galeria-nav.prev{left:15px}.galeria-nav.next{right:15px}.galeria-indicators{display:flex;justify-content:center;gap:8px;margin-top:20px}.galeria-indicator{width:10px;height:10px;border-radius:50%;background:var(--s);cursor:pointer;transition:all 0.3s ease}.galeria-indicator.active{background:var(--p);transform:scale(1.2)}#tienda{padding:40px 0}.tienda-intro{text-align:center;margin-bottom:40px}.tienda-intro p{font-size:1.1rem;max-width:800px;margin:0 auto;line-height:1.8}.tienda-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}.producto-card{background:var(--w);border-radius:15px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,0.08);transition:all 0.3s ease;position:relative}.producto-card:hover{transform:translateY(-8px);box-shadow:0 10px 30px rgba(0,0,0,0.15)}.producto-imagen{height:200px;overflow:hidden;position:relative}.producto-imagen img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}.producto-card:hover .producto-imagen img{transform:scale(1.1)}.producto-badge{position:absolute;top:10px;right:10px;background:var(--p);color:var(--w);padding:5px 10px;border-radius:20px;font-size:0.75rem;font-weight:600}.producto-info{padding:20px}.producto-info h3{font-size:1.2rem;margin-bottom:8px;color:var(--t)}.producto-info p{font-size:0.9rem;color:#666;margin-bottom:12px;line-height:1.5}.producto-footer{display:flex;justify-content:space-between;align-items:center}.producto-precio{font-size:1.3rem;font-weight:700;color:var(--a)}.producto-btn{background:var(--p);color:var(--w);border:none;padding:8px 16px;border-radius:30px;font-weight:600;cursor:pointer;transition:all 0.3s ease;font-size:0.9rem}.producto-btn:hover{background:var(--a);transform:scale(1.05)}#reserva{padding:40px 0;background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,182,193,0.3));border-radius:20px;box-shadow:var(--sh)}.reserva-container{display:flex;flex-direction:column;gap:40px}.reserva-form{background:var(--w);padding:25px;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.08)}.form-group{margin-bottom:20px}.form-group label{display:block;margin-bottom:8px;font-weight:600;color:var(--t);font-size:0.95rem}.form-control{width:100%;padding:12px;border:2px solid #eee;border-radius:10px;font-size:1rem;font-family:Montserrat,sans-serif;transition:all 0.3s ease}.form-control:focus{border-color:var(--p);outline:none;box-shadow:0 0 0 3px rgba(255,105,180,0.1)}.btn-submit{background:var(--p);color:var(--w);border:none;padding:12px 30px;border-radius:50px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;width:100%}.btn-submit:hover{background:var(--a);transform:translateY(-2px);box-shadow:0 5px 15px rgba(166,77,121,0.3)}.reserva-info{padding:20px}.reserva-info h3{font-size:1.4rem;margin-bottom:15px;color:var(--t)}.reserva-info p{margin-bottom:15px;line-height:1.7;font-size:1rem}.contact-item{display:flex;align-items:center;margin-bottom:15px}.contact-item i{font-size:1.2rem;color:var(--p);margin-right:12px;width:25px;text-align:center}.contact-item span{font-size:0.95rem}.confirmacion-reserva{display:none;background:#e8f5e9;border:2px solid #4caf50;border-radius:10px;padding:20px;margin-top:20px;text-align-center}.confirmacion-reserva.active{display:block}.confirmacion-reserva h3{color:#2e7d32;margin-bottom:15px;font-size:1.2rem}.confirmacion-reserva .btn-whatsapp{background:linear-gradient(135deg,#25d366,#128c7e);color:var(--w);border:none;padding:12px 25px;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s ease;display:inline-block;text-decoration:none}.confirmacion-reserva .btn-whatsapp:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.reservas-ocultas{display:none;background:#f5f5f5;border-radius:15px;padding:25px;margin-top:30px}.reservas-ocultas.active{display:block}.reservas-ocultas h3{color:var(--a);margin-bottom:20px;text-align:center;font-size:1.3rem}.lista-reservas{display:grid;gap:15px}.reserva-item{background:var(--w);padding:15px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1);position:relative}.reserva-item h4{color:var(--a);margin-bottom:10px;font-size:1.1rem}.reserva-item p{margin:5px 0;font-size:0.9rem}.delete-btn{position:absolute;top:10px;right:10px;background:#f44336;color:var(--w);border:none;border-radius:50%;width:25px;height:25px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease}.delete-btn:hover{background:#d32f2f}.testimonios{padding:40px 0}.testimonios-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}.testimonio-card{background:var(--w);border-radius:15px;padding:25px;box-shadow:0 5px 20px rgba(0,0,0,0.08);position:relative;transition:all 0.3s ease}.testimonio-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,0.15)}.testimonio-card::before{content:'"';position:absolute;top:10px;left:15px;font-size:3.5rem;color:var(--p);opacity:0.2;font-family:serif}.testimonio-text{font-style:italic;margin-bottom:15px;line-height:1.7;position:relative;z-index:1;font-size:1rem}.testimonio-rating{margin-bottom:12px}.testimonio-rating i{color:#ffc107;margin-right:2px;font-size:0.9rem}.testimonio-autor{display:flex;align-items:center}.testimonio-avatar{width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--s));display:flex;align-items:center;justify-content:center;color:var(--w);font-weight:700;margin-right:12px;font-size:1.1rem}.testimonio-info h4{font-size:1rem;margin-bottom:3px;color:var(--t)}.testimonio-info p{font-size:0.85rem;color:#666}.contacto{padding:40px 0}.contact-container{display:flex;flex-direction:column;gap:40px}.contact-info h3{font-size:1.4rem;margin-bottom:20px;color:var(--t)}.contact-details{margin-bottom:25px}.contact-details p{margin-bottom:12px;display:flex;align-items:center;font-size:0.95rem}.contact-details i{color:var(--p);margin-right:12px;width:22px}.map-container{border-radius:15px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,0.1);height:350px}.map-container iframe{width:100%;height:100%;border:none}footer{background:linear-gradient(135deg,var(--a),var(--s));color:var(--w);padding:40px 20px 20px;margin-top:60px}.footer-content{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;margin-bottom:30px}.footer-section h3{font-size:1.2rem;margin-bottom:15px;position:relative;padding-bottom:10px}.footer-section h3::after{content:'';position:absolute;bottom:0;left:0;width:40px;height:2px;background:var(--w)}.footer-section p,.footer-section li{margin-bottom:8px;line-height:1.6;font-size:0.9rem}.footer-section ul{list-style:none;padding:0}.footer-section a{color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.3s ease}.footer-section a:hover{color:var(--w)}.footer-bottom{text-align:center;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);font-size:0.85rem;color:rgba(255,255,255,0.7);position:relative}.trabaja-btn{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);border:none;padding:12px 25px;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s ease;display:inline-block;position:absolute;bottom:15px;right:20px}.trabaja-btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:2000;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease}.modal.active{display:flex;opacity:1}.modal-content{background:var(--w);padding:30px;border-radius:15px;width:90%;max-width:500px;box-shadow:0 10px 30px rgba(0,0,0,0.3);transform:translateY(-20px);transition:transform 0.3s ease}.modal.active .modal-content{transform:translateY(0)}.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.modal-header h3{font-size:1.5rem;color:var(--t)}.close-modal{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--t);transition:color 0.3s ease}.close-modal:hover{color:var(--p)}.trabaja-form{display:flex;flex-direction:column;gap:15px}.trabaja-form h3{text-align:center;margin-bottom:20px;color:var(--t);font-size:1.3rem}.file-input-wrapper{position:relative;overflow:hidden;display:inline-block;width:100%;margin-bottom:15px}.file-input-wrapper input[type=file]{position:absolute;left:-9999px}.file-input-label{display:block;padding:12px;background:#f5f5f5;border:2px dashed #ddd;border-radius:10px;text-align:center;cursor:pointer;transition:all 0.3s ease}.file-input-label:hover{background:#eee;border-color:var(--p)}.file-input-wrapper-2{position:relative;overflow:hidden;display:inline-block;width:100%;margin-bottom:15px}.file-input-wrapper-2 input[type=file]{position:absolute;left:-9999px}.file-input-label-2{display:block;padding:12px;background:#f5f5f5;border:2px dashed #ddd;border-radius:10px;text-align:center;cursor:pointer;transition:all 0.3s ease}.file-input-label-2:hover{background:#eee;border-color:var(--p)}.solicitudes-ocultas{display:none;background:#f5f5f5;border-radius:15px;padding:25px;margin-top:30px}.solicitudes-ocultas.active{display:block}.solicitudes-ocultas h3{color:var(--a);margin-bottom:20px;text-align:center;font-size:1.3rem}.lista-solicitudes{display:grid;gap:15px}.solicitud-item{background:var(--w);padding:15px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1);position:relative}.solicitud-item h4{color:var(--a);margin-bottom:10px;font-size:1.1rem}.solicitud-item p{margin:5px 0;font-size:0.9rem}.download-btn{position:absolute;top:10px;right:35px;background:#2196f3;color:var(--w);border:none;border-radius:50%;width:25px;height:25px;display:flex;align-items:center;justify-content-center;cursor:pointer;transition:all 0.3s ease}.download-btn:hover{background:#0b7dda}.delete-btn{position:absolute;top:10px;right:10px;background:#f44336;color:var(--w);border:none;border-radius:50%;width:25px;height:25px;display:flex;align-items:center;justify-content-center;cursor:pointer;transition:all 0.3s ease}.delete-btn:hover{background:#d32f2f}@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}@media(max-width:992px){.hero h2{font-size:2.5rem}.hero p{font-size:1.1rem}.servicios-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}}@media(max-width:768px){header{padding:12px 0}.header-content{justify-content:space-between}.logo h1{font-size:1.3rem}.menu-toggle{display:block}.nav-desktop{display:none}.hero{margin-top:70px;padding:60px 15px}.hero h2{font-size:2.2rem}.hero p{font-size:1rem}.hero-buttons{flex-direction:column;align-items:center;width:100%;max-width:300px;margin:0 auto}.btn{width:100%}h2{font-size:1.9rem}.galeria-slide img{height:300px}.footer-content{grid-template-columns:1fr;text-align:center}.trabaja-btn{position:relative;bottom:auto;right:auto;margin-top:20px}}@media(max-width:576px){.logo h1{font-size:1.1rem}.logo i{font-size:1.6rem}.hero{padding:50px 15px;min-height:50vh}.hero h2{font-size:1.8rem}.hero p{font-size:0.9rem}.hero-buttons{gap:10px}.btn{padding:10px 20px;font-size:0.9rem}h2{font-size:1.7rem}.galeria-slide img{height:250px}.servicios-grid{grid-template-columns:1fr}.tienda-grid{grid-template-columns:1fr}.testimonios-grid{grid-template-columns:1fr}.reserva-container{gap:30px}.map-container{height:250px}}
   </style>
 </head>
 <body>
@@ -1185,42 +71,15 @@
           <p>Nuestro equipo de expertos está comprometido con hacer que te sientas hermosa y confiada en cada visita. Utilizamos productos de alta calidad y las últimas técnicas para garantizar resultados excepcionales.</p>
         </div>
         <div class="servicios-grid">
-          <div class="servicio-item">
-            <i class="fas fa-spa"></i>
-            <h3>Tratamientos faciales y corporales</h3>
-          </div>
-          <div class="servicio-item">
-            <i class="fas fa-hand-sparkles"></i>
-            <h3>Manicura & Pedicura moderna</h3>
-          </div>
-          <div class="servicio-item">
-            <i class="fas fa-palette"></i>
-            <h3>Maquillaje profesional</h3>
-          </div>
-          <div class="servicio-item">
-            <i class="fas fa-cut"></i>
-            <h3>Corte y peinados personalizados</h3>
-          </div>
-          <div class="servicio-item">
-            <i class="fas fa-paint-brush"></i>
-            <h3>Coloración y mechas</h3>
-          </div>
-          <div class="servicio-item">
-            <i class="fas fa-sun"></i>
-            <h3>Depilación con cera</h3>
-          </div>
-          <div class="servicio-item">
-            <i class="fas fa-eye"></i>
-            <h3>Diseño de cejas y pestañas</h3>
-          </div>
-          <div class="servicio-item">
-            <i class="fas fa-user-tie"></i>
-            <h3>Asesoría de imagen</h3>
-          </div>
-          <div class="servicio-item">
-            <i class="fas fa-hot-tub"></i>
-            <h3>Tratamientos de spa</h3>
-          </div>
+          <div class="servicio-item"><i class="fas fa-spa"></i><h3>Tratamientos faciales y corporales</h3></div>
+          <div class="servicio-item"><i class="fas fa-hand-sparkles"></i><h3>Manicura & Pedicura moderna</h3></div>
+          <div class="servicio-item"><i class="fas fa-palette"></i><h3>Maquillaje profesional</h3></div>
+          <div class="servicio-item"><i class="fas fa-cut"></i><h3>Corte y peinados personalizados</h3></div>
+          <div class="servicio-item"><i class="fas fa-paint-brush"></i><h3>Coloración y mechas</h3></div>
+          <div class="servicio-item"><i class="fas fa-sun"></i><h3>Depilación con cera</h3></div>
+          <div class="servicio-item"><i class="fas fa-eye"></i><h3>Diseño de cejas y pestañas</h3></div>
+          <div class="servicio-item"><i class="fas fa-user-tie"></i><h3>Asesoría de imagen</h3></div>
+          <div class="servicio-item"><i class="fas fa-hot-tub"></i><h3>Tratamientos de spa</h3></div>
         </div>
       </div>
     </section>
@@ -1229,135 +88,29 @@
       <h2>📸 Momentos de Belleza</h2>
       <div class="galeria-container">
         <div class="galeria-slider" id="galeria-slider">
-          <div class="galeria-slide">
-            <img src="https://www.angelanapeluqueros.com/data/6306/contenidos/thumb_497886_contenidos_optimized.jpg" alt="Peinado elegante largo con rifledos" />
-            <div class="galeria-caption">
-              <h3>Peinados Elegantes</h3>
-              <p>Transformaciones que resaltan tu belleza natural</p>
-            </div>
-          </div>
-          <div class="galeria-slide">
-            <img src="https://www.grancasa.es/wp-content/uploads/sites/24/2018/02/productos-alisado-keratina.jpg" alt="Tratamiento de keratina realizado en salón" />
-            <div class="galeria-caption">
-              <h3>Tratamiento de Keratina</h3>
-              <p>Cabello liso y brillante por más tiempo</p>
-            </div>
-          </div>
-          <div class="galeria-slide">
-            <img src="https://termix.net/blog/wp-content/uploads/2024/10/Termix-horizontal-23.png" alt="Peinado profesional en salón Termix" />
-            <div class="galeria-caption">
-              <h3>Cuidado Profesional</h3>
-              <p>Productos y técnicas de vanguardia</p>
-            </div>
-          </div>
-          <div class="galeria-slide">
-            <img src="https://distribuidorabelha.com/wp-content/uploads/2021/02/balayage-01.jpg" alt="Tintura profesional estilo balayage" />
-            <div class="galeria-caption">
-              <h3>Técnicas de Color</h3>
-              <p>Mechas y balayage personalizados</p>
-            </div>
-          </div>
-          <div class="galeria-slide">
-            <img src="https://i.ytimg.com/vi/TAbgZySwUfw/maxresdefault.jpg" alt="Peinado recogido elegante para evento" />
-            <div class="galeria-caption">
-              <h3>Eventos Especiales</h3>
-              <p>Peinados para momentos inolvidables</p>
-            </div>
-          </div>
-          <div class="galeria-slide">
-            <img src="https://www.univital.com.co/wp-content/uploads/2025/03/como-cuidar-el-cabello-tinturado-univital.jpg" alt="Cabello tinturado cuidado profesionalmente" />
-            <div class="galeria-caption">
-              <h3>Cuidado Post-Tintura</h3>
-              <p>Mantén tu color vibrante por más tiempo</p>
-            </div>
-          </div>
-          <div class="galeria-slide">
-            <img src="https://media-cdn.tripadvisor.com/media/photo-s/17/f0/6b/48/antes-y-despues-de-una.jpg" alt="Antes y después tratamiento de belleza" />
-            <div class="galeria-caption">
-              <h3>Transformaciones</h3>
-              <p>Resultados visibles que te encantarán</p>
-            </div>
-          </div>
-          <div class="galeria-slide">
-            <img src="https://m.media-amazon.com/images/S/aplus-media/sc/3b97d825-a09d-46c6-8760-7687a8827e23.__CR0,0,970,600_PT0_SX970_V1___.jpg" alt="Cabello liso con efecto keratina" />
-            <div class="galeria-caption">
-              <h3>Efecto Keratina</h3>
-              <p>Cabello liso, brillante y manejable</p>
-            </div>
-          </div>
+          <div class="galeria-slide"><img src="https://www.angelanapeluqueros.com/data/6306/contenidos/thumb_497886_contenidos_optimized.jpg" alt="Peinado elegante largo con rifledos" /><div class="galeria-caption"><h3>Peinados Elegantes</h3><p>Transformaciones que resaltan tu belleza natural</p></div></div>
+          <div class="galeria-slide"><img src="https://www.grancasa.es/wp-content/uploads/sites/24/2018/02/productos-alisado-keratina.jpg" alt="Tratamiento de keratina realizado en salón" /><div class="galeria-caption"><h3>Tratamiento de Keratina</h3><p>Cabello liso y brillante por más tiempo</p></div></div>
+          <div class="galeria-slide"><img src="https://termix.net/blog/wp-content/uploads/2024/10/Termix-horizontal-23.png" alt="Peinado profesional en salón Termix" /><div class="galeria-caption"><h3>Cuidado Profesional</h3><p>Productos y técnicas de vanguardia</p></div></div>
+          <div class="galeria-slide"><img src="https://distribuidorabelha.com/wp-content/uploads/2021/02/balayage-01.jpg" alt="Tintura profesional estilo balayage" /><div class="galeria-caption"><h3>Técnicas de Color</h3><p>Mechas y balayage personalizados</p></div></div>
+          <div class="galeria-slide"><img src="https://i.ytimg.com/vi/TAbgZySwUfw/maxresdefault.jpg" alt="Peinado recogido elegante para evento" /><div class="galeria-caption"><h3>Eventos Especiales</h3><p>Peinados para momentos inolvidables</p></div></div>
+          <div class="galeria-slide"><img src="https://www.univital.com.co/wp-content/uploads/2025/03/como-cuidar-el-cabello-tinturado-univital.jpg" alt="Cabello tinturado cuidado profesionalmente" /><div class="galeria-caption"><h3>Cuidado Post-Tintura</h3><p>Mantén tu color vibrante por más tiempo</p></div></div>
+          <div class="galeria-slide"><img src="https://media-cdn.tripadvisor.com/media/photo-s/17/f0/6b/48/antes-y-despues-de-una.jpg" alt="Antes y después tratamiento de belleza" /><div class="galeria-caption"><h3>Transformaciones</h3><p>Resultados visibles que te encantarán</p></div></div>
+          <div class="galeria-slide"><img src="https://m.media-amazon.com/images/S/aplus-media/sc/3b97d825-a09d-46c6-8760-7687a8827e23.__CR0,0,970,600_PT0_SX970_V1___.jpg" alt="Cabello liso con efecto keratina" /><div class="galeria-caption"><h3>Efecto Keratina</h3><p>Cabello liso, brillante y manejable</p></div></div>
         </div>
-        <div class="galeria-nav prev" onclick="changeSlide(-1)">
-          <i class="fas fa-chevron-left"></i>
-        </div>
-        <div class="galeria-nav next" onclick="changeSlide(1)">
-          <i class="fas fa-chevron-right"></i>
-        </div>
+        <div class="galeria-nav prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></div>
+        <div class="galeria-nav next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></div>
       </div>
       <div class="galeria-indicators" id="galeria-indicators"></div>
     </section>
 
     <section id="tienda" data-aos="fade-up">
       <h2>🛍️ Nuestra Tienda</h2>
-      <div class="tienda-intro">
-        <p>Compra productos de belleza seleccionados especialmente para ti. Todos nuestros productos están formulados con ingredientes de alta calidad para resultados profesionales en casa.</p>
-      </div>
+      <div class="tienda-intro"><p>Compra productos de belleza seleccionados especialmente para ti. Todos nuestros productos están formulados con ingredientes de alta calidad para resultados profesionales en casa.</p></div>
       <div class="tienda-grid">
-        <div class="producto-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="producto-imagen">
-            <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=400&q=80" alt="Kit de cuidado facial" />
-            <span class="producto-badge">Bestseller</span>
-          </div>
-          <div class="producto-info">
-            <h3>Kit de cuidado facial</h3>
-            <p>Incluye limpiador, tónico y crema hidratante para piel radiante. Ideal para todo tipo de piel.</p>
-            <div class="producto-footer">
-              <span class="producto-precio">$75,000 COP</span>
-              <button class="producto-btn" onclick="comprarProducto('Kit de cuidado facial', '75,000 COP')">Comprar</button>
-            </div>
-          </div>
-        </div>
-        <div class="producto-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="producto-imagen">
-            <img src="https://images.unsplash.com/photo-1556228724-cabf8b6e204e?auto=format&fit=crop&w=400&q=80" alt="Set de esmaltes de uñas" />
-            <span class="producto-badge">Nuevo</span>
-          </div>
-          <div class="producto-info">
-            <h3>Set de esmaltes de uñas</h3>
-            <p>5 colores modernos y duraderos para lucir tus manos perfectas. Fórmula libre de toxinas.</p>
-            <div class="producto-footer">
-              <span class="producto-precio">$45,000 COP</span>
-              <button class="producto-btn" onclick="comprarProducto('Set de esmaltes de uñas', '45,000 COP')">Comprar</button>
-            </div>
-          </div>
-        </div>
-        <div class="producto-card" data-aos="fade-up" data-aos-delay="300">
-          <div class="producto-imagen">
-            <img src="https://images.unsplash.com/photo-1576765607921-15632b90a7f4?auto=format&fit=crop&w=400&q=80" alt="Sérum reparador capilar" />
-            <span class="producto-badge">Premium</span>
-          </div>
-          <div class="producto-info">
-            <h3>Sérum reparador capilar</h3>
-            <p>Repara el cabello seco y dañado con ingredientes naturales. Sin sulfatos ni parabenos.</p>
-            <div class="producto-footer">
-              <span class="producto-precio">$65,000 COP</span>
-              <button class="producto-btn" onclick="comprarProducto('Sérum reparador capilar', '65,000 COP')">Comprar</button>
-            </div>
-          </div>
-        </div>
-        <div class="producto-card" data-aos="fade-up" data-aos-delay="400">
-          <div class="producto-imagen">
-            <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=400&q=80" alt="Paleta de maquillaje profesional" />
-            <span class="producto-badge">Exclusivo</span>
-          </div>
-          <div class="producto-info">
-            <h3>Paleta de maquillaje profesional</h3>
-            <p>Colores intensos y duraderos para todos los tonos de piel. Ingredientes veganos.</p>
-            <div class="producto-footer">
-              <span class="producto-precio">$120,000 COP</span>
-              <button class="producto-btn" onclick="comprarProducto('Paleta de maquillaje profesional', '120,000 COP')">Comprar</button>
-            </div>
-          </div>
-        </div>
+        <div class="producto-card" data-aos="fade-up" data-aos-delay="100"><div class="producto-imagen"><img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=400&q=80" alt="Kit de cuidado facial" /><span class="producto-badge">Bestseller</span></div><div class="producto-info"><h3>Kit de cuidado facial</h3><p>Incluye limpiador, tónico y crema hidratante para piel radiante. Ideal para todo tipo de piel.</p><div class="producto-footer"><span class="producto-precio">$75,000 COP</span><button class="producto-btn" onclick="comprarProducto('Kit de cuidado facial', '75,000 COP')">Comprar</button></div></div></div>
+        <div class="producto-card" data-aos="fade-up" data-aos-delay="200"><div class="producto-imagen"><img src="https://images.unsplash.com/photo-1556228724-cabf8b6e204e?auto=format&fit=crop&w=400&q=80" alt="Set de esmaltes de uñas" /><span class="producto-badge">Nuevo</span></div><div class="producto-info"><h3>Set de esmaltes de uñas</h3><p>5 colores modernos y duraderos para lucir tus manos perfectas. Fórmula libre de toxinas.</p><div class="producto-footer"><span class="producto-precio">$45,000 COP</span><button class="producto-btn" onclick="comprarProducto('Set de esmaltes de uñas', '45,000 COP')">Comprar</button></div></div></div>
+        <div class="producto-card" data-aos="fade-up" data-aos-delay="300"><div class="producto-imagen"><img src="https://images.unsplash.com/photo-1576765607921-15632b90a7f4?auto=format&fit=crop&w=400&q=80" alt="Sérum reparador capilar" /><span class="producto-badge">Premium</span></div><div class="producto-info"><h3>Sérum reparador capilar</h3><p>Repara el cabello seco y dañado con ingredientes naturales. Sin sulfatos ni parabenos.</p><div class="producto-footer"><span class="producto-precio">$65,000 COP</span><button class="producto-btn" onclick="comprarProducto('Sérum reparador capilar', '65,000 COP')">Comprar</button></div></div></div>
+        <div class="producto-card" data-aos="fade-up" data-aos-delay="400"><div class="producto-imagen"><img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=400&q=80" alt="Paleta de maquillaje profesional" /><span class="producto-badge">Exclusivo</span></div><div class="producto-info"><h3>Paleta de maquillaje profesional</h3><p>Colores intensos y duraderos para todos los tonos de piel. Ingredientes veganos.</p><div class="producto-footer"><span class="producto-precio">$120,000 COP</span><button class="producto-btn" onclick="comprarProducto('Paleta de maquillaje profesional', '120,000 COP')">Comprar</button></div></div></div>
       </div>
     </section>
 
@@ -1366,131 +119,34 @@
       <div class="reserva-container">
         <div class="reserva-form">
           <form id="form-reserva">
-            <div class="form-group">
-              <label for="nombre">Nombre completo:</label>
-              <input type="text" id="nombre" name="nombre" class="form-control" required />
-            </div>
-            <div class="form-group">
-              <label for="telefono">Teléfono:</label>
-              <input type="tel" id="telefono" name="telefono" class="form-control" required />
-            </div>
-            <div class="form-group">
-              <label for="servicio">Servicio que deseas:</label>
-              <select id="servicio" name="servicio" class="form-control" required>
-                <option value="">-- Selecciona un servicio --</option>
-                <option value="Tratamiento facial">Tratamiento facial</option>
-                <option value="Manicura y Pedicura">Manicura y Pedicura</option>
-                <option value="Maquillaje profesional">Maquillaje profesional</option>
-                <option value="Corte y peinado">Corte y peinado</option>
-                <option value="Coloración y mechas">Coloración y mechas</option>
-                <option value="Depilación con cera">Depilación con cera</option>
-                <option value="Diseño de cejas y pestañas">Diseño de cejas y pestañas</option>
-                <option value="Asesoría de imagen">Asesoría de imagen</option>
-                <option value="Tratamientos de spa">Tratamientos de spa</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="fecha">Fecha preferida:</label>
-              <input type="date" id="fecha" name="fecha" class="form-control" required />
-            </div>
-            <div class="form-group">
-              <label for="hora">Hora preferida:</label>
-              <input type="time" id="hora" name="hora" class="form-control" required />
-            </div>
+            <div class="form-group"><label for="nombre">Nombre completo:</label><input type="text" id="nombre" name="nombre" class="form-control" required /></div>
+            <div class="form-group"><label for="telefono">Teléfono:</label><input type="tel" id="telefono" name="telefono" value="+593" class="form-control" required /></div>
+            <div class="form-group"><label for="servicio">Servicio que deseas:</label><select id="servicio" name="servicio" class="form-control" required><option value="">-- Selecciona un servicio --</option><option value="Tratamiento facial">Tratamiento facial</option><option value="Manicura y Pedicura">Manicura y Pedicura</option><option value="Maquillaje profesional">Maquillaje profesional</option><option value="Corte y peinado">Corte y peinado</option><option value="Coloración y mechas">Coloración y mechas</option><option value="Depilación con cera">Depilación con cera</option><option value="Diseño de cejas y pestañas">Diseño de cejas y pestañas</option><option value="Asesoría de imagen">Asesoría de imagen</option><option value="Tratamientos de spa">Tratamientos de spa</option></select></div>
+            <div class="form-group"><label for="fecha">Fecha preferida:</label><input type="date" id="fecha" name="fecha" class="form-control" required /></div>
+            <div class="form-group"><label for="hora">Hora preferida:</label><input type="time" id="hora" name="hora" class="form-control" required /></div>
             <button type="submit" class="btn-submit">Enviar Reserva</button>
           </form>
-          <div class="confirmacion-reserva" id="confirmacion-reserva">
-            <h3>¡Reserva enviada con éxito!</h3>
-            <p>Por favor, confirma tu cita a través de WhatsApp:</p>
-            <a href="#" id="btn-whatsapp-confirm" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-              <i class="fab fa-whatsapp"></i> Confirmar Cita
-            </a>
-          </div>
+          <div class="confirmacion-reserva" id="confirmacion-reserva"><h3>¡Reserva enviada con éxito!</h3><p>Por favor, confirma tu cita a través de WhatsApp:</p><a href="#" id="btn-whatsapp-confirm" class="btn-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> Confirmar Cita</a></div>
         </div>
         <div class="reserva-info">
           <h3>¿Por qué reservar con nosotros?</h3>
           <p>En Lis Belleza Total, nos aseguramos de que cada visita sea una experiencia inolvidable. Nuestros profesionales están capacitados para ofrecerte los mejores servicios adaptados a tus necesidades.</p>
-          <div class="contact-item">
-            <i class="fas fa-phone-alt"></i>
-            <span>+593 99 304 5286</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-envelope"></i>
-            <span>contacto@lisbellezatotal.com</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Calle 123 #45-67, Bogotá, Colombia</span>
-          </div>
-          <div class="social-links">
-            <a href="https://wa.me/593993045286" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
-          </div>
+          <div class="contact-item"><i class="fas fa-phone-alt"></i><span>+593 99 304 5286</span></div>
+          <div class="contact-item"><i class="fas fa-envelope"></i><span>creaturbellezatumisma@gmail.com</span></div>
+          <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Calle 123 #45-67, Bogotá, Colombia</span></div>
         </div>
       </div>
       
-      <!-- Apartado oculto de reservas -->
-      <div id="reservas-ocultas">
-        <h3>📋 Mis Reservas Registradas</h3>
-        <div class="lista-reservas" id="lista-reservas">
-          <!-- Las reservas se cargarán dinámicamente aquí -->
-        </div>
-      </div>
+      <div class="reservas-ocultas" id="reservas-ocultas"><h3>📋 Mis Reservas Registradas</h3><div class="lista-reservas" id="lista-reservas"></div></div>
+      <div class="solicitudes-ocultas" id="solicitudes-ocultas"><h3>💼 Solicitudes de Trabajo Recibidas</h3><div class="lista-solicitudes" id="lista-solicitudes"></div></div>
     </section>
 
     <section id="testimonios" data-aos="fade-up">
       <h2>💬 Opiniones de nuestras clientas</h2>
       <div class="testimonios-grid">
-        <div class="testimonio-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="testimonio-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <p class="testimonio-text">"Me encantó el tratamiento de keratina, mi cabello está súper suave y brillante. ¡Recomendadísimo! El equipo es muy profesional y atento a cada detalle."</p>
-          <div class="testimonio-autor">
-            <div class="testimonio-avatar">MG</div>
-            <div class="testimonio-info">
-              <h4>María G.</h4>
-              <p>Cliente desde 2023</p>
-            </div>
-          </div>
-        </div>
-        <div class="testimonio-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="testimonio-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <p class="testimonio-text">"El equipo es muy profesional y te hacen sentir muy cómoda. Mi maquillaje para la boda quedó perfecto. ¡Fui la estrella de la fiesta!"</p>
-          <div class="testimonio-autor">
-            <div class="testimonio-avatar">LP</div>
-            <div class="testimonio-info">
-              <h4>Laura P.</h4>
-              <p>Cliente desde 2022</p>
-            </div>
-          </div>
-        </div>
-        <div class="testimonio-card" data-aos="fade-up" data-aos-delay="300">
-          <div class="testimonio-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star-half-alt"></i>
-          </div>
-          <p class="testimonio-text">"Reservar fue fácil y rápido, además me contactaron por WhatsApp para confirmar todo. Excelente atención y resultados increíbles."</p>
-          <div class="testimonio-autor">
-            <div class="testimonio-avatar">SR</div>
-            <div class="testimonio-info">
-              <h4>Sofía R.</h4>
-              <p>Cliente desde 2024</p>
-            </div>
-          </div>
-        </div>
+        <div class="testimonio-card" data-aos="fade-up" data-aos-delay="100"><div class="testimonio-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testimonio-text">"Me encantó el tratamiento de keratina, mi cabello está súper suave y brillante. ¡Recomendadísimo! El equipo es muy profesional y atento a cada detalle."</p><div class="testimonio-autor"><div class="testimonio-avatar">MG</div><div class="testimonio-info"><h4>María G.</h4><p>Cliente desde 2023</p></div></div></div>
+        <div class="testimonio-card" data-aos="fade-up" data-aos-delay="200"><div class="testimonio-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testimonio-text">"El equipo es muy profesional y te hacen sentir muy cómoda. Mi maquillaje para la boda quedó perfecto. ¡Fui la estrella de la fiesta!"</p><div class="testimonio-autor"><div class="testimonio-avatar">LP</div><div class="testimonio-info"><h4>Laura P.</h4><p>Cliente desde 2022</p></div></div></div>
+        <div class="testimonio-card" data-aos="fade-up" data-aos-delay="300"><div class="testimonio-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><p class="testimonio-text">"Reservar fue fácil y rápido, además me contactaron por WhatsApp para confirmar todo. Excelente atención y resultados increíbles."</p><div class="testimonio-autor"><div class="testimonio-avatar">SR</div><div class="testimonio-info"><h4>Sofía R.</h4><p>Cliente desde 2024</p></div></div></div>
       </div>
     </section>
 
@@ -1502,18 +158,12 @@
           <div class="contact-details">
             <p><i class="fas fa-map-marker-alt"></i> Calle 123 #45-67, Bogotá, Colombia</p>
             <p><i class="fas fa-phone-alt"></i> +593 99 304 5286</p>
-            <p><i class="fas fa-envelope"></i> contacto@lisbellezatotal.com</p>
+            <p><i class="fas fa-envelope"></i> creaturbellezatumisma@gmail.com</p>
             <p><i class="fas fa-clock"></i> Lunes a Sábado: 9:00 AM - 7:00 PM</p>
             <p><i class="fas fa-clock"></i> Domingo: 10:00 AM - 5:00 PM</p>
           </div>
-          <h3>Síguenos en redes</h3>
-          <div class="social-links">
-            <a href="https://wa.me/593993045286" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
-          </div>
         </div>
-        <div class="map-container">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.8!2d-74.0499!3d4.6371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f99a6f9a6a6a6%3A0x1234567890abcdef!2sLis%20Belleza%20Total!5e0!3m2!1ses!2sco!4v1620000000000!5m2!1ses!2sco" allowfullscreen="" loading="lazy"></iframe>
-        </div>
+        <div class="map-container"><iframe src="https://maps.app.goo.gl/M44PbUBBFkuEfnyt9" allowfullscreen="" loading="lazy"></iframe></div>
       </div>
     </section>
   </main>
@@ -1545,13 +195,13 @@
         <h3>Contacto rápido</h3>
         <ul>
           <li><i class="fas fa-phone-alt"></i> +593 99 304 5286</li>
-          <li><i class="fas fa-envelope"></i> contacto@lisbellezatotal.com</li>
-          <li><i class="fab fa-whatsapp"></i> WhatsApp: +593 99 304 5286</li>
+          <li><i class="fas fa-envelope"></i> creaturbellezatumisma@gmail.com</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <p>&copy; 2025 Lis Belleza Total - Todos los derechos reservados | Creado con <i class="fas fa-heart" style="color: #ff69b4;"></i> para ti</p>
+      <button class="trabaja-btn" onclick="openTrabajaModal()">Trabaja con Nosotros</button>
     </div>
   </footer>
 
@@ -1570,48 +220,59 @@
     </div>
   </div>
 
+  <!-- Modal de Trabaja con Nosotros -->
+  <div class="modal" id="trabajaModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Trabaja con Nosotros</h3>
+        <button class="close-modal" id="closeTrabajaModal">&times;</button>
+      </div>
+      <form class="trabaja-form" id="form-trabaja">
+        <input type="text" id="nombre-trabajo" placeholder="Nombre completo" required>
+        <input type="email" id="email-trabajo" placeholder="Correo electrónico" required>
+        <input type="tel" id="telefono-trabajo" value="+593" placeholder="Teléfono" required>
+        <div class="file-input-wrapper">
+          <input type="file" id="cv-trabajo" accept=".pdf" required>
+          <label for="cv-trabajo" class="file-input-label">
+            <i class="fas fa-cloud-upload-alt"></i> Subir CV actualizado
+          </label>
+        </div>
+        <div class="file-input-wrapper-2">
+          <input type="file" id="ci-trabajo" accept=".pdf" required>
+          <label for="ci-trabajo" class="file-input-label-2">
+            <i class="fas fa-cloud-upload-alt"></i> Subir C.I en formato PDF
+          </label>
+        </div>
+        <button type="submit" class="btn-submit">Enviar Solicitud</button>
+      </form>
+      <div id="mensaje-trabajo" style="display: none; margin-top: 20px; padding: 15px; background: #e8f5e9; border-radius: 10px; text-align: center;">
+        <h3>¡Solicitud enviada con éxito!</h3>
+        <p>Gracias por tu interés. Nos pondremos en contacto cont pronto.</p>
+      </div>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // Inicializar AOS
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
-
+    AOS.init({duration:1000,once:true});
+    
     // Menú móvil
     const menuToggle = document.getElementById('menuToggle');
     const navMobile = document.getElementById('navMobile');
-    
-    menuToggle.addEventListener('click', () => {
+    menuToggle.addEventListener('click',()=>{
       navMobile.classList.toggle('active');
       const icon = menuToggle.querySelector('i');
-      if (navMobile.classList.contains('active')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
-      } else {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-      }
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
     });
-
-    // Cerrar menú al hacer clic en un enlace
-    document.querySelectorAll('.nav-mobile a').forEach(link => {
-      link.addEventListener('click', () => {
-        navMobile.classList.remove('active');
-        const icon = menuToggle.querySelector('i');
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-      });
-    });
-
-    // Función para cambiar diapositivas en la galería
+    
+    // Galería
     let currentSlide = 0;
     const slides = document.querySelectorAll('.galeria-slide');
     const totalSlides = slides.length;
     const slider = document.getElementById('galeria-slider');
     const indicatorsContainer = document.getElementById('galeria-indicators');
     
-    // Crear indicadores
     for (let i = 0; i < totalSlides; i++) {
       const indicator = document.createElement('div');
       indicator.classList.add('galeria-indicator');
@@ -1624,13 +285,8 @@
     
     function changeSlide(direction) {
       currentSlide += direction;
-      
-      if (currentSlide >= totalSlides) {
-        currentSlide = 0;
-      } else if (currentSlide < 0) {
-        currentSlide = totalSlides - 1;
-      }
-      
+      if (currentSlide >= totalSlides) currentSlide = 0;
+      else if (currentSlide < 0) currentSlide = totalSlides - 1;
       updateSlider();
     }
     
@@ -1641,21 +297,12 @@
     
     function updateSlider() {
       slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-      
-      // Actualizar indicadores
       indicators.forEach((indicator, index) => {
-        if (index === currentSlide) {
-          indicator.classList.add('active');
-        } else {
-          indicator.classList.remove('active');
-        }
+        indicator.classList.toggle('active', index === currentSlide);
       });
     }
     
-    // Cambio automático de diapositivas
-    setInterval(() => {
-      changeSlide(1);
-    }, 5000);
+    setInterval(() => changeSlide(1), 5000);
     
     // Sistema de login
     const loginBtn = document.getElementById('loginBtn');
@@ -1665,66 +312,74 @@
     const userInfo = document.getElementById('userInfo');
     const logoutBtn = document.getElementById('logoutBtn');
     const reservasOcultas = document.getElementById('reservas-ocultas');
+    const solicitudesOcultas = document.getElementById('solicitudes-ocultas');
     
-    // Abrir modal de login
-    loginBtn.addEventListener('click', () => {
-      loginModal.classList.add('active');
-    });
-    
-    // Cerrar modal de login
-    closeModal.addEventListener('click', () => {
-      loginModal.classList.remove('active');
-    });
-    
-    // Cerrar modal al hacer clic fuera
-    window.addEventListener('click', (e) => {
-      if (e.target === loginModal) {
-        loginModal.classList.remove('active');
+    document.addEventListener('DOMContentLoaded', () => {
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      if (isLoggedIn) {
+        loginBtn.style.display = 'none';
+        userInfo.classList.add('active');
+        reservasOcultas.classList.add('active');
+        solicitudesOcultas.classList.add('active');
+        cargarReservas();
+        cargarSolicitudes();
       }
     });
     
-    // Procesar login
+    loginBtn.addEventListener('click', () => {
+      loginModal.classList.add('active');
+      setTimeout(() => document.getElementById('username').focus(), 300);
+    });
+    
+    closeModal.addEventListener('click', () => loginModal.classList.remove('active'));
+    window.addEventListener('click', (e) => e.target === loginModal && loginModal.classList.remove('active'));
+    
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
       
-      // Verificar credenciales
-      if (username === 'creatubelleza' && password === 'montes9828') {
-        // Login exitoso
+      if (username === 'creaturbelleza' && password === 'montes9828') {
         loginModal.classList.remove('active');
         loginBtn.style.display = 'none';
         userInfo.classList.add('active');
         reservasOcultas.classList.add('active');
-        
-        // Cargar reservas
+        solicitudesOcultas.classList.add('active');
+        localStorage.setItem('isLoggedIn', 'true');
         cargarReservas();
+        cargarSolicitudes();
+        loginForm.reset();
       } else {
-        // Login fallido
         alert('Usuario o contraseña incorrectos');
+        loginForm.reset();
       }
     });
     
-    // Cerrar sesión
     logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('isLoggedIn');
       loginBtn.style.display = 'block';
       userInfo.classList.remove('active');
       reservasOcultas.classList.remove('active');
-      
-      // Limpiar formulario
-      document.getElementById('username').value = '';
-      document.getElementById('password').value = '';
+      solicitudesOcultas.classList.remove('active');
+      loginForm.reset();
     });
     
-    // Manejo básico de la reserva
+    // Reservas
     const form = document.getElementById('form-reserva');
     const confirmacionReserva = document.getElementById('confirmacion-reserva');
     const btnWhatsAppConfirm = document.getElementById('btn-whatsapp-confirm');
+    const telefonoInput = document.getElementById('telefono');
+    
+    // Función para manejar el campo de teléfono
+    telefonoInput.addEventListener('input', function(e) {
+      // Si el valor no comienza con +593, lo establecemos como +593
+      if (e.target.value.length < 4 || e.target.value.substring(0,4) !== '+593') {
+        e.target.value = '+593';
+      }
+    });
     
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      
       const nombre = form.nombre.value.trim();
       const telefono = form.telefono.value.trim();
       const servicio = form.servicio.value;
@@ -1736,37 +391,21 @@
         return;
       }
       
-      // Guardar reserva en localStorage
-      const nuevaReserva = {
-        id: Date.now(),
-        nombre,
-        telefono,
-        servicio,
-        fecha,
-        hora
-      };
-      
+      const nuevaReserva = {id:Date.now(),nombre,telefono,servicio,fecha,hora};
       let reservas = JSON.parse(localStorage.getItem('reservas')) || [];
       reservas.push(nuevaReserva);
       localStorage.setItem('reservas', JSON.stringify(reservas));
       
-      // Mostrar confirmación
       confirmacionReserva.classList.add('active');
-      
-      // Configurar botón de WhatsApp
       const mensaje = encodeURIComponent(`Hola, ${nombre}. Confirmo mi reserva para ${servicio} el día ${fecha} a las ${hora}. Mi teléfono es ${telefono}.`);
       btnWhatsAppConfirm.href = `https://wa.me/593993045286?text=${mensaje}`;
+      btnWhatsAppConfirm.target = '_blank';
       
-      // Limpiar formulario
       form.reset();
-      
-      // Si está logueado, recargar la lista de reservas
-      if (userInfo.classList.contains('active')) {
-        cargarReservas();
-      }
+      telefonoInput.value = '+593'; // Restablecer el valor del teléfono
+      if (userInfo.classList.contains('active')) cargarReservas();
     });
     
-    // Función para cargar reservas
     function cargarReservas() {
       const listaReservas = document.getElementById('lista-reservas');
       const reservas = JSON.parse(localStorage.getItem('reservas')) || [];
@@ -1777,65 +416,183 @@
       }
       
       listaReservas.innerHTML = '';
-      
       reservas.forEach(reserva => {
-        const reservaItem = document.createElement('div');
-        reservaItem.classList.add('reserva-item');
-        reservaItem.innerHTML = `
+        const item = document.createElement('div');
+        item.classList.add('reserva-item');
+        item.innerHTML = `
           <h4>${reserva.servicio}</h4>
           <p><strong>Cliente:</strong> ${reserva.nombre}</p>
-          <p><strong>Teléfono:</strong> ${reserva.telefono}</p>
+          <p><strong>Teléfono:</strong> <a href="https://wa.me/${reserva.telefono.replace(/\s/g, '')}" target="_blank" style="color: #25d366; text-decoration: none;">${reserva.telefono}</a></p>
           <p><strong>Fecha:</strong> ${reserva.fecha}</p>
           <p><strong>Hora:</strong> ${reserva.hora}</p>
+          <button class="delete-btn" onclick="eliminarReserva(${reserva.id})"><i class="fas fa-trash"></i></button>
         `;
-        listaReservas.appendChild(reservaItem);
+        listaReservas.appendChild(item);
       });
     }
     
-    // Función para comprar productos (envía mensaje a WhatsApp)
-    function comprarProducto(nombreProducto, precioProducto) {
-      const telefono = '593993045286'; // tu número sin signos ni espacios ni +
-      const mensaje = encodeURIComponent(`Hola, quiero comprar el producto "${nombreProducto}" con precio ${precioProducto} en Lis Belleza Total. ¿Podrían darme más información?`);
-      const url = `https://wa.me/${telefono}?text=${mensaje}`;
-      window.open(url, '_blank');
+    function eliminarReserva(id) {
+      if (confirm('¿Estás seguro de que quieres eliminar esta reserva?')) {
+        let reservas = JSON.parse(localStorage.getItem('reservas')) || [];
+        reservas = reservas.filter(r => r.id !== id);
+        localStorage.setItem('reservas', JSON.stringify(reservas));
+        cargarReservas();
+      }
     }
     
-    // Efecto de desplazamiento suave para los enlaces de navegación
+    // Solicitudes de trabajo
+    const trabajaModal = document.getElementById('trabajaModal');
+    const closeTrabajaModal = document.getElementById('closeTrabajaModal');
+    const formTrabaja = document.getElementById('form-trabaja');
+    const mensajeTrabajo = document.getElementById('mensaje-trabajo');
+    const telefonoTrabajoInput = document.getElementById('telefono-trabajo');
+    
+    function openTrabajaModal() {
+      trabajaModal.classList.add('active');
+      setTimeout(() => document.getElementById('nombre-trabajo').focus(), 300);
+    }
+    
+    closeTrabajaModal.addEventListener('click', () => trabajaModal.classList.remove('active'));
+    window.addEventListener('click', (e) => e.target === trabajaModal && trabajaModal.classList.remove('active'));
+    
+    // Función para manejar el campo de teléfono en el formulario de trabajo
+    telefonoTrabajoInput.addEventListener('input', function(e) {
+      // Si el valor no comienza con +593, lo establecemos como +593
+      if (e.target.value.length < 4 || e.target.value.substring(0,4) !== '+593') {
+        e.target.value = '+593';
+      }
+    });
+    
+    // Actualizar etiqueta de archivo cuando se selecciona
+    document.getElementById('cv-trabajo').addEventListener('change', function() {
+      const fileName = this.files[0]?.name || 'Subir CV actualizado';
+      document.querySelector('.file-input-label').innerHTML = `<i class="fas fa-file-pdf"></i> ${fileName}`;
+    });
+    
+    document.getElementById('ci-trabajo').addEventListener('change', function() {
+      const fileName = this.files[0]?.name || 'Subir C.I en formato PDF';
+      document.querySelector('.file-input-label-2').innerHTML = `<i class="fas fa-file-pdf"></i> ${fileName}`;
+    });
+    
+    formTrabaja.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = formTrabaja['nombre-trabajo'].value.trim();
+      const email = formTrabaja['email-trabajo'].value.trim();
+      const telefono = formTrabaja['telefono-trabajo'].value.trim();
+      const cvFile = document.getElementById('cv-trabajo').files[0];
+      const ciFile = document.getElementById('ci-trabajo').files[0];
+      
+      if (!nombre || !email || !telefono || !cvFile || !ciFile) {
+        alert('Por favor completa todos los campos obligatorios.');
+        return;
+      }
+      
+      const nuevaSolicitud = {
+        id: Date.now(),
+        nombre,
+        email,
+        telefono,
+        cvNombre: cvFile.name,
+        ciNombre: ciFile.name,
+        fecha: new Date().toLocaleDateString()
+      };
+      
+      let solicitudes = JSON.parse(localStorage.getItem('solicitudes-trabajo')) || [];
+      solicitudes.push(nuevaSolicitud);
+      localStorage.setItem('solicitudes-trabajo', JSON.stringify(solicitudes));
+      
+      mensajeTrabajo.style.display = 'block';
+      formTrabaja.reset();
+      document.querySelector('.file-input-label').innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Subir CV actualizado';
+      document.querySelector('.file-input-label-2').innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Subir C.I en formato PDF';
+      telefonoTrabajoInput.value = '+593';
+      
+      setTimeout(() => mensajeTrabajo.style.display = 'none', 5000);
+      
+      if (userInfo.classList.contains('active')) cargarSolicitudes();
+    });
+    
+    function cargarSolicitudes() {
+      const listaSolicitudes = document.getElementById('lista-solicitudes');
+      const solicitudes = JSON.parse(localStorage.getItem('solicitudes-trabajo')) || [];
+      
+      if (solicitudes.length === 0) {
+        listaSolicitudes.innerHTML = '<p>No tienes solicitudes de trabajo recibidas.</p>';
+        return;
+      }
+      
+      listaSolicitudes.innerHTML = '';
+      solicitudes.forEach(solicitud => {
+        const item = document.createElement('div');
+        item.classList.add('solicitud-item');
+        item.innerHTML = `
+          <h4>${solicitud.nombre}</h4>
+          <p><strong>Correo:</strong> ${solicitud.email}</p>
+          <p><strong>Teléfono:</strong> <a href="https://wa.me/${solicitud.telefono.replace(/\s/g, '')}" target="_blank" style="color: #25d366; text-decoration: none;">${solicitud.telefono}</a></p>
+          <p><strong>Fecha:</strong> ${solicitud.fecha}</p>
+          <button class="download-btn" onclick="descargarArchivo('${solicitud.cvNombre}', 'cv')"><i class="fas fa-download"></i> CV</button>
+          <button class="download-btn" onclick="descargarArchivo('${solicitud.ciNombre}', 'ci')"><i class="fas fa-download"></i> C.I</button>
+          <button class="delete-btn" onclick="eliminarSolicitud(${solicitud.id})"><i class="fas fa-trash"></i></button>
+        `;
+        listaSolicitudes.appendChild(item);
+      });
+    }
+    
+    function descargarArchivo(nombre, tipo) {
+      // Simulación de descarga de archivo
+      const link = document.createElement('a');
+      link.href = '#';
+      link.download = nombre;
+      
+      // Crear un blob con el nombre del archivo para simular la descarga
+      const blob = new Blob([`Contenido del archivo ${nombre}`], {type: 'application/pdf'});
+      const url = URL.createObjectURL(blob);
+      link.href = url;
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      
+      alert(`Descargando ${tipo}: ${nombre}`);
+    }
+    
+    function eliminarSolicitud(id) {
+      if (confirm('¿Estás seguro de que quieres eliminar esta solicitud?')) {
+        let solicitudes = JSON.parse(localStorage.getItem('solicitudes-trabajo')) || [];
+        solicitudes = solicitudes.filter(s => s.id !== id);
+        localStorage.setItem('solicitudes-trabajo', JSON.stringify(solicitudes));
+        cargarSolicitudes();
+      }
+    }
+    
+    // Comprar productos
+    function comprarProducto(nombre, precio) {
+      const mensaje = encodeURIComponent(`Hola, quiero comprar el producto "${nombre}" con precio ${precio} en Lis Belleza Total. ¿Podrían darme más información?`);
+      window.open(`https://wa.me/593993045286?text=${mensaje}`, '_blank');
+    }
+    
+    // Navegación suave
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
           const headerOffset = 80;
           const elementPosition = target.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-          
-          // Cerrar menú móvil si está abierto
-          navMobile.classList.remove('active');
-          const icon = menuToggle.querySelector('i');
-          icon.classList.remove('fa-times');
-          icon.classList.add('fa-bars');
+          window.scrollTo({top: offsetPosition, behavior: 'smooth'});
         }
       });
     });
     
-    // Efecto de cambio de color del header al hacer scroll
+    // Efecto scroll header
     window.addEventListener('scroll', function() {
       const header = document.querySelector('header');
-      if (window.scrollY > 50) {
-        header.style.background = 'linear-gradient(135deg, rgba(255,105,180,0.95), rgba(214,138,177,0.95))';
-      } else {
-        header.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
-      }
+      header.style.background = window.scrollY > 50 ? 
+        'linear-gradient(135deg, rgba(255,105,180,0.95), rgba(214,138,177,0.95))' : 
+        'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
     });
   </script>
-
 </body>
 </html>
-
