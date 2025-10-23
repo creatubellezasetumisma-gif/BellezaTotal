@@ -7,7 +7,58 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    :root{--p:#ff69b4;--s:#d68ab1;--a:#a64d79;--l:#fff8fb;--t:#5a2a5c;--w:#fff;--sh:0 4px 15px rgba(0,0,0,0.1)}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Montserrat,sans-serif;background-color:var(--l);color:var(--t);overflow-x:hidden}header{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);padding:15px 0;position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,0.1)}.header-content{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}.logo{display:flex;align-items:center}.logo i{font-size:2rem;color:var(--w)}.logo h1{font-size:1.5rem;font-weight:900;margin-left:10px;white-space:nowrap}.nav-desktop{display:flex;gap:15px}.nav-desktop a{color:var(--w);text-decoration:none;padding:8px 12px;font-weight:500;border-radius:20px;transition:all 0.3s ease;font-size:0.9rem;white-space:nowrap}.nav-desktop a:hover{background-color:rgba(255,255,255,0.2);transform:translateY(-2px)}.user-menu{display:flex;align-items:center;gap:10px}.login-btn{background:rgba(255,255,255,0.2);color:var(--w);border:none;padding:8px 15px;border-radius:20px;cursor:pointer;font-weight:600;transition:all 0.3s ease;font-size:0.9rem}.login-btn:hover{background:rgba(255,255,255,0.3)}.user-info{display:none;align-items:center;gap:10px}.user-info.active{display:flex}.logout-btn{background:rgba(255,255,255,0.2);color:var(--w);border:none;padding:8px 15px;border-radius:20px;cursor:pointer;font-weight:600;transition:all 0.3s ease;font-size:0.9rem}.logout-btn:hover{background:rgba(255,255,255,0.3)}.menu-toggle{display:none;background:none;border:none;color:var(--w);font-size:1.5rem;cursor:pointer}.nav-mobile{display:none;position:absolute;top:100%;left:0;right:0;background:var(--p);flex-direction:column;padding:15px;box-shadow:0 5px 15px rgba(0,0,0,0.2);gap:10px}.nav-mobile.active{display:flex}.nav-mobile a{color:var(--w);text-decoration:none;padding:10px 15px;font-weight:500;border-radius:10px;transition:all 0.3s ease;font-size:1rem}.nav-mobile a:hover{background-color:rgba(255,255,255,0.2)}.hero{margin-top:80px;padding:80px 20px;text-align:center;background:linear-gradient(rgba(255,105,180,0.7),rgba(214,138,177,0.7)),url('https://images.unsplash.com/photo-1556228724-cabf8b6e204e?auto=format&fit=crop&w=1950&q=80');background-size:cover;background-position:center;color:var(--w);position:relative;overflow:hidden;min-height:60vh;display:flex;align-items:center;justify-content:center}.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at center,rgba(255,255,255,0.1) 0%,rgba(255,105,180,0.3) 100%);z-index:1}.hero-content{position:relative;z-index:2;max-width:800px;margin:0 auto;text-align:center}.hero h2{font-size:2.8rem;margin-bottom:20px;font-weight:900;text-shadow:0 2px 10px rgba(0,0,0,0.2);animation:fadeInUp 1s ease-out;line-height:1.2}.hero p{font-size:1.3rem;margin-bottom:30px;font-weight:500;text-shadow:0 1px 5px rgba(0,0,0,0.2);animation:fadeInUp 1s ease-out 0.2s;animation-fill-mode:both;line-height:1.4}.hero-buttons{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;animation:fadeInUp 1s ease-out 0.4s;animation-fill-mode:both}.btn{display:inline-block;padding:12px 25px;border-radius:50px;text-decoration:none;font-weight:700;font-size:1rem;transition:all 0.3s ease;position:relative;overflow:hidden}.btn-primary{background:var(--w);color:var(--p);box-shadow:0 4px 15px rgba(0,0,0,0.2)}.btn-primary:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.btn-secondary{background:transparent;color:var(--w);border:2px solid var(--w)}.btn-secondary:hover{background:var(--w);color:var(--p)}main{padding:60px 20px;max-width:1100px;margin:0 auto}section{margin-bottom:60px}h2{font-size:2.2rem;margin-bottom:25px;font-weight:700;color:var(--t);text-align:center;position:relative;padding-bottom:15px}h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60px;height:4px;background:linear-gradient(to right,var(--p),var(--s));border-radius:2px}#sobre-nosotros{padding:40px 0;background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,182,193,0.3));border-radius:20px;box-shadow:var(--sh)}.sobre-content{display:flex;flex-direction:column;gap:30px}.sobre-texto{text-align:center;margin-bottom:20px}.sobre-texto p{font-size:1.1rem;line-height:1.8;margin-bottom:20px;max-width:800px;margin-left:auto;margin-right:auto}.servicios-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}.servicio-item{background:rgba(255,255,255,0.7);padding:20px;border-radius:10px;display:flex;align-items:center;transition:all 0.3s ease}.servicio-item:hover{background:var(--w);transform:translateY(-5px);box-shadow:0 5px 15px rgba(0,0,0,0.1)}.servicio-item i{color:var(--p);margin-right:15px;font-size:1.5rem;width:30px;text-align:center}.servicio-item h3{font-size:1.1rem;font-weight:600;margin:0}#galeria{padding:40px 0}.galeria-container{position:relative;max-width:1000px;margin:0 auto;overflow:hidden;border-radius:20px;box-shadow:var(--sh)}.galeria-slider{display:flex;transition:transform 0.5s ease}.galeria-slide{min-width:100%;position:relative}.galeria-slide img{width:100%;height:400px;object-fit:cover;display:block}.galeria-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent);color:var(--w);padding:20px;text-align:center}.galeria-caption h3{font-size:1.3rem;margin-bottom:5px}.galeria-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.8);color:var(--a);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;box-shadow:0 2px 10px rgba(0,0,0,0.1)}.galeria-nav:hover{background:var(--w);box-shadow:0 4px 15px rgba(0,0,0,0.2)}.galeria-nav.prev{left:15px}.galeria-nav.next{right:15px}.galeria-indicators{display:flex;justify-content:center;gap:8px;margin-top:20px}.galeria-indicator{width:10px;height:10px;border-radius:50%;background:var(--s);cursor:pointer;transition:all 0.3s ease}.galeria-indicator.active{background:var(--p);transform:scale(1.2)}#tienda{padding:40px 0}.tienda-intro{text-align:center;margin-bottom:40px}.tienda-intro p{font-size:1.1rem;max-width:800px;margin:0 auto;line-height:1.8}.tienda-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}.producto-card{background:var(--w);border-radius:15px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,0.08);transition:all 0.3s ease;position:relative}.producto-card:hover{transform:translateY(-8px);box-shadow:0 10px 30px rgba(0,0,0,0.15)}.producto-imagen{height:200px;overflow:hidden;position:relative}.producto-imagen img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}.producto-card:hover .producto-imagen img{transform:scale(1.1)}.producto-badge{position:absolute;top:10px;right:10px;background:var(--p);color:var(--w);padding:5px 10px;border-radius:20px;font-size:0.75rem;font-weight:600}.producto-info{padding:20px}.producto-info h3{font-size:1.2rem;margin-bottom:8px;color:var(--t)}.producto-info p{font-size:0.9rem;color:#666;margin-bottom:12px;line-height:1.5}.producto-footer{display:flex;justify-content:space-between;align-items:center}.producto-precio{font-size:1.3rem;font-weight:700;color:var(--a)}.producto-btn{background:var(--p);color:var(--w);border:none;padding:8px 16px;border-radius:30px;font-weight:600;cursor:pointer;transition:all 0.3s ease;font-size:0.9rem}.producto-btn:hover{background:var(--a);transform:scale(1.05)}#reserva{padding:40px 0;background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,182,193,0.3));border-radius:20px;box-shadow:var(--sh)}.reserva-container{display:flex;flex-direction:column;gap:40px}.reserva-form{background:var(--w);padding:25px;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.08)}.form-group{margin-bottom:20px}.form-group label{display:block;margin-bottom:8px;font-weight:600;color:var(--t);font-size:0.95rem}.form-control{width:100%;padding:12px;border:2px solid #eee;border-radius:10px;font-size:1rem;font-family:Montserrat,sans-serif;transition:all 0.3s ease}.form-control:focus{border-color:var(--p);outline:none;box-shadow:0 0 0 3px rgba(255,105,180,0.1)}.btn-submit{background:var(--p);color:var(--w);border:none;padding:12px 30px;border-radius:50px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;width:100%}.btn-submit:hover{background:var(--a);transform:translateY(-2px);box-shadow:0 5px 15px rgba(166,77,121,0.3)}.reserva-info{padding:20px}.reserva-info h3{font-size:1.4rem;margin-bottom:15px;color:var(--t)}.reserva-info p{margin-bottom:15px;line-height:1.7;font-size:1rem}.contact-item{display:flex;align-items:center;margin-bottom:15px}.contact-item i{font-size:1.2rem;color:var(--p);margin-right:12px;width:25px;text-align:center}.contact-item span{font-size:0.95rem}.confirmacion-reserva{display:none;background:#e8f5e9;border:2px solid #4caf50;border-radius:10px;padding:20px;margin-top:20px;text-align-center}.confirmacion-reserva.active{display:block}.confirmacion-reserva h3{color:#2e7d32;margin-bottom:15px;font-size:1.2rem}.confirmacion-reserva .btn-whatsapp{background:linear-gradient(135deg,#25d366,#128c7e);color:var(--w);border:none;padding:12px 25px;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s ease;display:inline-block;text-decoration:none}.confirmacion-reserva .btn-whatsapp:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.reservas-ocultas{display:none;background:#f5f5f5;border-radius:15px;padding:25px;margin-top:30px}.reservas-ocultas.active{display:block}.reservas-ocultas h3{color:var(--a);margin-bottom:20px;text-align:center;font-size:1.3rem}.lista-reservas{display:grid;gap:15px}.reserva-item{background:var(--w);padding:15px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1);position:relative}.reserva-item h4{color:var(--a);margin-bottom:10px;font-size:1.1rem}.reserva-item p{margin:5px 0;font-size:0.9rem}.delete-btn{position:absolute;top:10px;right:10px;background:#f44336;color:var(--w);border:none;border-radius:50%;width:25px;height:25px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease}.delete-btn:hover{background:#d32f2f}.testimonios{padding:40px 0}.testimonios-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}.testimonio-card{background:var(--w);border-radius:15px;padding:25px;box-shadow:0 5px 20px rgba(0,0,0,0.08);position:relative;transition:all 0.3s ease}.testimonio-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,0.15)}.testimonio-card::before{content:'"';position:absolute;top:10px;left:15px;font-size:3.5rem;color:var(--p);opacity:0.2;font-family:serif}.testimonio-text{font-style:italic;margin-bottom:15px;line-height:1.7;position:relative;z-index:1;font-size:1rem}.testimonio-rating{margin-bottom:12px}.testimonio-rating i{color:#ffc107;margin-right:2px;font-size:0.9rem}.testimonio-autor{display:flex;align-items:center}.testimonio-avatar{width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--s));display:flex;align-items:center;justify-content:center;color:var(--w);font-weight:700;margin-right:12px;font-size:1.1rem}.testimonio-info h4{font-size:1rem;margin-bottom:3px;color:var(--t)}.testimonio-info p{font-size:0.85rem;color:#666}.contacto{padding:40px 0}.contact-container{display:flex;flex-direction:column;gap:40px}.contact-info h3{font-size:1.4rem;margin-bottom:20px;color:var(--t)}.contact-details{margin-bottom:25px}.contact-details p{margin-bottom:12px;display:flex;align-items:center;font-size:0.95rem}.contact-details i{color:var(--p);margin-right:12px;width:22px}.map-container{border-radius:15px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,0.1);height:350px}.map-container iframe{width:100%;height:100%;border:none}footer{background:linear-gradient(135deg,var(--a),var(--s));color:var(--w);padding:40px 20px 20px;margin-top:60px}.footer-content{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;margin-bottom:30px}.footer-section h3{font-size:1.2rem;margin-bottom:15px;position:relative;padding-bottom:10px}.footer-section h3::after{content:'';position:absolute;bottom:0;left:0;width:40px;height:2px;background:var(--w)}.footer-section p,.footer-section li{margin-bottom:8px;line-height:1.6;font-size:0.9rem}.footer-section ul{list-style:none;padding:0}.footer-section a{color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.3s ease}.footer-section a:hover{color:var(--w)}.footer-bottom{text-align:center;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);font-size:0.85rem;color:rgba(255,255,255,0.7);position:relative}.trabaja-btn{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);border:none;padding:12px 25px;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s ease;display:inline-block;position:absolute;bottom:15px;right:20px}.trabaja-btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:2000;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease}.modal.active{display:flex;opacity:1}.modal-content{background:var(--w);padding:30px;border-radius:15px;width:90%;max-width:500px;box-shadow:0 10px 30px rgba(0,0,0,0.3);transform:translateY(-20px);transition:transform 0.3s ease}.modal.active .modal-content{transform:translateY(0)}.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.modal-header h3{font-size:1.5rem;color:var(--t)}.close-modal{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--t);transition:color 0.3s ease}.close-modal:hover{color:var(--p)}.trabaja-form{display:flex;flex-direction:column;gap:15px}.trabaja-form h3{text-align:center;margin-bottom:20px;color:var(--t);font-size:1.3rem}.file-input-wrapper{position:relative;overflow:hidden;display:inline-block;width:100%;margin-bottom:15px}.file-input-wrapper input[type=file]{position:absolute;left:-9999px}.file-input-label{display:block;padding:12px;background:#f5f5f5;border:2px dashed #ddd;border-radius:10px;text-align:center;cursor:pointer;transition:all 0.3s ease}.file-input-label:hover{background:#eee;border-color:var(--p)}.file-input-wrapper-2{position:relative;overflow:hidden;display:inline-block;width:100%;margin-bottom:15px}.file-input-wrapper-2 input[type=file]{position:absolute;left:-9999px}.file-input-label-2{display:block;padding:12px;background:#f5f5f5;border:2px dashed #ddd;border-radius:10px;text-align:center;cursor:pointer;transition:all 0.3s ease}.file-input-label-2:hover{background:#eee;border-color:var(--p)}.solicitudes-ocultas{display:none;background:#f5f5f5;border-radius:15px;padding:25px;margin-top:30px}.solicitudes-ocultas.active{display:block}.solicitudes-ocultas h3{color:var(--a);margin-bottom:20px;text-align:center;font-size:1.3rem}.lista-solicitudes{display:grid;gap:15px}.solicitud-item{background:var(--w);padding:15px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1);position:relative}.solicitud-item h4{color:var(--a);margin-bottom:10px;font-size:1.1rem}.solicitud-item p{margin:5px 0;font-size:0.9rem}.download-btn{position:absolute;top:10px;right:35px;background:#2196f3;color:var(--w);border:none;border-radius:50%;width:25px;height:25px;display:flex;align-items:center;justify-content-center;cursor:pointer;transition:all 0.3s ease}.download-btn:hover{background:#0b7dda}.delete-btn{position:absolute;top:10px;right:10px;background:#f44336;color:var(--w);border:none;border-radius:50%;width:25px;height:25px;display:flex;align-items:center;justify-content-center;cursor:pointer;transition:all 0.3s ease}.delete-btn:hover{background:#d32f2f}@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}@media(max-width:992px){.hero h2{font-size:2.5rem}.hero p{font-size:1.1rem}.servicios-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}}@media(max-width:768px){header{padding:12px 0}.header-content{justify-content:space-between}.logo h1{font-size:1.3rem}.menu-toggle{display:block}.nav-desktop{display:none}.hero{margin-top:70px;padding:60px 15px}.hero h2{font-size:2.2rem}.hero p{font-size:1rem}.hero-buttons{flex-direction:column;align-items:center;width:100%;max-width:300px;margin:0 auto}.btn{width:100%}h2{font-size:1.9rem}.galeria-slide img{height:300px}.footer-content{grid-template-columns:1fr;text-align:center}.trabaja-btn{position:relative;bottom:auto;right:auto;margin-top:20px}}@media(max-width:576px){.logo h1{font-size:1.1rem}.logo i{font-size:1.6rem}.hero{padding:50px 15px;min-height:50vh}.hero h2{font-size:1.8rem}.hero p{font-size:0.9rem}.hero-buttons{gap:10px}.btn{padding:10px 20px;font-size:0.9rem}h2{font-size:1.7rem}.galeria-slide img{height:250px}.servicios-grid{grid-template-columns:1fr}.tienda-grid{grid-template-columns:1fr}.testimonios-grid{grid-template-columns:1fr}.reserva-container{gap:30px}.map-container{height:250px}}
+    :root{--p:#ff69b4;--s:#d68ab1;--a:#a64d79;--l:#fff8fb;--t:#5a2a5c;--w:#fff;--sh:0 4px 15px rgba(0,0,0,0.1)}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Montserrat,sans-serif;background-color:var(--l);color:var(--t);overflow-x:hidden}header{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);padding:15px 0;position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,0.1)}.header-content{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}.logo{display:flex;align-items:center}.logo i{font-size:2rem;color:var(--w)}.logo h1{font-size:1.5rem;font-weight:900;margin-left:10px;white-space:nowrap}.nav-desktop{display:flex;gap:15px}.nav-desktop a{color:var(--w);text-decoration:none;padding:8px 12px;font-weight:500;border-radius:20px;transition:all 0.3s ease;font-size:0.9rem;white-space:nowrap}.nav-desktop a:hover{background-color:rgba(255,255,255,0.2);transform:translateY(-2px)}.user-menu{display:flex;align-items:center;gap:15px}.cart-icon{position:relative;cursor:pointer;transition:transform 0.3s ease;}.cart-icon:hover{transform:scale(1.1);}.cart-icon i{font-size:1.5rem;}.cart-count{position:absolute;top:-8px;right:-8px;background:#ff4757;color:white;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;}.login-btn{background:rgba(255,255,255,0.2);color:var(--w);border:none;padding:8px 15px;border-radius:20px;cursor:pointer;font-weight:600;transition:all 0.3s ease;font-size:0.9rem}.login-btn:hover{background:rgba(255,255,255,0.3)}.user-info{display:none;align-items:center;gap:10px}.user-info.active{display:flex}.logout-btn{background:rgba(255,255,255,0.2);color:var(--w);border:none;padding:8px 15px;border-radius:20px;cursor:pointer;font-weight:600;transition:all 0.3s ease;font-size:0.9rem}.logout-btn:hover{background:rgba(255,255,255,0.3)}.menu-toggle{display:none;background:none;border:none;color:var(--w);font-size:1.5rem;cursor:pointer}.nav-mobile{display:none;position:absolute;top:100%;left:0;right:0;background:var(--p);flex-direction:column;padding:15px;box-shadow:0 5px 15px rgba(0,0,0,0.2);gap:10px}.nav-mobile.active{display:flex}.nav-mobile a{color:var(--w);text-decoration:none;padding:10px 15px;font-weight:500;border-radius:10px;transition:all 0.3s ease;font-size:1rem}.nav-mobile a:hover{background-color:rgba(255,255,255,0.2)}.hero{margin-top:80px;padding:80px 20px;text-align:center;background:linear-gradient(rgba(255,105,180,0.7),rgba(214,138,177,0.7)),url('https://images.unsplash.com/photo-1556228724-cabf8b6e204e?auto=format&fit=crop&w=1950&q=80');background-size:cover;background-position:center;color:var(--w);position:relative;overflow:hidden;min-height:60vh;display:flex;align-items:center;justify-content:center}.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at center,rgba(255,255,255,0.1) 0%,rgba(255,105,180,0.3) 100%);z-index:1}.hero-content{position:relative;z-index:2;max-width:800px;margin:0 auto;text-align:center}.hero h2{font-size:2.8rem;margin-bottom:20px;font-weight:900;text-shadow:0 2px 10px rgba(0,0,0,0.2);animation:fadeInUp 1s ease-out;line-height:1.2}.hero p{font-size:1.3rem;margin-bottom:30px;font-weight:500;text-shadow:0 1px 5px rgba(0,0,0,0.2);animation:fadeInUp 1s ease-out 0.2s;animation-fill-mode:both;line-height:1.4}.hero-buttons{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;animation:fadeInUp 1s ease-out 0.4s;animation-fill-mode:both}.btn{display:inline-block;padding:12px 25px;border-radius:50px;text-decoration:none;font-weight:700;font-size:1rem;transition:all 0.3s ease;position:relative;overflow:hidden}.btn-primary{background:var(--w);color:var(--p);box-shadow:0 4px 15px rgba(0,0,0,0.2)}.btn-primary:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.btn-secondary{background:transparent;color:var(--w);border:2px solid var(--w)}.btn-secondary:hover{background:var(--w);color:var(--p)}main{padding:60px 20px;max-width:1100px;margin:0 auto}section{margin-bottom:60px}h2{font-size:2.2rem;margin-bottom:25px;font-weight:700;color:var(--t);text-align:center;position:relative;padding-bottom:15px}h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60px;height:4px;background:linear-gradient(to right,var(--p),var(--s));border-radius:2px}#sobre-nosotros{padding:40px 0;background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,182,193,0.3));border-radius:20px;box-shadow:var(--sh)}.sobre-content{display:flex;flex-direction:column;gap:30px}.sobre-texto{text-align:center;margin-bottom:20px}.sobre-texto p{font-size:1.1rem;line-height:1.8;margin-bottom:20px;max-width:800px;margin-left:auto;margin-right:auto}.servicios-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}.servicio-item{background:rgba(255,255,255,0.7);padding:20px;border-radius:10px;display:flex;align-items:center;transition:all 0.3s ease}.servicio-item:hover{background:var(--w);transform:translateY(-5px);box-shadow:0 5px 15px rgba(0,0,0,0.1)}.servicio-item i{color:var(--p);margin-right:15px;font-size:1.5rem;width:30px;text-align:center}.servicio-item h3{font-size:1.1rem;font-weight:600;margin:0}#galeria{padding:40px 0}.galeria-container{position:relative;max-width:1000px;margin:0 auto;overflow:hidden;border-radius:20px;box-shadow:var(--sh)}.galeria-slider{display:flex;transition:transform 0.5s ease}.galeria-slide{min-width:100%;position:relative}.galeria-slide img{width:100%;height:400px;object-fit:cover;display:block}.galeria-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent);color:var(--w);padding:20px;text-align:center}.galeria-caption h3{font-size:1.3rem;margin-bottom:5px}.galeria-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.8);color:var(--a);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;box-shadow:0 2px 10px rgba(0,0,0,0.1)}.galeria-nav:hover{background:var(--w);box-shadow:0 4px 15px rgba(0,0,0,0.2)}.galeria-nav.prev{left:15px}.galeria-nav.next{right:15px}.galeria-indicators{display:flex;justify-content:center;gap:8px;margin-top:20px}.galeria-indicator{width:10px;height:10px;border-radius:50%;background:var(--s);cursor:pointer;transition:all 0.3s ease}.galeria-indicator.active{background:var(--p);transform:scale(1.2)}#tienda{padding:40px 0}.tienda-intro{text-align:center;margin-bottom:40px}.tienda-intro p{font-size:1.1rem;max-width:800px;margin:0 auto;line-height:1.8}.tienda-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}.producto-card{background:var(--w);border-radius:15px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,0.08);transition:all 0.3s ease;position:relative}.producto-card:hover{transform:translateY(-8px);box-shadow:0 10px 30px rgba(0,0,0,0.15)}.producto-imagen{height:200px;overflow:hidden;position:relative}.producto-imagen img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}.producto-card:hover .producto-imagen img{transform:scale(1.1)}.producto-badge{position:absolute;top:10px;right:10px;background:var(--p);color:var(--w);padding:5px 10px;border-radius:20px;font-size:0.75rem;font-weight:600}.producto-info{padding:20px}.producto-info h3{font-size:1.2rem;margin-bottom:8px;color:var(--t)}.producto-info p{font-size:0.9rem;color:#666;margin-bottom:12px;line-height:1.5}.producto-footer{display:flex;justify-content:space-between;align-items:center}.producto-precio{font-size:1.3rem;font-weight:700;color:var(--a)}.producto-btn{background:var(--p);color:var(--w);border:none;padding:8px 16px;border-radius:30px;font-weight:600;cursor:pointer;transition:all 0.3s ease;font-size:0.9rem}.producto-btn:hover{background:var(--a);transform:scale(1.05)}#reserva{padding:40px 0;background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,182,193,0.3));border-radius:20px;box-shadow:var(--sh)}.reserva-container{display:flex;flex-direction:column;gap:40px}.reserva-form{background:var(--w);padding:25px;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.08)}.form-group{margin-bottom:20px}.form-group label{display:block;margin-bottom:8px;font-weight:600;color:var(--t);font-size:0.95rem}.form-control{width:100%;padding:12px;border:2px solid #eee;border-radius:10px;font-size:1rem;font-family:Montserrat,sans-serif;transition:all 0.3s ease}.form-control:focus{border-color:var(--p);outline:none;box-shadow:0 0 0 3px rgba(255,105,180,0.1)}.btn-submit{background:var(--p);color:var(--w);border:none;padding:12px 30px;border-radius:50px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;width:100%}.btn-submit:hover{background:var(--a);transform:translateY(-2px);box-shadow:0 5px 15px rgba(166,77,121,0.3)}.reserva-info{padding:20px}.reserva-info h3{font-size:1.4rem;margin-bottom:15px;color:var(--t)}.reserva-info p{margin-bottom:15px;line-height:1.7;font-size:1rem}.contact-item{display:flex;align-items:center;margin-bottom:15px}.contact-item i{font-size:1.2rem;color:var(--p);margin-right:12px;width:25px;text-align:center}.contact-item span{font-size:0.95rem}.confirmacion-reserva{display:none;background:#e8f5e9;border:2px solid #4caf50;border-radius:10px;padding:20px;margin-top:20px;text-align:center}.confirmacion-reserva.active{display:block}.confirmacion-reserva h3{color:#2e7d32;margin-bottom:15px;font-size:1.2rem}.confirmacion-reserva .btn-whatsapp{background:linear-gradient(135deg,#25d366,#128c7e);color:var(--w);border:none;padding:12px 25px;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s ease;display:inline-block;text-decoration:none}.confirmacion-reserva .btn-whatsapp:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.reservas-ocultas{display:none;background:#f5f5f5;border-radius:15px;padding:25px;margin-top:30px}.reservas-ocultas.active{display:block}.reservas-ocultas h3{color:var(--a);margin-bottom:20px;text-align:center;font-size:1.3rem}.lista-reservas{display:grid;gap:15px}.reserva-item{background:var(--w);padding:15px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1);position:relative}.reserva-item h4{color:var(--a);margin-bottom:10px;font-size:1.1rem}.reserva-item p{margin:5px 0;font-size:0.9rem}.delete-btn{position:absolute;top:10px;right:10px;background:#f44336;color:var(--w);border:none;border-radius:50%;width:25px;height:25px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease}.delete-btn:hover{background:#d32f2f}.testimonios{padding:40px 0}.testimonios-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}.testimonio-card{background:var(--w);border-radius:15px;padding:25px;box-shadow:0 5px 20px rgba(0,0,0,0.08);position:relative;transition:all 0.3s ease}.testimonio-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,0.15)}.testimonio-card::before{content:'"';position:absolute;top:10px;left:15px;font-size:3.5rem;color:var(--p);opacity:0.2;font-family:serif}.testimonio-text{font-style:italic;margin-bottom:15px;line-height:1.7;position:relative;z-index:1;font-size:1rem}.testimonio-rating{margin-bottom:12px}.testimonio-rating i{color:#ffc107;margin-right:2px;font-size:0.9rem}.testimonio-autor{display:flex;align-items:center}.testimonio-avatar{width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--s));display:flex;align-items:center;justify-content:center;color:var(--w);font-weight:700;margin-right:12px;font-size:1.1rem}.testimonio-info h4{font-size:1rem;margin-bottom:3px;color:var(--t)}.testimonio-info p{font-size:0.85rem;color:#666}.contacto{padding:40px 0}.contact-container{display:flex;flex-direction:column;gap:40px}.contact-info h3{font-size:1.4rem;margin-bottom:20px;color:var(--t)}.contact-details{margin-bottom:25px}.contact-details p{margin-bottom:12px;display:flex;align-items:center;font-size:0.95rem}.contact-details i{color:var(--p);margin-right:12px;width:22px}.map-container{border-radius:15px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,0.1);height:350px}.map-container iframe{width:100%;height:100%;border:none}footer{background:linear-gradient(135deg,var(--a),var(--s));color:var(--w);padding:40px 20px 20px;margin-top:60px}.footer-content{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;margin-bottom:30px}.footer-section h3{font-size:1.2rem;margin-bottom:15px;position:relative;padding-bottom:10px}.footer-section h3::after{content:'';position:absolute;bottom:0;left:0;width:40px;height:2px;background:var(--w)}.footer-section p,.footer-section li{margin-bottom:8px;line-height:1.6;font-size:0.9rem}.footer-section ul{list-style:none;padding:0}.footer-section a{color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.3s ease}.footer-section a:hover{color:var(--w)}.footer-bottom{text-align:center;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);font-size:0.85rem;color:rgba(255,255,255,0.7);position:relative}.trabaja-btn{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);border:none;padding:12px 25px;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s ease;display:inline-block;position:absolute;bottom:15px;right:20px}.trabaja-btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:2000;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease}.modal.active{display:flex;opacity:1}.modal-content{background:var(--w);padding:30px;border-radius:15px;width:90%;max-width:500px;box-shadow:0 10px 30px rgba(0,0,0,0.3);transform:translateY(-20px);transition:transform 0.3s ease; max-height: 80vh; overflow-y: auto;}.modal.active .modal-content{transform:translateY(0)}.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.modal-header h3{font-size:1.5rem;color:var(--t)}.close-modal{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--t);transition:color 0.3s ease}.close-modal:hover{color:var(--p)}.trabaja-form{display:flex;flex-direction:column;gap:15px}.trabaja-form h3{text-align:center;margin-bottom:20px;color:var(--t);font-size:1.3rem}.file-input-wrapper{position:relative;overflow:hidden;display:inline-block;width:100%;margin-bottom:15px}.file-input-wrapper input[type=file]{position:absolute;left:-9999px}.file-input-label{display:block;padding:12px;background:#f5f5f5;border:2px dashed #ddd;border-radius:10px;text-align:center;cursor:pointer;transition:all 0.3s ease}.file-input-label:hover{background:#eee;border-color:var(--p)}.file-input-wrapper-2{position:relative;overflow:hidden;display:inline-block;width:100%;margin-bottom:15px}.file-input-wrapper-2 input[type=file]{position:absolute;left:-9999px}.file-input-label-2{display:block;padding:12px;background:#f5f5f5;border:2px dashed #ddd;border-radius:10px;text-align:center;cursor:pointer;transition:all 0.3s ease}.file-input-label-2:hover{background:#eee;border-color:var(--p)}.solicitudes-ocultas{display:none;background:#f5f5f5;border-radius:15px;padding:25px;margin-top:30px}.solicitudes-ocultas.active{display:block}.solicitudes-ocultas h3{color:var(--a);margin-bottom:20px;text-align:center;font-size:1.3rem}.lista-solicitudes{display:grid;gap:15px}.solicitud-item{background:var(--w);padding:15px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1);position:relative}.solicitud-item h4{color:var(--a);margin-bottom:10px;font-size:1.1rem}.solicitud-item p{margin:5px 0;font-size:0.9rem}.download-btn{position:absolute;top:10px;right:35px;background:#2196f3;color:var(--w);border:none;border-radius:50%;width:25px;height:25px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease}.download-btn:hover{background:#0b7dda}.admin-panel{display:none;background:#f0f8ff;border-radius:15px;padding:25px;margin-top:30px;border:2px dashed var(--p)}.admin-panel.active{display:block}.admin-panel h3{color:var(--a);margin-bottom:20px;text-align:center;font-size:1.3rem}.admin-producto-item{background:var(--w);padding:20px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1);margin-bottom:20px;border-left: 5px solid var(--p);}.admin-producto-item h4{color:var(--t);margin-bottom:15px;font-size:1.2rem}.admin-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;align-items:end; margin-bottom: 10px;}.admin-form-group{display:flex;flex-direction:column}.admin-form-group label{font-weight:600;color:var(--t);margin-bottom:5px;font-size:0.9rem;}.admin-form-group input{width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;font-size:0.9rem;}.admin-save-btn{background:var(--p);color:var(--w);border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer;transition:all 0.3s ease; margin-right: 10px;}.admin-save-btn:hover{background:var(--a);transform:scale(1.02);}.admin-delete-btn{background:#f44336;color:var(--w);border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer;transition:all 0.3s ease;}.admin-delete-btn:hover{background:#d32f2f;transform:scale(1.02);}.admin-add-form{background:var(--w);padding:20px;border-radius:10px;border: 2px solid var(--s); margin-top: 20px;}.admin-add-form h4{color:var(--t);margin-bottom:15px;text-align:center;}.admin-add-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;}#admin-message{display:none; background: #e8f5e9; border: 1px solid #4caf50; color: #2e7d32; padding: 10px; border-radius: 8px; text-align: center; margin-top: 15px; font-weight: 500;}
+    
+    /* Estilos para el Carrito */
+    .cart-modal-content{width: 90%; max-width: 600px;}
+    .cart-item{display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #eee;}
+    .cart-item img{width: 60px; height: 60px; object-fit: cover; border-radius: 8px; margin-right: 15px;}
+    .cart-item-details{flex-grow: 1;}
+    .cart-item-name{font-weight: 600; color: var(--t);}
+    .cart-item-price{color: var(--a);}
+    .cart-item-quantity{display: flex; align-items: center; gap: 10px;}
+    .cart-item-quantity button{background: var(--p); color: var(--w); border: none; width: 25px; height: 25px; border-radius: 5px; cursor: pointer; font-weight: bold;}
+    .cart-item-quantity button:hover{background: var(--a);}
+    .cart-total{font-size: 1.2rem; font-weight: 700; text-align: right; margin-top: 20px; color: var(--t);}
+    .cart-checkout-btn{width: 100%; padding: 15px; background: var(--p); color: var(--w); border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: 20px; transition: all 0.3s ease;}
+    .cart-checkout-btn:hover{background: var(--a); transform: translateY(-2px);}
+    .empty-cart{text-align: center; padding: 40px; color: #999;}
+    .cart-remove-btn{background: #f44336; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; margin-left: 10px;}
+    .cart-remove-btn:hover{background: #d32f2f;}
+    
+    /* Estilos para el formulario de envío */
+    .checkout-form{margin-top: 20px; padding: 20px; background: #f9f9f9; border-radius: 10px;}
+    .checkout-form h4{margin-bottom: 15px; color: var(--t); text-align: center;}
+    .checkout-form-group{margin-bottom: 15px;}
+    .checkout-form-group label{display: block; margin-bottom: 5px; font-weight: 600; color: var(--t);}
+    .checkout-form-group input, .checkout-form-group textarea{width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit;}
+    .checkout-form-group textarea{resize: vertical; min-height: 80px;}
+    
+    /* Estilos para la información de pago */
+    .payment-info{display: none; margin-top: 20px; padding: 25px; background: #e8f5e9; border-radius: 10px; text-align: center; border: 2px solid #4caf50; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; z-index: 10;}
+    .payment-info.active{display: block !important; animation: fadeIn 0.5s ease-in-out;}
+    .payment-info h4{margin-bottom: 20px; color: #2e7d32; font-size: 1.4rem; font-weight: 700;}
+    .payment-info p{margin-bottom: 15px; color: #333; font-size: 1.1rem; line-height: 1.5;}
+    .payment-info .account-details{background: white; padding: 20px; border-radius: 10px; margin: 20px 0; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: left; border-left: 4px solid #4caf50;}
+    .payment-info .account-details p{margin-bottom: 12px; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center;}
+    .payment-info .account-details p strong{color: #2e7d32;}
+    .payment-info .whatsapp-btn{display: inline-block; background: #25d366; color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 700; margin-top: 20px; transition: all 0.3s ease; font-size: 1.1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
+    .payment-info .whatsapp-btn:hover{background: #128c7e; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.3);}
+    
+    /* Estilos para los pedidos del admin */
+    .ordenes-ocultas{display:none;background:#f5f5f5;border-radius:15px;padding:25px;margin-top:30px}
+    .ordenes-ocultas.active{display:block}
+    .ordenes-ocultas h3{color:var(--a);margin-bottom:20px;text-align:center;font-size:1.3rem}
+    .lista-ordenes{display:grid;gap:15px}
+    .orden-item{background:var(--w);padding:20px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1);position:relative;border-left: 5px solid #25d366;}
+    .orden-item h4{color:var(--t);margin-bottom:10px;font-size:1.2rem}
+    .orden-item p{margin:5px 0;font-size:0.9rem}
+    .orden-item .productos-lista{list-style:none; padding-left:0; margin-top:10px;}
+    .orden-item .productos-lista li{background:#f9f9f9; padding:5px 10px; border-radius:5px; margin-bottom:5px;}
+    .orden-total{font-weight:700; color:var(--a); margin-top:10px; font-size:1.1rem}
+
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}@media(max-width:992px){.hero h2{font-size:2.5rem}.hero p{font-size:1.1rem}.servicios-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}}@media(max-width:768px){header{padding:12px 0}.header-content{justify-content:space-between}.logo h1{font-size:1.3rem}.menu-toggle{display:block}.nav-desktop{display:none}.hero{margin-top:70px;padding:60px 15px}.hero h2{font-size:2.2rem}.hero p{font-size:1rem}.hero-buttons{flex-direction:column;align-items:center;width:100%;max-width:300px;margin:0 auto}.btn{width:100%}h2{font-size:1.9rem}.galeria-slide img{height:300px}.footer-content{grid-template-columns:1fr;text-align:center}.trabaja-btn{position:relative;bottom:auto;right:auto;margin-top:20px}}@media(max-width:576px){.logo h1{font-size:1.1rem}.logo i{font-size:1.6rem}.hero{padding:50px 15px;min-height:50vh}.hero h2{font-size:1.8rem}.hero p{font-size:0.9rem}.hero-buttons{gap:10px}.btn{padding:10px 20px;font-size:0.9rem}h2{font-size:1.7rem}.galeria-slide img{height:250px}.servicios-grid{grid-template-columns:1fr}.tienda-grid{grid-template-columns:1fr}.testimonios-grid{grid-template-columns:1fr}.reserva-container{gap:30px}.map-container{height:250px}.admin-form-grid, .admin-add-form-grid{grid-template-columns:1fr;}.cart-item{flex-direction: column; text-align: center;}}
   </style>
 </head>
 <body>
@@ -29,9 +80,13 @@
       </nav>
       
       <div class="user-menu">
+        <div class="cart-icon" onclick="toggleCart()">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cart-count">0</span>
+        </div>
         <button class="login-btn" id="loginBtn">Iniciar Sesión</button>
         <div class="user-info" id="userInfo">
-          <span>Bienvenido, <strong>creaturbelleza</strong></span>
+          <span>Bienvenido, <strong>creatubelleza</strong></span>
           <button class="logout-btn" id="logoutBtn">Cerrar Sesión</button>
         </div>
       </div>
@@ -104,13 +159,50 @@
     </section>
 
     <section id="tienda" data-aos="fade-up">
-      <h2>🛍️ Nuestra Tienda</h2>
-      <div class="tienda-intro"><p>Compra productos de belleza seleccionados especialmente para ti. Todos nuestros productos están formulados con ingredientes de alta calidad para resultados profesionales en casa.</p></div>
-      <div class="tienda-grid">
-        <div class="producto-card" data-aos="fade-up" data-aos-delay="100"><div class="producto-imagen"><img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=400&q=80" alt="Kit de cuidado facial" /><span class="producto-badge">Bestseller</span></div><div class="producto-info"><h3>Kit de cuidado facial</h3><p>Incluye limpiador, tónico y crema hidratante para piel radiante. Ideal para todo tipo de piel.</p><div class="producto-footer"><span class="producto-precio">$75,000 COP</span><button class="producto-btn" onclick="comprarProducto('Kit de cuidado facial', '75,000 COP')">Comprar</button></div></div></div>
-        <div class="producto-card" data-aos="fade-up" data-aos-delay="200"><div class="producto-imagen"><img src="https://images.unsplash.com/photo-1556228724-cabf8b6e204e?auto=format&fit=crop&w=400&q=80" alt="Set de esmaltes de uñas" /><span class="producto-badge">Nuevo</span></div><div class="producto-info"><h3>Set de esmaltes de uñas</h3><p>5 colores modernos y duraderos para lucir tus manos perfectas. Fórmula libre de toxinas.</p><div class="producto-footer"><span class="producto-precio">$45,000 COP</span><button class="producto-btn" onclick="comprarProducto('Set de esmaltes de uñas', '45,000 COP')">Comprar</button></div></div></div>
-        <div class="producto-card" data-aos="fade-up" data-aos-delay="300"><div class="producto-imagen"><img src="https://images.unsplash.com/photo-1576765607921-15632b90a7f4?auto=format&fit=crop&w=400&q=80" alt="Sérum reparador capilar" /><span class="producto-badge">Premium</span></div><div class="producto-info"><h3>Sérum reparador capilar</h3><p>Repara el cabello seco y dañado con ingredientes naturales. Sin sulfatos ni parabenos.</p><div class="producto-footer"><span class="producto-precio">$65,000 COP</span><button class="producto-btn" onclick="comprarProducto('Sérum reparador capilar', '65,000 COP')">Comprar</button></div></div></div>
-        <div class="producto-card" data-aos="fade-up" data-aos-delay="400"><div class="producto-imagen"><img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=400&q=80" alt="Paleta de maquillaje profesional" /><span class="producto-badge">Exclusivo</span></div><div class="producto-info"><h3>Paleta de maquillaje profesional</h3><p>Colores intensos y duraderos para todos los tonos de piel. Ingredientes veganos.</p><div class="producto-footer"><span class="producto-precio">$120,000 COP</span><button class="producto-btn" onclick="comprarProducto('Paleta de maquillaje profesional', '120,000 COP')">Comprar</button></div></div></div>
+      <h2>🛍️ Nuestra Tienda de Productos Capilares</h2>
+      <div class="tienda-intro"><p>Descubre nuestra selección exclusiva de productos capilares de Dipaso. Formulados con ingredientes de alta calidad para mantener tu cabello saludable y radiante.</p></div>
+      <div class="tienda-grid" id="tienda-grid">
+        <!-- Los productos se cargarán aquí dinámicamente con JavaScript -->
+      </div>
+    </section>
+
+    <!-- Panel de Administración de Productos -->
+    <section id="admin-productos" class="admin-panel" data-aos="fade-up">
+      <h2>⚙️ Administrar Productos</h2>
+      <div id="admin-lista-productos">
+        <!-- Los productos para editar se cargarán aquí dinámicamente -->
+      </div>
+      
+      <!-- Formulario para añadir un nuevo producto -->
+      <div class="admin-add-form">
+        <h4>➕ Añadir Nuevo Producto</h4>
+        <form id="form-agregar-producto">
+          <div class="admin-add-form-grid">
+            <div class="admin-form-group">
+              <label for="new-name">Nombre del Producto:</label>
+              <input type="text" id="new-name" required>
+            </div>
+            <div class="admin-form-group">
+              <label for="new-price">Precio (USD):</label>
+              <input type="text" id="new-price" required>
+            </div>
+            <div class="admin-form-group" style="grid-column: 1 / -1;">
+              <label for="new-image">URL de la Imagen:</label>
+              <input type="text" id="new-image" required>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit">Añadir Producto</button>
+        </form>
+      </div>
+      
+      <div id="admin-message"></div>
+    </section>
+
+    <!-- Panel de Pedidos de Clientes para el Admin -->
+    <section id="ordenes-ocultas" class="ordenes-ocultas" data-aos="fade-up">
+      <h2>📦 Pedidos de Clientes</h2>
+      <div class="lista-ordenes" id="lista-ordenes">
+        <!-- Los pedidos se cargarán aquí dinámicamente -->
       </div>
     </section>
 
@@ -121,7 +213,7 @@
           <form id="form-reserva">
             <div class="form-group"><label for="nombre">Nombre completo:</label><input type="text" id="nombre" name="nombre" class="form-control" required /></div>
             <div class="form-group"><label for="telefono">Teléfono:</label><input type="tel" id="telefono" name="telefono" value="+593" class="form-control" required /></div>
-            <div class="form-group"><label for="servicio">Servicio que deseas:</label><select id="servicio" name="servicio" class="form-control" required><option value="">-- Selecciona un servicio --</option><option value="Tratamiento facial">Tratamiento facial</option><option value="Manicura y Pedicura">Manicura y Pedicura</option><option value="Maquillaje profesional">Maquillaje profesional</option><option value="Corte y peinado">Corte y peinado</option><option value="Coloración y mechas">Coloración y mechas</option><option value="Depilación con cera">Depilación con cera</option><option value="Diseño de cejas y pestañas">Diseño de cejas y pestañas</option><option value="Asesoría de imagen">Asesoría de imagen</option><option value="Tratamientos de spa">Tratamientos de spa</option></select></div>
+            <div class="form-group"><label for="servicio">Servicio que deseas:</label><select id="servicio" name="servicio" class="form-control" required><option value="">-- Selecciona un servicio --</option><option value="Tratamiento capilar profesional">Tratamiento capilar profesional</option><option value="Corte y peinado">Corte y peinado</option><option value="Coloración y mechas">Coloración y mechas</option><option value="Tratamiento de keratina">Tratamiento de keratina</option><option value="Botox capilar">Botox capilar</option><option value="Reconstrucción capilar">Reconstrucción capilar</option><option value="Alisado brasileño">Alisado brasileño</option><option value="Asesoría de imagen capilar">Asesoría de imagen capilar</option></select></div>
             <div class="form-group"><label for="fecha">Fecha preferida:</label><input type="date" id="fecha" name="fecha" class="form-control" required /></div>
             <div class="form-group"><label for="hora">Hora preferida:</label><input type="time" id="hora" name="hora" class="form-control" required /></div>
             <button type="submit" class="btn-submit">Enviar Reserva</button>
@@ -130,9 +222,9 @@
         </div>
         <div class="reserva-info">
           <h3>¿Por qué reservar con nosotros?</h3>
-          <p>En Lis Belleza Total, nos aseguramos de que cada visita sea una experiencia inolvidable. Nuestros profesionales están capacitados para ofrecerte los mejores servicios adaptados a tus necesidades.</p>
+          <p>En Lis Belleza Total, nos aseguramos de que cada visita sea una experiencia inolvidable. Nuestros profesionales están capacitados para ofrecerte los mejores servicios capilares adaptados a tus necesidades.</p>
           <div class="contact-item"><i class="fas fa-phone-alt"></i><span>+593 99 304 5286</span></div>
-          <div class="contact-item"><i class="fas fa-envelope"></i><span>creaturbellezatumisma@gmail.com</span></div>
+          <div class="contact-item"><i class="fas fa-envelope"></i><span>creatubelleza@gmail.com</span></div>
           <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Calle 123 #45-67, Bogotá, Colombia</span></div>
         </div>
       </div>
@@ -144,9 +236,9 @@
     <section id="testimonios" data-aos="fade-up">
       <h2>💬 Opiniones de nuestras clientas</h2>
       <div class="testimonios-grid">
-        <div class="testimonio-card" data-aos="fade-up" data-aos-delay="100"><div class="testimonio-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testimonio-text">"Me encantó el tratamiento de keratina, mi cabello está súper suave y brillante. ¡Recomendadísimo! El equipo es muy profesional y atento a cada detalle."</p><div class="testimonio-autor"><div class="testimonio-avatar">MG</div><div class="testimonio-info"><h4>María G.</h4><p>Cliente desde 2023</p></div></div></div>
-        <div class="testimonio-card" data-aos="fade-up" data-aos-delay="200"><div class="testimonio-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testimonio-text">"El equipo es muy profesional y te hacen sentir muy cómoda. Mi maquillaje para la boda quedó perfecto. ¡Fui la estrella de la fiesta!"</p><div class="testimonio-autor"><div class="testimonio-avatar">LP</div><div class="testimonio-info"><h4>Laura P.</h4><p>Cliente desde 2022</p></div></div></div>
-        <div class="testimonio-card" data-aos="fade-up" data-aos-delay="300"><div class="testimonio-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><p class="testimonio-text">"Reservar fue fácil y rápido, además me contactaron por WhatsApp para confirmar todo. Excelente atención y resultados increíbles."</p><div class="testimonio-autor"><div class="testimonio-avatar">SR</div><div class="testimonio-info"><h4>Sofía R.</h4><p>Cliente desde 2024</p></div></div></div>
+        <div class="testimonio-card" data-aos="fade-up" data-aos-delay="100"><div class="testimonio-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testimonio-text">"El tratamiento de keratina con productos Dipaso dejó mi cabello súper suave y brillante. ¡Recomendadísimo! El equipo es muy profesional y atento a cada detalle."</p><div class="testimonio-autor"><div class="testimonio-avatar">MG</div><div class="testimonio-info"><h4>María G.</h4><p>Cliente desde 2023</p></div></div></div>
+        <div class="testimonio-card" data-aos="fade-up" data-aos-delay="200"><div class="testimonio-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testimonio-text">"Usé los productos Dipaso en casa y mi cabello nunca se había visto mejor. El shampoo y la máscara de tratamiento han transformado mi cabello seco y dañado."</p><div class="testimonio-autor"><div class="testimonio-avatar">LP</div><div class="testimonio-info"><h4>Laura P.</h4><p>Cliente desde 2022</p></div></div></div>
+        <div class="testimonio-card" data-aos="fade-up" data-aos-delay="300"><div class="testimonio-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><p class="testimonio-text">"El sérum de brillo Dipaso es mi producto favorito. Controla el frizz y deja mi cabello con un brillo increíble. ¡Ya no puedo vivir sin él!"</p><div class="testimonio-autor"><div class="testimonio-avatar">SR</div><div class="testimonio-info"><h4>Sofía R.</h4><p>Cliente desde 2024</p></div></div></div>
       </div>
     </section>
 
@@ -158,12 +250,12 @@
           <div class="contact-details">
             <p><i class="fas fa-map-marker-alt"></i> Calle 123 #45-67, Bogotá, Colombia</p>
             <p><i class="fas fa-phone-alt"></i> +593 99 304 5286</p>
-            <p><i class="fas fa-envelope"></i> creaturbellezatumisma@gmail.com</p>
+            <p><i class="fas fa-envelope"></i> creatubelleza@gmail.com</p>
             <p><i class="fas fa-clock"></i> Lunes a Sábado: 9:00 AM - 7:00 PM</p>
             <p><i class="fas fa-clock"></i> Domingo: 10:00 AM - 5:00 PM</p>
           </div>
         </div>
-        <div class="map-container"><iframe src="https://maps.app.goo.gl/M44PbUBBFkuEfnyt9" allowfullscreen="" loading="lazy"></iframe></div>
+        <div class="map-container"><iframe src="https://maps.app.goo.gl/Cb275GuUDyefj1VW8" allowfullscreen="" loading="lazy"></iframe></div>
       </div>
     </section>
   </main>
@@ -172,15 +264,15 @@
     <div class="footer-content">
       <div class="footer-section">
         <h3>Sobre Lis Belleza Total</h3>
-        <p>Brindamos servicios de belleza de alta calidad con productos y técnicas de vanguardia. Tu satisfacción es nuestra prioridad.</p>
+        <p>Especialistas en tratamientos capilares de alta calidad con productos Dipaso. Tu satisfacción es nuestra prioridad.</p>
       </div>
       <div class="footer-section">
-        <h3>Servicios Destacados</h3>
+        <h3>Servicios Capilares Destacados</h3>
         <ul>
-          <li>Tratamientos faciales personalizados</li>
-          <li>Corte y coloración profesional</li>
-          <li>Manicura y pedicura de lujo</li>
-          <li>Maquillaje para eventos</li>
+          <li>Tratamientos de keratina profesional</li>
+          <li>Corte y coloración capilar</li>
+          <li>Reconstrucción capilar intensiva</li>
+          <li>Alisado y botox capilar</li>
         </ul>
       </div>
       <div class="footer-section">
@@ -195,7 +287,7 @@
         <h3>Contacto rápido</h3>
         <ul>
           <li><i class="fas fa-phone-alt"></i> +593 99 304 5286</li>
-          <li><i class="fas fa-envelope"></i> creaturbellezatumisma@gmail.com</li>
+          <li><i class="fas fa-envelope"></i> creatubelleza@gmail.com</li>
         </ul>
       </div>
     </div>
@@ -252,9 +344,429 @@
     </div>
   </div>
 
+  <!-- Modal del Carrito de Compras -->
+  <div class="modal" id="cartModal">
+    <div class="modal-content cart-modal-content">
+      <div class="modal-header">
+        <h3>🛒 Tu Carrito de Compras</h3>
+        <button class="close-modal" id="closeCartModal">&times;</button>
+      </div>
+      <div id="cart-items-container">
+        <!-- Los items del carrito se cargarán aquí dinámicamente -->
+      </div>
+      <div class="cart-total" id="cart-total">
+        Total: $0.00 USD
+      </div>
+      
+      <!-- Formulario de envío -->
+      <div class="checkout-form" id="checkout-form">
+        <h4>📦 Datos de Envío por Servientrega</h4>
+        <div class="checkout-form-group">
+          <label for="checkout-name">Nombres y Apellidos:</label>
+          <input type="text" id="checkout-name" required>
+        </div>
+        <div class="checkout-form-group">
+          <label for="checkout-phone">Teléfono:</label>
+          <input type="tel" id="checkout-phone" value="+593" required>
+        </div>
+        <div class="checkout-form-group">
+          <label for="checkout-address">Dirección de Envío:</label>
+          <input type="text" id="checkout-address" placeholder="Calle principal y número" required>
+        </div>
+        <div class="checkout-form-group">
+          <label for="checkout-city">Ciudad:</label>
+          <input type="text" id="checkout-city" placeholder="Ciudad de envío" required>
+        </div>
+        <div class="checkout-form-group">
+          <label for="checkout-notes">Observaciones:</label>
+          <textarea id="checkout-notes" placeholder="Referencias, detalles adicionales..."></textarea>
+        </div>
+        <button class="cart-checkout-btn" onclick="proceedToPayment()">Comprar</button>
+      </div>
+      
+      <!-- Información de pago -->
+      <div class="payment-info" id="payment-info">
+        <h4>💳 Información de Pago</h4>
+        <p>Por favor, realiza la transferencia a la siguiente cuenta bancaria:</p>
+        <div class="account-details">
+          <p><strong>Banco:</strong> <span>Banco Pichincha</span></p>
+          <p><strong>Número de cuenta:</strong> <span>20026669966</span></p>
+          <p><strong>Titular:</strong> <span>Ingrid Montes Flores</span></p>
+        </div>
+        <p>Una vez realizada la transferencia, envíanos el comprobante por WhatsApp para procesar tu pedido.</p>
+        <a href="#" class="whatsapp-btn" id="whatsapp-payment-btn" target="_blank">
+          <i class="fab fa-whatsapp"></i> Enviar Comprobante por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({duration:1000,once:true});
+    
+    // --- GESTIÓN DE PRODUCTOS ---
+    const productosPorDefecto = [
+      { id: 1, name: 'Shampoo Reparador Dipaso', price: '6.25', imageUrl: 'https://dipasoec.vtexassets.com/arquivos/ids/159672-800-auto?v=638705778699930000&width=800&height=auto&aspect=true', description: 'Formulado con keratina y aceites naturales para reparar el cabello dañado. Devuelve la vitalidad y brillo a tu cabello.', badge: 'Bestseller' },
+      { id: 2, name: 'Acondicionador Nutritivo Dipaso', price: '5.50', imageUrl: 'https://dipasoec.vtexassets.com/arquivos/ids/161883-220-220?v=638840641064500000&width=220&height=220&aspect=true', description: 'Enriquecido con vitaminas y proteínas que nutren profundamente cada hebra de cabello. Ideal para cabello seco y quebradizo.', badge: 'Nuevo' },
+      { id: 3, name: 'Máscara de Tratamiento Dipaso', price: '7.50', imageUrl: 'https://dipasoec.vtexassets.com/arquivos/ids/160308-220-220?v=638754092827970000&width=220&height=220&aspect=true', description: 'Tratamiento intensivo para reparar y revitalizar el cabello extremadamente dañado. Resultados visibles desde la primera aplicación.', badge: 'Premium' },
+      { id: 4, name: 'Sérum de Brillo Dipaso', price: '7.00', imageUrl: 'https://dipasoec.vtexassets.com/arquivos/ids/160627-220-220?v=638912128832870000&width=220&height=220&aspect=true', description: 'Proporciona brillo intenso y control del frizz sin pesar el cabello. Fórmula ligera con protección UV.', badge: 'Exclusivo' },
+      { id: 5, name: 'Aceite Capilar Dipaso', price: '6.50', imageUrl: 'https://dipasoec.vtexassets.com/arquivos/ids/156559-220-220?v=638592493584430000&width=220&height=220&aspect=true', description: 'Aceite nutritivo con argán y coco para hidratar y reparar las puntas secas. Absorción rápida sin dejar residuos grasos.', badge: 'Popular' },
+      { id: 6, name: 'Espuma para Peinado Dipaso', price: '5.25', imageUrl: 'https://dipasoec.vtexassets.com/arquivos/ids/155989-220-220?v=638587487829000000&width=220&height=220&aspect=true', description: 'Fija tu peinado con un acabado flexible y natural. Protege el cabello del calor y la humedad.', badge: 'Tendencia' },
+      { id: 7, name: 'Spray Protector Térmico Dipaso', price: '5.75', imageUrl: 'https://dipasoec.vtexassets.com/arquivos/ids/158525-220-220?v=638666924736970000&width=220&height=220&aspect=true', description: 'Protege tu cabello de los daños causados por herramientas de calor. Crea una barrera térmica sin alisar el cabello.', badge: 'Recomendado' },
+      { id: 8, name: 'Kit Completo de Tratamiento Dipaso', price: '21.25', imageUrl: 'https://dipasoec.vtexassets.com/arquivos/ids/159182-800-auto?v=638689307426100000&width=800&height=auto&aspect=true', description: 'Incluye shampoo, acondicionador, máscara y sérum para un tratamiento capilar completo. El cuidado perfecto para tu cabello.', badge: 'Pack Ahorro' }
+    ];
+
+    function cargarProductos() {
+      const productosGuardados = localStorage.getItem('productosDipaso');
+      if (productosGuardados) {
+        return JSON.parse(productosGuardados);
+      }
+      guardarProductos(productosPorDefecto);
+      return productosPorDefecto;
+    }
+
+    function guardarProductos(productos) {
+      localStorage.setItem('productosDipaso', JSON.stringify(productos));
+    }
+
+    function renderizarTienda() {
+      const tiendaGrid = document.getElementById('tienda-grid');
+      const productos = cargarProductos();
+      tiendaGrid.innerHTML = '';
+      productos.forEach((producto, index) => {
+        const productoCard = document.createElement('div');
+        productoCard.className = 'producto-card';
+        productoCard.setAttribute('data-aos', 'fade-up');
+        productoCard.setAttribute('data-aos-delay', (index + 1) * 100);
+        productoCard.innerHTML = `
+          <div class="producto-imagen">
+            <img src="${producto.imageUrl}" alt="${producto.name}" />
+            <span class="producto-badge">${producto.badge}</span>
+          </div>
+          <div class="producto-info">
+            <h3>${producto.name}</h3>
+            <p>${producto.description}</p>
+            <div class="producto-footer">
+              <span class="producto-precio">$${producto.price} USD</span>
+              <button class="producto-btn" onclick="anadirAlCarrito(${producto.id})">Añadir al Carrito</button>
+            </div>
+          </div>
+        `;
+        tiendaGrid.appendChild(productoCard);
+      });
+    }
+    
+    function renderizarPanelAdmin() {
+      const adminLista = document.getElementById('admin-lista-productos');
+      const productos = cargarProductos();
+      adminLista.innerHTML = '';
+      productos.forEach(producto => {
+        const adminItem = document.createElement('div');
+        adminItem.className = 'admin-producto-item';
+        adminItem.innerHTML = `
+          <h4>${producto.name}</h4>
+          <div class="admin-form-grid">
+            <div class="admin-form-group">
+              <label for="name-${producto.id}">Nombre:</label>
+              <input type="text" id="name-${producto.id}" value="${producto.name}">
+            </div>
+            <div class="admin-form-group">
+              <label for="price-${producto.id}">Precio (USD):</label>
+              <input type="text" id="price-${producto.id}" value="${producto.price}">
+            </div>
+            <div class="admin-form-group" style="grid-column: 1 / -1;">
+              <label for="img-${producto.id}">URL de la Imagen:</label>
+              <input type="text" id="img-${producto.id}" value="${producto.imageUrl}">
+            </div>
+          </div>
+          <div>
+            <button class="admin-save-btn" data-id="${producto.id}">Guardar Cambios</button>
+            <button class="admin-delete-btn" data-id="${producto.id}">Eliminar Producto</button>
+          </div>
+        `;
+        adminLista.appendChild(adminItem);
+      });
+
+      adminLista.addEventListener('click', (e) => {
+        if (e.target.classList.contains('admin-save-btn')) {
+          const id = parseInt(e.target.getAttribute('data-id'));
+          const nuevoNombre = document.getElementById(`name-${id}`).value;
+          const nuevaImg = document.getElementById(`img-${id}`).value;
+          const nuevoPrecio = document.getElementById(`price-${id}`).value;
+          
+          let productos = cargarProductos();
+          const productoIndex = productos.findIndex(p => p.id === id);
+          if (productoIndex !== -1) {
+            productos[productoIndex].name = nuevoNombre;
+            productos[productoIndex].imageUrl = nuevaImg;
+            productos[productoIndex].price = nuevoPrecio;
+            guardarProductos(productos);
+            renderizarTienda();
+            renderizarPanelAdmin();
+            mostrarMensajeAdmin('¡Producto actualizado con éxito!');
+          }
+        } else if (e.target.classList.contains('admin-delete-btn')) {
+            const id = parseInt(e.target.getAttribute('data-id'));
+            if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+                let productos = cargarProductos();
+                productos = productos.filter(p => p.id !== id);
+                guardarProductos(productos);
+                renderizarTienda();
+                renderizarPanelAdmin();
+                mostrarMensajeAdmin('¡Producto eliminado con éxito!');
+            }
+        }
+      });
+    }
+
+    function mostrarMensajeAdmin(mensaje) {
+        const messageEl = document.getElementById('admin-message');
+        messageEl.textContent = mensaje;
+        messageEl.style.display = 'block';
+        setTimeout(() => {
+            messageEl.style.display = 'none';
+        }, 3000);
+    }
+
+    // --- GESTIÓN DEL CARRITO ---
+    function getCarrito() {
+      return JSON.parse(localStorage.getItem('carrito')) || [];
+    }
+
+    function setCarrito(carrito) {
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+    }
+
+    function anadirAlCarrito(productoId) {
+      const productos = cargarProductos();
+      const producto = productos.find(p => p.id === productoId);
+      if (!producto) return;
+
+      let carrito = getCarrito();
+      const itemExistente = carrito.find(item => item.id === productoId);
+
+      if (itemExistente) {
+        itemExistente.quantity++;
+      } else {
+        carrito.push({ ...producto, quantity: 1 });
+      }
+
+      setCarrito(carrito);
+      actualizarContadorCarrito();
+      alert(`${producto.name} añadido al carrito.`);
+    }
+    
+    function actualizarContadorCarrito() {
+      const carrito = getCarrito();
+      const totalItems = carrito.reduce((total, item) => total + item.quantity, 0);
+      document.getElementById('cart-count').textContent = totalItems;
+    }
+
+    function renderizarCarrito() {
+      const carrito = getCarrito();
+      const container = document.getElementById('cart-items-container');
+      const totalEl = document.getElementById('cart-total');
+
+      if (carrito.length === 0) {
+        container.innerHTML = '<p class="empty-cart">Tu carrito está vacío.</p>';
+        totalEl.textContent = 'Total: $0.00 USD';
+        document.getElementById('checkout-form').style.display = 'none';
+        document.getElementById('payment-info').classList.remove('active');
+        return;
+      }
+
+      container.innerHTML = '';
+      let total = 0;
+
+      carrito.forEach(item => {
+        const itemTotal = parseFloat(item.price) * item.quantity;
+        total += itemTotal;
+        
+        const itemEl = document.createElement('div');
+        itemEl.className = 'cart-item';
+        itemEl.innerHTML = `
+          <img src="${item.imageUrl}" alt="${item.name}">
+          <div class="cart-item-details">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">$${item.price} USD</div>
+          </div>
+          <div class="cart-item-quantity">
+            <button onclick="cambiarCantidad(${item.id}, -1)">-</button>
+            <span>${item.quantity}</span>
+            <button onclick="cambiarCantidad(${item.id}, 1)">+</button>
+          </div>
+          <button class="cart-remove-btn" onclick="eliminarDelCarrito(${item.id})">Eliminar</button>
+        `;
+        container.appendChild(itemEl);
+      });
+
+      totalEl.textContent = `Total: $${total.toFixed(2)} USD`;
+      document.getElementById('checkout-form').style.display = 'block';
+    }
+
+    function cambiarCantidad(productoId, cambio) {
+      let carrito = getCarrito();
+      const item = carrito.find(item => item.id === productoId);
+      if (item) {
+        item.quantity += cambio;
+        if (item.quantity <= 0) {
+          eliminarDelCarrito(productoId);
+        } else {
+          setCarrito(carrito);
+          renderizarCarrito();
+          actualizarContadorCarrito();
+        }
+      }
+    }
+
+    function eliminarDelCarrito(productoId) {
+      if (confirm('¿Estás seguro de que quieres eliminar este producto del carrito?')) {
+        let carrito = getCarrito();
+        carrito = carrito.filter(item => item.id !== productoId);
+        setCarrito(carrito);
+        renderizarCarrito();
+        actualizarContadorCarrito();
+      }
+    }
+
+    function proceedToPayment() {
+      const name = document.getElementById('checkout-name').value.trim();
+      const phone = document.getElementById('checkout-phone').value.trim();
+      const address = document.getElementById('checkout-address').value.trim();
+      const city = document.getElementById('checkout-city').value.trim();
+      const notes = document.getElementById('checkout-notes').value.trim();
+      
+      if (!name || !phone || !address || !city) {
+        alert('Por favor, completa todos los campos obligatorios.');
+        return;
+      }
+      
+      const carrito = getCarrito();
+      let total = 0;
+      carrito.forEach(item => {
+        total += parseFloat(item.price) * item.quantity;
+      });
+
+      // Crear y guardar el pedido
+      const nuevoPedido = {
+        id: Date.now().toString(),
+        date: new Date().toLocaleString(),
+        customer: { name, phone, address, city, notes },
+        items: carrito,
+        total: total.toFixed(2)
+      };
+
+      let pedidos = JSON.parse(localStorage.getItem('ordenes')) || [];
+      pedidos.push(nuevoPedido);
+      localStorage.setItem('ordenes', JSON.stringify(pedidos));
+
+      // Preparar el mensaje de WhatsApp
+      let mensaje = `Hola, soy ${name} y he realizado un pedido con los siguientes productos:\n\n`;
+      carrito.forEach(item => {
+        mensaje += `- ${item.name} (x${item.quantity}) - $${item.price} USD c/u\n`;
+      });
+      mensaje += `\nTotal: $${total.toFixed(2)} USD\n\n`;
+      mensaje += `Datos de envío (Servientrega):\n`;
+      mensaje += `Teléfono: ${phone}\n`;
+      mensaje += `Dirección: ${address}\n`;
+      mensaje += `Ciudad: ${city}\n`;
+      if (notes) mensaje += `Observaciones: ${notes}\n`;
+      mensaje += `\nHe realizado la transferencia al Banco Pichincha, cuenta 20026669966 a nombre de Ingrid Montes Flores y adjunto el comprobante.`;
+      
+      const encodedMensaje = encodeURIComponent(mensaje);
+      const whatsappBtn = document.getElementById('whatsapp-payment-btn');
+      whatsappBtn.href = `https://wa.me/593990532307?text=${encodedMensaje}`;
+      
+      // Ocultar formulario de envío y mostrar información de pago
+      document.getElementById('checkout-form').style.display = 'none';
+      
+      // Forzar que la sección de pago sea visible
+      const paymentInfo = document.getElementById('payment-info');
+      paymentInfo.style.display = 'block';
+      paymentInfo.style.visibility = 'visible';
+      paymentInfo.style.opacity = '1';
+      paymentInfo.style.position = 'relative';
+      paymentInfo.style.zIndex = '1000';
+      
+      // Hacer scroll suave hacia la sección de pago
+      setTimeout(() => {
+        paymentInfo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+      
+      // Limpiar carrito
+      setCarrito([]);
+      actualizarContadorCarrito();
+      renderizarCarrito();
+    }
+
+    function toggleCart() {
+      const modal = document.getElementById('cartModal');
+      modal.classList.toggle('active');
+      if (modal.classList.contains('active')) {
+        renderizarCarrito();
+        // Resetear el estado del modal de pago
+        document.getElementById('checkout-form').style.display = 'block';
+        document.getElementById('payment-info').classList.remove('active');
+        document.getElementById('payment-info').style.display = 'none';
+        document.getElementById('checkout-form').reset();
+      }
+    }
+    // --- FIN GESTIÓN DEL CARRITO ---
+
+    // --- GESTIÓN DE PEDIDOS PARA ADMIN ---
+    function cargarOrdenes() {
+      const listaOrdenes = document.getElementById('lista-ordenes');
+      const ordenes = JSON.parse(localStorage.getItem('ordenes')) || [];
+      
+      if (ordenes.length === 0) {
+        listaOrdenes.innerHTML = '<p>No hay pedidos registrados.</p>';
+        return;
+      }
+      
+      listaOrdenes.innerHTML = '';
+      ordenes.reverse().forEach(orden => { // Mostrar los más recientes primero
+        const item = document.createElement('div');
+        item.className = 'orden-item';
+        
+        let productosLista = '<ul class="productos-lista">';
+        orden.items.forEach(p => {
+          productosLista += `<li>${p.name} (x${p.quantity}) - $${p.price}</li>`;
+        });
+        productosLista += '</ul>';
+
+        item.innerHTML = `
+          <h4>Pedido de: ${orden.customer.name}</h4>
+          <p><strong>Fecha:</strong> ${orden.date}</p>
+          <p><strong>Teléfono:</strong> <a href="https://wa.me/${orden.customer.phone.replace(/\s/g, '')}" target="_blank" style="color: #25d366; text-decoration: none;">${orden.customer.phone}</a></p>
+          <p><strong>Dirección:</strong> ${orden.customer.address}</p>
+          <p><strong>Ciudad:</strong> ${orden.customer.city}</p>
+          ${orden.customer.notes ? `<p><strong>Obs.:</strong> ${orden.customer.notes}</p>` : ''}
+          ${productosLista}
+          <p class="orden-total"><strong>Total del Pedido:</strong> $${orden.total} USD</p>
+          <button class="delete-btn" onclick="eliminarOrden('${orden.id}')"><i class="fas fa-trash"></i></button>
+        `;
+        listaOrdenes.appendChild(item);
+      });
+    }
+
+    function eliminarOrden(id) {
+      if (confirm('¿Estás seguro de que quieres eliminar este pedido?')) {
+        let ordenes = JSON.parse(localStorage.getItem('ordenes')) || [];
+        ordenes = ordenes.filter(o => o.id !== id);
+        localStorage.setItem('ordenes', JSON.stringify(ordenes));
+        cargarOrdenes();
+      }
+    }
+    // --- FIN GESTIÓN DE PEDIDOS ---
+
+    // Cargar productos y carrito al inicio
+    document.addEventListener('DOMContentLoaded', () => {
+      renderizarTienda();
+      actualizarContadorCarrito();
+    });
+
+    // --- RESTO DE LA LÓGICA ---
     
     // Menú móvil
     const menuToggle = document.getElementById('menuToggle');
@@ -313,6 +825,8 @@
     const logoutBtn = document.getElementById('logoutBtn');
     const reservasOcultas = document.getElementById('reservas-ocultas');
     const solicitudesOcultas = document.getElementById('solicitudes-ocultas');
+    const adminPanel = document.getElementById('admin-productos');
+    const ordenesOcultas = document.getElementById('ordenes-ocultas');
     
     document.addEventListener('DOMContentLoaded', () => {
       const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
@@ -321,8 +835,12 @@
         userInfo.classList.add('active');
         reservasOcultas.classList.add('active');
         solicitudesOcultas.classList.add('active');
+        adminPanel.classList.add('active');
+        ordenesOcultas.classList.add('active');
         cargarReservas();
         cargarSolicitudes();
+        renderizarPanelAdmin();
+        cargarOrdenes();
       }
     });
     
@@ -339,15 +857,19 @@
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
       
-      if (username === 'creaturbelleza' && password === 'montes9828') {
+      if (username === 'creatubelleza' && password === 'montes9828') {
         loginModal.classList.remove('active');
         loginBtn.style.display = 'none';
         userInfo.classList.add('active');
         reservasOcultas.classList.add('active');
         solicitudesOcultas.classList.add('active');
+        adminPanel.classList.add('active');
+        ordenesOcultas.classList.add('active');
         localStorage.setItem('isLoggedIn', 'true');
         cargarReservas();
         cargarSolicitudes();
+        renderizarPanelAdmin();
+        cargarOrdenes();
         loginForm.reset();
       } else {
         alert('Usuario o contraseña incorrectos');
@@ -361,6 +883,8 @@
       userInfo.classList.remove('active');
       reservasOcultas.classList.remove('active');
       solicitudesOcultas.classList.remove('active');
+      adminPanel.classList.remove('active');
+      ordenesOcultas.classList.remove('active');
       loginForm.reset();
     });
     
@@ -370,9 +894,7 @@
     const btnWhatsAppConfirm = document.getElementById('btn-whatsapp-confirm');
     const telefonoInput = document.getElementById('telefono');
     
-    // Función para manejar el campo de teléfono
     telefonoInput.addEventListener('input', function(e) {
-      // Si el valor no comienza con +593, lo establecemos como +593
       if (e.target.value.length < 4 || e.target.value.substring(0,4) !== '+593') {
         e.target.value = '+593';
       }
@@ -402,7 +924,7 @@
       btnWhatsAppConfirm.target = '_blank';
       
       form.reset();
-      telefonoInput.value = '+593'; // Restablecer el valor del teléfono
+      telefonoInput.value = '+593';
       if (userInfo.classList.contains('active')) cargarReservas();
     });
     
@@ -455,15 +977,12 @@
     closeTrabajaModal.addEventListener('click', () => trabajaModal.classList.remove('active'));
     window.addEventListener('click', (e) => e.target === trabajaModal && trabajaModal.classList.remove('active'));
     
-    // Función para manejar el campo de teléfono en el formulario de trabajo
     telefonoTrabajoInput.addEventListener('input', function(e) {
-      // Si el valor no comienza con +593, lo establecemos como +593
       if (e.target.value.length < 4 || e.target.value.substring(0,4) !== '+593') {
         e.target.value = '+593';
       }
     });
     
-    // Actualizar etiqueta de archivo cuando se selecciona
     document.getElementById('cv-trabajo').addEventListener('change', function() {
       const fileName = this.files[0]?.name || 'Subir CV actualizado';
       document.querySelector('.file-input-label').innerHTML = `<i class="fas fa-file-pdf"></i> ${fileName}`;
@@ -539,21 +1058,16 @@
     }
     
     function descargarArchivo(nombre, tipo) {
-      // Simulación de descarga de archivo
       const link = document.createElement('a');
       link.href = '#';
       link.download = nombre;
-      
-      // Crear un blob con el nombre del archivo para simular la descarga
       const blob = new Blob([`Contenido del archivo ${nombre}`], {type: 'application/pdf'});
       const url = URL.createObjectURL(blob);
       link.href = url;
-      
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-      
       alert(`Descargando ${tipo}: ${nombre}`);
     }
     
@@ -566,9 +1080,9 @@
       }
     }
     
-    // Comprar productos
+    // Comprar productos (función deprecada, ahora se usa el carrito)
     function comprarProducto(nombre, precio) {
-      const mensaje = encodeURIComponent(`Hola, quiero comprar el producto "${nombre}" con precio ${precio} en Lis Belleza Total. ¿Podrían darme más información?`);
+      const mensaje = encodeURIComponent(`Hola, quiero comprar el producto "${nombre}" con precio $${precio} USD en Lis Belleza Total. ¿Podrían darme más información?`);
       window.open(`https://wa.me/593993045286?text=${mensaje}`, '_blank');
     }
     
@@ -593,6 +1107,102 @@
         'linear-gradient(135deg, rgba(255,105,180,0.95), rgba(214,138,177,0.95))' : 
         'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
     });
+
+    // --- FORMULARIO PARA AÑADIR PRODUCTO ---
+    const formAgregarProducto = document.getElementById('form-agregar-producto');
+    formAgregarProducto.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = document.getElementById('new-name').value.trim();
+      const precio = document.getElementById('new-price').value.trim();
+      const imagen = document.getElementById('new-image').value.trim();
+
+      if (!nombre || !precio || !imagen) {
+        alert('Por favor, completa todos los campos para añadir el producto.');
+        return;
+      }
+
+      // Generar descripción automática basada en el nombre del producto
+      let descripcion = generarDescripcionAutomatica(nombre);
+
+      const nuevoProducto = {
+        id: Date.now(),
+        name: nombre,
+        price: precio,
+        imageUrl: imagen,
+        description: descripcion,
+        badge: 'Nuevo'
+      };
+
+      let productos = cargarProductos();
+      productos.push(nuevoProducto);
+      guardarProductos(productos);
+
+      renderizarTienda();
+      renderizarPanelAdmin();
+      formAgregarProducto.reset();
+      mostrarMensajeAdmin('¡Producto añadido con éxito!');
+    });
+
+    // Función para generar descripción automática
+    function generarDescripcionAutomatica(nombreProducto) {
+      const nombreLower = nombreProducto.toLowerCase();
+      
+      // Palabras clave y sus descripciones correspondientes
+      const descripciones = {
+        'shampoo': 'Formulado con ingredientes naturales que limpian suavemente el cabello sin resecarlo. Ideal para uso diario y todo tipo de cabello.',
+        'acondicionador': 'Enriquecido con vitaminas y agentes hidratantes que desenredanan y suavizan el cabello. Deja el cabello manejable y brillante.',
+        'máscara': 'Tratamiento profundo que repara y reconstruye la fibra capilar desde el interior. Ideal para cabello dañado o tratado químicamente.',
+        'sérum': 'Producto ligero que sella las cutículas, controla el frizz y aporta brillo instantáneo. No engrasa ni pesa el cabello.',
+        'aceite': 'Aceite nutritivo que hidrata, suaviza y aporta brillo al cabello. Contiene vitaminas esenciales para un cabello saludable.',
+        'kit': 'Set completo que incluye todos los productos necesarios para un tratamiento integral. Ahorra comprando los productos por separado.',
+        'spray': 'Producto de aplicación fácil que protege el cabello del calor y los daños ambientales. Ideal para proteger antes del uso de herramientas térmicas.',
+        'espuma': 'Producto que aporta volumen y fijación al peinado sin dejar el cabello rígido. Permite reestilizar y modificar el peinado fácilmente.',
+        'tratamiento': 'Solución completa para abordar problemas específicos del cabello como caída, sequedad o daño por agentes químicos.',
+        'protector': 'Barrera protectora contra los daños del sol, el calor y la contaminación. Esencial para mantener el cabello saludable.',
+        'reparador': 'Fórmula avanzada que repara la estructura interna del cabello, restaurando su fuerza y elasticidad naturales.',
+        'nutritivo': 'Combinación de vitaminas, minerales y proteínas que nutren el cabello desde la raíz hasta las puntas.',
+        'brillo': 'Producto diseñado para intensificar el brillo natural del cabello, aportando luminosidad y vitalidad.',
+        'coloración': 'Producto para teñir o matizar el cabello con colores vibrantes y duraderos. Formula suave que no daña el cabello.',
+        'keratina': 'Tratamiento profesional que alisa y suaviza el cabello, eliminando el frizz y aportando brillo duradero.',
+        'botox': 'Tratamiento que relaja y alisa el cabello sin químicos agresivos. Aporta volumen y control del frizz.',
+        'reconstrucción': 'Tratamiento intensivo que repara el cabello severamente dañado, restaurando su salud y apariencia.',
+        'alisado': 'Procedimiento que transforma el cabello rizado en liso y suave de manera temporal o permanente.',
+        'peinado': 'Producto para estilizar y mantener el peinado en su lugar, aportando fijación y control del frizz.',
+        'mechas': 'Técnica de coloración que crea luces y sombras naturales en el cabello para un aspecto multidimensional.',
+        'balayage': 'Técnica de coloración libre que crea un efecto de degradado natural, con el color más oscuro en las puntas.',
+        'cuidado': 'Línea completa de productos diseñados para mantener el cabello saludable, limpio y con un aspecto impecable.',
+        'profesional': 'Producto de uso profesional que garantice resultados de salon de alta calidad para tus clientes.',
+        'intensivo': 'Tratamiento concentrado con ingredientes activos que actúan rápidamente sobre el cabello para resultados visibles.',
+        'hidratante': 'Fórmula rica en agentes humectantes que restauran la hidratación del cabello seco y quebradizo.',
+        'volumen': 'Producto que aumenta el grosor y la densidad del cabello, dándole un aspecto más lleno y saludable.',
+        'suave': 'Tratamiento que alisa y relaja el cabello, eliminando el frizz y facilitando el peinado.',
+        'control': 'Producto que ayuda a controlar el frizz y mantener el peinado en su lugar durante todo el día.',
+        'eficaz': 'Solución rápida y eficiente para resolver problemas comunes del cabello como la sequedad o el daño.',
+        'calidad': 'Producto de alta gama formulado con los mejores ingredientes para garantizar resultados profesionales.'
+      };
+      
+      // Buscar coincidencias en el nombre del producto
+      for (let clave in descripciones) {
+        if (nombreLower.includes(clave)) {
+          return descripciones[clave];
+        }
+      }
+      
+      // Descripción genérica si no se encuentra coincidencia
+      return `Producto profesional de alta calidad diseñado para satisfacer tus necesidades capilares. Formulado con ingredientes seleccionados para garantizar resultados excepcionales y duraderos. Ideal para uso profesional y en casa.`;
+    }
+    // --- FIN FORMULARIO PARA AÑADIR PRODUCTO ---
+
+    // --- EVENT LISTENERS PARA MODALES ---
+    document.getElementById('closeCartModal').addEventListener('click', () => {
+      document.getElementById('cartModal').classList.remove('active');
+    });
+    window.addEventListener('click', (e) => {
+      if (e.target === document.getElementById('cartModal')) {
+        document.getElementById('cartModal').classList.remove('active');
+      }
+    });
+
   </script>
 </body>
 </html>
