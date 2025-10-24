@@ -487,6 +487,32 @@
       font-size: 1.2rem;
       font-weight: 600;
     }
+    
+    /* Estilos para botones de PDF */
+    .pdf-btn {
+      background: linear-gradient(135deg, #ff69b4, #d68ab1);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .pdf-btn:hover {
+      background: linear-gradient(135deg, #d68ab1, #a64d79);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    
+    .pdf-btn i {
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
@@ -1560,9 +1586,15 @@
           <td>$${pedido.total} USD</td>
           <td><span class="status-badge ${estadoClass}">${estadoText}</span></td>
           <td class="admin-actions-cell">
-            <button class="view-btn" onclick="generarPDFPedido('${pedido.id}')">Ver</button>
-            <button class="edit-btn" onclick="editarEstadoPedido('${pedido.id}')">Estado</button>
-            <button class="delete-btn" onclick="eliminarPedido('${pedido.id}')">Eliminar</button>
+            <button class="pdf-btn" onclick="generarPDFPedido('${pedido.id}')" title="Generar PDF">
+              <i class="fas fa-file-pdf"></i> PDF
+            </button>
+            <button class="edit-btn" onclick="editarEstadoPedido('${pedido.id}')" title="Cambiar estado">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="delete-btn" onclick="eliminarPedido('${pedido.id}')" title="Eliminar">
+              <i class="fas fa-trash"></i>
+            </button>
           </td>
         `;
         tbody.appendChild(row);
@@ -1573,7 +1605,7 @@
     async function generarPDFPedido(pedidoId) {
       const pedido = pedidos[pedidoId];
       if (!pedido) {
-        mostrarNotificación('Pedido no encontrado', 'error');
+        mostrarNotificacion('Pedido no encontrado', 'error');
         return;
       }
       
@@ -1651,10 +1683,10 @@
         // Guardar el PDF
         pdf.save(`factura-pedido-${pedido.id}.pdf`);
         
-        mostrarNotificación('PDF generado y descargado exitosamente');
+        mostrarNotificacion('PDF generado y descargado exitosamente');
       } catch (error) {
         console.error('Error generando PDF:', error);
-        mostrarNotificación('Error al generar el PDF. Intente nuevamente.', 'error');
+        mostrarNotificacion('Error al generar el PDF. Intente nuevamente.', 'error');
       } finally {
         // Ocultar loader
         loader.classList.remove('active');
@@ -1699,9 +1731,15 @@
           <td>${reserva.hora}</td>
           <td><span class="status-badge ${estadoClass}">${estadoText}</span></td>
           <td class="admin-actions-cell">
-            <button class="view-btn" onclick="generarPDFReserva('${reserva.id}')">Ver</button>
-            <button class="edit-btn" onclick="editarEstadoReserva('${reserva.id}')">Estado</button>
-            <button class="delete-btn" onclick="eliminarReserva('${reserva.id}')">Eliminar</button>
+            <button class="pdf-btn" onclick="generarPDFReserva('${reserva.id}')" title="Generar PDF">
+              <i class="fas fa-file-pdf"></i> PDF
+            </button>
+            <button class="edit-btn" onclick="editarEstadoReserva('${reserva.id}')" title="Cambiar estado">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="delete-btn" onclick="eliminarReserva('${reserva.id}')" title="Eliminar">
+              <i class="fas fa-trash"></i>
+            </button>
           </td>
         `;
         tbody.appendChild(row);
@@ -1712,7 +1750,7 @@
     async function generarPDFReserva(reservaId) {
       const reserva = reservas[reservaId];
       if (!reserva) {
-        mostrarNotificación('Reserva no encontrada', 'error');
+        mostrarNotificacion('Reserva no encontrada', 'error');
         return;
       }
       
@@ -1831,12 +1869,14 @@
           <td>${fecha}</td>
           <td>${solicitud.nombres} ${solicitud.apellidos}</td>
           <td>${solicitud.telefono}</td>
-          <td>${solicitud.email}</td>
+          <td>${solicitud.email || 'No proporcionado'}</td>
           <td><a href="${solicitud.cvUrl}" target="_blank" class="view-btn">Ver CV</a></td>
           <td><a href="${solicitud.cedulaUrl}" target="_blank" class="view-btn">Ver Cédula</a></td>
           <td>${solicitud.comentarios || 'Sin comentarios'}</td>
           <td class="admin-actions-cell">
-            <button class="delete-btn" onclick="eliminarSolicitud('${solicitud.id}')">Eliminar</button>
+            <button class="delete-btn" onclick="eliminarSolicitud('${solicitud.id}')" title="Eliminar">
+              <i class="fas fa-trash"></i>
+            </button>
           </td>
         `;
         tbody.appendChild(row);
@@ -2483,3 +2523,4 @@
   </script>
 </body>
 </html>
+
