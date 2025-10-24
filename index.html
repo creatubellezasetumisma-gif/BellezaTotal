@@ -8,6 +8,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
   <style>
     :root{--p:#ff69b4;--s:#d68ab1;--a:#a64d79;--l:#fff8fb;--t:#5a2a5c;--w:#fff;--sh:0 4px 15px rgba(0,0,0,0.1)}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Montserrat,sans-serif;background:var(--l);color:var(--t);line-height:1.6;overflow-x:hidden}html{scroll-behavior:smooth}.container{max-width:1100px;margin:0 auto;padding:0 20px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.btn{display:inline-block;padding:12px 25px;border-radius:50px;text-decoration:none;font-weight:700;font-size:1rem;transition:all 0.3s ease;cursor:pointer;border:none}.btn-primary{background:var(--w);color:var(--p);box-shadow:var(--sh)}.btn-primary:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.btn-secondary{background:transparent;color:var(--w);border:2px solid var(--w)}.btn-secondary:hover{background:var(--w);color:var(--p)}.btn-accent{background:var(--p);color:var(--w)}.btn-accent:hover{background:var(--a);transform:translateY(-2px)}header{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);padding:15px 0;position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,0.1)}.header-content{display:flex;justify-content:space-between;align-items:center}.logo{display:flex;align-items:center}.logo i{font-size:2rem;color:var(--w)}.logo h1{font-size:1.5rem;font-weight:900;margin-left:10px;white-space:nowrap}.nav-desktop{display:flex;gap:15px}.nav-desktop a{color:var(--w);text-decoration:none;padding:8px 12px;font-weight:500;border-radius:20px;transition:all 0.3s ease;font-size:0.9rem;white-space:nowrap}.nav-desktop a:hover{background:rgba(255,255,255,0.2);transform:translateY(-2px)}.user-menu{display:flex;align-items:center;gap:15px}.cart-icon{position:relative;cursor:pointer;transition:transform 0.3s ease}.cart-icon:hover{transform:scale(1.1)}.cart-icon i{font-size:1.5rem}.cart-count{position:absolute;top:-8px;right:-8px;background:#ff4757;color:white;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700}.login-btn,.logout-btn{background:rgba(255,255,255,0.2);color:var(--w);border:none;padding:8px 15px;border-radius:20px;cursor:pointer;font-weight:600;transition:all 0.3s ease;font-size:0.9rem}.login-btn:hover,.logout-btn:hover{background:rgba(255,255,255,0.3)}.user-info{display:none;align-items:center;gap:10px}.user-info.active{display:flex}.menu-toggle{display:none;background:none;border:none;color:var(--w);font-size:1.5rem;cursor:pointer}.nav-mobile{display:none;position:absolute;top:100%;left:0;right:0;background:var(--p);flex-direction:column;padding:15px;box-shadow:0 5px 15px rgba(0,0,0,0.2);gap:10px}.nav-mobile.active{display:flex}.nav-mobile a{color:var(--w);text-decoration:none;padding:10px 15px;font-weight:500;border-radius:10px;transition:all 0.3s ease;font-size:1rem}.nav-mobile a:hover{background:rgba(255,255,255,0.2)}.hero{margin-top:80px;padding:80px 20px;text-align:center;background:linear-gradient(rgba(255,105,180,0.7),rgba(214,138,177,0.7)),url('https://images.unsplash.com/photo-1556228724-cabf8b6e204e?auto=format&fit=crop&w=1950&q=80');background-size:cover;background-position:center;color:var(--w);position:relative;overflow:hidden;min-height:60vh;display:flex;align-items:center;justify-content:center}.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at center,rgba(255,255,255,0.1) 0%,rgba(255,105,180,0.3) 100%);z-index:1}.hero-content{position:relative;z-index:2;max-width:800px;margin:0 auto;text-align:center}.hero h2{font-size:2.8rem;margin-bottom:20px;font-weight:900;text-shadow:0 2px 10px rgba(0,0,0,0.2);animation:fadeInUp 1s ease-out;line-height:1.2}.hero p{font-size:1.3rem;margin-bottom:30px;font-weight:500;text-shadow:0 1px 5px rgba(0,0,0,0.2);animation:fadeInUp 1s ease-out 0.2s;animation-fill-mode:both;line-height:1.4}.hero-buttons{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;animation:fadeInUp 1s ease-out 0.4s;animation-fill-mode:both}main{padding:60px 20px;max-width:1100px;margin:0 auto}section{margin-bottom:60px}h2{font-size:2.2rem;margin-bottom:25px;font-weight:700;color:var(--t);text-align:center;position:relative;padding-bottom:15px}h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60px;height:4px;background:linear-gradient(to right,var(--p),var(--s));border-radius:2px}#sobre-nosotros{padding:40px 0;background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,182,193,0.3));border-radius:20px;box-shadow:var(--sh)}.sobre-content{display:flex;flex-direction:column;gap:30px}.sobre-texto{text-align:center;margin-bottom:20px}.sobre-texto p{font-size:1.1rem;line-height:1.8;margin-bottom:20px;max-width:800px;margin-left:auto;margin-right:auto}.servicios-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}.servicio-item{background:rgba(255,255,255,0.7);padding:20px;border-radius:10px;display:flex;align-items:center;transition:all 0.3s ease}.servicio-item:hover{background:var(--w);transform:translateY(-5px);box-shadow:0 5px 15px rgba(0,0,0,0.1)}.servicio-item i{color:var(--p);margin-right:15px;font-size:1.5rem;width:30px;text-align:center}.servicio-item h3{font-size:1.1rem;font-weight:600;margin:0}#galeria{padding:40px 0}.galeria-container{position:relative;max-width:1000px;margin:0 auto;overflow:hidden;border-radius:20px;box-shadow:var(--sh)}.galeria-slider{display:flex;transition:transform 0.5s ease}.galeria-slide{min-width:100%;position:relative}.galeria-slide img{width:100%;height:400px;object-fit:cover;display:block}.galeria-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent);color:var(--w);padding:20px;text-align:center}.galeria-caption h3{font-size:1.3rem;margin-bottom:5px}.galeria-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.8);color:var(--a);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;box-shadow:0 2px 10px rgba(0,0,0,0.1)}.galeria-nav:hover{background:var(--w);box-shadow:0 4px 15px rgba(0,0,0,0.2)}.galeria-nav.prev{left:15px}.galeria-nav.next{right:15px}.galeria-indicators{display:flex;justify-content:center;gap:8px;margin-top:20px}.galeria-indicator{width:10px;height:10px;border-radius:50%;background:var(--s);cursor:pointer;transition:all 0.3s ease}.galeria-indicator.active{background:var(--p);transform:scale(1.2)}.admin-galeria-controls{display:none;margin-top:20px;padding:20px;background:#f9f9f9;border-radius:10px;border:2px dashed var(--p)}.admin-galeria-controls.active{display:block}.admin-galeria-controls h3{font-size:1.3rem;margin-bottom:15px;color:var(--a);text-align:center}.galeria-admin-form{display:flex;gap:15px;margin-bottom:20px;flex-wrap:wrap}.galeria-admin-form input{flex:1;min-width:200px;padding:10px;border:1px solid #ddd;border-radius:5px}.galeria-admin-form button{padding:10px 20px;background:var(--p);color:white;border:none;border-radius:5px;cursor:pointer;font-weight:600;transition:all 0.3s ease}.galeria-admin-form button:hover{background:var(--a)}.galeria-imagenes-admin{display:grid;grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));gap:15px}.galeria-imagen-admin-item{position:relative;border-radius:8px;overflow:hidden;box-shadow:0 2px 5px rgba(0,0,0,0.1)}.galeria-imagen-admin-item img{width:100%;height:100px;object-fit:cover;display:block}.galeria-imagen-admin-item .delete-btn{position:absolute;top:5px;right:5px;background:rgba(244, 67, 54, 0.9);color:white;border:none;border-radius:50%;width:25px;height:25px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;transition:all 0.3s ease}.galeria-imagen-admin-item .delete-btn:hover{background:#d32f2f;transform:scale(1.1)}#tienda{padding:40px 0}.tienda-intro{text-align:center;margin-bottom:40px}.tienda-intro p{font-size:1.1rem;max-width:800px;margin:0 auto;line-height:1.8}.tienda-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-bottom:30px}.producto-card{background:var(--w);border-radius:15px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,0.08);transition:all 0.3s ease;position:relative}.producto-card:hover{transform:translateY(-8px);box-shadow:0 10px 30px rgba(0,0,0,0.15)}.producto-imagen{height:200px;overflow:hidden;position:relative}.producto-imagen img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}.producto-card:hover .producto-imagen img{transform:scale(1.1)}.producto-badge{position:absolute;top:10px;right:10px;background:var(--p);color:var(--w);padding:5px 10px;border-radius:20px;font-size:0.75rem;font-weight:600}.producto-info{padding:20px}.producto-info h3{font-size:1.2rem;margin-bottom:8px;color:var(--t)}.producto-info p{font-size:0.9rem;color:#666;margin-bottom:12px;line-height:1.5}.producto-footer{display:flex;justify-content:space-between;align-items:center}.producto-precio{font-size:1.3rem;font-weight:700;color:var(--a)}.producto-btn{background:var(--p);color:var(--w);border:none;padding:8px 16px;border-radius:30px;font-weight:600;cursor:pointer;transition:all 0.3s ease;font-size:0.9rem}.producto-btn:hover{background:var(--a);transform:scale(1.05)}.ver-mas-container{text-align:center;margin-top:20px}.ver-mas-btn{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);border:none;padding:15px 30px;border-radius:50px;font-size:1.1rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(0,0,0,0.2)}.ver-mas-btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:2000;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease}.modal.active{display:flex;opacity:1}.modal-content{background:var(--w);padding:30px;border-radius:15px;width:90%;max-width:500px;box-shadow:0 10px 30px rgba(0,0,0,0.3);transform:translateY(-20px);transition:transform 0.3s ease;max-height:80vh;overflow-y:auto}.modal.active .modal-content{transform:translateY(0)}.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.modal-header h3{font-size:1.5rem;color:var(--t)}.close-modal{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--t);transition:color 0.3s ease}.close-modal:hover{color:var(--p)}.login-form{display:flex;flex-direction:column;gap:15px}.login-form input{padding:12px;border:2px solid #eee;border-radius:10px;font-size:1rem;font-family:Montserrat,sans-serif}.login-form input:focus{border-color:var(--p);outline:none;box-shadow:0 0 0 3px rgba(255,105,180,0.1)}.login-btn-form{background:var(--p);color:var(--w);border:none;padding:12px;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease}.login-btn-form:hover{background:var(--a)}#reserva{padding:40px 0;background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,182,193,0.3));border-radius:20px;box-shadow:var(--sh)}.reserva-container{display:flex;flex-direction:column;gap:40px}.reserva-form{background:var(--w);padding:25px;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.08)}.form-group{margin-bottom:20px}.form-group label{display:block;margin-bottom:8px;font-weight:600;color:var(--t);font-size:0.95rem}.form-control{width:100%;padding:12px;border:2px solid #eee;border-radius:10px;font-size:1rem;font-family:Montserrat,sans-serif;transition:all 0.3s ease}.form-control:focus{border-color:var(--p);outline:none;box-shadow:0 0 0 3px rgba(255,105,180,0.1)}.btn-submit{background:var(--p);color:var(--w);border:none;padding:12px 30px;border-radius:50px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;width:100%}.btn-submit:hover{background:var(--a);transform:translateY(-2px);box-shadow:0 5px 15px rgba(166,77,121,0.3)}.reserva-info{padding:20px}.reserva-info h3{font-size:1.4rem;margin-bottom:15px;color:var(--t)}.reserva-info p{margin-bottom:15px;line-height:1.7;font-size:1rem}.contact-item{display:flex;align-items:center;margin-bottom:15px}.contact-item i{font-size:1.2rem;color:var(--p);margin-right:12px;width:25px;text-align:center}.contact-item span{font-size:0.95rem}.confirmacion-reserva{display:none;background:#e8f5e9;border:2px solid #4caf50;border-radius:10px;padding:20px;margin-top:20px;text-align:center}.confirmacion-reserva.active{display:block}.confirmacion-reserva h3{color:#2e7d32;margin-bottom:15px;font-size:1.2rem}.confirmacion-reserva .btn-whatsapp{background:linear-gradient(135deg,#25d366,#128c7e);color:var(--w);border:none;padding:12px 25px;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s ease;display:inline-block;text-decoration:none}.confirmacion-reserva .btn-whatsapp:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.admin-panel{display:none;background:#f5f5f5;border-radius:15px;padding:25px;margin-top:30px}.admin-panel.active{display:block}.admin-panel h3{color:var(--a);margin-bottom:20px;text-align:center;font-size:1.3rem}.admin-producto-item{background:var(--w);padding:20px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1);margin-bottom:20px;border-left:5px solid var(--p)}.admin-producto-item h4{color:var(--t);margin-bottom:15px;font-size:1.2rem}.admin-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;align-items:end;margin-bottom:10px}.admin-form-group{display:flex;flex-direction:column}.admin-form-group label{font-weight:600;color:var(--t);margin-bottom:5px;font-size:0.9rem}.admin-form-group input{width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;font-size:0.9rem}.admin-save-btn,.admin-delete-btn{background:var(--p);color:var(--w);border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer;transition:all 0.3s ease;margin-right:10px}.admin-save-btn:hover{background:var(--a);transform:scale(1.02)}.admin-delete-btn{background:#f44336}.admin-delete-btn:hover{background:#d32f2f;transform:scale(1.02)}.admin-add-form{background:var(--w);padding:20px;border-radius:10px;border:2px solid var(--s);margin-top:20px}.admin-add-form h4{color:var(--t);margin-bottom:15px;text-align:center}.admin-add-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}#admin-message{display:none;background:#e8f5e9;border:1px solid #4caf50;color:#2e7d32;padding:10px;border-radius:8px;text-align:center;margin-top:15px;font-weight:500}.testimonios{padding:40px 0}.testimonios-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}.testimonio-card{background:var(--w);border-radius:15px;padding:25px;box-shadow:0 5px 20px rgba(0,0,0,0.08);position:relative;transition:all 0.3s ease}.testimonio-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,0.15)}.testimonio-card::before{content:'"';position:absolute;top:10px;left:15px;font-size:3.5rem;color:var(--p);opacity:0.2;font-family:serif}.testimonio-text{font-style:italic;margin-bottom:15px;line-height:1.7;position:relative;z-index:1;font-size:1rem}.testimonio-rating{margin-bottom:12px}.testimonio-rating i{color:#ffc107;margin-right:2px;font-size:0.9rem}.testimonio-autor{display:flex;align-items:center}.testimonio-avatar{width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--s));display:flex;align-items:center;justify-content:center;color:var(--w);font-weight:700;margin-right:12px;font-size:1.1rem}.testimonio-info h4{font-size:1rem;margin-bottom:3px;color:var(--t)}.testimonio-info p{font-size:0.85rem;color:#666}.contacto{padding:40px 0}.contact-container{display:flex;flex-direction:column;gap:40px}.contact-info h3{font-size:1.4rem;margin-bottom:20px;color:var(--t)}.contact-details{margin-bottom:25px}.contact-details p{margin-bottom:12px;display:flex;align-items:center;font-size:0.95rem}.contact-details i{color:var(--p);margin-right:12px;width:22px}.map-container{border-radius:15px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,0.1);height:350px}.map-container iframe{width:100%;height:100%;border:none}footer{background:linear-gradient(135deg,var(--a),var(--s));color:var(--w);padding:40px 20px 20px;margin-top:60px}.footer-content{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;margin-bottom:30px}.footer-section h3{font-size:1.2rem;margin-bottom:15px;position:relative;padding-bottom:10px}.footer-section h3::after{content:'';position:absolute;bottom:0;left:0;width:40px;height:2px;background:var(--w)}.footer-section p,.footer-section li{margin-bottom:8px;line-height:1.6;font-size:0.9rem}.footer-section ul{list-style:none;padding:0}.footer-section a{color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.3s ease}.footer-section a:hover{color:var(--w)}.footer-bottom{text-align:center;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);font-size:0.85rem;color:rgba(255,255,255,0.7);position:relative}.trabaja-btn{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);border:none;padding:12px 25px;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s ease;display:inline-block;position:absolute;bottom:15px;right:20px}.trabaja-btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.cart-modal-content{width:90%;max-width:600px}.cart-item{display:flex;align-items:center;justify-content:space-between;padding:15px 0;border-bottom:1px solid #eee}.cart-item img{width:60px;height:60px;object-fit:cover;border-radius:8px;margin-right:15px}.cart-item-details{flex-grow:1}.cart-item-name{font-weight:600;color:var(--t)}.cart-item-price{color:var(--a)}.cart-item-quantity{display:flex;align-items:center;gap:10px}.cart-item-quantity button{background:var(--p);color:var(--w);border:none;width:25px;height:25px;border-radius:5px;cursor:pointer;font-weight:bold}.cart-item-quantity button:hover{background:var(--a)}.cart-total{font-size:1.2rem;font-weight:700;text-align:right;margin-top:20px;color:var(--t)}.cart-checkout-btn{width:100%;padding:15px;background:var(--p);color:var(--w);border:none;border-radius:10px;font-size:1.1rem;font-weight:700;cursor:pointer;margin-top:20px;transition:all 0.3s ease}.cart-checkout-btn:hover{background:var(--a);transform:translateY(-2px)}.empty-cart{text-align:center;padding:40px;color:#999}.cart-remove-btn{background:#f44336;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;font-size:0.8rem;margin-left:10px}.cart-remove-btn:hover{background:#d32f2f}.checkout-form{margin-top:20px;padding:20px;background:#f9f9f9;border-radius:10px}.checkout-form h4{margin-bottom:15px;color:var(--t);text-align:center}.checkout-form-group{margin-bottom:15px}.checkout-form-group label{display:block;margin-bottom:5px;font-weight:600;color:var(--t)}.checkout-form-group input,.checkout-form-group textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:5px;font-family:inherit}.checkout-form-group textarea{resize:vertical;min-height:80px}.payment-info{display:none;margin-top:20px;padding:25px;background:#e8f5e9;border-radius:10px;text-align:center;border:2px solid #4caf50;box-shadow:0 4px 15px rgba(0,0,0,0.1);position:relative;z-index:10}.payment-info.active{display:block!important;animation:fadeIn 0.5s ease-in-out}.payment-info h4{margin-bottom:20px;color:#2e7d32;font-size:1.4rem;font-weight:700}.payment-info p{margin-bottom:15px;color:#333;font-size:1.1rem;line-height:1.5}.payment-info .account-details{background:white;padding:20px;border-radius:10px;margin:20px 0;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.1);text-align:left;border-left:4px solid #4caf50}.payment-info .account-details p{margin-bottom:12px;font-size:1.1rem;display:flex;justify-content:space-between;align-items:center}.payment-info .account-details p strong{color:#2e7d32}.payment-info .whatsapp-btn{display:inline-block;background:#25d366;color:white;padding:15px 30px;border-radius:50px;text-decoration:none;font-weight:700;margin-top:20px;transition:all 0.3s ease;font-size:1.1rem;box-shadow:0 4px 10px rgba(0,0,0,0.2)}.payment-info .whatsapp-btn:hover{background:#128c7e;transform:translateY(-3px);box-shadow:0 6px 15px rgba(0,0,0,0.3)}.tienda-modal-content{width:95%;max-width:1200px;max-height:90vh;overflow-y:auto}.tienda-modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:15px;border-bottom:2px solid var(--p)}.tienda-modal-header h3{font-size:1.8rem;color:var(--t);margin:0}.tienda-modal-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:25px}.tienda-filtros{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}.filtro-btn{padding:8px 15px;background:#f0f0f0;border:1px solid #ddd;border-radius:20px;cursor:pointer;transition:all 0.3s ease;font-size:0.9rem}.filtro-btn:hover,.filtro-btn.active{background:var(--p);color:white;border-color:var(--p)}.admin-content-editor{display:none;background:#f9f9f9;border-radius:15px;padding:25px;margin-top:30px;border:2px dashed var(--p)}.admin-content-editor.active{display:block}.admin-content-editor h3{color:var(--a);margin-bottom:20px;text-align:center;font-size:1.3rem}.editor-section{margin-bottom:25px;padding:20px;background:var(--w);border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1)}.editor-section h4{color:var(--t);margin-bottom:15px;font-size:1.1rem;border-bottom:2px solid var(--p);padding-bottom:8px}.editor-form-group{margin-bottom:15px}.editor-form-group label{display:block;margin-bottom:5px;font-weight:600;color:var(--t);font-size:0.9rem}.editor-form-group input,.editor-form-group textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:5px;font-family:inherit;font-size:0.95rem}.editor-form-group textarea{resize:vertical;min-height:80px}.editor-actions{display:flex;gap:10px;justify-content:center;margin-top:15px}.editor-btn{padding:10px 20px;border:none;border-radius:5px;font-weight:600;cursor:pointer;transition:all 0.3s ease}.editor-btn-save{background:var(--p);color:var(--w)}.editor-btn-save:hover{background:var(--a)}.editor-btn-cancel{background:#ccc;color:var(--t)}.editor-btn-cancel:hover{background:#999}.testimonio-editor-item{background:var(--w);padding:15px;border-radius:10px;margin-bottom:15px;box-shadow:0 2px 5px rgba(0,0,0,0.1)}.testimonio-editor-item h5{color:var(--p);margin-bottom:10px;font-size:1rem}.contact-editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.contact-editor-full{grid-column:1 / -1}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}@media(max-width:992px){.hero h2{font-size:2.5rem}.hero p{font-size:1.1rem}.servicios-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}}@media(max-width:768px){header{padding:12px 0}.header-content{justify-content:space-between}.logo h1{font-size:1.3rem}.menu-toggle{display:block}.nav-desktop{display:none}.hero{margin-top:70px;padding:60px 15px}.hero h2{font-size:2.2rem}.hero p{font-size:1rem}.hero-buttons{flex-direction:column;align-items:center;width:100%;max-width:300px;margin:0 auto}.btn{width:100%}h2{font-size:1.9rem}.galeria-slide img{height:300px}.footer-content{grid-template-columns:1fr;text-align:center}.trabaja-btn{position:relative;bottom:auto;right:auto;margin-top:20px}}@media(max-width:576px){.logo h1{font-size:1.1rem}.logo i{font-size:1.6rem}.hero{padding:50px 15px;min-height:50vh}.hero h2{font-size:1.8rem}.hero p{font-size:0.9rem}.hero-buttons{gap:10px}.btn{padding:10px 20px;font-size:0.9rem}h2{font-size:1.7rem}.galeria-slide img{height:250px}.servicios-grid{grid-template-columns:1fr}.tienda-grid{grid-template-columns:1fr}.testimonios-grid{grid-template-columns:1fr}.reserva-container{gap:30px}.map-container{height:250px}.admin-form-grid,.admin-add-form-grid{grid-template-columns:1fr}.cart-item{flex-direction:column;text-align:center}.tienda-modal-grid{grid-template-columns:1fr}.contact-editor-grid{grid-template-columns:1fr}}
   </style>
@@ -345,14 +348,102 @@
   </div>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    // Configuración de Firebase con TUS credenciales reales
+    const firebaseConfig = {
+      apiKey: "AIzaSyALUQDae0xYF9e0wPN2ozrA9iFZdhXnb9U",
+      authDomain: "belleza-9213a.firebaseapp.com",
+      databaseURL: "https://belleza-9213a-default-rtdb.firebaseio.com",
+      projectId: "belleza-9213a",
+      storageBucket: "belleza-9213a.firebasestorage.app",
+      messagingSenderId: "65561692115",
+      appId: "1:65561692115:web:d8d17ff0646843b82ad126",
+      measurementId: "G-HN1RT885R5"
+    };
+
+    // Inicializar Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    // Variables globales para almacenar datos
+    let productos = [];
+    let imagenesGaleria = [];
+    let reservas = [];
+    let contenidoEditable = {};
+    let carrito = [];
+    let isLoggedIn = false;
+
+    // Función para obtener datos de Firebase en tiempo real
+    function obtenerDatosFirebase(ruta, callback) {
+      database.ref(ruta).on('value', (snapshot) => {
+        const datos = snapshot.val();
+        if (datos) {
+          callback(datos);
+        } else {
+          // Si no hay datos, usar valores por defecto
+          switch(ruta) {
+            case 'productos':
+              callback(productosPorDefecto);
+              break;
+            case 'galeria':
+              callback(imagenesGaleriaPorDefecto);
+              break;
+            case 'contenido':
+              callback(contenidoEditablePorDefecto);
+              break;
+            default:
+              callback([]);
+          }
+        }
+      });
+    }
+
+    // Función para guardar datos en Firebase
+    function guardarDatosFirebase(ruta, datos) {
+      database.ref(ruta).set(datos);
+    }
+
+    // Función para añadir un elemento a una lista en Firebase
+    function añadirElementoFirebase(ruta, elemento) {
+      const nuevaRuta = database.ref(ruta).push();
+      nuevaRuta.set(elemento);
+    }
+
+    // Función para actualizar un elemento en Firebase
+    function actualizarElementoFirebase(ruta, id, datosActualizados) {
+      database.ref(`${ruta}/${id}`).update(datosActualizados);
+    }
+
+    // Función para eliminar un elemento de Firebase
+    function eliminarElementoFirebase(ruta, id) {
+      database.ref(`${ruta}/${id}`).remove();
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       AOS.init({duration:1000,once:true});
-      renderizarTienda();
-      actualizarContadorCarrito();
-      renderizarGaleria(); // Llamar a renderizarGaleria al cargar la página
-      cargarContenidoEditable();
-      renderizarTestimonios();
-      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      
+      // Cargar datos desde Firebase en tiempo real
+      obtenerDatosFirebase('productos', (datos) => {
+        productos = datos;
+        renderizarTienda();
+      });
+      
+      obtenerDatosFirebase('galeria', (datos) => {
+        imagenesGaleria = datos;
+        renderizarGaleria();
+        if (isLoggedIn) cargarGaleriaAdmin();
+      });
+      
+      obtenerDatosFirebase('contenido', (datos) => {
+        contenidoEditable = datos;
+        aplicarContenidoEditable();
+      });
+      
+      obtenerDatosFirebase('reservas', (datos) => {
+        reservas = datos || [];
+      });
+      
+      // Verificar si el usuario está logueado
+      isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
       if(isLoggedIn) {
         document.getElementById('loginBtn').style.display='none';
         document.getElementById('userInfo').classList.add('active');
@@ -360,9 +451,10 @@
         document.getElementById('admin-galeria-controls').classList.add('active');
         document.getElementById('admin-content-editor').classList.add('active');
         renderizarPanelAdmin();
-        cargarGaleriaAdmin();
-        cargarTestimoniosEditor();
       }
+      
+      renderizarTestimonios();
+      actualizarContadorCarrito();
     });
     
     // Sistema de contenido editable
@@ -380,32 +472,21 @@
       }
     };
     
-    function cargarContenidoEditable() {
-      const contenidoGuardado = localStorage.getItem('contenidoEditable');
-      if(contenidoGuardado) {
-        return JSON.parse(contenidoGuardado);
-      }
-      localStorage.setItem('contenidoEditable', JSON.stringify(contenidoEditablePorDefecto));
-      return contenidoEditablePorDefecto;
-    }
-    
-    function guardarContenidoEditable(contenido) {
-      localStorage.setItem('contenidoEditable', JSON.stringify(contenido));
-    }
-    
     function aplicarContenidoEditable() {
-      const contenido = cargarContenidoEditable();
-      
       // Aplicar información de reserva
-      document.getElementById('reserva-telefono').textContent = contenido.reservaInfo.telefono;
-      document.getElementById('reserva-email').textContent = contenido.reservaInfo.email;
-      document.getElementById('reserva-direccion').textContent = contenido.reservaInfo.direccion;
+      if (contenidoEditable.reservaInfo) {
+        document.getElementById('reserva-telefono').textContent = contenidoEditable.reservaInfo.telefono;
+        document.getElementById('reserva-email').textContent = contenidoEditable.reservaInfo.email;
+        document.getElementById('reserva-direccion').textContent = contenidoEditable.reservaInfo.direccion;
+      }
       
       // Aplicar información de contacto
-      document.getElementById('contacto-direccion').textContent = contenido.contactoInfo.direccion;
-      document.getElementById('contacto-telefono').textContent = contenido.contactoInfo.telefono;
-      document.getElementById('contacto-email').textContent = contenido.contactoInfo.email;
-      document.getElementById('mapa-iframe').src = contenido.contactoInfo.mapaUrl;
+      if (contenidoEditable.contactoInfo) {
+        document.getElementById('contacto-direccion').textContent = contenidoEditable.contactoInfo.direccion;
+        document.getElementById('contacto-telefono').textContent = contenidoEditable.contactoInfo.telefono;
+        document.getElementById('contacto-email').textContent = contenidoEditable.contactoInfo.email;
+        document.getElementById('mapa-iframe').src = contenidoEditable.contactoInfo.mapaUrl;
+      }
     }
     
     function renderizarTestimonios() {
@@ -465,51 +546,6 @@
       });
     }
     
-    // Funciones del editor de contenido
-    function cargarTestimoniosEditor() {
-      // Esta función se mantiene para futuras implementaciones
-    }
-    
-    function guardarReservaInfo() {
-      const contenido = cargarContenidoEditable();
-      contenido.reservaInfo = {
-        telefono: document.getElementById('edit-reserva-telefono').value,
-        email: document.getElementById('edit-reserva-email').value,
-        direccion: document.getElementById('edit-reserva-direccion').value
-      };
-      guardarContenidoEditable(contenido);
-      aplicarContenidoEditable();
-      mostrarNotificacion('Información de reserva actualizada con éxito.');
-    }
-    
-    function guardarContactoInfo() {
-      const contenido = cargarContenidoEditable();
-      contenido.contactoInfo = {
-        direccion: document.getElementById('edit-contacto-direccion').value,
-        telefono: document.getElementById('edit-contacto-telefono').value,
-        email: document.getElementById('edit-contacto-email').value,
-        mapaUrl: document.getElementById('edit-mapa-url').value
-      };
-      guardarContenidoEditable(contenido);
-      aplicarContenidoEditable();
-      mostrarNotificacion('Información de contacto actualizada con éxito.');
-    }
-    
-    function cancelarEdicionReserva() {
-      const contenido = cargarContenidoEditable();
-      document.getElementById('edit-reserva-telefono').value = contenido.reservaInfo.telefono;
-      document.getElementById('edit-reserva-email').value = contenido.reservaInfo.email;
-      document.getElementById('edit-reserva-direccion').value = contenido.reservaInfo.direccion;
-    }
-    
-    function cancelarEdicionContacto() {
-      const contenido = cargarContenidoEditable();
-      document.getElementById('edit-contacto-direccion').value = contenido.contactoInfo.direccion;
-      document.getElementById('edit-contacto-telefono').value = contenido.contactoInfo.telefono;
-      document.getElementById('edit-contacto-email').value = contenido.contactoInfo.email;
-      document.getElementById('edit-mapa-url').value = contenido.contactoInfo.mapaUrl;
-    }
-    
     // Galería con generación automática de descripciones
     const imagenesGaleriaPorDefecto = [
       {id:1,url:'https://www.angelanapeluqueros.com/data/6306/contenidos/thumb_497886_contenidos_optimized.jpg',titulo:'Peinados Elegantes',descripcion:'Transformaciones que resaltan tu belleza natural'},
@@ -522,24 +558,13 @@
       {id:8,url:'https://m.media-amazon.com/images/S/aplus-media/sc/3b97d825-a09d-46c6-8760-7687a8827e23.__CR0,0,970,600_PT0_SX970_V1___.jpg',titulo:'Efecto Keratina',descripcion:'Cabello liso, brillante y manejable'}
     ];
     
-    function cargarGaleria() {
-      const imagenesGuardadas = localStorage.getItem('imagenesGaleria');
-      if(imagenesGuardadas) return JSON.parse(imagenesGuardadas);
-      localStorage.setItem('imagenesGaleria', JSON.stringify(imagenesGaleriaPorDefecto));
-      return imagenesGaleriaPorDefecto;
-    }
-    
-    function guardarGaleria(imagenes) {
-      localStorage.setItem('imagenesGaleria', JSON.stringify(imagenes));
-    }
-    
     function renderizarGaleria() {
       const slider = document.getElementById('galeria-slider');
       const indicatorsContainer = document.getElementById('galeria-indicators');
-      const imagenes = cargarGaleria();
       slider.innerHTML = '';
       indicatorsContainer.innerHTML = '';
-      imagenes.forEach((imagen, index) => {
+      
+      imagenesGaleria.forEach((imagen, index) => {
         const slide = document.createElement('div');
         slide.className = 'galeria-slide';
         slide.innerHTML = `<img src="${imagen.url}" alt="${imagen.titulo}" /><div class="galeria-caption"><h3>${imagen.titulo}</h3><p>${imagen.descripcion}</p></div>`;
@@ -673,13 +698,8 @@
       document.getElementById('galeria-img-desc').value = descripcion;
       document.getElementById('galeria-img-desc').style.color = '#333';
       
-      const nuevaImagen = {id: Date.now(), url, titulo, descripcion};
-      let imagenes = cargarGaleria();
-      imagenes.push(nuevaImagen);
-      guardarGaleria(imagenes);
-      
-      renderizarGaleria();
-      cargarGaleriaAdmin();
+      const nuevaImagen = {id: Date.now().toString(), url, titulo, descripcion};
+      añadirElementoFirebase('galeria', nuevaImagen);
       
       document.getElementById('galeria-img-url').value = '';
       document.getElementById('galeria-img-title').value = '';
@@ -690,25 +710,21 @@
     
     function eliminarImagenGaleria(id) {
       if(confirm('¿Estás seguro de que quieres eliminar esta imagen de la galería?')) {
-        let imagenes = cargarGaleria();
-        imagenes = imagenes.filter(img => img.id !== id);
-        guardarGaleria(imagenes);
-        renderizarGaleria();
-        cargarGaleriaAdmin();
+        eliminarElementoFirebase('galeria', id);
         mostrarNotificacion('Imagen eliminada de la galería.');
       }
     }
     
     function cargarGaleriaAdmin() {
       const container = document.getElementById('galeria-imagenes-admin');
-      const imagenes = cargarGaleria();
       container.innerHTML = '';
-      imagenes.forEach(imagen => {
+      
+      imagenesGaleria.forEach(imagen => {
         const item = document.createElement('div');
         item.className = 'galeria-imagen-admin-item';
         item.innerHTML = `
           <img src="${imagen.url}" alt="${imagen.titulo}" />
-          <button class="delete-btn" onclick="eliminarImagenGaleria(${imagen.id})" aria-label="Eliminar imagen">
+          <button class="delete-btn" onclick="eliminarImagenGaleria('${imagen.id}')" aria-label="Eliminar imagen">
             <i class="fas fa-trash"></i>
           </button>
         `;
@@ -783,20 +799,8 @@
       {id:8,name:'Kit Completo de Tratamiento Dipaso',price:'21.25',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/159182-800-auto?v=638689307426100000&width=800&height=auto&aspect=true',description:'Incluye shampoo, acondicionador, máscara y sérum para un tratamiento capilar completo. El cuidado perfecto para tu cabello.',badge:'Pack Ahorro',categoria:'tratamiento'}
     ];
     
-    function cargarProductos() {
-      const productosGuardados = localStorage.getItem('productosDipaso');
-      if(productosGuardados) return JSON.parse(productosGuardados);
-      localStorage.setItem('productosDipaso', JSON.stringify(productosPorDefecto));
-      return productosPorDefecto;
-    }
-    
-    function guardarProductos(productos) {
-      localStorage.setItem('productosDipaso', JSON.stringify(productos));
-    }
-    
     function renderizarTienda() {
       const tiendaGrid = document.getElementById('tienda-grid');
-      const productos = cargarProductos();
       const productosMostrar = productos.slice(0, 3);
       tiendaGrid.innerHTML = '';
       productosMostrar.forEach((producto, index) => {
@@ -817,7 +821,7 @@
             <p>${producto.description}</p>
             <div class="producto-footer">
               <span class="producto-precio">$${producto.price} USD</span>
-              <button class="producto-btn" onclick="anadirAlCarrito(${producto.id})" aria-label="Añadir ${producto.name} al carrito">Añadir al Carrito</button>
+              <button class="producto-btn" onclick="anadirAlCarrito('${producto.id}')" aria-label="Añadir ${producto.name} al carrito">Añadir al Carrito</button>
             </div>
           </div>
         `;
@@ -827,7 +831,6 @@
     
     function renderizarTiendaCompleta(filtro = 'todos') {
       const tiendaModalGrid = document.getElementById('tienda-modal-grid');
-      const productos = cargarProductos();
       let productosFiltrados = productos;
       if(filtro !== 'todos') {
         productosFiltrados = productos.filter(p => p.categoria === filtro);
@@ -851,7 +854,7 @@
             <p>${producto.description}</p>
             <div class="producto-footer">
               <span class="producto-precio">$${producto.price} USD</span>
-              <button class="producto-btn" onclick="anadirAlCarrito(${producto.id})" aria-label="Añadir ${producto.name} al carrito">Añadir al Carrito</button>
+              <button class="producto-btn" onclick="anadirAlCarrito('${producto.id}')" aria-label="Añadir ${producto.name} al carrito">Añadir al Carrito</button>
             </div>
           </div>
         `;
@@ -875,7 +878,6 @@
     
     function renderizarPanelAdmin() {
       const adminLista = document.getElementById('admin-lista-productos');
-      const productos = cargarProductos();
       adminLista.innerHTML = '';
       productos.forEach(producto => {
         const adminItem = document.createElement('div');
@@ -897,27 +899,32 @@
       
       adminLista.addEventListener('click', (e) => {
         if(e.target.classList.contains('admin-save-btn')) {
-          const id = parseInt(e.target.getAttribute('data-id'));
+          const id = e.target.getAttribute('data-id');
           const nuevoNombre = document.getElementById(`name-${id}`).value;
           const nuevaImg = document.getElementById(`img-${id}`).value;
           const nuevoPrecio = document.getElementById(`price-${id}`).value;
-          let productos = cargarProductos();
+          
           const productoIndex = productos.findIndex(p => p.id === id);
           if(productoIndex !== -1) {
             productos[productoIndex].name = nuevoNombre;
             productos[productoIndex].imageUrl = nuevaImg;
             productos[productoIndex].price = nuevoPrecio;
-            guardarProductos(productos);
+            
+            actualizarElementoFirebase('productos', id, {
+              name: nuevoNombre,
+              imageUrl: nuevaImg,
+              price: nuevoPrecio
+            });
+            
             renderizarTienda();
             renderizarPanelAdmin();
             mostrarMensajeAdmin('¡Producto actualizado con éxito!');
           }
         } else if(e.target.classList.contains('admin-delete-btn')) {
-          const id = parseInt(e.target.getAttribute('data-id'));
+          const id = e.target.getAttribute('data-id');
           if(confirm('¿Estás seguro de que quieres eliminar este producto?')) {
-            let productos = cargarProductos();
             productos = productos.filter(p => p.id !== id);
-            guardarProductos(productos);
+            eliminarElementoFirebase('productos', id);
             renderizarTienda();
             renderizarPanelAdmin();
             mostrarMensajeAdmin('¡Producto eliminado con éxito!');
@@ -934,30 +941,27 @@
     }
     
     // Carrito
-    function getCarrito() { return JSON.parse(localStorage.getItem('carrito')) || []; }
-    function setCarrito(carrito) { localStorage.setItem('carrito', JSON.stringify(carrito)); }
-    
     function anadirAlCarrito(productoId) {
-      const productos = cargarProductos();
       const producto = productos.find(p => p.id === productoId);
       if(!producto) return;
-      let carrito = getCarrito();
+      
       const itemExistente = carrito.find(item => item.id === productoId);
-      if(itemExistente) itemExistente.quantity++;
-      else carrito.push({...producto, quantity: 1});
-      setCarrito(carrito);
+      if(itemExistente) {
+        itemExistente.quantity++;
+      } else {
+        carrito.push({...producto, quantity: 1});
+      }
+      
       actualizarContadorCarrito();
       mostrarNotificacion(`${producto.name} añadido al carrito.`);
     }
     
     function actualizarContadorCarrito() {
-      const carrito = getCarrito();
       const totalItems = carrito.reduce((total, item) => total + item.quantity, 0);
       document.getElementById('cart-count').textContent = totalItems;
     }
     
     function renderizarCarrito() {
-      const carrito = getCarrito();
       const container = document.getElementById('cart-items-container');
       const totalEl = document.getElementById('cart-total');
       if(carrito.length === 0) {
@@ -982,11 +986,11 @@
             <div class="cart-item-price">$${item.price} USD</div>
           </div>
           <div class="cart-item-quantity">
-            <button onclick="cambiarCantidad(${item.id}, -1)" aria-label="Reducir cantidad">-</button>
+            <button onclick="cambiarCantidad('${item.id}', -1)" aria-label="Reducir cantidad">-</button>
             <span>${item.quantity}</span>
-            <button onclick="cambiarCantidad(${item.id}, 1)" aria-label="Aumentar cantidad">+</button>
+            <button onclick="cambiarCantidad('${item.id}', 1)" aria-label="Aumentar cantidad">+</button>
           </div>
-          <button class="cart-remove-btn" onclick="eliminarDelCarrito(${item.id})" aria-label="Eliminar del carrito">Eliminar</button>
+          <button class="cart-remove-btn" onclick="eliminarDelCarrito('${item.id}')" aria-label="Eliminar del carrito">Eliminar</button>
         `;
         container.appendChild(itemEl);
       });
@@ -995,24 +999,20 @@
     }
     
     function cambiarCantidad(productoId, cambio) {
-      let carrito = getCarrito();
       const item = carrito.find(item => item.id === productoId);
       if(item) {
         item.quantity += cambio;
         if(item.quantity <= 0) eliminarDelCarrito(productoId);
         else {
-          setCarrito(carrito);
-          renderizarCarrito();
           actualizarContadorCarrito();
+          renderizarCarrito();
         }
       }
     }
     
     function eliminarDelCarrito(productoId) {
       if(confirm('¿Estás seguro de que quieres eliminar este producto del carrito?')) {
-        let carrito = getCarrito();
         carrito = carrito.filter(item => item.id !== productoId);
-        setCarrito(carrito);
         renderizarCarrito();
         actualizarContadorCarrito();
       }
@@ -1028,7 +1028,6 @@
         mostrarNotificacion('Por favor, completa todos los campos obligatorios.', 'error');
         return;
       }
-      const carrito = getCarrito();
       let total = 0;
       carrito.forEach(item => { total += parseFloat(item.price) * item.quantity; });
       const nuevoPedido = {
@@ -1038,9 +1037,7 @@
         items: carrito,
         total: total.toFixed(2)
       };
-      let pedidos = JSON.parse(localStorage.getItem('ordenes')) || [];
-      pedidos.push(nuevoPedido);
-      localStorage.setItem('ordenes', JSON.stringify(pedidos));
+      añadirElementoFirebase('ordenes', nuevoPedido);
       let mensaje = `Hola, soy ${name} y he realizado un pedido con los siguientes productos:\n\n`;
       carrito.forEach(item => { mensaje += `- ${item.name} (x${item.quantity}) - $${item.price} USD c/u\n`; });
       mensaje += `\nTotal: $${total.toFixed(2)} USD\n\n`;
@@ -1061,7 +1058,7 @@
       paymentInfo.style.position = 'relative';
       paymentInfo.style.zIndex = '1000';
       setTimeout(() => { paymentInfo.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
-      setCarrito([]);
+      carrito = [];
       actualizarContadorCarrito();
       renderizarCarrito();
     }
@@ -1144,6 +1141,7 @@
         document.getElementById('admin-galeria-controls').classList.add('active');
         document.getElementById('admin-content-editor').classList.add('active');
         localStorage.setItem('isLoggedIn', 'true');
+        isLoggedIn = true;
         renderizarPanelAdmin();
         cargarGaleriaAdmin();
         loginForm.reset();
@@ -1160,6 +1158,7 @@
       document.getElementById('admin-productos').classList.remove('active');
       document.getElementById('admin-galeria-controls').classList.remove('active');
       document.getElementById('admin-content-editor').classList.remove('active');
+      isLoggedIn = false;
       loginForm.reset();
     });
     
@@ -1186,10 +1185,8 @@
         mostrarNotificacion('Por favor completa todos los campos.', 'error');
         return;
       }
-      const nuevaReserva = {id:Date.now(),nombre,telefono,servicio,fecha,hora};
-      let reservas = JSON.parse(localStorage.getItem('reservas')) || [];
-      reservas.push(nuevaReserva);
-      localStorage.setItem('reservas', JSON.stringify(reservas));
+      const nuevaReserva = {id:Date.now().toString(),nombre,telefono,servicio,fecha,hora};
+      añadirElementoFirebase('reservas', nuevaReserva);
       confirmacionReserva.classList.add('active');
       const mensaje = encodeURIComponent(`Hola, ${nombre}. Confirmo mi reserva para ${servicio} el día ${fecha} a las ${hora}. Mi teléfono es ${telefono}.`);
       btnWhatsAppConfirm.href = `https://wa.me/593993045286?text=${mensaje}`;
@@ -1239,15 +1236,13 @@
         return;
       }
       const nuevaSolicitud = {
-        id: Date.now(),
+        id: Date.now().toString(),
         nombre,
         email,
         telefono,
         fecha: new Date().toLocaleDateString()
       };
-      let solicitudes = JSON.parse(localStorage.getItem('solicitudes-trabajo')) || [];
-      solicitudes.push(nuevaSolicitud);
-      localStorage.setItem('solicitudes-trabajo', JSON.stringify(solicitudes));
+      añadirElementoFirebase('solicitudes-trabajo', nuevaSolicitud);
       mensajeTrabajo.style.display = 'block';
       formTrabaja.reset();
       telefonoTrabajoInput.value = '+593';
@@ -1268,7 +1263,7 @@
       let descripcion = generarDescripcionAutomatica(nombre);
       let categoria = determinarCategoria(nombre);
       const nuevoProducto = {
-        id: Date.now(),
+        id: Date.now().toString(),
         name: nombre,
         price: precio,
         imageUrl: imagen,
@@ -1276,11 +1271,7 @@
         badge: 'Nuevo',
         categoria: categoria
       };
-      let productos = cargarProductos();
-      productos.push(nuevoProducto);
-      guardarProductos(productos);
-      renderizarTienda();
-      renderizarPanelAdmin();
+      añadirElementoFirebase('productos', nuevoProducto);
       formAgregarProducto.reset();
       mostrarMensajeAdmin('¡Producto añadido con éxito!');
     });
@@ -1331,6 +1322,51 @@
       if(nombreLower.includes('acondicionador')) return 'acondicionador';
       if(nombreLower.includes('máscara') || nombreLower.includes('tratamiento') || nombreLower.includes('keratina') || nombreLower.includes('botox')) return 'tratamiento';
       return 'accesorio';
+    }
+    
+    // Funciones del editor de contenido
+    function guardarReservaInfo() {
+      const nuevaReservaInfo = {
+        telefono: document.getElementById('edit-reserva-telefono').value,
+        email: document.getElementById('edit-reserva-email').value,
+        direccion: document.getElementById('edit-reserva-direccion').value
+      };
+      
+      actualizarElementoFirebase('contenido', 'reservaInfo', nuevaReservaInfo);
+      contenidoEditable.reservaInfo = nuevaReservaInfo;
+      aplicarContenidoEditable();
+      mostrarNotificacion('Información de reserva actualizada con éxito.');
+    }
+    
+    function guardarContactoInfo() {
+      const nuevaContactoInfo = {
+        direccion: document.getElementById('edit-contacto-direccion').value,
+        telefono: document.getElementById('edit-contacto-telefono').value,
+        email: document.getElementById('edit-contacto-email').value,
+        mapaUrl: document.getElementById('edit-mapa-url').value
+      };
+      
+      actualizarElementoFirebase('contenido', 'contactoInfo', nuevaContactoInfo);
+      contenidoEditable.contactoInfo = nuevaContactoInfo;
+      aplicarContenidoEditable();
+      mostrarNotificacion('Información de contacto actualizada con éxito.');
+    }
+    
+    function cancelarEdicionReserva() {
+      if (contenidoEditable.reservaInfo) {
+        document.getElementById('edit-reserva-telefono').value = contenidoEditable.reservaInfo.telefono;
+        document.getElementById('edit-reserva-email').value = contenidoEditable.reservaInfo.email;
+        document.getElementById('edit-reserva-direccion').value = contenidoEditable.reservaInfo.direccion;
+      }
+    }
+    
+    function cancelarEdicionContacto() {
+      if (contenidoEditable.contactoInfo) {
+        document.getElementById('edit-contacto-direccion').value = contenidoEditable.contactoInfo.direccion;
+        document.getElementById('edit-contacto-telefono').value = contenidoEditable.contactoInfo.telefono;
+        document.getElementById('edit-contacto-email').value = contenidoEditable.contactoInfo.email;
+        document.getElementById('edit-mapa-url').value = contenidoEditable.contactoInfo.mapaUrl;
+      }
     }
     
     // Event listeners para modales
