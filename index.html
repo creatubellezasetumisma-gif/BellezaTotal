@@ -11,681 +11,40 @@
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-  <!-- jsPDF para generar PDFs -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
-    :root{--p:#ff69b4;--s:#d68ab1;--a:#a64d79;--l:#fff8fb;--t:#5a2a5c;--w:#fff;--sh:0 4px 15px rgba(0,0,0,0.1)}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Montserrat,sans-serif;background:var(--l);color:var(--t);line-height:1.6;overflow-x:hidden}html{scroll-behavior:smooth}.container{max-width:1100px;margin:0 auto;padding:0 20px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.btn{display:inline-block;padding:12px 25px;border-radius:50px;text-decoration:none;font-weight:700;font-size:1rem;transition:all 0.3s ease;cursor:pointer;border:none}.btn-primary{background:var(--w);color:var(--p);box-shadow:var(--sh)}.btn-primary:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.btn-secondary{background:transparent;color:var(--w);border:2px solid var(--w)}.btn-secondary:hover{background:var(--w);color:var(--p)}.btn-accent{background:var(--p);color:var(--w)}.btn-accent:hover{background:var(--a);transform:translateY(-2px)}header{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);padding:15px 0;position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,0.1)}.header-content{display:flex;justify-content:space-between;align-items:center}.logo{display:flex;align-items:center}.logo i{font-size:2rem;color:var(--w)}.logo h1{font-size:1.5rem;font-weight:900;margin-left:10px;white-space:nowrap}.nav-desktop{display:flex;gap:15px}.nav-desktop a{color:var(--w);text-decoration:none;padding:8px 12px;font-weight:500;border-radius:20px;transition:all 0.3s ease;font-size:0.9rem;white-space:nowrap}.nav-desktop a:hover{background:rgba(255,255,255,0.2);transform:translateY(-2px)}.user-menu{display:flex;align-items:center;gap:15px}.cart-icon{position:relative;cursor:pointer;transition:transform 0.3s ease}.cart-icon:hover{transform:scale(1.1)}.cart-icon i{font-size:1.5rem}.cart-count{position:absolute;top:-8px;right:-8px;background:#ff4757;color:white;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700}.menu-toggle{display:none;background:none;border:none;color:var(--w);font-size:1.5rem;cursor:pointer}.nav-mobile{display:none;position:absolute;top:100%;left:0;right:0;background:var(--p);flex-direction:column;padding:15px;box-shadow:0 5px 15px rgba(0,0,0,0.2);gap:10px}.nav-mobile.active{display:flex}.nav-mobile a{color:var(--w);text-decoration:none;padding:10px 15px;font-weight:500;border-radius:10px;transition:all 0.3s ease;font-size:1rem}.nav-mobile a:hover{background:rgba(255,255,255,0.2)}.hero{margin-top:80px;padding:80px 20px;text-align:center;background:linear-gradient(rgba(255,105,180,0.7),rgba(214,138,177,0.7)),url('https://images.unsplash.com/photo-1556228724-cabf8b6e204e?auto=format&fit=crop&w=1950&q=80');background-size:cover;background-position:center;color:var(--w);position:relative;overflow:hidden;min-height:60vh;display:flex;align-items:center;justify-content:center}.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at center,rgba(255,255,255,0.1) 0%,rgba(255,105,180,0.3) 100%);z-index:1}.hero-content{position:relative;z-index:2;max-width:800px;margin:0 auto;text-align:center}.hero h2{font-size:2.8rem;margin-bottom:20px;font-weight:900;text-shadow:0 2px 10px rgba(0,0,0,0.2);animation:fadeInUp 1s ease-out;line-height:1.2}.hero p{font-size:1.3rem;margin-bottom:30px;font-weight:500;text-shadow:0 1px 5px rgba(0,0,0,0.2);animation:fadeInUp 1s ease-out 0.2s;animation-fill-mode:both;line-height:1.4}.hero-buttons{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;animation:fadeInUp 1s ease-out 0.4s;animation-fill-mode:both}main{padding:60px 20px;max-width:1100px;margin:0 auto}section{margin-bottom:60px}h2{font-size:2.2rem;margin-bottom:25px;font-weight:700;color:var(--t);text-align:center;position:relative;padding-bottom:15px}h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60px;height:4px;background:linear-gradient(to right,var(--p),var(--s));border-radius:2px}#sobre-nosotros{padding:40px 0;background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,182,193,0.3));border-radius:20px;box-shadow:var(--sh)}.sobre-content{display:flex;flex-direction:column;gap:30px}.sobre-texto{text-align:center;margin-bottom:20px}.sobre-texto p{font-size:1.1rem;line-height:1.8;margin-bottom:20px;max-width:800px;margin-left:auto;margin-right:auto}.servicios-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}.servicio-item{background:rgba(255,255,255,0.7);padding:20px;border-radius:10px;display:flex;align-items:center;transition:all 0.3s ease}.servicio-item:hover{background:var(--w);transform:translateY(-5px);box-shadow:0 5px 15px rgba(0,0,0,0.1)}.servicio-item i{color:var(--p);margin-right:15px;font-size:1.5rem;width:30px;text-align:center}.servicio-item h3{font-size:1.1rem;font-weight:600;margin:0}#galeria{padding:40px 0}.galeria-container{position:relative;max-width:1000px;margin:0 auto;overflow:hidden;border-radius:20px;box-shadow:var(--sh)}.galeria-slider{display:flex;transition:transform 0.5s ease}.galeria-slide{min-width:100%;position:relative}.galeria-slide img{width:100%;height:400px;object-fit:cover;display:block}.galeria-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent);color:var(--w);padding:20px;text-align:center}.galeria-caption h3{font-size:1.3rem;margin-bottom:5px}.galeria-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.8);color:var(--a);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;box-shadow:0 2px 10px rgba(0,0,0,0.1)}.galeria-nav:hover{background:var(--w);box-shadow:0 4px 15px rgba(0,0,0,0.2)}.galeria-nav.prev{left:15px}.galeria-nav.next{right:15px}.galeria-indicators{display:flex;justify-content:center;gap:8px;margin-top:20px}.galeria-indicator{width:10px;height:10px;border-radius:50%;background:var(--s);cursor:pointer;transition:all 0.3s ease}.galeria-indicator.active{background:var(--p);transform:scale(1.2)}.admin-galeria-controls{display:none;margin-top:20px;padding:20px;background:#f9f9f9;border-radius:10px;border:2px dashed var(--p)}.admin-galeria-controls.active{display:block}.admin-galeria-controls h3{font-size:1.3rem;margin-bottom:15px;color:var(--a);text-align:center}.galeria-admin-form{display:flex;gap:15px;margin-bottom:20px;flex-wrap:wrap}.galeria-admin-form input{flex:1;min-width:200px;padding:10px;border:1px solid #ddd;border-radius:5px}.galeria-admin-form button{padding:10px 20px;background:var(--p);color:white;border:none;border-radius:5px;cursor:pointer;font-weight:600;transition:all 0.3s ease}.galeria-admin-form button:hover{background:var(--a)}.galeria-imagenes-admin{display:grid;grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));gap:15px}.galeria-imagen-admin-item{position:relative;border-radius:8px;overflow:hidden;box-shadow:0 2px 5px rgba(0,0,0,0.1)}.galeria-imagen-admin-item img{width:100%;height:100px;object-fit:cover;display:block}.galeria-imagen-admin-item .delete-btn{position:absolute;top:5px;right:5px;background:rgba(244, 67, 54, 0.9);color:white;border:none;border-radius:50%;width:25px;height:25px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;transition:all 0.3s ease}.galeria-imagen-admin-item .delete-btn:hover{background:#d32f2f;transform:scale(1.1)}#tienda{padding:40px 0}.tienda-intro{text-align:center;margin-bottom:40px}.tienda-intro p{font-size:1.1rem;max-width:800px;margin:0 auto;line-height:1.8}.tienda-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-bottom:30px}.producto-card{background:var(--w);border-radius:15px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,0.08);transition:all 0.3s ease;position:relative}.producto-card:hover{transform:translateY(-8px);box-shadow:0 10px 30px rgba(0,0,0,0.15)}.producto-imagen{height:200px;overflow:hidden;position:relative}.producto-imagen img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}.producto-card:hover .producto-imagen img{transform:scale(1.1)}.producto-badge{position:absolute;top:10px;right:10px;background:var(--p);color:var(--w);padding:5px 10px;border-radius:20px;font-size:0.75rem;font-weight:600}.producto-info{padding:20px}.producto-info h3{font-size:1.2rem;margin-bottom:8px;color:var(--t)}.producto-info p{font-size:0.9rem;color:#666;margin-bottom:12px;line-height:1.5}.producto-footer{display:flex;justify-content:space-between;align-items:center}.producto-precio{font-size:1.3rem;font-weight:700;color:var(--a)}.producto-btn{background:var(--p);color:var(--w);border:none;padding:8px 16px;border-radius:30px;font-weight:600;cursor:pointer;transition:all 0.3s ease;font-size:0.9rem}.producto-btn:hover{background:var(--a);transform:scale(1.05)}.ver-mas-container{text-align:center;margin-top:20px}.ver-mas-btn{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);border:none;padding:15px 30px;border-radius:50px;font-size:1.1rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(0,0,0,0.2)}.ver-mas-btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:2000;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease}.modal.active{display:flex;opacity:1}.modal-content{background:var(--w);padding:30px;border-radius:15px;width:90%;max-width:500px;box-shadow:0 10px 30px rgba(0,0,0,0.3);transform:translateY(-20px);transition:transform 0.3s ease;max-height:80vh;overflow-y:auto}.modal.active .modal-content{transform:translateY(0)}.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.modal-header h3{font-size:1.5rem;color:var(--t)}.close-modal{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--t);transition:color 0.3s ease}.close-modal:hover{color:var(--p)}.login-form{display:flex;flex-direction:column;gap:15px}.login-form input{padding:12px;border:2px solid #eee;border-radius:10px;font-size:1rem;font-family:Montserrat,sans-serif}.login-form input:focus{border-color:var(--p);outline:none;box-shadow:0 0 0 3px rgba(255,105,180,0.1)}.login-btn-form{background:var(--p);color:var(--w);border:none;padding:12px;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease}.login-btn-form:hover{background:var(--a)}#reserva{padding:40px 0;background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,182,193,0.3));border-radius:20px;box-shadow:var(--sh)}.reserva-container{display:flex;flex-direction:column;gap:40px}.reserva-form{background:var(--w);padding:25px;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.08)}.form-group{margin-bottom:20px}.form-group label{display:block;margin-bottom:8px;font-weight:600;color:var(--t);font-size:0.95rem}.form-control{width:100%;padding:12px;border:2px solid #eee;border-radius:10px;font-size:1rem;font-family:Montserrat,sans-serif;transition:all 0.3s ease}.form-control:focus{border-color:var(--p);outline:none;box-shadow:0 0 0 3px rgba(255,105,180,0.1)}.btn-submit{background:var(--p);color:var(--w);border:none;padding:12px 30px;border-radius:50px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;width:100%}.btn-submit:hover{background:var(--a);transform:translateY(-2px);box-shadow:0 5px 15px rgba(166,77,121,0.3)}.reserva-info{padding:20px}.reserva-info h3{font-size:1.4rem;margin-bottom:15px;color:var(--t)}.reserva-info p{margin-bottom:15px;line-height:1.7;font-size:1rem}.contact-item{display:flex;align-items:center;margin-bottom:15px}.contact-item i{font-size:1.2rem;color:var(--p);margin-right:12px;width:25px;text-align:center}.contact-item span{font-size:0.95rem}.confirmacion-reserva{display:none;background:#e8f5e9;border:2px solid #4caf50;border-radius:10px;padding:20px;margin-top:20px;text-align:center}.confirmacion-reserva.active{display:block}.confirmacion-reserva h3{color:#2e7d32;margin-bottom:15px;font-size:1.2rem}.confirmacion-reserva .btn-whatsapp{background:linear-gradient(135deg,#25d366,#128c7e);color:var(--w);border:none;padding:12px 25px;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s ease;display:inline-block;text-decoration:none}.confirmacion-reserva .btn-whatsapp:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.admin-panel{display:none;background:#f5f5f5;border-radius:15px;padding:25px;margin-top:30px}.admin-panel.active{display:block}.admin-panel h3{color:var(--a);margin-bottom:20px;text-align:center;font-size:1.3rem}.admin-producto-item{background:var(--w);padding:20px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1);margin-bottom:20px;border-left:5px solid var(--p)}.admin-producto-item h4{color:var(--t);margin-bottom:15px;font-size:1.2rem}.admin-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;align-items:end;margin-bottom:10px}.admin-form-group{display:flex;flex-direction:column}.admin-form-group label{font-weight:600;color:var(--t);margin-bottom:5px;font-size:0.9rem}.admin-form-group input{width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;font-size:0.9rem}.admin-save-btn,.admin-delete-btn{background:var(--p);color:var(--w);border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer;transition:all 0.3s ease;margin-right:10px}.admin-save-btn:hover{background:var(--a);transform:scale(1.02)}.admin-delete-btn{background:#f44336}.admin-delete-btn:hover{background:#d32f2f;transform:scale(1.02)}.admin-add-form{background:var(--w);padding:20px;border-radius:10px;border:2px solid var(--s);margin-top:20px}.admin-add-form h4{color:var(--t);margin-bottom:15px;text-align:center}.admin-add-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}#admin-message{display:none;background:#e8f5e9;border:1px solid #4caf50;color:#2e7d32;padding:10px;border-radius:8px;text-align:center;margin-top:15px;font-weight:500}.testimonios{padding:40px 0}.testimonios-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}.testimonio-card{background:var(--w);border-radius:15px;padding:25px;box-shadow:0 5px 20px rgba(0,0,0,0.08);position:relative;transition:all 0.3s ease}.testimonio-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,0.15)}.testimonio-card::before{content:'"';position:absolute;top:10px;left:15px;font-size:3.5rem;color:var(--p);opacity:0.2;font-family:serif}.testimonio-text{font-style:italic;margin-bottom:15px;line-height:1.7;position:relative;z-index:1;font-size:1rem}.testimonio-rating{margin-bottom:12px}.testimonio-rating i{color:#ffc107;margin-right:2px;font-size:0.9rem}.testimonio-autor{display:flex;align-items:center}.testimonio-avatar{width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--s));display:flex;align-items:center;justify-content:center;color:var(--w);font-weight:700;margin-right:12px;font-size:1.1rem}.testimonio-info h4{font-size:1rem;margin-bottom:3px;color:var(--t)}.testimonio-info p{font-size:0.85rem;color:#666}.contacto{padding:40px 0}.contact-container{display:flex;flex-direction:column;gap:40px}.contact-info h3{font-size:1.4rem;margin-bottom:20px;color:var(--t)}.contact-details{margin-bottom:25px}.contact-details p{margin-bottom:12px;display:flex;align-items:center;font-size:0.95rem}.contact-details i{color:var(--p);margin-right:12px;width:22px}.map-container{border-radius:15px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,0.1);height:350px}.map-container iframe{width:100%;height:100%;border:none}footer{background:linear-gradient(135deg,var(--a),var(--s));color:var(--w);padding:40px 20px 20px;margin-top:60px}.footer-content{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;margin-bottom:30px}.footer-section h3{font-size:1.2rem;margin-bottom:15px;position:relative;padding-bottom:10px}.footer-section h3::after{content:'';position:absolute;bottom:0;left:0;width:40px;height:2px;background:var(--w)}.footer-section p,.footer-section li{margin-bottom:8px;line-height:1.6;font-size:0.9rem}.footer-section ul{list-style:none;padding:0}.footer-section a{color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.3s ease}.footer-section a:hover{color:var(--w)}.footer-bottom{text-align:center;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);font-size:0.85rem;color:rgba(255,255,255,0.7);position:relative}.trabaja-btn{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);border:none;padding:12px 25px;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s ease;display:inline-block;position:absolute;bottom:15px;right:20px}.trabaja-btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.cart-modal-content{width:90%;max-width:600px}.cart-item{display:flex;align-items:center;justify-content:space-between;padding:15px 0;border-bottom:1px solid #eee}.cart-item img{width:60px;height:60px;object-fit:cover;border-radius:8px;margin-right:15px}.cart-item-details{flex-grow:1}.cart-item-name{font-weight:600;color:var(--t)}.cart-item-price{color:var(--a)}.cart-item-quantity{display:flex;align-items:center;gap:10px}.cart-item-quantity button{background:var(--p);color:var(--w);border:none;width:25px;height:25px;border-radius:5px;cursor:pointer;font-weight:bold}.cart-item-quantity button:hover{background:var(--a)}.cart-total{font-size:1.2rem;font-weight:700;text-align:right;margin-top:20px;color:var(--t)}.cart-checkout-btn{width:100%;padding:15px;background:var(--p);color:var(--w);border:none;border-radius:10px;font-size:1.1rem;font-weight:700;cursor:pointer;margin-top:20px;transition:all 0.3s ease}.cart-checkout-btn:hover{background:var(--a);transform:translateY(-2px)}.empty-cart{text-align:center;padding:40px;color:#999}.cart-remove-btn{background:#f44336;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;font-size:0.8rem;margin-left:10px}.cart-remove-btn:hover{background:#d32f2f}.checkout-form{margin-top:20px;padding:20px;background:#f9f9f9;border-radius:10px}.checkout-form h4{margin-bottom:15px;color:var(--t);text-align:center}.checkout-form-group{margin-bottom:15px}.checkout-form-group label{display:block;margin-bottom:5px;font-weight:600;color:var(--t)}.checkout-form-group input,.checkout-form-group textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:5px;font-family:inherit}.checkout-form-group textarea{resize:vertical;min-height:80px}.payment-info{display:none;margin-top:20px;padding:25px;background:#e8f5e9;border-radius:10px;text-align:center;border:2px solid #4caf50;box-shadow:0 4px 15px rgba(0,0,0,0.1);position:relative;z-index:10}.payment-info.active{display:block!important;animation:fadeIn 0.5s ease-in-out}.payment-info h4{margin-bottom:20px;color:#2e7d32;font-size:1.4rem;font-weight:700}.payment-info p{margin-bottom:15px;color:#333;font-size:1.1rem;line-height:1.5}.payment-info .account-details{background:white;padding:20px;border-radius:10px;margin:20px 0;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.1);text-align:left;border-left:4px solid #4caf50}.payment-info .account-details p{margin-bottom:12px;font-size:1.1rem;display:flex;justify-content:space-between;align-items:center}.payment-info .account-details p strong{color:#2e7d32}.payment-info .whatsapp-btn{display:inline-block;background:#25d366;color:white;padding:15px 30px;border-radius:50px;text-decoration:none;font-weight:700;margin-top:20px;transition:all 0.3s ease;font-size:1.1rem;box-shadow:0 4px 10px rgba(0,0,0,0.2)}.payment-info .whatsapp-btn:hover{background:#128c7e;transform:translateY(-3px);box-shadow:0 6px 15px rgba(0,0,0,0.3)}.tienda-modal-content{width:95%;max-width:1200px;max-height:90vh;overflow-y:auto}.tienda-modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:15px;border-bottom:2px solid var(--p)}.tienda-modal-header h3{font-size:1.8rem;color:var(--t);margin:0}.tienda-modal-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:25px}.tienda-filtros{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}.filtro-btn{padding:8px 15px;background:#f0f0f0;border:1px solid #ddd;border-radius:20px;cursor:pointer;transition:all 0.3s ease;font-size:0.9rem}.filtro-btn:hover,.filtro-btn.active{background:var(--p);color:white;border-color:var(--p)}.admin-content-editor{display:none;background:#f9f9f9;border-radius:15px;padding:25px;margin-top:30px;border:2px dashed var(--p)}.admin-content-editor.active{display:block}.admin-content-editor h3{color:var(--a);margin-bottom:20px;text-align:center;font-size:1.3rem}.editor-section{margin-bottom:25px;padding:20px;background:var(--w);border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1)}.editor-section h4{color:var(--t);margin-bottom:15px;font-size:1.1rem;border-bottom:2px solid var(--p);padding-bottom:8px}.editor-form-group{margin-bottom:15px}.editor-form-group label{display:block;margin-bottom:5px;font-weight:600;color:var(--t);font-size:0.9rem}.editor-form-group input,.editor-form-group textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:5px;font-family:inherit;font-size:0.95rem}.editor-form-group textarea{resize:vertical;min-height:80px}.editor-actions{display:flex;gap:10px;justify-content:center;margin-top:15px}.editor-btn{padding:10px 20px;border:none;border-radius:5px;font-weight:600;cursor:pointer;transition:all 0.3s ease}.editor-btn-save{background:var(--p);color:var(--w)}.editor-btn-save:hover{background:var(--a)}.editor-btn-cancel{background:#ccc;color:var(--t)}.editor-btn-cancel:hover{background:#999}.testimonio-editor-item{background:var(--w);padding:15px;border-radius:10px;margin-bottom:15px;box-shadow:0 2px 5px rgba(0,0,0,0.1)}.testimonio-editor-item h5{color:var(--p);margin-bottom:10px;font-size:1rem}.contact-editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.contact-editor-full{grid-column:1 / -1}.file-upload{margin-bottom:15px}.file-upload label{display:block;margin-bottom:5px;font-weight:600;color:var(--t);font-size:0.9rem}.file-upload input[type="file"]{width:100%;padding:10px;border:1px solid #ddd;border-radius:5px;font-family:inherit;font-size:0.9rem}.file-upload .file-info{margin-top:5px;font-size:0.8rem;color:#666}.admin-table{width:100%;border-collapse:collapse;margin-top:20px;background:var(--w);border-radius:10px;overflow:hidden;box-shadow:0 2px 5px rgba(0,0,0,0.1)}.admin-table th{background:var(--p);color:var(--w);padding:12px;text-align:left;font-weight:600}.admin-table td{padding:12px;border-bottom:1px solid #eee}.admin-table tr:hover{background:#f9f9f9}.admin-table .status-badge{display:inline-block;padding:4px 8px;border-radius:12px;font-size:0.8rem;font-weight:600}.status-badge.pending{background:#fff3cd;color:#856404}.status-badge.confirmed{background:#d4edda;color:#155724}.status-badge.cancelled{background:#f8d7da;color:#721c24}.status-badge.processing{background:#cce5ff;color:#004085}.status-badge.shipped{background:#d1ecf1;color:#0c5460}.status-badge.delivered{background:#d4edda;color:#155724}.admin-actions-cell{display:flex;gap:5px}.admin-actions-cell button{padding:5px 10px;border:none;border-radius:5px;cursor:pointer;font-size:0.8rem;font-weight:600;transition:all 0.3s ease}.admin-actions-cell .view-btn{background:#007bff;color:white}.admin-actions-cell .view-btn:hover{background:#0056b3}.admin-actions-cell .delete-btn{background:#dc3545;color:white}.admin-actions-cell .delete-btn:hover{background:#c82333}.admin-actions-cell .edit-btn{background:#28a745;color:white}.admin-actions-cell .edit-btn:hover{background:#218838}.detail-modal-content{width:95%;max-width:800px}.detail-section{margin-bottom:20px}.detail-section h4{color:var(--p);margin-bottom:10px;font-size:1.1rem;border-bottom:2px solid var(--p);padding-bottom:5px}.detail-item{display:flex;margin-bottom:8px}.detail-item strong{min-width:120px;color:var(--t)}.detail-item span{color:#666}.product-list{margin-top:10px}.product-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #eee}.product-item:last-child{border-bottom:none}.product-name{font-weight:500}.product-price{color:var(--a)}.product-quantity{background:#f0f0f0;padding:2px 8px;border-radius:10px;font-size:0.85rem}.status-select{padding:5px 10px;border:1px solid #ddd;border-radius:5px;font-size:0.9rem;cursor:pointer}.status-select:focus{outline:none;border-color:var(--p)}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}@media(max-width:992px){.hero h2{font-size:2.5rem}.hero p{font-size:1.1rem}.servicios-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}}@media(max-width:768px){header{padding:12px 0}.header-content{justify-content:space-between}.logo h1{font-size:1.3rem}.menu-toggle{display:block}.nav-desktop{display:none}.hero{margin-top:70px;padding:60px 15px}.hero h2{font-size:2.2rem}.hero p{font-size:1rem}.hero-buttons{flex-direction:column;align-items:center;width:100%;max-width:300px;margin:0 auto}.btn{width:100%}h2{font-size:1.9rem}.galeria-slide img{height:300px}.footer-content{grid-template-columns:1fr;text-align:center}.trabaja-btn{position:relative;bottom:auto;right:auto;margin-top:20px}}@media(max-width:576px){.logo h1{font-size:1.1rem}.logo i{font-size:1.6rem}.hero{padding:50px 15px;min-height:50vh}.hero h2{font-size:1.8rem}.hero p{font-size:0.9rem}.hero-buttons{gap:10px}.btn{padding:10px 20px;font-size:0.9rem}h2{font-size:1.7rem}.galeria-slide img{height:250px}.servicios-grid{grid-template-columns:1fr}.tienda-grid{grid-template-columns:1fr}.testimonios-grid{grid-template-columns:1fr}.reserva-container{gap:30px}.map-container{height:250px}.admin-form-grid,.admin-add-form-grid{grid-template-columns:1fr}.cart-item{flex-direction:column;text-align:center}.tienda-modal-grid{grid-template-columns:1fr}.contact-editor-grid{grid-template-columns:1fr}}
+    :root{--p:#ff69b4;--s:#d68ab1;--a:#a64d79;--l:#fff8fb;--t:#5a2a5c;--w:#fff;--sh:0 4px 15px rgba(0,0,0,0.1)}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Montserrat,sans-serif;background:var(--l);color:var(--t);line-height:1.6;overflow-x:hidden}html{scroll-behavior:smooth}.container{max-width:1100px;margin:0 auto;padding:0 20px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.btn{display:inline-block;padding:12px 25px;border-radius:50px;text-decoration:none;font-weight:700;font-size:1rem;transition:all 0.3s ease;cursor:pointer;border:none}.btn-primary{background:var(--w);color:var(--p);box-shadow:var(--sh)}.btn-primary:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.btn-secondary{background:transparent;color:var(--w);border:2px solid var(--w)}.btn-secondary:hover{background:var(--w);color:var(--p)}.btn-accent{background:var(--p);color:var(--w)}.btn-accent:hover{background:var(--a);transform:translateY(-2px)}header{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);padding:15px 0;position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,0.1)}.header-content{display:flex;justify-content:space-between;align-items:center}.logo{display:flex;align-items:center;position:relative}.logo i{font-size:2rem;color:var(--w);margin-right:10px}.logo h1{font-size:1.5rem;font-weight:900;white-space:nowrap;background:linear-gradient(45deg, #fff, #ffd4e5);-webkit-background-clip: text;-webkit-text-fill-color: transparent;background-clip: text;text-shadow: 0 2px 4px rgba(0,0,0,0.1)}.logo::before{content:'';position:absolute;top:-5px;left:-5px;right:-5px;bottom:-5px;background:linear-gradient(45deg, #ff69b4, #d68ab1, #ff69b4);border-radius:50%;z-index:-1;opacity:0.3;animation:logoGlow 3s ease-in-out infinite}@keyframes logoGlow{0%,100%{transform:scale(1);opacity:0.3}50%{transform:scale(1.05);opacity:0.5}}.nav-desktop{display:flex;gap:15px}.nav-desktop a{color:var(--w);text-decoration:none;padding:8px 12px;font-weight:500;border-radius:20px;transition:all 0.3s ease;font-size:0.9rem;white-space:nowrap}.nav-desktop a:hover{background:rgba(255,255,255,0.2);transform:translateY(-2px)}.user-menu{display:flex;align-items:center;gap:15px}.cart-icon{position:relative;cursor:pointer;transition:transform 0.3s ease}.cart-icon:hover{transform:scale(1.1)}.cart-icon i{font-size:1.5rem}.cart-count{position:absolute;top:-8px;right:-8px;background:#ff4757;color:white;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700}.menu-toggle{display:none;background:none;border:none;color:var(--w);font-size:1.5rem;cursor:pointer}.nav-mobile{display:none;position:absolute;top:100%;left:0;right:0;background:var(--p);flex-direction:column;padding:15px;box-shadow:0 5px 15px rgba(0,0,0,0.2);gap:10px}.nav-mobile.active{display:flex}.nav-mobile a{color:var(--w);text-decoration:none;padding:10px 15px;font-weight:500;border-radius:10px;transition:all 0.3s ease;font-size:1rem}.nav-mobile a:hover{background:rgba(255,255,255,0.2)}.hero{margin-top:80px;padding:80px 20px;text-align:center;background:linear-gradient(rgba(255,105,180,0.7),rgba(214,138,177,0.7)),url('https://images.unsplash.com/photo-1556228724-cabf8b6e204e?auto=format&fit=crop&w=1950&q=80');background-size:cover;background-position:center;color:var(--w);position:relative;overflow:hidden;min-height:60vh;display:flex;align-items:center;justify-content:center}.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at center,rgba(255,255,255,0.1) 0%,rgba(255,105,180,0.3) 100%);z-index:1}.hero-content{position:relative;z-index:2;max-width:800px;margin:0 auto;text-align:center}.hero h2{font-size:2.8rem;margin-bottom:20px;font-weight:900;text-shadow:0 2px 10px rgba(0,0,0,0.2);animation:fadeInUp 1s ease-out;line-height:1.2}.hero p{font-size:1.3rem;margin-bottom:30px;font-weight:500;text-shadow:0 1px 5px rgba(0,0,0,0.2);animation:fadeInUp 1s ease-out 0.2s;animation-fill-mode:both;line-height:1.4}.hero-buttons{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;animation:fadeInUp 1s ease-out 0.4s;animation-fill-mode:both}main{padding:60px 20px;max-width:1100px;margin:0 auto}section{margin-bottom:60px}h2{font-size:2.2rem;margin-bottom:25px;font-weight:700;color:var(--t);text-align:center;position:relative;padding-bottom:15px}h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60px;height:4px;background:linear-gradient(to right,var(--p),var(--s));border-radius:2px}#sobre-nosotros{padding:40px 0;background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,182,193,0.3));border-radius:20px;box-shadow:var(--sh)}.sobre-content{display:flex;flex-direction:column;gap:30px}.sobre-texto{text-align:center;margin-bottom:20px}.sobre-texto p{font-size:1.1rem;line-height:1.8;margin-bottom:20px;max-width:800px;margin-left:auto;margin-right:auto}.servicios-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}.servicio-item{background:rgba(255,255,255,0.7);padding:20px;border-radius:10px;display:flex;align-items:center;transition:all 0.3s ease}.servicio-item:hover{background:var(--w);transform:translateY(-5px);box-shadow:0 5px 15px rgba(0,0,0,0.1)}.servicio-item i{color:var(--p);margin-right:15px;font-size:1.5rem;width:30px;text-align:center}.servicio-item h3{font-size:1.1rem;font-weight:600;margin:0}#galeria{padding:40px 0}.galeria-container{position:relative;max-width:1000px;margin:0 auto;overflow:hidden;border-radius:20px;box-shadow:var(--sh)}.galeria-slider{display:flex;transition:transform 0.5s ease}.galeria-slide{min-width:100%;position:relative}.galeria-slide img{width:100%;height:400px;object-fit:cover;display:block}.galeria-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent);color:var(--w);padding:20px;text-align:center}.galeria-caption h3{font-size:1.3rem;margin-bottom:5px}.galeria-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.8);color:var(--a);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;box-shadow:0 2px 10px rgba(0,0,0,0.1)}.galeria-nav:hover{background:var(--w);box-shadow:0 4px 15px rgba(0,0,0,0.2)}.galeria-nav.prev{left:15px}.galeria-nav.next{right:15px}.galeria-indicators{display:flex;justify-content:center;gap:8px;margin-top:20px}.galeria-indicator{width:10px;height:10px;border-radius:50%;background:var(--s);cursor:pointer;transition:all 0.3s ease}.galeria-indicator.active{background:var(--p);transform:scale(1.2)}.admin-galeria-controls{display:none;margin-top:20px;padding:20px;background:#f9f9f9;border-radius:10px;border:2px dashed var(--p)}.admin-galeria-controls.active{display:block}.admin-galeria-controls h3{font-size:1.3rem;margin-bottom:15px;color:var(--a);text-align:center}.galeria-admin-form{display:flex;gap:15px;margin-bottom:20px;flex-wrap:wrap}.galeria-admin-form input{flex:1;min-width:200px;padding:10px;border:1px solid #ddd;border-radius:5px}.galeria-admin-form button{padding:10px 20px;background:var(--p);color:white;border:none;border-radius:5px;cursor:pointer;font-weight:600;transition:all 0.3s ease}.galeria-admin-form button:hover{background:var(--a)}.galeria-imagenes-admin{display:grid;grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));gap:15px}.galeria-imagen-admin-item{position:relative;border-radius:8px;overflow:hidden;box-shadow:0 2px 5px rgba(0,0,0,0.1)}.galeria-imagen-admin-item img{width:100%;height:100px;object-fit:cover;display:block}.galeria-imagen-admin-item .delete-btn{position:absolute;top:5px;right:5px;background:rgba(244, 67, 54, 0.9);color:white;border:none;border-radius:50%;width:25px;height:25px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;transition:all 0.3s ease}.galeria-imagen-admin-item .delete-btn:hover{background:#d32f2f;transform:scale(1.1)}#tienda{padding:40px 0}.tienda-intro{text-align:center;margin-bottom:40px}.tienda-intro p{font-size:1.1rem;max-width:800px;margin:0 auto;line-height:1.8}.tienda-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-bottom:30px}.producto-card{background:var(--w);border-radius:15px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,0.08);transition:all 0.3s ease;position:relative}.producto-card:hover{transform:translateY(-8px);box-shadow:0 10px 30px rgba(0,0,0,0.15)}.producto-imagen{height:200px;overflow:hidden;position:relative}.producto-imagen img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}.producto-card:hover .producto-imagen img{transform:scale(1.1)}.producto-badge{position:absolute;top:10px;right:10px;background:var(--p);color:var(--w);padding:5px 10px;border-radius:20px;font-size:0.75rem;font-weight:600}.producto-info{padding:20px}.producto-info h3{font-size:1.2rem;margin-bottom:8px;color:var(--t)}.producto-info p{font-size:0.9rem;color:#666;margin-bottom:12px;line-height:1.5}.producto-footer{display:flex;justify-content:space-between;align-items:center}.producto-precio{font-size:1.3rem;font-weight:700;color:var(--a)}.producto-btn{background:var(--p);color:var(--w);border:none;padding:8px 16px;border-radius:30px;font-weight:600;cursor:pointer;transition:all 0.3s ease;font-size:0.9rem}.producto-btn:hover{background:var(--a);transform:scale(1.05)}.ver-mas-container{text-align:center;margin-top:20px}.ver-mas-btn{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);border:none;padding:15px 30px;border-radius:50px;font-size:1.1rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(0,0,0,0.2)}.ver-mas-btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:2000;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease}.modal.active{display:flex;opacity:1}.modal-content{background:var(--w);padding:30px;border-radius:15px;width:90%;max-width:500px;box-shadow:0 10px 30px rgba(0,0,0,0.3);transform:translateY(-20px);transition:transform 0.3s ease;max-height:80vh;overflow-y:auto}.modal.active .modal-content{transform:translateY(0)}.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.modal-header h3{font-size:1.5rem;color:var(--t)}.close-modal{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--t);transition:color 0.3s ease}.close-modal:hover{color:var(--p)}.login-form{display:flex;flex-direction:column;gap:15px}.login-form input{padding:12px;border:2px solid #eee;border-radius:10px;font-size:1rem;font-family:Montserrat,sans-serif}.login-form input:focus{border-color:var(--p);outline:none;box-shadow:0 0 0 3px rgba(255,105,180,0.1)}.login-btn-form{background:var(--p);color:var(--w);border:none;padding:12px;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease}.login-btn-form:hover{background:var(--a)}#reserva{padding:40px 0;background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,182,193,0.3));border-radius:20px;box-shadow:var(--sh)}.reserva-container{display:flex;flex-direction:column;gap:40px}.reserva-form{background:var(--w);padding:25px;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.08)}.form-group{margin-bottom:20px}.form-group label{display:block;margin-bottom:8px;font-weight:600;color:var(--t);font-size:0.95rem}.form-control{width:100%;padding:12px;border:2px solid #eee;border-radius:10px;font-size:1rem;font-family:Montserrat,sans-serif;transition:all 0.3s ease}.form-control:focus{border-color:var(--p);outline:none;box-shadow:0 0 0 3px rgba(255,105,180,0.1)}.btn-submit{background:var(--p);color:var(--w);border:none;padding:12px 30px;border-radius:50px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;width:100%}.btn-submit:hover{background:var(--a);transform:translateY(-2px);box-shadow:0 5px 15px rgba(166,77,121,0.3)}.reserva-info{padding:20px}.reserva-info h3{font-size:1.4rem;margin-bottom:15px;color:var(--t)}.reserva-info p{margin-bottom:15px;line-height:1.7;font-size:1rem}.contact-item{display:flex;align-items:center;margin-bottom:15px}.contact-item i{font-size:1.2rem;color:var(--p);margin-right:12px;width:25px;text-align:center}.contact-item span{font-size:0.95rem}.confirmacion-reserva{display:none;background:#e8f5e9;border:2px solid #4caf50;border-radius:10px;padding:20px;margin-top:20px;text-align:center}.confirmacion-reserva.active{display:block}.confirmacion-reserva h3{color:#2e7d32;margin-bottom:15px;font-size:1.2rem}.confirmacion-reserva .btn-whatsapp{background:linear-gradient(135deg,#25d366,#128c7e);color:var(--w);border:none;padding:12px 25px;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s ease;display:inline-block;text-decoration:none}.confirmacion-reserva .btn-whatsapp:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.admin-panel{display:none;background:#f5f5f5;border-radius:15px;padding:25px;margin-top:30px}.admin-panel.active{display:block}.admin-panel h3{color:var(--a);margin-bottom:20px;text-align:center;font-size:1.3rem}.admin-producto-item{background:var(--w);padding:20px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1);margin-bottom:20px;border-left:5px solid var(--p)}.admin-producto-item h4{color:var(--t);margin-bottom:15px;font-size:1.2rem}.admin-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;align-items:end;margin-bottom:10px}.admin-form-group{display:flex;flex-direction:column}.admin-form-group label{font-weight:600;color:var(--t);margin-bottom:5px;font-size:0.9rem}.admin-form-group input{width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;font-size:0.9rem}.admin-save-btn,.admin-delete-btn{background:var(--p);color:var(--w);border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer;transition:all 0.3s ease;margin-right:10px}.admin-save-btn:hover{background:var(--a);transform:scale(1.02)}.admin-delete-btn{background:#f44336}.admin-delete-btn:hover{background:#d32f2f;transform:scale(1.02)}.admin-add-form{background:var(--w);padding:20px;border-radius:10px;border:2px solid var(--s);margin-top:20px}.admin-add-form h4{color:var(--t);margin-bottom:15px;text-align:center}.admin-add-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}#admin-message{display:none;background:#e8f5e9;border:1px solid #4caf50;color:#2e7d32;padding:10px;border-radius:8px;text-align:center;margin-top:15px;font-weight:500}.testimonios{padding:40px 0}.testimonios-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}.testimonio-card{background:var(--w);border-radius:15px;padding:25px;box-shadow:0 5px 20px rgba(0,0,0,0.08);position:relative;transition:all 0.3s ease}.testimonio-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,0.15)}.testimonio-card::before{content:'"';position:absolute;top:10px;left:15px;font-size:3.5rem;color:var(--p);opacity:0.2;font-family:serif}.testimonio-text{font-style:italic;margin-bottom:15px;line-height:1.7;position:relative;z-index:1;font-size:1rem}.testimonio-rating{margin-bottom:12px}.testimonio-rating i{color:#ffc107;margin-right:2px;font-size:0.9rem}.testimonio-autor{display:flex;align-items:center}.testimonio-avatar{width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--s));display:flex;align-items:center;justify-content:center;color:var(--w);font-weight:700;margin-right:12px;font-size:1.1rem}.testimonio-info h4{font-size:1rem;margin-bottom:3px;color:var(--t)}.testimonio-info p{font-size:0.85rem;color:#666}.contacto{padding:40px 0}.contact-container{display:flex;flex-direction:column;gap:40px}.contact-info h3{font-size:1.4rem;margin-bottom:20px;color:var(--t)}.contact-details{margin-bottom:25px}.contact-details p{margin-bottom:12px;display:flex;align-items:center;font-size:0.95rem}.contact-details i{color:var(--p);margin-right:12px;width:22px}.map-container{border-radius:15px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,0.1);height:350px}.map-container iframe{width:100%;height:100%;border:none}footer{background:linear-gradient(135deg,var(--a),var(--s));color:var(--w);padding:40px 20px 20px;margin-top:60px}.footer-content{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;margin-bottom:30px}.footer-section h3{font-size:1.2rem;margin-bottom:15px;position:relative;padding-bottom:10px}.footer-section h3::after{content:'';position:absolute;bottom:0;left:0;width:40px;height:2px;background:var(--w)}.footer-section p,.footer-section li{margin-bottom:8px;line-height:1.6;font-size:0.9rem}.footer-section ul{list-style:none;padding:0}.footer-section a{color:rgba(255,255,255,0.8);text-decoration:none;transition:color 0.3s ease}.footer-section a:hover{color:var(--w)}.footer-bottom{text-align:center;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);font-size:0.85rem;color:rgba(255,255,255,0.7);position:relative}.trabaja-btn{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);border:none;padding:12px 25px;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s ease;display:inline-block;position:absolute;bottom:15px;right:20px}.trabaja-btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}.cart-modal-content{width:90%;max-width:600px}.cart-item{display:flex;align-items:center;justify-content:space-between;padding:15px 0;border-bottom:1px solid #eee}.cart-item img{width:60px;height:60px;object-fit:cover;border-radius:8px;margin-right:15px}.cart-item-details{flex-grow:1}.cart-item-name{font-weight:600;color:var(--t)}.cart-item-price{color:var(--a)}.cart-total{font-size:1.2rem;font-weight:700;text-align:right;margin-top:20px;color:var(--t)}.cart-checkout-btn{width:100%;padding:15px;background:var(--p);color:var(--w);border:none;border-radius:10px;font-size:1.1rem;font-weight:700;cursor:pointer;margin-top:20px;transition:all 0.3s ease}.cart-checkout-btn:hover{background:var(--a);transform:translateY(-2px)}.empty-cart{text-align:center;padding:40px;color:#999}.cart-remove-btn{background:#f44336;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;font-size:0.8rem;margin-left:10px}.cart-remove-btn:hover{background:#d32f2f}.checkout-form{margin-top:20px;padding:20px;background:#f9f9f9;border-radius:10px}.checkout-form h4{margin-bottom:15px;color:var(--t);text-align:center}.checkout-form-group{margin-bottom:15px}.checkout-form-group label{display:block;margin-bottom:5px;font-weight:600;color:var(--t)}.checkout-form-group input,.checkout-form-group textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:5px;font-family:inherit}.checkout-form-group textarea{resize:vertical;min-height:80px}.payment-info{display:none;margin-top:20px;padding:25px;background:#e8f5e9;border-radius:10px;text-align:center;border:2px solid #4caf50;box-shadow:0 4px 15px rgba(0,0,0,0.1)}.payment-info.active{display:block}.payment-info h4{margin-bottom:20px;color:#2e7d32;font-size:1.4rem;font-weight:700}.payment-info p{margin-bottom:15px;color:#333;font-size:1.1rem;line-height:1.5}.payment-info .account-details{background:white;padding:20px;border-radius:10px;margin:20px 0;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.1)}.payment-info .account-details p{margin-bottom:12px;font-size:1.1rem}.payment-info .whatsapp-btn{display:inline-block;background:#25d366;color:white;padding:15px 30px;border-radius:50px;text-decoration:none;font-weight:700;margin-top:20px;transition:all 0.3s ease;font-size:1.1rem;box-shadow:0 4px 10px rgba(0,0,0,0.2)}.payment-info .whatsapp-btn:hover{background:#128c7e;transform:translateY(-3px);box-shadow:0 6px 15px rgba(0,0,0,0.3)}.tienda-modal-content{width:95%;max-width:1200px;max-height:90vh;overflow-y:auto}.tienda-modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:15px;border-bottom:2px solid var(--p)}.tienda-modal-header h3{font-size:1.8rem;color:var(--t);margin:0}.tienda-modal-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:25px}.tienda-filtros{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}.filtro-btn{padding:8px 15px;background:#f0f0f0;border:1px solid #ddd;border-radius:20px;cursor:pointer;transition:all 0.3s ease;font-size:0.9rem}.filtro-btn:hover,.filtro-btn.active{background:var(--p);color:white;border-color:var(--p)}.admin-content-editor{display:none;background:#f9f9f9;border-radius:15px;padding:25px;margin-top:30px;border:2px dashed var(--p)}.admin-content-editor.active{display:block}.admin-content-editor h3{color:var(--a);margin-bottom:20px;text-align:center;font-size:1.3rem}.editor-section{margin-bottom:25px;padding:20px;background:var(--w);border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1)}.editor-section h4{color:var(--t);margin-bottom:15px;font-size:1.1rem;border-bottom:2px solid var(--p);padding-bottom:8px}.editor-form-group{margin-bottom:15px}.editor-form-group label{display:block;margin-bottom:5px;font-weight:600;color:var(--t);font-size:0.9rem}.editor-form-group input,.editor-form-group textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:5px;font-family:inherit;font-size:0.95rem}.editor-form-group textarea{resize:vertical;min-height:80px}.editor-actions{display:flex;gap:10px;justify-content:center;margin-top:15px}.editor-btn{padding:10px 20px;border:none;border-radius:5px;font-weight:600;cursor:pointer;transition:all 0.3s ease}.editor-btn-save{background:var(--p);color:var(--w)}.editor-btn-save:hover{background:var(--a)}.editor-btn-cancel{background:#ccc;color:var(--t)}.editor-btn-cancel:hover{background:#999}.testimonio-editor-item{background:var(--w);padding:15px;border-radius:10px;margin-bottom:15px;box-shadow:0 2px 5px rgba(0,0,0,0.1)}.testimonio-editor-item h5{color:var(--p);margin-bottom:10px;font-size:1rem}.contact-editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.contact-editor-full{grid-column:1 / -1}.file-upload{margin-bottom:15px}.file-upload label{display:block;margin-bottom:5px;font-weight:600;color:var(--t);font-size:0.9rem}.file-upload input[type="file"]{width:100%;padding:10px;border:1px solid #ddd;border-radius:5px;font-family:inherit;font-size:0.9rem}.file-upload .file-info{margin-top:5px;font-size:0.8rem;color:#666}.admin-table{width:100%;border-collapse:collapse;margin-top:20px;background:var(--w);border-radius:10px;overflow:hidden;box-shadow:0 2px 5px rgba(0,0,0,0.1)}.admin-table th{background:var(--p);color:var(--w);padding:12px;text-align:left;font-weight:600}.admin-table td{padding:12px;border-bottom:1px solid #eee}.admin-table tr:hover{background:#f9f9f9}.admin-table .status-badge{display:inline-block;padding:4px 8px;border-radius:12px;font-size:0.8rem;font-weight:600}.status-badge.pending{background:#fff3cd;color:#856404}.status-badge.confirmed{background:#d4edda;color:#155724}.status-badge.cancelled{background:#f8d7da;color:#721c24}.admin-actions-cell{display:flex;gap:5px}.admin-actions-cell button{padding:5px 10px;border:none;border-radius:5px;cursor:pointer;font-size:0.8rem;font-weight:600;transition:all 0.3s ease}.admin-actions-cell .delete-btn{background:#dc3545;color:white}.admin-actions-cell .delete-btn:hover{background:#c82333}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}@media(max-width:992px){.hero h2{font-size:2.5rem}.hero p{font-size:1.1rem}.servicios-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}}@media(max-width:768px){header{padding:12px 0}.header-content{justify-content:space-between}.logo h1{font-size:1.3rem}.menu-toggle{display:block}.nav-desktop{display:none}.hero{margin-top:70px;padding:60px 15px}.hero h2{font-size:2.2rem}.hero p{font-size:1rem}.hero-buttons{flex-direction:column;align-items:center;width:100%;max-width:300px;margin:0 auto}.btn{width:100%}h2{font-size:1.9rem}.galeria-slide img{height:300px}.footer-content{grid-template-columns:1fr;text-align:center}.trabaja-btn{position:relative;bottom:auto;right:auto;margin-top:20px}}@media(max-width:576px){.logo h1{font-size:1.1rem}.logo i{font-size:1.6rem}.hero{padding:50px 15px;min-height:50vh}.hero h2{font-size:1.8rem}.hero p{font-size:0.9rem}.hero-buttons{gap:10px}.btn{padding:10px 20px;font-size:0.9rem}h2{font-size:1.7rem}.galeria-slide img{height:250px}.servicios-grid{grid-template-columns:1fr}.tienda-grid{grid-template-columns:1fr}.testimonios-grid{grid-template-columns:1fr}.reserva-container{gap:30px}.map-container{height:250px}.admin-form-grid,.admin-add-form-grid{grid-template-columns:1fr}.cart-item{flex-direction:column;text-align:center}.tienda-modal-grid{grid-template-columns:1fr}.contact-editor-grid{grid-template-columns:1fr}}
     
     /* Estilos específicos para admin en móvil */
     @media(max-width:768px) {
-      .admin-panel {
-        padding: 15px;
-        margin: 20px 0;
-      }
-      
-      .admin-panel h3 {
-        font-size: 1.1rem;
-        margin-bottom: 15px;
-      }
-      
-      .admin-producto-item {
-        padding: 15px;
-        margin-bottom: 15px;
-      }
-      
-      .admin-producto-item h4 {
-        font-size: 1rem;
-        margin-bottom: 10px;
-      }
-      
-      .admin-form-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-      
-      .admin-form-group {
-        margin-bottom: 10px;
-      }
-      
-      .admin-form-group label {
-        font-size: 0.85rem;
-        margin-bottom: 5px;
-      }
-      
-      .admin-form-group input {
-        padding: 8px;
-        font-size: 0.9rem;
-      }
-      
-      .admin-save-btn, .admin-delete-btn {
-        padding: 8px 15px;
-        font-size: 0.85rem;
-        margin-right: 5px;
-      }
-      
-      .admin-add-form {
-        padding: 15px;
-      }
-      
-      .admin-add-form h4 {
-        font-size: 1rem;
-        margin-bottom: 10px;
-      }
-      
-      .admin-add-form-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-      
-      .btn-submit {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-      }
-      
-      /* Tablas responsivas */
-      .admin-table {
-        font-size: 0.85rem;
-        overflow-x: auto;
-        display: block;
-        white-space: nowrap;
-      }
-      
-      .admin-table th,
-      .admin-table td {
-        padding: 8px 4px;
-        font-size: 0.75rem;
-      }
-      
-      .admin-table th {
-        font-size: 0.8rem;
-      }
-      
-      .admin-table .status-badge {
-        padding: 2px 4px;
-        font-size: 0.7rem;
-      }
-      
-      .admin-actions-cell {
-        flex-direction: column;
-        gap: 3px;
-      }
-      
-      .admin-actions-cell button {
-        width: 100%;
-        padding: 6px;
-        font-size: 0.75rem;
-      }
-      
-      /* Editor de contenido */
-      .admin-content-editor {
-        padding: 15px;
-        margin: 20px 0;
-      }
-      
-      .admin-content-editor h3 {
-        font-size: 1.1rem;
-        margin-bottom: 15px;
-      }
-      
-      .editor-section {
-        padding: 15px;
-        margin-bottom: 15px;
-      }
-      
-      .editor-section h4 {
-        font-size: 1rem;
-        margin-bottom: 10px;
-      }
-      
-      .editor-form-group {
-        margin-bottom: 10px;
-      }
-      
-      .editor-form-group label {
-        font-size: 0.85rem;
-        margin-bottom: 5px;
-      }
-      
-      .editor-form-group input,
-      .editor-form-group textarea {
-        padding: 8px;
-        font-size: 0.85rem;
-      }
-      
-      .editor-actions {
-        flex-direction: column;
-        gap: 8px;
-      }
-      
-      .editor-btn {
-        width: 100%;
-        padding: 8px;
-        font-size: 0.85rem;
-      }
-      
-      /* Galería admin */
-      .galeria-admin-form {
-        flex-direction: column;
-        gap: 10px;
-      }
-      
-      .galeria-admin-form input {
-        min-width: auto;
-      }
-      
-      .galeria-admin-form button {
-        width: 100%;
-      }
-      
-      .galeria-imagenes-admin {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        gap: 10px;
-      }
-      
-      /* Formularios */
-      .form-group {
-        margin-bottom: 15px;
-      }
-      
-      .form-group label {
-        font-size: 0.9rem;
-        margin-bottom: 5px;
-      }
-      
-      .form-control {
-        padding: 10px;
-        font-size: 0.9rem;
-      }
-      
-      /* File upload */
-      .file-upload {
-        margin-bottom: 10px;
-      }
-      
-      .file-upload label {
-        font-size: 0.9rem;
-      }
-      
-      .file-upload input[type="file"] {
-        padding: 8px;
-        font-size: 0.85rem;
-      }
-      
-      .file-info {
-        font-size: 0.75rem;
-      }
-      
-      /* Modal */
-      .modal-content {
-        width: 95%;
-        padding: 20px;
-        margin: 10px;
-      }
-      
-      .modal-header h3 {
-        font-size: 1.2rem;
-      }
-      
-      .login-form input {
-        padding: 10px;
-        font-size: 0.9rem;
-      }
-      
-      .login-btn-form {
-        padding: 10px;
-        font-size: 0.9rem;
-      }
-      
-      /* Cart */
-      .cart-modal-content {
-        width: 95%;
-        padding: 20px;
-      }
-      
-      .cart-item {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-        padding: 10px 0;
-      }
-      
-      .cart-item img {
-        margin: 0 auto 10px;
-      }
-      
-      .cart-item-details {
-        text-align: center;
-      }
-      
-      .cart-item-quantity {
-        justify-content: center;
-        margin: 10px 0;
-      }
-      
-      .cart-remove-btn {
-        margin: 10px 0;
-      }
-      
-      .checkout-form-group {
-        margin-bottom: 10px;
-      }
-      
-      .checkout-form-group label {
-        font-size: 0.9rem;
-      }
-      
-      .checkout-form-group input,
-      .checkout-form-group textarea {
-        padding: 10px;
-        font-size: 0.9rem;
-      }
-      
-      .cart-checkout-btn {
-        padding: 12px;
-        font-size: 1rem;
-      }
-      
-      .payment-info {
-        padding: 20px;
-      }
-      
-      .payment-info h4 {
-        font-size: 1.2rem;
-      }
-      
-      .payment-info p {
-        font-size: 0.95rem;
-      }
-      
-      .account-details p {
-        font-size: 0.95rem;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-      }
-      
-      .whatsapp-btn {
-        padding: 12px 20px;
-        font-size: 1rem;
-      }
-    }
-    
-    @media(max-width:480px) {
-      .container {
-        padding: 0 15px;
-      }
-      
-      .hero {
-        padding: 40px 15px;
-        min-height: 40vh;
-      }
-      
-      .hero h2 {
-        font-size: 1.6rem;
-      }
-      
-      .hero p {
-        font-size: 0.85rem;
-      }
-      
-      .hero-buttons {
-        gap: 8px;
-      }
-      
-      .btn {
-        padding: 8px 16px;
-        font-size: 0.85rem;
-      }
-      
-      h2 {
-        font-size: 1.5rem;
-      }
-      
-      .admin-panel {
-        padding: 10px;
-        margin: 15px 0;
-      }
-      
-      .admin-panel h3 {
-        font-size: 1rem;
-        margin-bottom: 10px;
-      }
-      
-      .admin-table th,
-      .admin-table td {
-        padding: 6px 2px;
-        font-size: 0.7rem;
-      }
-      
-      .admin-table th {
-        font-size: 0.75rem;
-      }
-      
-      .status-badge {
-        font-size: 0.6rem;
-      }
-      
-      .admin-actions-cell button {
-        font-size: 0.7rem;
-        padding: 4px;
-      }
-      
-      .modal-content {
-        padding: 15px;
-      }
-      
-      .modal-header h3 {
-        font-size: 1.1rem;
-      }
-      
-      .form-group {
-        margin-bottom: 10px;
-      }
-      
-      .form-group label {
-        font-size: 0.85rem;
-      }
-      
-      .form-control {
-        padding: 8px;
-        font-size: 0.85rem;
-      }
-      
-      .btn-submit {
-        padding: 8px 20px;
-        font-size: 0.85rem;
-      }
-      
-      .cart-total {
-        font-size: 1rem;
-      }
-      
-      .payment-info h4 {
-        font-size: 1.1rem;
-      }
-      
-      .payment-info p {
-        font-size: 0.9rem;
-      }
-      
-      .account-details p {
-        font-size: 0.9rem;
-      }
+      .admin-panel {padding: 15px;margin: 20px 0;}
+      .admin-panel h3 {font-size: 1.1rem;margin-bottom: 15px;}
+      .admin-producto-item {padding: 15px;margin-bottom: 15px;}
+      .admin-producto-item h4 {font-size: 1rem;margin-bottom: 10px;}
+      .admin-form-grid {grid-template-columns: 1fr;gap: 10px;}
+      .admin-form-group {margin-bottom: 10px;}
+      .admin-form-group label {font-size: 0.85rem;margin-bottom: 5px;}
+      .admin-form-group input {padding: 8px;font-size: 0.9rem;}
+      .admin-save-btn, .admin-delete-btn {padding: 8px 15px;font-size: 0.85rem;margin-right: 5px;}
+      .admin-add-form {padding: 15px;}
+      .admin-add-form h4 {font-size: 1rem;margin-bottom: 10px;}
+      .admin-add-form-grid {grid-template-columns: 1fr;gap: 10px;}
+      .btn-submit {padding: 10px 20px;font-size: 0.9rem;}
+      .admin-table {font-size: 0.85rem;overflow-x: auto;display:block;white-space: nowrap;}
+      .admin-table th, .admin-table td {padding: 8px 4px;font-size: 0.75rem;}
+      .admin-table th {font-size: 0.8rem;}
+      .admin-table .status-badge {padding: 2px 4px;font-size: 0.7rem;}
+      .admin-actions-cell {flex-direction: column;gap: 3px;}
+      .admin-actions-cell button {width: 100%;padding: 6px;font-size: 0.75rem;}
     }
     
     /* Estilos para el botón de inicio/cierre de sesión en el footer */
-    .footer-login-section {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
-      margin-top: 20px;
-    }
+    .footer-login-section {display: flex;justify-content: center;align-items: center;gap: 15px;margin-top: 20px;}
+    .footer-login-btn, .footer-logout-btn {background: rgba(255,255,255,0.2);color: var(--w);border: none;padding: 8px 15px;border-radius: 20px;cursor: pointer;font-weight: 600;transition: all 0.3s ease;font-size: 0.9rem;}
+    .footer-login-btn:hover, .footer-logout-btn:hover {background: rgba(255,255,255,0.3);}
+    .footer-user-info {display: none;align-items: center;gap: 10px;}
+    .footer-user-info.active {display: flex;}
     
-    .footer-login-btn, .footer-logout-btn {
-      background: rgba(255,255,255,0.2);
-      color: var(--w);
-      border: none;
-      padding: 8px 15px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-    }
-    
-    .footer-login-btn:hover, .footer-logout-btn:hover {
-      background: rgba(255,255,255,0.3);
-    }
-    
-    .footer-user-info {
-      display: none;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .footer-user-info.active {
-      display: flex;
-    }
-    
-    /* Estilos para el loader de PDF */
-    .pdf-loader {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      z-index: 10000;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      color: white;
-    }
-    
-    .pdf-loader.active {
-      display: flex;
-    }
-    
-    .pdf-loader-spinner {
-      width: 50px;
-      height: 50px;
-      border: 5px solid rgba(255,255,255,0.3);
-      border-top: 5px solid white;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin-bottom: 20px;
-    }
-    
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    
-    .pdf-loader-text {
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-    
-    /* Estilos para botones de PDF */
-    .pdf-btn {
-      background: linear-gradient(135deg, #ff69b4, #d68ab1);
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    
-    .pdf-btn:hover {
-      background: linear-gradient(135deg, #d68ab1, #a64d79);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    
-    .pdf-btn i {
-      font-size: 0.9rem;
-    }
-    
-    /* Estilos para vista previa de PDF */
-    .pdf-preview-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.9);
-      z-index: 10001;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .pdf-preview-modal.active {
-      display: flex;
-    }
-    
-    .pdf-preview-content {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 800px;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-    }
-    
-    .pdf-preview-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #ff69b4;
-    }
-    
-    .pdf-preview-header h3 {
-      color: #ff69b4;
-      font-size: 1.5rem;
-      margin: 0;
-    }
-    
-    .pdf-preview-actions {
-      display: flex;
-      gap: 10px;
-    }
-    
-    .pdf-preview-btn {
-      background: #ff69b4;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-    
-    .pdf-preview-btn:hover {
-      background: #d68ab1;
-      transform: translateY(-2px);
-    }
-    
-    .pdf-preview-close {
-      background: #f44336;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-    }
-    
-    .pdf-preview-close:hover {
-      background: #d32f2f;
-    }
-    
-    #pdfPreviewFrame {
-      width: 100%;
-      height: 600px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-    }
-    
-    /* Estilos para la sección de generación de PDF */
-    .pdf-generator-section {
-      background: #f9f9f9;
-      border-radius: 15px;
-      padding: 25px;
-      margin-top: 30px;
-      border: 2px dashed var(--p);
-      display: none; /* Oculto por defecto */
-    }
-    
-    .pdf-generator-section.active {
-      display: block; /* Solo visible para administradores */
-    }
-    
-    .pdf-generator-section h3 {
-      color: var(--a);
-      margin-bottom: 20px;
-      text-align: center;
-      font-size: 1.3rem;
-    }
-    
-    .pdf-generator-form {
-      display: flex;
-      gap: 15px;
-      align-items: end;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    
-    .pdf-generator-group {
-      display: flex;
-      flex-direction: column;
-      min-width: 200px;
-    }
-    
-    .pdf-generator-group label {
-      font-weight: 600;
-      color: var(--t);
-      margin-bottom: 5px;
-      font-size: 0.9rem;
-    }
-    
-    .pdf-generator-group input {
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 0.9rem;
-    }
-    
-    .pdf-generator-group select {
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
-    
-    .pdf-generator-btn {
-      background: var(--p);
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    
-    .pdf-generator-btn:hover {
-      background: var(--a);
-      transform: translateY(-2px);
-    }
-    
-    .pdf-generator-btn:disabled {
-      background: #ccc;
-      cursor: not-allowed;
-      transform: none;
-    }
-    
-    /* Estilos para la lista de productos en la tabla */
+    /* Estilos para la lista de productos en la tabla de pedidos */
     .product-list-cell {
       max-width: 300px;
     }
@@ -693,6 +52,11 @@
     .product-list-cell .product-item {
       font-size: 0.85rem;
       padding: 4px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .product-list-cell .product-item:last-child {
+      border-bottom: none;
     }
     
     .product-list-cell .product-name {
@@ -705,6 +69,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 10px;
+      margin-top: 2px;
     }
     
     .product-list-cell .product-price {
@@ -720,110 +85,153 @@
       font-weight: 600;
     }
     
-    /* Estilos para botón de ver detalles */
-    .view-details-btn {
-      background: #007bff;
-      color: white;
+    /* Estilos mejorados para el carrito */
+    .cart-item-quantity {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f8f8f8;
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+    }
+    
+    .cart-item-quantity button {
+      background: var(--p);
+      color: var(--w);
       border: none;
-      padding: 4px 8px;
-      border-radius: 3px;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: bold;
+      font-size: 14px;
       transition: all 0.3s ease;
-    }
-    
-    .view-details-btn:hover {
-      background: #0056b3;
-    }
-    
-    /* Modal de detalles del pedido */
-    .detail-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-      z-index: 2000;
+      display: flex;
       align-items: center;
       justify-content: center;
     }
     
-    .detail-modal.active {
-      display: flex;
+    .cart-item-quantity button:hover {
+      background: var(--a);
+      transform: scale(1.05);
     }
     
-    .detail-modal-content {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 600px;
-      max-height: 80vh;
-      overflow-y: auto;
-      position: relative;
+    .cart-item-quantity button:active {
+      transform: scale(0.95);
     }
     
-    .detail-modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 2px solid var(--p);
+    .cart-item-quantity button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
     }
     
-    .detail-modal-header h3 {
-      color: var(--p);
-      font-size: 1.5rem;
-      margin: 0;
-    }
-    
-    .detail-modal-close {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
+    .cart-item-quantity span {
+      min-width: 30px;
+      text-align: center;
+      font-weight: 600;
       color: var(--t);
-      transition: color 0.3s ease;
+      font-size: 14px;
     }
     
-    .detail-modal-close:hover {
-      color: var(--p);
+    /* Selector de cantidad mejorado */
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f8f8f8;
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
     }
     
-    /* Mensaje de error para el generador de PDF */
-    .pdf-error-message {
-      display: none;
-      background: #f8d7da;
-      color: #721c24;
-      padding: 10px 15px;
-      border-radius: 5px;
-      margin-top: 10px;
-      font-size: 0.9rem;
-      border: 1px solid #f5c6cb;
+    .quantity-selector button {
+      background: var(--p);
+      color: var(--w);
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
-    .pdf-error-message.active {
-      display: block;
+    .quantity-selector button:hover {
+      background: var(--a);
+      transform: scale(1.05);
     }
     
-    /* Mensaje de éxito para el generador de PDF */
-    .pdf-success-message {
-      display: none;
-      background: #d4edda;
-      color: #155724;
-      padding: 10px 15px;
-      border-radius: 5px;
-      margin-top: 10px;
-      font-size: 0.9rem;
-      border: 1px solid #c3e6cb;
+    .quantity-selector button:active {
+      transform: scale(0.95);
     }
     
-    .pdf-success-message.active {
-      display: block;
+    .quantity-selector button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .quantity-selector input {
+      width: 50px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-weight: 600;
+      color: var(--t);
+      font-size: 14px;
+    }
+    
+    .quantity-selector input:focus {
+      outline: none;
+      border-color: var(--p);
+    }
+    
+    /* Animaciones para el carrito */
+    @keyframes cartItemUpdate {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); background-color: #fff0f5; }
+      100% { transform: scale(1); }
+    }
+    
+    .cart-item-updating {
+      animation: cartItemUpdate 0.3s ease;
+    }
+    
+    /* Notificaciones mejoradas */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: 8px;
+      color: white;
+      font-weight: 500;
+      z-index: 10000;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+    
+    .notification.success {
+      background: linear-gradient(135deg, #4caf50, #45a049);
+    }
+    
+    .notification.error {
+      background: linear-gradient(135deg, #f44336, #da190b);
+    }
+    
+    .notification.info {
+      background: linear-gradient(135deg, #2196f3, #1976d2);
     }
   </style>
 </head>
@@ -831,7 +239,10 @@
   <a href="#main-content" class="sr-only">Saltar al contenido principal</a>
   <header>
     <div class="container header-content">
-      <div class="logo"><i class="fas fa-sparkles"></i><h1>✨ Lis Belleza Total ✨</h1></div>
+      <div class="logo">
+        <i class="fas fa-sparkles"></i>
+        <h1>✨ Lis Belleza Total ✨</h1>
+      </div>
       <nav class="nav-desktop">
         <a href="#sobre-nosotros">👑 Sobre Nosotros</a>
         <a href="#galeria">📸 Galería</a>
@@ -998,29 +409,6 @@
           </tbody>
         </table>
       </div>
-    </section>
-    
-    <!-- Sección de Generación de PDF/Factura (SOLO PARA ADMINISTRADORES) -->
-    <section id="pdf-generator" class="pdf-generator-section" data-aos="fade-up">
-      <h3>📄 Generar PDF/Factura</h3>
-      <div class="pdf-generator-form">
-        <div class="pdf-generator-group">
-          <label for="pdf-type">Tipo de Documento:</label>
-          <select id="pdf-type">
-            <option value="pedido">Factura de Pedido</option>
-            <option value="reserva">Factura de Reserva</option>
-          </select>
-        </div>
-        <div class="pdf-generator-group">
-          <label for="pdf-id">ID del Documento:</label>
-          <input type="text" id="pdf-id" placeholder="Ej: 1761356104582">
-        </div>
-        <button class="pdf-generator-btn" onclick="generarPDFPorID()">
-          <i class="fas fa-file-pdf"></i> Generar PDF
-        </button>
-      </div>
-      <div id="pdf-error-message" class="pdf-error-message"></div>
-      <div id="pdf-success-message" class="pdf-success-message"></div>
     </section>
     
     <!-- Panel de Administración de Solicitudes de Trabajo -->
@@ -1285,46 +673,9 @@
     </div>
   </div>
   
-  <!-- Loader para generación de PDF -->
-  <div class="pdf-loader" id="pdfLoader">
-    <div class="pdf-loader-spinner"></div>
-    <div class="pdf-loader-text">Generando PDF...</div>
-  </div>
-  
-  <!-- Modal para vista previa de PDF -->
-  <div class="pdf-preview-modal" id="pdfPreviewModal">
-    <div class="pdf-preview-content">
-      <div class="pdf-preview-header">
-        <h3 id="pdfPreviewTitle">Vista Previa de PDF</h3>
-        <div class="pdf-preview-actions">
-          <button class="pdf-preview-btn" onclick="downloadPDF()">
-            <i class="fas fa-download"></i> Descargar
-          </button>
-          <button class="pdf-preview-close" onclick="closePDFPreview()">
-            <i class="fas fa-times"></i> Cerrar
-          </button>
-        </div>
-      </div>
-      <iframe id="pdfPreviewFrame" title="Vista previa del PDF"></iframe>
-    </div>
-  </div>
-  
-  <!-- Modal para ver detalles del pedido -->
-  <div class="detail-modal" id="detailModal">
-    <div class="detail-modal-content">
-      <div class="detail-modal-header">
-        <h3>Detalles del Pedido</h3>
-        <button class="detail-modal-close" onclick="closeDetailModal()">&times;</button>
-      </div>
-      <div id="detailModalBody">
-        <!-- Los detalles se cargarán dinámicamente -->
-      </div>
-    </div>
-  </div>
-  
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // Configuración de Firebase con TUS credenciales reales
+    // Configuración de Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyALUQDae0xYF9e0wPN2ozrA9iFZdhXnb9U",
       authDomain: "belleza-9213a.firebaseapp.com",
@@ -1340,7 +691,7 @@
     firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
 
-    // Variables globales para almacenar datos
+    // Variables globales
     let productos = [];
     let imagenesGaleria = [];
     let reservas = [];
@@ -1349,55 +700,41 @@
     let contenidoEditable = {};
     let carrito = [];
     let isLoggedIn = false;
-    let currentPDFData = null;
 
-    // Función para obtener datos de Firebase en tiempo real
+    // Funciones de Firebase
     function obtenerDatosFirebase(ruta, callback) {
       database.ref(ruta).on('value', (snapshot) => {
         const datos = snapshot.val();
         if (datos) {
           callback(datos);
         } else {
-          // Si no hay datos, usar valores por defecto
           switch(ruta) {
-            case 'productos':
-              callback(productosPorDefecto);
-              break;
-            case 'galeria':
-              callback(imagenesGaleriaPorDefecto);
-              break;
-            case 'contenido':
-              callback(contenidoEditablePorDefecto);
-              break;
-            default:
-              callback({});
+            case 'productos': callback(productosPorDefecto); break;
+            case 'galeria': callback(imagenesGaleriaPorDefecto); break;
+            case 'contenido': callback(contenidoEditablePorDefecto); break;
+            default: callback({});
           }
         }
       });
     }
 
-    // Función para guardar datos en Firebase
     function guardarDatosFirebase(ruta, datos) {
       database.ref(ruta).set(datos);
     }
 
-    // Función para añadir un elemento a una lista en Firebase
     function añadirElementoFirebase(ruta, elemento) {
       const nuevaRuta = database.ref(ruta).push();
       nuevaRuta.set(elemento);
     }
 
-    // Función para actualizar un elemento en Firebase
     function actualizarElementoFirebase(ruta, id, datosActualizados) {
       database.ref(`${ruta}/${id}`).update(datosActualizados);
     }
 
-    // Función para eliminar un elemento de Firebase
     function eliminarElementoFirebase(ruta, id) {
       database.ref(`${ruta}/${id}`).remove();
     }
 
-    // Función para leer archivo como base64
     function leerArchivoComoBase64(file) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -1407,10 +744,76 @@
       });
     }
 
+    // Datos por defecto
+    const contenidoEditablePorDefecto = {
+      reservaInfo: {
+        telefono: '+593 99 304 5286',
+        email: 'creatubelleza@gmail.com',
+        direccion: 'Calle 123 #45-67, Bogotá, Colombia'
+      },
+      contactoInfo: {
+        direccion: 'Calle 123 #45-67, Bogotá, Colombia',
+        telefono: '+593 99 304 5286',
+        email: 'creatubelleza@gmail.com',
+        mapaUrl: 'https://maps.app.goo.gl/Cb275GuUDyefj1VW8'
+      }
+    };
+
+    const productosPorDefecto = [
+      {id:1,name:'Shampoo Reparador Dipaso',price:'6.25',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/159672-800-auto?v=638705778699930000&width=800&height=auto&aspect=true',description:'Formulado con keratina y aceites naturales para reparar el cabello dañado.',badge:'Bestseller',categoria:'shampoo'},
+      {id:2,name:'Acondicionador Nutritivo Dipaso',price:'5.50',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/161883-220-220?v=638840641064500000&width=220&height=220&aspect=true',description:'Enriquecido con vitaminas y proteínas que nutren profundamente.',badge:'Nuevo',categoria:'acondicionador'},
+      {id:3,name:'Máscara de Tratamiento Dipaso',price:'7.50',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/160308-220-220?v=638754092827970000&width=220&height=220&aspect=true',description:'Tratamiento intensivo para reparar y revitalizar el cabello.',badge:'Premium',categoria:'tratamiento'},
+      {id:4,name:'Sérum de Brillo Dipaso',price:'7.00',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/160627-220-220?v=638912128832870000&width=220&height=220&aspect=true',description:'Proporciona brillo intenso y control del frizz sin pesar.',badge:'Exclusivo',categoria:'accesorio'},
+      {id:5,name:'Aceite Capilar Dipaso',price:'6.50',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/156559-220-220?v=638592493584430000&width=220&height=220&aspect=true',description:'Aceite nutritivo con argán y coco para hidratar las puntas.',badge:'Popular',categoria:'accesorio'},
+      {id:6,name:'Espuma para Peinado Dipaso',price:'5.25',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/155989-220-220?v=638587487829000000&width=220&height=220&aspect=true',description:'Fija tu peinado con un acabado flexible y natural.',badge:'Tendencia',categoria:'accesorio'},
+      {id:7,name:'Spray Protector Térmico Dipaso',price:'5.75',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/158525-220-220?v=638666924736970000&width=220&height=220&aspect=true',description:'Protege tu cabello de los daños causados por herramientas de calor.',badge:'Recomendado',categoria:'accesorio'},
+      {id:8,name:'Kit Completo de Tratamiento Dipaso',price:'21.25',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/159182-800-auto?v=638689307426100000&width=800&height=auto&aspect=true',description:'Incluye shampoo, acondicionador, máscara y sérum.',badge:'Pack Ahorro',categoria:'tratamiento'}
+    ];
+
+    const imagenesGaleriaPorDefecto = [
+      {id:1,url:'https://www.angelanapeluqueros.com/data/6306/contenidos/thumb_497886_contenidos_optimized.jpg',titulo:'Peinados Elegantes',descripcion:'Transformaciones que resaltan tu belleza natural'},
+      {id:2,url:'https://www.grancasa.es/wp-content/uploads/sites/24/2018/02/productos-alisado-keratina.jpg',titulo:'Tratamiento de Keratina',descripcion:'Cabello liso y brillante por más tiempo'},
+      {id:3,url:'https://termix.net/blog/wp-content/uploads/2024/10/Termix-horizontal-23.png',titulo:'Cuidado Profesional',descripcion:'Productos y técnicas de vanguardia'},
+      {id:4,url:'https://distribuidorabelha.com/wp-content/uploads/2021/02/balayage-01.jpg',titulo:'Técnicas de Color',descripcion:'Mechas y balayage personalizados'},
+      {id:5,url:'https://i.ytimg.com/vi/TAbgZySwUfw/maxresdefault.jpg',titulo:'Eventos Especiales',descripcion:'Peinados para momentos inolvidables'},
+      {id:6,url:'https://www.univital.com.co/wp-content/uploads/2025/03/como-cuidar-el-cabello-tinturado-univital.jpg',titulo:'Cuidado Post-Tintura',descripcion:'Mantén tu color vibrante por más tiempo'},
+      {id:7,url:'https://media-cdn.tripadvisor.com/media/photo-s/17/f0/6b/48/antes-y-despues-de-una.jpg',titulo:'Transformaciones',descripcion:'Resultados visibles que te encantarán'},
+      {id:8,url:'https://m.media-amazon.com/images/S/aplus-media/sc/3b97d825-a09d-46c6-8760-7687a8827e23.__CR0,0,970,600_PT0_SX970_V1___.jpg',titulo:'Efecto Keratina',descripcion:'Cabello liso, brillante y manejable'}
+    ];
+
+    // Sistema de notificaciones mejorado
+    function mostrarNotificación(mensaje, tipo = 'success') {
+      const notificacionesExistentes = document.querySelectorAll('.notification');
+      notificacionesExistentes.forEach(n => n.remove());
+      
+      const notificación = document.createElement('div');
+      notificación.className = `notification ${tipo}`;
+      notificación.textContent = mensaje;
+      notificación.setAttribute('role','alert');
+      notificación.setAttribute('aria-live','assertive');
+      
+      document.body.appendChild(notificación);
+      
+      notificación.offsetHeight;
+      
+      setTimeout(() => {
+        notificación.classList.add('show');
+      }, 10);
+      
+      setTimeout(() => {
+        notificación.classList.remove('show');
+        setTimeout(() => {
+          if (document.body.contains(notificación)) {
+            document.body.removeChild(notificación);
+          }
+        }, 300);
+      }, 3000);
+    }
+
+    // Inicialización
     document.addEventListener('DOMContentLoaded', () => {
       AOS.init({duration:1000,once:true});
       
-      // Cargar datos desde Firebase en tiempo real
       obtenerDatosFirebase('productos', (datos) => {
         productos = datos;
         renderizarTienda();
@@ -1442,52 +845,23 @@
         if (isLoggedIn) renderizarPedidosAdmin();
       });
       
-      // Verificar si el usuario está logueado
       isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
       if(isLoggedIn) {
-        document.getElementById('footerLoginBtn').style.display='none';
-        document.getElementById('footerUserInfo').classList.add('active');
-        document.getElementById('admin-productos').classList.add('active');
-        document.getElementById('admin-galeria-controls').classList.add('active');
-        document.getElementById('admin-content-editor').classList.add('active');
-        document.getElementById('admin-reservas').classList.add('active');
-        document.getElementById('admin-solicitudes').classList.add('active');
-        document.getElementById('admin-pedidos').classList.add('active');
-        document.getElementById('pdf-generator').classList.add('active'); // Mostrar generador PDF solo para admin
-        renderizarPanelAdmin();
-        renderizarReservasAdmin();
-        renderizarSolicitudesAdmin();
-        renderizarPedidosAdmin();
+        mostrarPanelAdmin();
       }
       
       renderizarTestimonios();
       actualizarContadorCarrito();
     });
-    
-    // Sistema de contenido editable
-    const contenidoEditablePorDefecto = {
-      reservaInfo: {
-        telefono: '+593 99 304 5286',
-        email: 'creatubelleza@gmail.com',
-        direccion: 'Calle 123 #45-67, Bogotá, Colombia'
-      },
-      contactoInfo: {
-        direccion: 'Calle 123 #45-67, Bogotá, Colombia',
-        telefono: '+593 99 304 5286',
-        email: 'creatubelleza@gmail.com',
-        mapaUrl: 'https://maps.app.goo.gl/Cb275GuUDyefj1VW8'
-      }
-    };
-    
+
+    // Funciones de renderizado
     function aplicarContenidoEditable() {
-      // Aplicar información de reserva
       if (contenidoEditable.reservaInfo) {
         document.getElementById('reserva-telefono').textContent = contenidoEditable.reservaInfo.telefono;
         document.getElementById('reserva-email').textContent = contenidoEditable.reservaInfo.email;
         document.getElementById('reserva-direccion').textContent = contenidoEditable.reservaInfo.direccion;
       }
       
-      // Aplicar información de contacto
       if (contenidoEditable.contactoInfo) {
         document.getElementById('contacto-direccion').textContent = contenidoEditable.contactoInfo.direccion;
         document.getElementById('contacto-telefono').textContent = contenidoEditable.contactoInfo.telefono;
@@ -1495,7 +869,7 @@
         document.getElementById('mapa-iframe').src = contenidoEditable.contactoInfo.mapaUrl;
       }
     }
-    
+
     function renderizarTestimonios() {
       const testimoniosGrid = document.getElementById('testimonios-grid');
       testimoniosGrid.innerHTML = '';
@@ -1503,7 +877,7 @@
       const testimoniosPorDefecto = [
         {
           id: 1,
-          texto: 'El tratamiento de keratina con productos Dipaso dejó mi cabello súper suave y brillante. ¡Recomendadísimo! El equipo es muy profesional y atento a cada detalle.',
+          texto: 'El tratamiento de keratina con productos Dipaso dejó mi cabello súper suave y brillante. ¡Recomendadísimo!',
           autor: 'María G.',
           clienteDesde: 'Cliente desde 2023',
           iniciales: 'MG',
@@ -1511,7 +885,7 @@
         },
         {
           id: 2,
-          texto: 'Usé los productos Dipaso en casa y mi cabello nunca se había visto mejor. El shampoo y la máscara de tratamiento han transformado mi cabello seco y dañado.',
+          texto: 'Usé los productos Dipaso en casa y mi cabello nunca se había visto mejor. El shampoo y la máscara han transformado mi cabello seco.',
           autor: 'Laura P.',
           clienteDesde: 'Cliente desde 2022',
           iniciales: 'LP',
@@ -1519,7 +893,7 @@
         },
         {
           id: 3,
-          texto: 'El sérum de brillo Dipaso es mi producto favorito. Controla el frizz y deja mi cabello con un brillo increíble. ¡Ya no puedo vivir sin él!',
+          texto: 'El sérum de brillo Dipaso es mi producto favorito. Controla el frizz y deja mi cabello con un brillo increíble.',
           autor: 'Sofía R.',
           clienteDesde: 'Cliente desde 2024',
           iniciales: 'SR',
@@ -1552,19 +926,7 @@
         testimoniosGrid.appendChild(testimonioCard);
       });
     }
-    
-    // Galería con generación automática de descripciones
-    const imagenesGaleriaPorDefecto = [
-      {id:1,url:'https://www.angelanapeluqueros.com/data/6306/contenidos/thumb_497886_contenidos_optimized.jpg',titulo:'Peinados Elegantes',descripcion:'Transformaciones que resaltan tu belleza natural'},
-      {id:2,url:'https://www.grancasa.es/wp-content/uploads/sites/24/2018/02/productos-alisado-keratina.jpg',titulo:'Tratamiento de Keratina',descripcion:'Cabello liso y brillante por más tiempo'},
-      {id:3,url:'https://termix.net/blog/wp-content/uploads/2024/10/Termix-horizontal-23.png',titulo:'Cuidado Profesional',descripcion:'Productos y técnicas de vanguardia'},
-      {id:4,url:'https://distribuidorabelha.com/wp-content/uploads/2021/02/balayage-01.jpg',titulo:'Técnicas de Color',descripcion:'Mechas y balayage personalizados'},
-      {id:5,url:'https://i.ytimg.com/vi/TAbgZySwUfw/maxresdefault.jpg',titulo:'Eventos Especiales',descripcion:'Peinados para momentos inolvidables'},
-      {id:6,url:'https://www.univital.com.co/wp-content/uploads/2025/03/como-cuidar-el-cabello-tinturado-univital.jpg',titulo:'Cuidado Post-Tintura',descripcion:'Mantén tu color vibrante por más tiempo'},
-      {id:7,url:'https://media-cdn.tripadvisor.com/media/photo-s/17/f0/6b/48/antes-y-despues-de-una.jpg',titulo:'Transformaciones',descripcion:'Resultados visibles que te encantarán'},
-      {id:8,url:'https://m.media-amazon.com/images/S/aplus-media/sc/3b97d825-a09d-46c6-8760-7687a8827e23.__CR0,0,970,600_PT0_SX970_V1___.jpg',titulo:'Efecto Keratina',descripcion:'Cabello liso, brillante y manejable'}
-    ];
-    
+
     function renderizarGaleria() {
       const slider = document.getElementById('galeria-slider');
       const indicatorsContainer = document.getElementById('galeria-indicators');
@@ -1596,216 +958,7 @@
       totalSlides = slides.length;
       indicators = document.querySelectorAll('.galeria-indicator');
     }
-    
-    // Generación automática de descripciones usando IA
-    async function generarDescripcionAutomatica(imageUrl) {
-      try {
-        const urlParts = imageUrl.split('/');
-        const fileName = urlParts[urlParts.length - 1].split('.')[0];
-        const urlKeywords = imageUrl.toLowerCase().match(/\b(hair|beauty|salon|style|cut|color|treatment|keratin|makeup|spa|nail|skin|care|professional|elegante|brillo|suave|liso|ondulado|rubio|castaño|negro|rojo|azul|verde|morado|rosado|rosado|dorado|plateado|brillante|mate|natural|artificial|moderno|clasico|vintage|romantico|edgy|minimalista|glamorous|sophisticated|chic|trendy|fashionable|stylish|gorgeous|beautiful|stunning|amazing|wonderful|perfect|flawless)\b/g) || [];
-        
-        const descripcionesBase = {
-          'hair': ['Transformación capilar profesional', 'Estilo único para tu cabello', 'Cuidado experto para tu melena'],
-          'beauty': ['Realza tu belleza natural', 'Tratamiento estético profesional', 'Cuidado integral de belleza'],
-          'salon': ['Experiencia de salón exclusiva', 'Servicio premium de belleza', 'Atención personalizada experta'],
-          'style': ['Estilo único y personalizado', 'Diseño a tu medida', 'Tendencia actualizada'],
-          'cut': ['Corte preciso y moderno', 'Diseño facial personalizado', 'Estilo adaptado a ti'],
-          'color': ['Color vibrante y duradero', 'Tincura profesional de calidad', 'Matiz perfecto para tu tono'],
-          'treatment': ['Tratamiento intensivo reparador', 'Terapia capil profesional', 'Solución experta para tu cabello'],
-          'keratin': ['Tratamiento de keratina profesional', 'Alisado duradero y natural', 'Reconstrucción capilar profunda'],
-          'makeup': ['Maquillaje profesional impecable', 'Resalta tus mejores rasgos', 'Look perfecto para cualquier ocasión'],
-          'spa': ['Experiencia spa relajante', 'Tratamiento de bienestar total', 'Momento de paz y belleza'],
-          'nail': ['Manicura y pedicura perfecta', 'Diseño único para tus uñas', 'Cuidado integral de manos y pies'],
-          'skin': ['Tratamiento facial rejuvenecedor', 'Cuidado profesional de la piel', 'Terapia estética avanzada'],
-          'care': ['Cuidado experto y personalizado', 'Atención detallada profesional', 'Tratamiento de alta calidad'],
-          'professional': ['Servicio profesional garantizado', 'Calidad experta en cada detalle', 'Atención especializada'],
-          'elegante': ['Estilo elegante y sofisticado', 'Diseño refinado y clásico', 'Look chic y distinguido'],
-          'brillo': ['Brillo intenso y duradero', 'Efecto luminoso natural', 'Acabado brillante espectacular'],
-          'suave': ['Textura suave y sedosa', 'Tacto delicado y agradable', 'Sensación suave al contacto'],
-          'liso': ['Alisado perfecto y natural', 'Efecto liso duradero', 'Cabello liso sin frizz'],
-          'ondulado': ['Ondas naturales y definidas', 'Estilo ondulado romántico', 'Movimiento suave y elegante'],
-          'rubio': ['Rubio brillante y natural', 'Tono dorado luminoso', 'Color rubio perfecto'],
-          'castaño': ['Castano rico y profundo', 'Tono cálido natural', 'Color castaño elegante'],
-          'negro': ['Negro intenso y profundo', 'Tono oscuro brillante', 'Color negro perfecto'],
-          'rojo': ['Rojo vibrante y audaz', 'Tono apasionado intenso', 'Color rojo espectacular'],
-          'azul': ['Azul único y atrevido', 'Tono fresco y moderno', 'Color azul innovador'],
-          'verde': ['Verde natural y fresco', 'Tono orgánico vibrante', 'Color verde especial'],
-          'morado': ['Morado místico y elegante', 'Tono profundo y sofisticado', 'Color morado único'],
-          'rosado': ['Rosado dulce y romántico', 'Tono suave y delicado', 'Color rosado encantador'],
-          'dorado': ['Dorado brillante y lujoso', 'Tono precioso y elegante', 'Color dorado espectacular'],
-          'plateado': ['Plateado moderno y chic', 'Tono fresco y sofisticado', 'Color plateado único'],
-          'brillante': ['Acabado brillante espectacular', 'Efecto luminoso intenso', 'Brillo deslumbrante'],
-          'mate': ['Acabado mate elegante', 'Efecto suave y moderno', 'Textura mate sofisticada'],
-          'natural': ['Look natural y fresco', 'Estilo orgánico y bello', 'Apariencia natural perfecta'],
-          'artificial': ['Diseño artificial creativo', 'Estilo innovador y moderno', 'Look único y atrevido'],
-          'moderno': ['Estilo moderno y actual', 'Diseño contemporáneo chic', 'Look trendy y fresco'],
-          'clasico': ['Estilo clásico atemporal', 'Diseño elegante tradicional', 'Look sofisticado y refinado'],
-          'vintage': ['Estilo vintage retro', 'Diseño clásico nostálgico', 'Look retro encantador'],
-          'romantico': ['Estilo romántico y dulce', 'Diseño tierno y elegante', 'Look encantador y suave'],
-          'edgy': ['Estilo edgy y audaz', 'Diseño moderno y atrevido', 'Look único y provocador'],
-          'minimalista': ['Estilo minimalista limpio', 'Diseño simple y elegante', 'Look sutil y sofisticado'],
-          'glamorous': ['Estilo glamoroso lujoso', 'Diseño espectacular y brillante', 'Look deslumbrante'],
-          'sophisticated': ['Estilo sofisticado refinado', 'Diseño elegante y complejo', 'Look distinguido'],
-          'chic': ['Estilo chic y moderno', 'Diseño elegante y actual', 'Look trendy y refinado'],
-          'trendy': ['Estilo trendy y actual', 'Diseño moderno y fresco', 'Look fashionable y chic'],
-          'fashionable': ['Estilo fashionable y chic', 'Diseño moderno y elegante', 'Look trendy y sofisticado'],
-          'stylish': ['Estilo stylish y elegante', 'Diseño refinado y moderno', 'Look chic y distinguido'],
-          'gorgeous': ['Estilo gorgeous y espectacular', 'Diseño hermoso y deslumbrante', 'Look increíble'],
-          'beautiful': ['Estilo beautiful y natural', 'Diseño hermoso y elegante', 'Look precioso y encantador'],
-          'stunning': ['Estilo stunning y deslumbrante', 'Diseño espectacular y impactante', 'Look increíble'],
-          'amazing': ['Estilo amazing y sorprendente', 'Diseño increíble y único', 'Look espectacular'],
-          'wonderful': ['Estilo wonderful y encantador', 'Diseño precioso y bello', 'Look maravilloso'],
-          'perfect': ['Estilo perfect y impecable', 'Diseño perfecto y sin defectos', 'Look impecable'],
-          'flawless': ['Estilo flawless y perfecto', 'Diseño impecable y sin errores', 'Look sin defectos']
-        };
-        
-        let descripcionEncontrada = null;
-        for(const keyword of urlKeywords) {
-          if(descripcionesBase[keyword]) {
-            descripcionEncontrada = descripcionesBase[keyword][Math.floor(Math.random() * descripcionesBase[keyword].length)];
-            break;
-          }
-        }
-        
-        if(!descripcionEncontrada) {
-          const palabrasNombre = fileName.split(/[-_]/);
-          const adjetivos = ['profesional', 'exclusivo', 'único', 'espectacular', 'elegante', 'moderno', 'sofisticado', 'brillante', 'natural', 'perfecto'];
-          const sustantivos = ['estilo', 'diseño', 'look', 'transformación', 'tratamiento', 'cuidado', 'servicio', 'experiencia'];
-          const adjetivoAleatorio = adjetivos[Math.floor(Math.random() * adjetivos.length)];
-          const sustantivoAleatorio = sustantivos[Math.floor(Math.random() * sustantivos.length)];
-          descripcionEncontrada = `${sustantivoAleatorio.charAt(0).toUpperCase() + sustantivoAleatorio.slice(1)} ${adjetivoAleatorio} para realzar tu belleza`;
-        }
-        
-        if(!descripcionEncontrada.includes('belleza') && !descripcionEncontrada.includes('cabello') && !descripcionEncontrada.includes('pelo')) {
-          const contextos = ['capilar', 'de belleza', 'estético', 'profesional'];
-          const contextoAleatorio = contextos[Math.floor(Math.random() * contextos.length)];
-          descripcionEncontrada += ` ${contextoAleatorio}`;
-        }
-        
-        return descripcionEncontrada;
-      } catch(error) {
-        console.error('Error generando descripción:', error);
-        return 'Tratamiento profesional de belleza para realzar tu estilo único';
-      }
-    }
-    
-    async function añadirImagenGaleria() {
-      const url = document.getElementById('galeria-img-url').value.trim();
-      const titulo = document.getElementById('galeria-img-title').value.trim();
-      
-      if(!url || !titulo) {
-        mostrarNotificacion('Por favor, completa la URL y el título de la imagen.', 'error');
-        return;
-      }
-      
-      document.getElementById('galeria-img-desc').value = 'Generando descripción automática...';
-      document.getElementById('galeria-img-desc').style.color = '#ff69b4';
-      
-      const descripcion = await generarDescripcionAutomatica(url);
-      document.getElementById('galeria-img-desc').value = descripcion;
-      document.getElementById('galeria-img-desc').style.color = '#333';
-      
-      const nuevaImagen = {id: Date.now().toString(), url, titulo, descripcion};
-      añadirElementoFirebase('galeria', nuevaImagen);
-      
-      document.getElementById('galeria-img-url').value = '';
-      document.getElementById('galeria-img-title').value = '';
-      document.getElementById('galeria-img-desc').value = '';
-      
-      mostrarNotificacion('Imagen añadida a la galería con descripción automática.');
-    }
-    
-    function eliminarImagenGaleria(id) {
-      if(confirm('¿Estás seguro de que quieres eliminar esta imagen de la galería?')) {
-        eliminarElementoFirebase('galeria', id);
-        mostrarNotificación('Imagen eliminada de la galería.');
-      }
-    }
-    
-    function cargarGaleriaAdmin() {
-      const container = document.getElementById('galeria-imagenes-admin');
-      container.innerHTML = '';
-      
-      Object.values(imagenesGaleria).forEach(imagen => {
-        const item = document.createElement('div');
-        item.className = 'galeria-imagen-admin-item';
-        item.innerHTML = `
-          <img src="${imagen.url}" alt="${imagen.titulo}" />
-          <button class="delete-btn" onclick="eliminarImagenGaleria('${imagen.id}')" aria-label="Eliminar imagen">
-            <i class="fas fa-trash"></i>
-          </button>
-        `;
-        container.appendChild(item);
-      });
-    }
-    
-    document.getElementById('galeria-img-url').addEventListener('blur', async function() {
-      const url = this.value.trim();
-      if(url) {
-        document.getElementById('galeria-img-desc').value = 'Generando descripción...';
-        document.getElementById('galeria-img-desc').style.color = '#ff69b4';
-        
-        const descripcion = await generarDescripcionAutomatica(url);
-        document.getElementById('galeria-img-desc').value = descripcion;
-        document.getElementById('galeria-img-desc').style.color = '#333';
-      }
-    });
-    
-    // Variables para el carrusel
-    let currentSlide = 0, slides = [], totalSlides = 0, indicators = [];
-    const slider = document.getElementById('galeria-slider');
-    
-    function changeSlide(direction) {
-      currentSlide += direction;
-      if(currentSlide >= totalSlides) currentSlide = 0;
-      else if(currentSlide < 0) currentSlide = totalSlides - 1;
-      updateSlider();
-    }
-    
-    function goToSlide(index) {
-      currentSlide = index;
-      updateSlider();
-    }
-    
-    function updateSlider() {
-      if(slider) {
-        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-      }
-      indicators.forEach((indicator, index) => {
-        indicator.classList.toggle('active', index === currentSlide);
-        indicator.setAttribute('aria-current', index === currentSlide ? 'true' : 'false');
-      });
-    }
-    
-    let galleryInterval;
-    function iniciarGaleriaAutoplay() {
-      galleryInterval = setInterval(() => changeSlide(1), 5000);
-    }
-    function detenerGaleriaAutoplay() {
-      clearInterval(galleryInterval);
-    }
-    
-    document.addEventListener('DOMContentLoaded', () => {
-      const galeriaContainer = document.querySelector('.galeria-container');
-      if(galeriaContainer) {
-        galeriaContainer.addEventListener('mouseenter', detenerGaleriaAutoplay);
-        galeriaContainer.addEventListener('mouseleave', iniciarGaleriaAutoplay);
-      }
-      iniciarGaleriaAutoplay();
-    });
-    
-    // Productos
-    const productosPorDefecto = [
-      {id:1,name:'Shampoo Reparador Dipaso',price:'6.25',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/159672-800-auto?v=638705778699930000&width=800&height=auto&aspect=true',description:'Formulado con keratina y aceites naturales para reparar el cabello dañado. Devuelve la vitalidad y brillo a tu cabello.',badge:'Bestseller',categoria:'shampoo'},
-      {id:2,name:'Acondicionador Nutritivo Dipaso',price:'5.50',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/161883-220-220?v=638840641064500000&width=220&height=220&aspect=true',description:'Enriquecido con vitaminas y proteínas que nutren profundamente cada hebra de cabello. Ideal para cabello seco y quebradizo.',badge:'Nuevo',categoria:'acondicionador'},
-      {id:3,name:'Máscara de Tratamiento Dipaso',price:'7.50',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/160308-220-220?v=638754092827970000&width=220&height=220&aspect=true',description:'Tratamiento intensivo para reparar y revitalizar el cabello extremadamente dañado. Resultados visibles desde la primera aplicación.',badge:'Premium',categoria:'tratamiento'},
-      {id:4,name:'Sérum de Brillo Dipaso',price:'7.00',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/160627-220-220?v=638912128832870000&width=220&height=220&aspect=true',description:'Proporciona brillo intenso y control del frizz sin pesar el cabello. Fórmula ligera con protección UV.',badge:'Exclusivo',categoria:'accesorio'},
-      {id:5,name:'Aceite Capilar Dipaso',price:'6.50',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/156559-220-220?v=638592493584430000&width=220&height=220&aspect=true',description:'Aceite nutritivo con argán y coco para hidratar y reparar las puntas secas. Absorción rápida sin dejar residuos grasos.',badge:'Popular',categoria:'accesorio'},
-      {id:6,name:'Espuma para Peinado Dipaso',price:'5.25',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/155989-220-220?v=638587487829000000&width=220&height=220&aspect=true',description:'Fija tu peinado con un acabado flexible y natural. Protege el cabello del calor y la humedad.',badge:'Tendencia',categoria:'accesorio'},
-      {id:7,name:'Spray Protector Térmico Dipaso',price:'5.75',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/158525-220-220?v=638666924736970000&width=220&height=220&aspect=true',description:'Protege tu cabello de los daños causados por herramientas de calor. Crea una barrera térmica sin alisar el cabello.',badge:'Recomendado',categoria:'accesorio'},
-      {id:8,name:'Kit Completo de Tratamiento Dipaso',price:'21.25',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/159182-800-auto?v=638689307426100000&width=800&height=auto&aspect=true',description:'Incluye shampoo, acondicionador, máscara y sérum para un tratamiento capilar completo. El cuidado perfecto para tu cabello.',badge:'Pack Ahorro',categoria:'tratamiento'}
-    ];
-    
+
     function renderizarTienda() {
       const tiendaGrid = document.getElementById('tienda-grid');
       const productosMostrar = Object.values(productos).slice(0, 3);
@@ -1835,7 +988,7 @@
         tiendaGrid.appendChild(productoCard);
       });
     }
-    
+
     function renderizarTiendaCompleta(filtro = 'todos') {
       const tiendaModalGrid = document.getElementById('tienda-modal-grid');
       let productosFiltrados = Object.values(productos);
@@ -1869,21 +1022,24 @@
       });
       AOS.refresh();
     }
-    
-    function abrirTiendaCompleta() {
-      const modal = document.getElementById('tiendaModal');
-      modal.classList.add('active');
-      modal.setAttribute('aria-hidden','false');
-      renderizarTiendaCompleta();
-    }
-    
-    function filtrarProductos(categoria) {
-      document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      renderizarTiendaCompleta(categoria);
-    }
-    
+
     function renderizarPanelAdmin() {
+      document.getElementById('footerLoginBtn').style.display='none';
+      document.getElementById('footerUserInfo').classList.add('active');
+      document.getElementById('admin-productos').classList.add('active');
+      document.getElementById('admin-galeria-controls').classList.add('active');
+      document.getElementById('admin-content-editor').classList.add('active');
+      document.getElementById('admin-reservas').classList.add('active');
+      document.getElementById('admin-solicitudes').classList.add('active');
+      document.getElementById('admin-pedidos').classList.add('active');
+      renderizarPanelProductos();
+      renderizarReservasAdmin();
+      renderizarSolicitudesAdmin();
+      renderizarPedidosAdmin();
+      cargarGaleriaAdmin();
+    }
+
+    function renderizarPanelProductos() {
       const adminLista = document.getElementById('admin-lista-productos');
       adminLista.innerHTML = '';
       Object.values(productos).forEach(producto => {
@@ -1927,7 +1083,7 @@
         }
       });
     }
-    
+
     function renderizarPedidosAdmin() {
       const tbody = document.getElementById('admin-pedidos-tbody');
       tbody.innerHTML = '';
@@ -1936,24 +1092,17 @@
         const row = document.createElement('tr');
         const estado = pedido.estado || 'pending';
         const estadoClass = estado === 'confirmed' ? 'confirmed' : 
-                            estado === 'cancelled' ? 'cancelled' : 
-                            estado === 'processing' ? 'processing' :
-                            estado === 'shipped' ? 'shipped' :
-                            estado === 'delivered' ? 'delivered' : 'pending';
+                            estado === 'cancelled' ? 'cancelled' : 'pending';
         const estadoText = estado === 'confirmed' ? 'Confirmado' : 
-                          estado === 'cancelled' ? 'Cancelado' : 
-                          estado === 'processing' ? 'Procesando' :
-                          estado === 'shipped' ? 'Enviado' :
-                          estado === 'delivered' ? 'Entregado' : 'Pendiente';
+                          estado === 'cancelled' ? 'Cancelado' : 'Pendiente';
         
-        // Crear lista de productos
-        let productosHTML = '<div class="product-list">';
+        let productosHTML = '<div class="product-list-cell">';
         if (pedido.items && pedido.items.length > 0) {
           pedido.items.forEach(item => {
             productosHTML += `
               <div class="product-item">
+                <div class="product-name">${item.name}</div>
                 <div class="product-details">
-                  <span class="product-name">${item.name}</span>
                   <span class="product-price">$${item.price}</span>
                   <span class="product-quantity">x${item.quantity}</span>
                 </div>
@@ -1973,7 +1122,7 @@
           <td>${pedido.customer.address}, ${pedido.customer.city}</td>
           <td>$${pedido.total} USD</td>
           <td><span class="status-badge ${estadoClass}">${estadoText}</span></td>
-          <td class="product-list-cell">${productosHTML}</td>
+          <td>${productosHTML}</td>
           <td class="admin-actions-cell">
             <button class="delete-btn" onclick="eliminarPedido('${pedido.id}')" title="Eliminar">
               <i class="fas fa-trash"></i>
@@ -1983,252 +1132,7 @@
         tbody.appendChild(row);
       });
     }
-    
-    // Función para generar PDF por ID - CORREGIDA Y MEJORADA
-    function generarPDFPorID() {
-      const tipo = document.getElementById('pdf-type').value;
-      const id = document.getElementById('pdf-id').value.trim();
-      const errorMsg = document.getElementById('pdf-error-message');
-      const successMsg = document.getElementById('pdf-success-message');
-      
-      // Limpiar mensajes anteriores
-      errorMsg.classList.remove('active');
-      successMsg.classList.remove('active');
-      
-      // Validar que se haya ingresado un ID
-      if (!id) {
-        errorMsg.textContent = 'Por favor, ingresa el ID del documento';
-        errorMsg.classList.add('active');
-        return;
-      }
-      
-      // Deshabilitar botón mientras se genera el PDF
-      const btn = document.querySelector('.pdf-generator-btn');
-      const originalText = btn.innerHTML;
-      btn.disabled = true;
-      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generando...';
-      
-      try {
-        if (tipo === 'pedido') {
-          generarPDFPedido(id);
-        } else if (tipo === 'reserva') {
-          generarPDFReserva(id);
-        }
-        
-        // Mostrar mensaje de éxito
-        successMsg.textContent = `✅ ${tipo === 'pedido' ? 'Factura de pedido' : 'Factura de reserva'} generada exitosamente`;
-        successMsg.classList.add('active');
-        
-        // Limpiar formulario
-        document.getElementById('pdf-id').value = '';
-        
-        // Ocultar mensaje de éxito después de 3 segundos
-        setTimeout(() => {
-          successMsg.classList.remove('active');
-        }, 3000);
-        
-      } catch (error) {
-        console.error('Error generando PDF:', error);
-        errorMsg.textContent = '❌ Error al generar el PDF. Por favor, intenta de nuevo.';
-        errorMsg.classList.add('active');
-      } finally {
-        // Restaurar botón
-        btn.disabled = false;
-        btn.innerHTML = originalText;
-      }
-    }
-    
-    // Función para generar PDF de pedido con formato de factura completo
-    async function generarPDFPedido(pedidoId) {
-      const pedido = pedidos[pedidoId];
-      if (!pedido) {
-        throw new Error('Pedido no encontrado');
-      }
-      
-      // Mostrar loader
-      const loader = document.getElementById('pdfLoader');
-      loader.classList.add('active');
-      
-      try {
-        // Verificar si jsPDF está disponible
-        if (typeof window.jspdf === 'undefined') {
-          throw new Error('La librería jsPDF no está cargada');
-        }
-        
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF();
-        
-        // Función para agregar texto con formato
-        function addText(text, x, y, fontSize = 12, isBold = false, color = [0, 0, 0]) {
-          pdf.setFontSize(fontSize);
-          pdf.setTextColor(color[0], color[1], color[2]);
-          pdf.setFont(isBold ? "helvetica" : "helvetica", isBold ? "bold" : "normal");
-          pdf.text(text, x, y);
-        }
-        
-        // Función para agregar línea
-        function addLine(x1, y1, x2, y2) {
-          pdf.line(x1, y1, x2, y2);
-        }
-        
-        // Encabezado de la factura
-        addText("FACTURA", 105, 20, 20, true, [255, 105, 180]);
-        addText("LIS BELLEZA TOTAL", 105, 28, 16, true, [255, 105, 180]);
-        
-        // Línea separadora
-        addLine(20, 35, 190, 35);
-        
-        // Datos del emisor (quien vende)
-        addText("DATOS DEL EMISOR", 20, 45, 12, true);
-        addText("Razón Social: Lis Belleza Total", 20, 52, 10);
-        addText("Nombre Comercial: Lis Belleza Total", 20, 58, 10);
-        addText("RUC: 1795687454001", 20, 64, 10);
-        addText("Dirección Matriz: Calle 123 #45-67, Bogotá, Colombia", 20, 70, 10);
-        addText("Teléfono: +593 99 304 5286", 20, 76, 10);
-        addText("Email: creatubelleza@gmail.com", 20, 82, 10);
-        
-        // Datos del comprobante
-        addText("DATOS DEL COMPROBANTE", 110, 45, 12, true);
-        addText("Tipo de Documento: FACTURA", 110, 52, 10);
-        addText("Número de Factura: F001-" + pedido.id.padStart(9, '0'), 110, 58, 10);
-        addText("Fecha de Emisión: " + new Date().toLocaleDateString('es-EC'), 110, 64, 10);
-        addText("Hora de Emisión: " + new Date().toLocaleTimeString('es-EC'), 110, 70, 10);
-        
-        // Línea separadora
-        addLine(20, 90, 190, 90);
-        
-        // Datos del receptor (quien compra)
-        addText("DATOS DEL RECEPTOR", 20, 100, 12, true);
-        addText("Nombre/Razón Social: " + pedido.customer.name, 20, 107, 10);
-        addText("Identificación: " + (pedido.customer.identification || "N/A"), 20, 113, 10);
-        addText("Teléfono: " + pedido.customer.phone, 20, 119, 10);
-        addText("Dirección: " + pedido.customer.address, 20, 125, 10);
-        addText("Ciudad: " + pedido.customer.city, 20, 131, 10);
-        addText("Email: " + (pedido.customer.email || "N/A"), 20, 137, 10);
-        
-        // Línea separadora
-        addLine(20, 145, 190, 145);
-        
-        // Detalles de la transacción
-        addText("DETALLES DE LA TRANSACCIÓN", 20, 155, 12, true);
-        
-        // Encabezados de la tabla de productos
-        let yPosition = 165;
-        addText("CANT.", 20, yPosition, 9, true);
-        addText("DESCRIPCIÓN", 40, yPosition, 9, true);
-        addText("P. UNIT.", 120, yPosition, 9, true);
-        addText("SUBTOTAL", 160, yPosition, 9, true);
-        
-        // Línea separadora de encabezados
-        addLine(20, yPosition + 3, 190, yPosition + 3);
-        
-        yPosition += 10;
-        let subtotalSinIVA = 0;
-        let subtotalConIVA = 0;
-        
-        // Listar productos
-        pedido.items.forEach(item => {
-          const cantidad = item.quantity;
-          const precioUnitario = parseFloat(item.price);
-          const subtotal = cantidad * precioUnitario;
-          
-          // Determinar si tiene IVA (12%) o no (0%)
-          const tieneIVA = Math.random() > 0.5; // Simulación: algunos productos tienen IVA
-          const ivaRate = tieneIVA ? 0.12 : 0;
-          
-          if (tieneIVA) {
-            subtotalConIVA += subtotal;
-          } else {
-            subtotalSinIVA += subtotal;
-          }
-          
-          addText(cantidad.toString(), 20, yPosition, 9);
-          addText(item.name, 40, yPosition, 9);
-          addText("$" + precioUnitario.toFixed(2), 120, yPosition, 9);
-          addText("$" + subtotal.toFixed(2), 160, yPosition, 9);
-          
-          yPosition += 7;
-        });
-        
-        // Línea separadora de productos
-        addLine(20, yPosition, 190, yPosition);
-        yPosition += 10;
-        
-        // Subtotales por tarifa de IVA
-        addText("SUBTOTAL 0%:", 120, yPosition, 10, true);
-        addText("$" + subtotalSinIVA.toFixed(2), 160, yPosition, 10);
-        yPosition += 7;
-        
-        addText("SUBTOTAL 12%:", 120, yPosition, 10, true);
-        addText("$" + subtotalConIVA.toFixed(2), 160, yPosition, 10);
-        yPosition += 7;
-        
-        const IVA12 = subtotalConIVA * 0.12;
-        addText("IVA 12%:", 120, yPosition, 10, true);
-        addText("$" + IVA12.toFixed(2), 160, yPosition, 10);
-        yPosition += 10;
-        
-        // Total de la factura
-        const totalFactura = subtotalSinIVA + subtotalConIVA + IVA12;
-        addText("TOTAL A PAGAR:", 120, yPosition, 12, true, [255, 105, 180]);
-        addText("$" + totalFactura.toFixed(2) + " USD", 160, yPosition, 12, true, [255, 105, 180]);
-        
-        // Forma de pago
-        yPosition += 15;
-        addText("FORMA DE PAGO:", 20, yPosition, 10, true);
-        yPosition += 7;
-        addText("Transferencia Bancaria", 20, yPosition, 10);
-        yPosition += 7;
-        addText("Banco: Banco Pichincha", 20, yPosition, 10);
-        yPosition += 7;
-        addText("Cuenta: 20026669966", 20, yPosition, 10);
-        yPosition += 7;
-        addText("Titular: Ingrid Montes Flores", 20, yPosition, 10);
-        
-        // Información adicional
-        yPosition += 15;
-        addText("OBSERVACIONES:", 20, yPosition, 10, true);
-        yPosition += 7;
-        if (pedido.customer.notes) {
-          addText(pedido.customer.notes, 20, yPosition, 9);
-        } else {
-          addText("Sin observaciones", 20, yPosition, 9);
-        }
-        
-        // Pie de página
-        yPosition = 280;
-        addText("¡Gracias por su compra!", 105, yPosition, 12, true, [255, 105, 180]);
-        yPosition += 7;
-        addText("Lis Belleza Total - Tu belleza es nuestra pasión", 105, yPosition, 10, false, [100, 100, 100]);
-        
-        // Generar el PDF como blob
-        const pdfBlob = pdf.output('blob');
-        
-        // Guardar los datos del PDF para descarga posterior
-        currentPDFData = {
-          blob: pdfBlob,
-          filename: `factura-pedido-${pedido.id}.pdf`
-        };
-        
-        // Mostrar vista previa
-        showPDFPreview(pdfBlob, `factura-pedido-${pedido.id}.pdf`);
-        
-      } catch (error) {
-        console.error('Error generando PDF:', error);
-        throw error;
-      } finally {
-        // Ocultar loader
-        loader.classList.remove('active');
-      }
-    }
-    
-    function eliminarPedido(id) {
-      if(confirm('¿Estás seguro de que quieres eliminar este pedido?')) {
-        eliminarElementoFirebase('ordenes', id);
-        mostrarNotificación('Pedido eliminado con éxito.');
-      }
-    }
-    
+
     function renderizarReservasAdmin() {
       const tbody = document.getElementById('admin-reservas-tbody');
       tbody.innerHTML = '';
@@ -2257,208 +1161,7 @@
         tbody.appendChild(row);
       });
     }
-    
-    // Función para generar PDF de reserva con formato de factura
-    async function generarPDFReserva(reservaId) {
-      const reserva = reservas[reservaId];
-      if (!reserva) {
-        throw new Error('Reserva no encontrada');
-      }
-      
-      // Mostrar loader
-      const loader = document.getElementById('pdfLoader');
-      loader.classList.add('active');
-      
-      try {
-        // Verificar si jsPDF está disponible
-        if (typeof window.jspdf === 'undefined') {
-          throw new Error('La librería jsPDF no está cargada');
-        }
-        
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF();
-        
-        // Función para agregar texto con formato
-        function addText(text, x, y, fontSize = 12, isBold = false, color = [0, 0, 0]) {
-          pdf.setFontSize(fontSize);
-          pdf.setTextColor(color[0], color[1], color[2]);
-          pdf.setFont(isBold ? "helvetica" : "helvetica", isBold ? "bold" : "normal");
-          pdf.text(text, x, y);
-        }
-        
-        // Función para agregar línea
-        function addLine(x1, y1, x2, y2) {
-          pdf.line(x1, y1, x2, y2);
-        }
-        
-        // Encabezado de la factura
-        addText("FACTURA DE SERVICIO", 105, 20, 20, true, [255, 105, 180]);
-        addText("LIS BELLEZA TOTAL", 105, 28, 16, true, [255, 105, 180]);
-        
-        // Línea separadora
-        addLine(20, 35, 190, 35);
-        
-        // Datos del emisor (quien vende)
-        addText("DATOS DEL EMISOR", 20, 45, 12, true);
-        addText("Razón Social: Lis Belleza Total", 20, 52, 10);
-        addText("Nombre Comercial: Lis Belleza Total", 20, 58, 10);
-        addText("RUC: 1795687454001", 20, 64, 10);
-        addText("Dirección Matriz: Calle 123 #45-67, Bogotá, Colombia", 20, 70, 10);
-        addText("Teléfono: +593 99 304 5286", 20, 76, 10);
-        addText("Email: creatubelleza@gmail.com", 20, 82, 10);
-        
-        // Datos del comprobante
-        addText("DATOS DEL COMPROBANTE", 110, 45, 12, true);
-        addText("Tipo de Documento: FACTURA", 110, 52, 10);
-        addText("Número de Factura: F001-" + reserva.id.padStart(9, '0'), 110, 58, 10);
-        addText("Fecha de Emisión: " + new Date().toLocaleDateString('es-EC'), 110, 64, 10);
-        addText("Hora de Emisión: " + new Date().toLocaleTimeString('es-EC'), 110, 70, 10);
-        
-        // Línea separadora
-        addLine(20, 90, 190, 90);
-        
-        // Datos del receptor (quien compra)
-        addText("DATOS DEL RECEPTOR", 20, 100, 12, true);
-        addText("Nombre/Razón Social: " + reserva.nombre, 20, 107, 10);
-        addText("Identificación: " + (reserva.identification || "N/A"), 20, 113, 10);
-        addText("Teléfono: " + reserva.telefono, 20, 119, 10);
-        addText("Email: " + (reserva.email || "N/A"), 20, 125, 10);
-        
-        // Línea separadora
-        addLine(20, 135, 190, 135);
-        
-        // Detalles de la transacción
-        addText("DETALLES DEL SERVICIO", 20, 145, 12, true);
-        
-        // Encabezados de la tabla de servicios
-        let yPosition = 155;
-        addText("CANT.", 20, yPosition, 9, true);
-        addText("DESCRIPCIÓN", 40, yPosition, 9, true);
-        addText("P. UNIT.", 120, yPosition, 9, true);
-        addText("SUBTOTAL", 160, yPosition, 9, true);
-        
-        // Línea separadora de encabezados
-        addLine(20, yPosition + 3, 190, yPosition + 3);
-        
-        yPosition += 10;
-        
-        // Obtener precio del servicio
-        const preciosServicios = {
-          'Tratamiento capilar profesional': 50,
-          'Corte y peinado': 30,
-          'Coloración y mechas': 60,
-          'Tratamiento de keratina': 80,
-          'Botox capilar': 70,
-          'Reconstrucción capilar': 90,
-          'Alisado brasileño': 100,
-          'Asesoría de imagen capilar': 40
-        };
-        
-        const precioUnitario = preciosServicios[reserva.servicio] || 50;
-        const cantidad = 1;
-        const subtotal = precioUnitario * cantidad;
-        
-        // Determinar si tiene IVA (12%) o no (0%)
-        const tieneIVA = true; // Los servicios generalmente tienen IVA
-        const ivaRate = tieneIVA ? 0.12 : 0;
-        
-        // Listar servicio
-        addText(cantidad.toString(), 20, yPosition, 9);
-        addText(reserva.servicio, 40, yPosition, 9);
-        addText("$" + precioUnitario.toFixed(2), 120, yPosition, 9);
-        addText("$" + subtotal.toFixed(2), 160, yPosition, 9);
-        
-        yPosition += 7;
-        
-        // Agregar información de fecha y hora
-        addText("Fecha del servicio: " + reserva.fecha, 40, yPosition, 9);
-        yPosition += 7;
-        addText("Hora del servicio: " + reserva.hora, 40, yPosition, 9);
-        
-        // Línea separadora de productos
-        addLine(20, yPosition + 5, 190, yPosition + 5);
-        yPosition += 15;
-        
-        // Subtotales por tarifa de IVA
-        const subtotalSinIVA = tieneIVA ? 0 : subtotal;
-        const subtotalConIVA = tieneIVA ? subtotal : 0;
-        
-        if (subtotalSinIVA > 0) {
-          addText("SUBTOTAL 0%:", 120, yPosition, 10, true);
-          addText("$" + subtotalSinIVA.toFixed(2), 160, yPosition, 10);
-          yPosition += 7;
-        }
-        
-        if (subtotalConIVA > 0) {
-          addText("SUBTOTAL 12%:", 120, yPosition, 10, true);
-          addText("$" + subtotalConIVA.toFixed(2), 160, yPosition, 10);
-          yPosition += 7;
-          
-          const IVA12 = subtotalConIVA * 0.12;
-          addText("IVA 12%:", 120, yPosition, 10, true);
-          addText("$" + IVA12.toFixed(2), 160, yPosition, 10);
-          yPosition += 10;
-        }
-        
-        // Total de la factura
-        const totalFactura = subtotalSinIVA + subtotalConIVA + (subtotalConIVA * 0.12);
-        addText("TOTAL A PAGAR:", 120, yPosition, 12, true, [255, 105, 180]);
-        addText("$" + totalFactura.toFixed(2) + " USD", 160, yPosition, 12, true, [255, 105, 180]);
-        
-        // Forma de pago
-        yPosition += 15;
-        addText("FORMA DE PAGO:", 20, yPosition, 10, true);
-        yPosition += 7;
-        addText("Transferencia Bancaria", 20, yPosition, 10);
-        yPosition += 7;
-        addText("Banco: Banco Pichincha", 20, yPosition, 10);
-        yPosition += 7;
-        addText("Cuenta: 20026669966", 20, yPosition, 10);
-        yPosition += 7;
-        addText("Titular: Ingrid Montes Flores", 20, yPosition, 10);
-        
-        // Estado de la reserva
-        yPosition += 15;
-        const estado = reserva.estado || 'pending';
-        const estadoText = estado === 'confirmed' ? 'Confirmada' : estado === 'cancelled' ? 'Cancelada' : 'Pendiente';
-        addText("ESTADO DE LA RESERVA:", 20, yPosition, 10, true);
-        yPosition += 7;
-        addText(estadoText, 20, yPosition, 10);
-        
-        // Pie de página
-        yPosition = 280;
-        addText("¡Gracias por confiar en nosotros!", 105, yPosition, 12, true, [255, 105, 180]);
-        yPosition += 7;
-        addText("Lis Belleza Total - Tu belleza es nuestra pasión", 105, yPosition, 10, false, [100, 100, 100]);
-        
-        // Generar el PDF como blob
-        const pdfBlob = pdf.output('blob');
-        
-        // Guardar los datos del PDF para descarga posterior
-        currentPDFData = {
-          blob: pdfBlob,
-          filename: `factura-reserva-${reserva.id}.pdf`
-        };
-        
-        // Mostrar vista previa
-        showPDFPreview(pdfBlob, `factura-reserva-${reserva.id}.pdf`);
-        
-      } catch (error) {
-        console.error('Error generando PDF:', error);
-        throw error;
-      } finally {
-        // Ocultar loader
-        loader.classList.remove('active');
-      }
-    }
-    
-    function eliminarReserva(id) {
-      if(confirm('¿Estás seguro de que quieres eliminar esta reserva?')) {
-        eliminarElementoFirebase('reservas', id);
-        mostrarNotificación('Reserva eliminada con éxito.');
-      }
-    }
-    
+
     function renderizarSolicitudesAdmin() {
       const tbody = document.getElementById('admin-solicitudes-tbody');
       tbody.innerHTML = '';
@@ -2484,35 +1187,168 @@
         tbody.appendChild(row);
       });
     }
+
+    // Galería
+    let currentSlide = 0, slides = [], totalSlides = 0, indicators = [];
+    const slider = document.getElementById('galeria-slider');
     
-    function eliminarSolicitud(id) {
-      if(confirm('¿Estás seguro de que quieres eliminar esta solicitud?')) {
-        eliminarElementoFirebase('solicitudes-trabajo', id);
-        mostrarNotificación('Solicitud eliminada con éxito.');
+    function changeSlide(direction) {
+      currentSlide += direction;
+      if(currentSlide >= totalSlides) currentSlide = 0;
+      else if(currentSlide < 0) currentSlide = totalSlides - 1;
+      updateSlider();
+    }
+    
+    function goToSlide(index) {
+      currentSlide = index;
+      updateSlider();
+    }
+    
+    function updateSlider() {
+      if(slider) {
+        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+      }
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentSlide);
+        indicator.setAttribute('aria-current', index === currentSlide ? 'true' : 'false');
+      });
+    }
+    
+    let galleryInterval;
+    function iniciarGaleriaAutoplay() {
+      galleryInterval = setInterval(() => changeSlide(1), 5000);
+    }
+    function detenerGaleriaAutoplay() {
+      clearInterval(galleryInterval);
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      const galeriaContainer = document.querySelector('.galeria-container');
+      if(galeriaContainer) {
+        galeriaContainer.addEventListener('mouseenter', detenerGaleriaAutoplay);
+        galeriaContainer.addEventListener('mouseleave', iniciarGaleriaAutoplay);
+      }
+      iniciarGaleriaAutoplay();
+    });
+
+    async function añadirImagenGaleria() {
+      const url = document.getElementById('galeria-img-url').value.trim();
+      const titulo = document.getElementById('galeria-img-title').value.trim();
+      
+      if(!url || !titulo) {
+        mostrarNotificación('Por favor, completa la URL y el título de la imagen.', 'error');
+        return;
+      }
+      
+      const descripcion = await generarDescripcionAutomatica(url);
+      document.getElementById('galeria-img-desc').value = descripcion;
+      
+      const nuevaImagen = {id: Date.now().toString(), url, titulo, descripcion};
+      añadirElementoFirebase('galeria', nuevaImagen);
+      
+      document.getElementById('galeria-img-url').value = '';
+      document.getElementById('galeria-img-title').value = '';
+      document.getElementById('galeria-img-desc').value = '';
+      
+      mostrarNotificación('Imagen añadida a la galería con descripción automática.');
+    }
+    
+    function eliminarImagenGaleria(id) {
+      if(confirm('¿Estás seguro de que quieres eliminar esta imagen de la galería?')) {
+        eliminarElementoFirebase('galeria', id);
+        mostrarNotificación('Imagen eliminada de la galería.');
       }
     }
     
-    function mostrarMensajeAdmin(mensaje) {
-      const messageEl = document.getElementById('admin-message');
-      messageEl.textContent = mensaje;
-      messageEl.style.display = 'block';
-      setTimeout(() => { messageEl.style.display = 'none'; }, 3000);
+    function cargarGaleriaAdmin() {
+      const container = document.getElementById('galeria-imagenes-admin');
+      container.innerHTML = '';
+      
+      Object.values(imagenesGaleria).forEach(imagen => {
+        const item = document.createElement('div');
+        item.className = 'galeria-imagen-admin-item';
+        item.innerHTML = `
+          <img src="${imagen.url}" alt="${imagen.titulo}" />
+          <button class="delete-btn" onclick="eliminarImagenGaleria('${imagen.id}')" aria-label="Eliminar imagen">
+            <i class="fas fa-trash"></i>
+          </button>
+        `;
+        container.appendChild(item);
+      });
     }
     
-    // Carrito
+    document.getElementById('galeria-img-url').addEventListener('blur', async function() {
+      const url = this.value.trim();
+      if(url) {
+        const descripcion = await generarDescripcionAutomatica(url);
+        document.getElementById('galeria-img-desc').value = descripcion;
+      }
+    });
+    
+    async function generarDescripcionAutomatica(imageUrl) {
+      try {
+        const urlParts = imageUrl.split('/');
+        const fileName = urlParts[urlParts.length - 1].split('.')[0];
+        const descripcionesBase = {
+          'hair': ['Transformación capilar profesional', 'Estilo único para tu cabello'],
+          'beauty': ['Realza tu belleza natural', 'Tratamiento estético profesional'],
+          'salon': ['Experiencia de salón exclusiva', 'Servicio premium de belleza'],
+          'style': ['Estilo único y personalizado', 'Diseño a tu medida'],
+          'cut': ['Corte preciso y moderno', 'Diseño facial personalizado'],
+          'color': ['Color vibrante y duradero', 'Tincura profesional de calidad'],
+          'treatment': ['Tratamiento intensivo reparador', 'Terapia capil profesional'],
+          'keratin': ['Tratamiento de keratina profesional', 'Alisado duradero y natural'],
+          'makeup': ['Maquillaje profesional impecable', 'Resalta tus mejores rasgos'],
+          'spa': ['Experiencia spa relajante', 'Tratamiento de bienestar total']
+        };
+        
+        let descripcionEncontrada = null;
+        const urlKeywords = imageUrl.toLowerCase().match(/\b(hair|beauty|salon|style|cut|color|treatment|keratin|makeup|spa)\b/g) || [];
+        
+        for(const keyword of urlKeywords) {
+          if(descripcionesBase[keyword]) {
+            descripcionEncontrada = descripcionesBase[keyword][Math.floor(Math.random() * descripcionesBase[keyword].length)];
+            break;
+          }
+        }
+        
+        if(!descripcionEncontrada) {
+          const adjetivos = ['profesional', 'exclusivo', 'único', 'espectacular', 'elegante'];
+          const sustantivos = ['estilo', 'diseño', 'look', 'transformación'];
+          const adjetivoAleatorio = adjetivos[Math.floor(Math.random() * adjetivos.length)];
+          const sustantivoAleatorio = sustantivos[Math.floor(Math.random() * sustantivos.length)];
+          descripcionEncontrada = `${sustantivoAleatorio.charAt(0).toUpperCase() + sustantivoAleatorio.slice(1)} ${adjetivoAleatorio} para realzar tu belleza`;
+        }
+        
+        return descripcionEncontrada;
+      } catch(error) {
+        console.error('Error generando descripción:', error);
+        return 'Tratamiento profesional de belleza para realzar tu estilo único';
+      }
+    }
+
+    // Carrito - CORREGIDO Y MEJORADO
     function anadirAlCarrito(productoId) {
-      const producto = productos[productoId];
-      if(!producto) return;
+      const id = parseInt(productoId);
+      const producto = productos.find(p => parseInt(p.id) === id);
       
-      const itemExistente = carrito.find(item => item.id === productoId);
+      if(!producto) {
+        console.error('Producto no encontrado:', productoId);
+        return;
+      }
+      
+      const itemExistente = carrito.find(item => parseInt(item.id) === id);
+      
       if(itemExistente) {
         itemExistente.quantity++;
+        mostrarNotificación(`${producto.name} cantidad actualizada a ${itemExistente.quantity}`, 'info');
       } else {
-        carrito.push({...producto, quantity: 1});
+        carrito.push({...producto, quantity: 1, id: id});
+        mostrarNotificación(`${producto.name} añadido al carrito.`, 'success');
       }
       
       actualizarContadorCarrito();
-      mostrarNotificación(`${producto.name} añadido al carrito.`);
+      renderizarCarrito();
     }
     
     function actualizarContadorCarrito() {
@@ -2520,6 +1356,7 @@
       document.getElementById('cart-count').textContent = totalItems;
     }
     
+    // CORREGIDO: Función para renderizar el carrito
     function renderizarCarrito() {
       const container = document.getElementById('cart-items-container');
       const totalEl = document.getElementById('cart-total');
@@ -2532,24 +1369,26 @@
       }
       container.innerHTML = '';
       let total = 0;
-      carrito.forEach(item => {
+      carrito.forEach((item, index) => {
         const itemTotal = parseFloat(item.price) * item.quantity;
         total += itemTotal;
         const itemEl = document.createElement('div');
         itemEl.className = 'cart-item';
         itemEl.setAttribute('role','listitem');
+        itemEl.setAttribute('data-product-id', item.id);
+        
         itemEl.innerHTML = `
           <img src="${item.imageUrl}" alt="${item.name}">
           <div class="cart-item-details">
             <div class="cart-item-name">${item.name}</div>
-            <div class="cart-item-price">$${item.price} USD</div>
+            <div class="cart-item-price">$${item.price} USD c/u</div>
           </div>
           <div class="cart-item-quantity">
-            <button onclick="cambiarCantidad('${item.id}', -1)" aria-label="Reducir cantidad">-</button>
+            <button onclick="cambiarCantidad(${item.id}, -1)" ${item.quantity <= 1 ? 'disabled' : ''} aria-label="Reducir cantidad">−</button>
             <span>${item.quantity}</span>
-            <button onclick="cambiarCantidad('${item.id}', 1)" aria-label="Aumentar cantidad">+</button>
+            <button onclick="cambiarCantidad(${item.id}, 1)" ${item.quantity >= 99 ? 'disabled' : ''} aria-label="Aumentar cantidad">+</button>
           </div>
-          <button class="cart-remove-btn" onclick="eliminarDelCarrito('${item.id}')" aria-label="Eliminar del carrito">Eliminar</button>
+          <button class="cart-remove-btn" onclick="eliminarDelCarrito(${item.id})" aria-label="Eliminar del carrito">Eliminar</button>
         `;
         container.appendChild(itemEl);
       });
@@ -2557,26 +1396,42 @@
       document.getElementById('checkout-form').style.display = 'block';
     }
     
+    // CORREGIDO: Función para cambiar cantidad
     function cambiarCantidad(productoId, cambio) {
-      const item = carrito.find(item => item.id === productoId);
+      const id = parseInt(productoId);
+      const item = carrito.find(item => parseInt(item.id) === id);
+      
       if(item) {
-        item.quantity += cambio;
-        if(item.quantity <= 0) eliminarDelCarrito(productoId);
-        else {
+        const nuevaCantidad = item.quantity + cambio;
+        if(nuevaCantidad >= 1 && nuevaCantidad <= 99) {
+          item.quantity = nuevaCantidad;
           actualizarContadorCarrito();
           renderizarCarrito();
+          
+          const itemElement = document.querySelector(`[data-product-id="${id}"]`);
+          if(itemElement) {
+            itemElement.classList.add('cart-item-updating');
+            setTimeout(() => {
+              itemElement.classList.remove('cart-item-updating');
+            }, 300);
+          }
         }
       }
     }
     
+    // CORREGIDO: Función para eliminar del carrito
     function eliminarDelCarrito(productoId) {
+      const id = parseInt(productoId);
+      
       if(confirm('¿Estás seguro de que quieres eliminar este producto del carrito?')) {
-        carrito = carrito.filter(item => item.id !== productoId);
+        carrito = carrito.filter(item => parseInt(item.id) !== id);
         renderizarCarrito();
         actualizarContadorCarrito();
+        mostrarNotificación('Producto eliminado del carrito', 'info');
       }
     }
     
+    // CORREGIDO: Función para procesar el pago
     function proceedToPayment() {
       const name = document.getElementById('checkout-name').value.trim();
       const phone = document.getElementById('checkout-phone').value.trim();
@@ -2612,7 +1467,6 @@
       whatsappBtn.href = `https://wa.me/593990532307?text=${encodedMensaje}`;
       whatsappBtn.target = '_blank';
       
-      // CORRECCIÓN: Mostrar el total y la información de pago correctamente
       const paymentInfo = document.getElementById('payment-info');
       paymentInfo.classList.add('active');
       paymentInfo.style.display = 'block';
@@ -2621,7 +1475,6 @@
       paymentInfo.style.position = 'relative';
       paymentInfo.style.zIndex = '1000';
       
-      // Actualizar el total en la sección de pago
       const totalElement = document.createElement('div');
       totalElement.style.fontSize = '1.3rem';
       totalElement.style.fontWeight = '700';
@@ -2629,11 +1482,9 @@
       totalElement.style.marginBottom = '15px';
       totalElement.innerHTML = `Total a pagar: <strong>$${total.toFixed(2)} USD</strong>`;
       
-      // Insertar el total antes de la información de la cuenta
       const accountDetails = paymentInfo.querySelector('.account-details');
       paymentInfo.insertBefore(totalElement, accountDetails);
       
-      // Ocultar el formulario de checkout
       document.getElementById('checkout-form').style.display = 'none';
       
       setTimeout(() => { paymentInfo.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
@@ -2658,8 +1509,8 @@
         document.getElementById('checkout-form').reset();
       }
     }
-    
-    // Menúvil móvil
+
+    // Menú móvil
     const menuToggle = document.getElementById('menuToggle');
     const navMobile = document.getElementById('navMobile');
     menuToggle.addEventListener('click', () => {
@@ -2680,7 +1531,7 @@
         icon.classList.remove('fa-times');
       });
     });
-    
+
     // Login
     const footerLoginBtn = document.getElementById('footerLoginBtn');
     const loginModal = document.getElementById('loginModal');
@@ -2714,22 +1565,9 @@
       if(username === 'creatubelleza' && password === 'montes9828') {
         loginModal.classList.remove('active');
         loginModal.setAttribute('aria-hidden','true');
-        footerLoginBtn.style.display = 'none';
-        footerUserInfo.classList.add('active');
-        document.getElementById('admin-productos').classList.add('active');
-        document.getElementById('admin-galeria-controls').classList.add('active');
-        document.getElementById('admin-content-editor').classList.add('active');
-        document.getElementById('admin-reservas').classList.add('active');
-        document.getElementById('admin-solicitudes').classList.add('active');
-        document.getElementById('admin-pedidos').classList.add('active');
-        document.getElementById('pdf-generator').classList.add('active'); // Mostrar generador PDF solo para admin
         localStorage.setItem('isLoggedIn', 'true');
         isLoggedIn = true;
         renderizarPanelAdmin();
-        renderizarReservasAdmin();
-        renderizarSolicitudesAdmin();
-        renderizarPedidosAdmin();
-        cargarGaleriaAdmin();
         loginForm.reset();
       } else {
         mostrarNotificación('Usuario o contraseña incorrectos', 'error');
@@ -2747,11 +1585,10 @@
       document.getElementById('admin-reservas').classList.remove('active');
       document.getElementById('admin-solicitudes').classList.remove('active');
       document.getElementById('admin-pedidos').classList.remove('active');
-      document.getElementById('pdf-generator').classList.remove('active'); // Ocultar generador PDF al cerrar sesión
       isLoggedIn = false;
       loginForm.reset();
     });
-    
+
     // Reservas
     const form = document.getElementById('form-reserva');
     const confirmacionReserva = document.getElementById('confirmacion-reserva');
@@ -2792,7 +1629,7 @@
       form.reset();
       telefonoInput.value = '+593';
     });
-    
+
     // Trabaja con nosotros
     const trabajaModal = document.getElementById('trabajaModal');
     const closeTrabajaModal = document.getElementById('closeTrabajaModal');
@@ -2800,7 +1637,6 @@
     const mensajeTrabajo = document.getElementById('mensaje-trabajo');
     const telefonoTrabajoInput = document.getElementById('telefono-trabajo');
     
-    // Manejo de archivos
     document.getElementById('cv-trabajo').addEventListener('change', function(e) {
       const fileName = e.target.files[0]?.name || 'No se ha seleccionado ningún archivo';
       document.getElementById('cv-info').textContent = fileName;
@@ -2850,7 +1686,6 @@
       }
       
       try {
-        // Convertir archivos a base64
         const cvBase64 = await leerArchivoComoBase64(cvFile);
         const cedulaBase64 = await leerArchivoComoBase64(cedulaFile);
         
@@ -2878,7 +1713,7 @@
         mostrarNotificación('Error al procesar los archivos. Intenta de nuevo.', 'error');
       }
     });
-    
+
     // Formulario añadir producto
     const formAgregarProducto = document.getElementById('form-agregar-producto');
     formAgregarProducto.addEventListener('submit', function(e) {
@@ -2909,40 +1744,39 @@
     function generarDescripcionAutomatica(nombreProducto) {
       const nombreLower = nombreProducto.toLowerCase();
       const descripciones = {
-        'shampoo':'Formulado con ingredientes naturales que limpian suavemente el cabello sin resecarlo. Ideal para uso diario y todo tipo de cabello.',
-        'acondicionador':'Enriquecido con vitaminas y agentes hidratantes que desenredanan y suavizan el cabello. Deja el cabello manejable y brillante.',
-        'máscara':'Tratamiento profundo que repara y reconstruye la fibra capilar desde el interior. Ideal para cabello dañado o tratado químicamente.',
-        'sérum':'Producto ligero que sella las cutículas y suaviza el cabello sin frizz. No engrasa ni pesa el cabello.',
-        'aceite':'Aceite nutritivo que hidrata, suaviza y aporta brillo al cabello. Contiene vitaminas esenciales para un cabello saludable.',
-        'kit':'Set completo que incluye todos los productos necesarios para un tratamiento integral. Ahorra comprando los productos por separado.',
-        'spray':'Producto de aplicación fácil que protege el cabello del calor y los daños ambientales. Ideal para proteger antes del uso de herramientas térmicas.',
-        'tratamiento':'Solución completa para abordar problemas específicos del cabello como caída, sequedad o daño por agentes químicos.',
-        'protector':'Barrera protectora contra los daños del sol, el calor y la contaminación. Esencial para mantener el cabello saludable.',
-        'reparador':'Fórmula avanzada que repara la estructura interna del cabello, restaurando su fuerza y elasticidad naturales.',
-        'nutritivo':'Combinación de vitaminas, minerales y proteínas que nutren el cabello desde la raíz hasta las puntas.',
-        'brillo':'Producto diseñado para intensificar el brillo natural del cabello, aportando luminosidad y vitalidad.',
-        'coloración':'Producto para teñir o matizar el cabello con colores vibrantes y duraderos. Formula suave que no daña el cabello.',
-        'keratina':'Tratamiento profesional que alisa y suaviza el cabello, eliminando el frizz y aportando brillo duradero.',
-        'botox':'Tratamiento que relaja y alisa el cabello sin químicos agresivos. Aporta volumen y control del frizz.',
-        'reconstrucción':'Tratamiento intensivo que repara el cabello severamente dañado, restaurando su salud y apariencia.',
-        'alisado':'Procedimiento que transforma el cabello rizado en liso y suave de manera temporal o permanente.',
-        'peinado':'Producto para estilizar y mantener el peinado en su lugar, aportando fijación y control del frizz.',
-        'mechas':'Técnica de coloración que crea luces y sombras naturales en el cabello para un aspecto multidimensional.',
-        'balayage':'Técnica de coloración libre que crea un efecto de de degradado natural, con el color más oscuro en las puntas.',
-        'cuidado':'Línea completa de productos diseñados para mantener el cabello saludable, limpio y con un aspecto impecable.',
-        'profesional':'Producto de uso profesional que garantice resultados de salon de alta calidad para tus clientes.',
-        'intensivo':'Tratamiento concentrado con ingredientes activos que actúan rápidamente sobre el cabello para resultados visibles.',
-        'hidratante':'Fórmula rica en agentes humectantes que restauran la hidratación del cabello seco y quebradizo.',
-        'volumen':'Producto que aumenta el grosor y la densidad del cabello, dándole un aspecto más lleno y saludable.',
-        'suave':'Tratamiento que alisa y relaja el cabello, eliminando el frizz y facilitando el peinado.',
-        'control':'Producto que ayuda a controlar el frizz y mantener el peinado en su lugar durante todo el día.',
-        'eficaz':'Solución rápida y eficiente para resolver problemas comunes del cabello como la sequedad o el daño.',
-        'calidad':'Producto de alta gama formulado con los mejores ingredientes para garantizar resultados profesionales.'
+        'shampoo':'Formulado con ingredientes naturales que limpian suavemente el cabello sin resecarlo.',
+        'acondicionador':'Enriquecido con vitaminas y agentes hidratantes que desenredanan y suavizan el cabello.',
+        'máscara':'Tratamiento profundo que repara y reconstruye la fibra capilar desde el interior.',
+        'sérum':'Producto ligero que sella las cutículas y suaviza el cabello sin frizz.',
+        'aceite':'Aceite nutritivo que hidrata, suaviza y aporta brillo al cabello.',
+        'kit':'Set completo que incluye todos los productos necesarios para un tratamiento integral.',
+        'spray':'Producto de aplicación fácil que protege el cabello del calor y los daños ambientales.',
+        'tratamiento':'Solución completa para abordar problemas específicos del cabello.',
+        'protector':'Barrera protectora contra los daños del sol, el calor y la contaminación.',
+        'reparador':'Fórmula avanzada que repara la estructura interna del cabello.',
+        'nutritivo':'Combinación de vitaminas, minerales y proteínas que nutren el cabello.',
+        'brillo':'Producto diseñado para intensificar el brillo natural del cabello.',
+        'keratina':'Tratamiento profesional que alisa y suaviza el cabello, eliminando el frizz.',
+        'botox':'Tratamiento que relaja y alisa el cabello sin químicos agresivos.',
+        'reconstrucción':'Tratamiento intensivo que repara el cabello severamente dañado.',
+        'alisado':'Procedimiento que transforma el cabello rizado en liso y suave.',
+        'peinado':'Producto para estilizar y mantener el peinado en su lugar.',
+        'mechas':'Técnica de coloración que crea luces y sombras naturales en el cabello.',
+        'balayage':'Técnica de coloración libre que crea un efecto de degradado natural.',
+        'cuidado':'Línea completa de productos diseñados para mantener el cabello saludable.',
+        'profesional':'Producto de uso profesional que garantice resultados de salon de alta calidad.',
+        'intensivo':'Tratamiento concentrado con ingredientes activos para resultados visibles.',
+        'hidratante':'Fórmula rica en agentes humectantes que restauran la hidratación del cabello.',
+        'volumen':'Producto que aumenta el grosor y la densidad del cabello.',
+        'suave':'Tratamiento que alisa y relaja el cabello, eliminando el frizz.',
+        'control':'Producto que ayuda a controlar el frizz y mantener el peinado.',
+        'eficaz':'Solución rápida y eficiente para resolver problemas comunes del cabello.',
+        'calidad':'Producto de alta gama formulado con los mejores ingredientes.'
       };
       for(const clave in descripciones) {
         if(nombreLower.includes(clave)) return descripciones[clave];
       }
-      return `Producto profesional de alta calidad diseñado para satisfacer tus necesidades capilares. Formulado con ingredientes seleccionados para garantizar resultados excepcionales y duraderos. Ideal para uso profesional y en casa.`;
+      return `Producto profesional de alta calidad diseñado para satisfacer tus necesidades capilares.`;
     }
     
     function determinarCategoria(nombreProducto) {
@@ -2952,8 +1786,8 @@
       if(nombreLower.includes('máscara') || nombreLower.includes('tratamiento') || nombreLower.includes('keratina') || nombreLower.includes('botox')) return 'tratamiento';
       return 'accesorio';
     }
-    
-    // Funciones del editor de contenido
+
+    // Editor de contenido
     function guardarReservaInfo() {
       const nuevaReservaInfo = {
         telefono: document.getElementById('edit-reserva-telefono').value,
@@ -2997,7 +1831,7 @@
         document.getElementById('edit-mapa-url').value = contenidoEditable.contactoInfo.mapaUrl;
       }
     }
-    
+
     // Event listeners para modales
     document.getElementById('closeCartModal').addEventListener('click', () => {
       document.getElementById('cartModal').classList.remove('active');
@@ -3019,64 +1853,49 @@
         document.getElementById('tiendaModal').setAttribute('aria-hidden','true');
       }
     });
-    
-    // Navegación suave
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if(targetId === '#') return;
-        const target = document.querySelector(targetId);
-        if(target) {
-          const headerOffset = 80;
-          const elementPosition = target.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageY - headerOffset;
-          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-        }
-      });
-    });
-    
-    // Efecto scroll header
-    window.addEventListener('scroll', function() {
-      const header = document.querySelector('header');
-      if(window.scrollY > 50) {
-        header.style.background = 'linear-gradient(135deg, rgba(255,105,180,0.95), rgba(214,138,177,0.95))';
-      } else {
-        header.style.background = 'linear-gradient(135deg,var(--p),var(--s))';
-      }
-    });
-    
-    // Sistema de notificaciones
-    function mostrarNotificacion(mensaje, tipo = 'success') {
-      const notificacion = document.createElement('div');
-      notificacion.className = `notificación ${tipo}`;
-      notificacion.textContent = mensaje;
-      notificación.setAttribute('role','alert');
-      notificación.setAttribute('aria-live','assertive');
-      notificación.style.position = 'fixed';
-      notificación.style.bottom = '20px';
-      notificación.style.right = '20px';
-      notificación.style.padding = '15px 20px';
-      notificación.style.borderRadius = '5px';
-      notificación.style.color = 'white';
-      notificación.style.fontWeight = '500';
-      notificación.style.zIndex = '9999';
-      notificación.style.transform = 'translateX(100%)';
-      notificación.style.transition = 'transform 0.3s ease';
-      if(tipo === 'error') {
-        notificación.style.backgroundColor = '#f44336';
-      } else {
-        notificación.style.backgroundColor = '#4caf50';
-      }
-      document.body.appendChild(notificacion);
-      setTimeout(() => { notificación.style.transform = 'translateX(0)'; }, 100);
-      setTimeout(() => {
-        notificación.style.transform = 'translateX(100%)';
-        setTimeout(() => { document.body.removeChild(notificacion); }, 300);
-      }, 3000);
+
+    // Funciones auxiliares
+    function abrirTiendaCompleta() {
+      const modal = document.getElementById('tiendaModal');
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden','false');
+      renderizarTiendaCompleta();
     }
     
-    // Validación de formularios
+    function filtrarProductos(categoria) {
+      document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      renderizarTiendaCompleta(categoria);
+    }
+    
+    function eliminarPedido(id) {
+      if(confirm('¿Estás seguro de que quieres eliminar este pedido?')) {
+        eliminarElementoFirebase('ordenes', id);
+        mostrarNotificación('Pedido eliminado con éxito.');
+      }
+    }
+    
+    function eliminarReserva(id) {
+      if(confirm('¿Estás seguro de que quieres eliminar esta reserva?')) {
+        eliminarElementoFirebase('reservas', id);
+        mostrarNotificación('Reserva eliminada con éxito.');
+      }
+    }
+    
+    function eliminarSolicitud(id) {
+      if(confirm('¿Estás seguro de que quieres eliminar esta solicitud?')) {
+        eliminarElementoFirebase('solicitudes-trabajo', id);
+        mostrarNotificación('Solicitud eliminada con éxito.');
+      }
+    }
+    
+    function mostrarMensajeAdmin(mensaje) {
+      const messageEl = document.getElementById('admin-message');
+      messageEl.textContent = mensaje;
+      messageEl.style.display = 'block';
+      setTimeout(() => { messageEl.style.display = 'none'; }, 3000);
+    }
+    
     function validarFormulario(form) {
       let isValid = true;
       const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
@@ -3107,106 +1926,56 @@
         mostrarNotificación('Por favor, completa todos los campos obligatorios.', 'error');
       }
     });
+
+    // Navegación suave
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if(targetId === '#') return;
+        const target = document.querySelector(targetId);
+        if(target) {
+          const headerOffset = 80;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageY - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      });
+    });
     
-    // Función para mostrar vista previa del PDF
-    function showPDFPreview(pdfBlob, filename) {
-      const modal = document.getElementById('pdfPreviewModal');
-      const frame = document.getElementById('pdfPreviewFrame');
-      const title = document.getElementById('pdfPreviewTitle');
-      
-      // Crear URL para el blob
-      const pdfUrl = URL.createObjectURL(pdfBlob);
-      
-      // Configurar el iframe
-      frame.src = pdfUrl;
-      
-      // Configurar el título
-      title.textContent = `Vista Previa - ${filename}`;
-      
-      // Guardar los datos para descarga
-      currentPDFData = {
-        blob: pdfBlob,
-        filename: filename,
-        url: pdfUrl
-      };
-      
-      // Mostrar el modal
-      modal.classList.add('active');
-      modal.setAttribute('aria-hidden', 'false');
-    }
-    
-    // Función para cerrar vista previa
-    function closePDFPreview() {
-      const modal = document.getElementById('pdfPreviewModal');
-      const frame = document.getElementById('pdfPreviewFrame');
-      
-      // Limpiar el iframe
-      frame.src = '';
-      
-      // Liberar la URL del blob
-      if (currentPDFData && currentPDFData.url) {
-        URL.revokeObjectURL(currentPDFData.url);
+    // Efecto scroll header
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if(window.scrollY > 50) {
+        header.style.background = 'linear-gradient(135deg, rgba(255,105,180,0.95), rgba(214,138,177,0.95))';
+      } else {
+        header.style.background = 'linear-gradient(135deg,var(--p),var(--s))';
       }
-      
-      // Ocultar el modal
-      modal.classList.remove('active');
-      modal.setAttribute('aria-hidden', 'true');
-      
-      // Limpiar datos
-      currentPDFData = null;
-    }
-    
-    // Función para descargar el PDF
-    function downloadPDF() {
-      if (!currentPDFData) {
-        mostrarNotificación('No hay PDF disponible para descargar', 'error');
-        return;
-      }
-      
-      // Crear un enlace temporal para descargar
-      const link = document.createElement('a');
-      link.href = currentPDFData.url;
-      link.download = currentPDFData.filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      mostrarNotificación('PDF descargado exitosamente');
-    }
-    
-    // Función para inicializar Firebase
+    });
+
+    // Inicializar Firebase
     function inicializarFirebase() {
-      // Verificar si ya hay datos en Firebase
       database.ref().once('value').then(snapshot => {
         const datos = snapshot.val();
-        if (datos.exists()) {
-          // Si hay datos, usarlos
-          console.log('Base de datos encontrada en Firebase');
-        } else {
-          // Si no hay datos, inicializar con datos por defecto
+        if (!datos.exists()) {
           const datosIniciales = {
             productos: productosPorDefecto,
             galeria: imagenesGaleriaPorDefecto,
             contenido: contenidoEditablePorDefecto
           };
-          
-          // Guardar datos iniciales en Firebase
           database.ref().set(datosIniciales);
         }
       }).catch(error => {
         console.error("Error al inicializar Firebase:", error);
-        // Inicializar con datos por defecto si hay error
         const datosIniciales = {
           productos: productosPorDefecto,
           galeria: imagenesGaleriaPorDefecto,
           contenido: contenidoEditablePorDefecto
         };
-        
         database.ref().set(datosIniciales);
       });
     }
     
-    // Llamar inicializar Firebase
     inicializarFirebase();
   </script>
 </body>
