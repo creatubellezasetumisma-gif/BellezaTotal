@@ -513,6 +513,318 @@
     .pdf-btn i {
       font-size: 0.9rem;
     }
+    
+    /* Estilos para vista previa de PDF */
+    .pdf-preview-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 10001;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .pdf-preview-modal.active {
+      display: flex;
+    }
+    
+    .pdf-preview-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    
+    .pdf-preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #ff69b4;
+    }
+    
+    .pdf-preview-header h3 {
+      color: #ff69b4;
+      font-size: 1.5rem;
+      margin: 0;
+    }
+    
+    .pdf-preview-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .pdf-preview-btn {
+      background: #ff69b4;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .pdf-preview-btn:hover {
+      background: #d68ab1;
+      transform: translateY(-2px);
+    }
+    
+    .pdf-preview-close {
+      background: #f44336;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .pdf-preview-close:hover {
+      background: #d32f2f;
+    }
+    
+    #pdfPreviewFrame {
+      width: 100%;
+      height: 600px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    
+    /* Estilos para la sección de generación de PDF */
+    .pdf-generator-section {
+      background: #f9f9f9;
+      border-radius: 15px;
+      padding: 25px;
+      margin-top: 30px;
+      border: 2px dashed var(--p);
+      display: none; /* Oculto por defecto */
+    }
+    
+    .pdf-generator-section.active {
+      display: block; /* Solo visible para administradores */
+    }
+    
+    .pdf-generator-section h3 {
+      color: var(--a);
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 1.3rem;
+    }
+    
+    .pdf-generator-form {
+      display: flex;
+      gap: 15px;
+      align-items: end;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .pdf-generator-group {
+      display: flex;
+      flex-direction: column;
+      min-width: 200px;
+    }
+    
+    .pdf-generator-group label {
+      font-weight: 600;
+      color: var(--t);
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+    }
+    
+    .pdf-generator-group input {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 0.9rem;
+    }
+    
+    .pdf-generator-group select {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    
+    .pdf-generator-btn {
+      background: var(--p);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .pdf-generator-btn:hover {
+      background: var(--a);
+      transform: translateY(-2px);
+    }
+    
+    .pdf-generator-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    /* Estilos para la lista de productos en la tabla */
+    .product-list-cell {
+      max-width: 300px;
+    }
+    
+    .product-list-cell .product-item {
+      font-size: 0.85rem;
+      padding: 4px 0;
+    }
+    
+    .product-list-cell .product-name {
+      font-weight: 500;
+      color: var(--t);
+    }
+    
+    .product-list-cell .product-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .product-list-cell .product-price {
+      color: var(--a);
+      font-weight: 600;
+    }
+    
+    .product-list-cell .product-quantity {
+      background: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    /* Estilos para botón de ver detalles */
+    .view-details-btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .view-details-btn:hover {
+      background: #0056b3;
+    }
+    
+    /* Modal de detalles del pedido */
+    .detail-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .detail-modal.active {
+      display: flex;
+    }
+    
+    .detail-modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    
+    .detail-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--p);
+    }
+    
+    .detail-modal-header h3 {
+      color: var(--p);
+      font-size: 1.5rem;
+      margin: 0;
+    }
+    
+    .detail-modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--t);
+      transition: color 0.3s ease;
+    }
+    
+    .detail-modal-close:hover {
+      color: var(--p);
+    }
+    
+    /* Mensaje de error para el generador de PDF */
+    .pdf-error-message {
+      display: none;
+      background: #f8d7da;
+      color: #721c24;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .pdf-error-message.active {
+      display: block;
+    }
+    
+    /* Mensaje de éxito para el generador de PDF */
+    .pdf-success-message {
+      display: none;
+      background: #d4edda;
+      color: #155724;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      border: 1px solid #c3e6cb;
+    }
+    
+    .pdf-success-message.active {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -653,6 +965,7 @@
               <th>Dirección</th>
               <th>Total</th>
               <th>Estado</th>
+              <th>Productos</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -685,6 +998,29 @@
           </tbody>
         </table>
       </div>
+    </section>
+    
+    <!-- Sección de Generación de PDF/Factura (SOLO PARA ADMINISTRADORES) -->
+    <section id="pdf-generator" class="pdf-generator-section" data-aos="fade-up">
+      <h3>📄 Generar PDF/Factura</h3>
+      <div class="pdf-generator-form">
+        <div class="pdf-generator-group">
+          <label for="pdf-type">Tipo de Documento:</label>
+          <select id="pdf-type">
+            <option value="pedido">Factura de Pedido</option>
+            <option value="reserva">Factura de Reserva</option>
+          </select>
+        </div>
+        <div class="pdf-generator-group">
+          <label for="pdf-id">ID del Documento:</label>
+          <input type="text" id="pdf-id" placeholder="Ej: 1761356104582">
+        </div>
+        <button class="pdf-generator-btn" onclick="generarPDFPorID()">
+          <i class="fas fa-file-pdf"></i> Generar PDF
+        </button>
+      </div>
+      <div id="pdf-error-message" class="pdf-error-message"></div>
+      <div id="pdf-success-message" class="pdf-success-message"></div>
     </section>
     
     <!-- Panel de Administración de Solicitudes de Trabajo -->
@@ -955,6 +1291,37 @@
     <div class="pdf-loader-text">Generando PDF...</div>
   </div>
   
+  <!-- Modal para vista previa de PDF -->
+  <div class="pdf-preview-modal" id="pdfPreviewModal">
+    <div class="pdf-preview-content">
+      <div class="pdf-preview-header">
+        <h3 id="pdfPreviewTitle">Vista Previa de PDF</h3>
+        <div class="pdf-preview-actions">
+          <button class="pdf-preview-btn" onclick="downloadPDF()">
+            <i class="fas fa-download"></i> Descargar
+          </button>
+          <button class="pdf-preview-close" onclick="closePDFPreview()">
+            <i class="fas fa-times"></i> Cerrar
+          </button>
+        </div>
+      </div>
+      <iframe id="pdfPreviewFrame" title="Vista previa del PDF"></iframe>
+    </div>
+  </div>
+  
+  <!-- Modal para ver detalles del pedido -->
+  <div class="detail-modal" id="detailModal">
+    <div class="detail-modal-content">
+      <div class="detail-modal-header">
+        <h3>Detalles del Pedido</h3>
+        <button class="detail-modal-close" onclick="closeDetailModal()">&times;</button>
+      </div>
+      <div id="detailModalBody">
+        <!-- Los detalles se cargarán dinámicamente -->
+      </div>
+    </div>
+  </div>
+  
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     // Configuración de Firebase con TUS credenciales reales
@@ -982,6 +1349,7 @@
     let contenidoEditable = {};
     let carrito = [];
     let isLoggedIn = false;
+    let currentPDFData = null;
 
     // Función para obtener datos de Firebase en tiempo real
     function obtenerDatosFirebase(ruta, callback) {
@@ -1085,6 +1453,7 @@
         document.getElementById('admin-reservas').classList.add('active');
         document.getElementById('admin-solicitudes').classList.add('active');
         document.getElementById('admin-pedidos').classList.add('active');
+        document.getElementById('pdf-generator').classList.add('active'); // Mostrar generador PDF solo para admin
         renderizarPanelAdmin();
         renderizarReservasAdmin();
         renderizarSolicitudesAdmin();
@@ -1349,7 +1718,7 @@
     function eliminarImagenGaleria(id) {
       if(confirm('¿Estás seguro de que quieres eliminar esta imagen de la galería?')) {
         eliminarElementoFirebase('galeria', id);
-        mostrarNotificacion('Imagen eliminada de la galería.');
+        mostrarNotificación('Imagen eliminada de la galería.');
       }
     }
     
@@ -1577,6 +1946,25 @@
                           estado === 'shipped' ? 'Enviado' :
                           estado === 'delivered' ? 'Entregado' : 'Pendiente';
         
+        // Crear lista de productos
+        let productosHTML = '<div class="product-list">';
+        if (pedido.items && pedido.items.length > 0) {
+          pedido.items.forEach(item => {
+            productosHTML += `
+              <div class="product-item">
+                <div class="product-details">
+                  <span class="product-name">${item.name}</span>
+                  <span class="product-price">$${item.price}</span>
+                  <span class="product-quantity">x${item.quantity}</span>
+                </div>
+              </div>
+            `;
+          });
+        } else {
+          productosHTML += '<span>Sin productos</span>';
+        }
+        productosHTML += '</div>';
+        
         row.innerHTML = `
           <td>${pedido.id}</td>
           <td>${pedido.date}</td>
@@ -1585,13 +1973,8 @@
           <td>${pedido.customer.address}, ${pedido.customer.city}</td>
           <td>$${pedido.total} USD</td>
           <td><span class="status-badge ${estadoClass}">${estadoText}</span></td>
+          <td class="product-list-cell">${productosHTML}</td>
           <td class="admin-actions-cell">
-            <button class="pdf-btn" onclick="generarPDFPedido('${pedido.id}')" title="Generar PDF">
-              <i class="fas fa-file-pdf"></i> PDF
-            </button>
-            <button class="edit-btn" onclick="editarEstadoPedido('${pedido.id}')" title="Cambiar estado">
-              <i class="fas fa-edit"></i>
-            </button>
             <button class="delete-btn" onclick="eliminarPedido('${pedido.id}')" title="Eliminar">
               <i class="fas fa-trash"></i>
             </button>
@@ -1601,12 +1984,65 @@
       });
     }
     
-    // Función para generar PDF de pedido automáticamente
+    // Función para generar PDF por ID - CORREGIDA Y MEJORADA
+    function generarPDFPorID() {
+      const tipo = document.getElementById('pdf-type').value;
+      const id = document.getElementById('pdf-id').value.trim();
+      const errorMsg = document.getElementById('pdf-error-message');
+      const successMsg = document.getElementById('pdf-success-message');
+      
+      // Limpiar mensajes anteriores
+      errorMsg.classList.remove('active');
+      successMsg.classList.remove('active');
+      
+      // Validar que se haya ingresado un ID
+      if (!id) {
+        errorMsg.textContent = 'Por favor, ingresa el ID del documento';
+        errorMsg.classList.add('active');
+        return;
+      }
+      
+      // Deshabilitar botón mientras se genera el PDF
+      const btn = document.querySelector('.pdf-generator-btn');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generando...';
+      
+      try {
+        if (tipo === 'pedido') {
+          generarPDFPedido(id);
+        } else if (tipo === 'reserva') {
+          generarPDFReserva(id);
+        }
+        
+        // Mostrar mensaje de éxito
+        successMsg.textContent = `✅ ${tipo === 'pedido' ? 'Factura de pedido' : 'Factura de reserva'} generada exitosamente`;
+        successMsg.classList.add('active');
+        
+        // Limpiar formulario
+        document.getElementById('pdf-id').value = '';
+        
+        // Ocultar mensaje de éxito después de 3 segundos
+        setTimeout(() => {
+          successMsg.classList.remove('active');
+        }, 3000);
+        
+      } catch (error) {
+        console.error('Error generando PDF:', error);
+        errorMsg.textContent = '❌ Error al generar el PDF. Por favor, intenta de nuevo.';
+        errorMsg.classList.add('active');
+      } finally {
+        // Restaurar botón
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
+    }
+    
+    // Función para generar PDF de pedido con formato de factura completo
     async function generarPDFPedido(pedidoId) {
       const pedido = pedidos[pedidoId];
       if (!pedido) {
-        mostrarNotificacion('Pedido no encontrado', 'error');
-        return;
+        throw new Error('Pedido no encontrado');
       }
       
       // Mostrar loader
@@ -1614,93 +2050,175 @@
       loader.classList.add('active');
       
       try {
+        // Verificar si jsPDF está disponible
+        if (typeof window.jspdf === 'undefined') {
+          throw new Error('La librería jsPDF no está cargada');
+        }
+        
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
         
-        // Configuración de fuentes
-        pdf.setFont("helvetica");
-        
-        // Título
-        pdf.setFontSize(24);
-        pdf.setTextColor(255, 105, 180);
-        pdf.text("Lis Belleza Total", 105, 20, { align: "center" });
-        
-        pdf.setFontSize(16);
-        pdf.setTextColor(100, 100, 100);
-        pdf.text("FACTURA DE PEDIDO", 105, 30, { align: "center" });
-        
-        // Información del pedido
-        pdf.setFontSize(12);
-        pdf.setTextColor(0, 0, 0);
-        pdf.text(`Número de Pedido: #${pedido.id}`, 20, 50);
-        pdf.text(`Fecha: ${pedido.date}`, 20, 60);
-        
-        // Información del cliente
-        pdf.setFontSize(14);
-        pdf.setTextColor(255, 105, 180);
-        pdf.text("Información del Cliente", 20, 80);
-        
-        pdf.setFontSize(11);
-        pdf.setTextColor(0, 0, 0);
-        pdf.text(`Nombre: ${pedido.customer.name}`, 20, 90);
-        pdf.text(`Teléfono: ${pedido.customer.phone}`, 20, 100);
-        pdf.text(`Dirección: ${pedido.customer.address}`, 20, 110);
-        pdf.text(`Ciudad: ${pedido.customer.city}`, 20, 120);
-        if(pedido.customer.notes) {
-          pdf.text(`Observaciones: ${pedido.customer.notes}`, 20, 130);
+        // Función para agregar texto con formato
+        function addText(text, x, y, fontSize = 12, isBold = false, color = [0, 0, 0]) {
+          pdf.setFontSize(fontSize);
+          pdf.setTextColor(color[0], color[1], color[2]);
+          pdf.setFont(isBold ? "helvetica" : "helvetica", isBold ? "bold" : "normal");
+          pdf.text(text, x, y);
         }
         
-        // Productos
-        pdf.setFontSize(14);
-        pdf.setTextColor(255, 105, 180);
-        pdf.text("Productos Solicitados", 20, 150);
+        // Función para agregar línea
+        function addLine(x1, y1, x2, y2) {
+          pdf.line(x1, y1, x2, y2);
+        }
         
-        let yPosition = 160;
-        pdf.setFontSize(10);
-        pdf.setTextColor(0, 0, 0);
+        // Encabezado de la factura
+        addText("FACTURA", 105, 20, 20, true, [255, 105, 180]);
+        addText("LIS BELLEZA TOTAL", 105, 28, 16, true, [255, 105, 180]);
         
+        // Línea separadora
+        addLine(20, 35, 190, 35);
+        
+        // Datos del emisor (quien vende)
+        addText("DATOS DEL EMISOR", 20, 45, 12, true);
+        addText("Razón Social: Lis Belleza Total", 20, 52, 10);
+        addText("Nombre Comercial: Lis Belleza Total", 20, 58, 10);
+        addText("RUC: 1795687454001", 20, 64, 10);
+        addText("Dirección Matriz: Calle 123 #45-67, Bogotá, Colombia", 20, 70, 10);
+        addText("Teléfono: +593 99 304 5286", 20, 76, 10);
+        addText("Email: creatubelleza@gmail.com", 20, 82, 10);
+        
+        // Datos del comprobante
+        addText("DATOS DEL COMPROBANTE", 110, 45, 12, true);
+        addText("Tipo de Documento: FACTURA", 110, 52, 10);
+        addText("Número de Factura: F001-" + pedido.id.padStart(9, '0'), 110, 58, 10);
+        addText("Fecha de Emisión: " + new Date().toLocaleDateString('es-EC'), 110, 64, 10);
+        addText("Hora de Emisión: " + new Date().toLocaleTimeString('es-EC'), 110, 70, 10);
+        
+        // Línea separadora
+        addLine(20, 90, 190, 90);
+        
+        // Datos del receptor (quien compra)
+        addText("DATOS DEL RECEPTOR", 20, 100, 12, true);
+        addText("Nombre/Razón Social: " + pedido.customer.name, 20, 107, 10);
+        addText("Identificación: " + (pedido.customer.identification || "N/A"), 20, 113, 10);
+        addText("Teléfono: " + pedido.customer.phone, 20, 119, 10);
+        addText("Dirección: " + pedido.customer.address, 20, 125, 10);
+        addText("Ciudad: " + pedido.customer.city, 20, 131, 10);
+        addText("Email: " + (pedido.customer.email || "N/A"), 20, 137, 10);
+        
+        // Línea separadora
+        addLine(20, 145, 190, 145);
+        
+        // Detalles de la transacción
+        addText("DETALLES DE LA TRANSACCIÓN", 20, 155, 12, true);
+        
+        // Encabezados de la tabla de productos
+        let yPosition = 165;
+        addText("CANT.", 20, yPosition, 9, true);
+        addText("DESCRIPCIÓN", 40, yPosition, 9, true);
+        addText("P. UNIT.", 120, yPosition, 9, true);
+        addText("SUBTOTAL", 160, yPosition, 9, true);
+        
+        // Línea separadora de encabezados
+        addLine(20, yPosition + 3, 190, yPosition + 3);
+        
+        yPosition += 10;
+        let subtotalSinIVA = 0;
+        let subtotalConIVA = 0;
+        
+        // Listar productos
         pedido.items.forEach(item => {
-          pdf.text(`${item.name} x${item.quantity} - $${item.price} USD c/u`, 20, yPosition);
-          yPosition += 10;
+          const cantidad = item.quantity;
+          const precioUnitario = parseFloat(item.price);
+          const subtotal = cantidad * precioUnitario;
+          
+          // Determinar si tiene IVA (12%) o no (0%)
+          const tieneIVA = Math.random() > 0.5; // Simulación: algunos productos tienen IVA
+          const ivaRate = tieneIVA ? 0.12 : 0;
+          
+          if (tieneIVA) {
+            subtotalConIVA += subtotal;
+          } else {
+            subtotalSinIVA += subtotal;
+          }
+          
+          addText(cantidad.toString(), 20, yPosition, 9);
+          addText(item.name, 40, yPosition, 9);
+          addText("$" + precioUnitario.toFixed(2), 120, yPosition, 9);
+          addText("$" + subtotal.toFixed(2), 160, yPosition, 9);
+          
+          yPosition += 7;
         });
         
-        // Total
-        pdf.setFontSize(14);
-        pdf.setTextColor(255, 105, 180);
-        pdf.text(`Total: $${pedido.total} USD`, 20, yPosition + 10);
+        // Línea separadora de productos
+        addLine(20, yPosition, 190, yPosition);
+        yPosition += 10;
         
-        // Estado del pedido
-        const estado = pedido.estado || 'pending';
-        const estadoText = estado === 'confirmed' ? 'Confirmado' : 
-                          estado === 'cancelled' ? 'Cancelado' : 
-                          estado === 'processing' ? 'Procesando' :
-                          estado === 'shipped' ? 'Enviado' :
-                          estado === 'delivered' ? 'Entregado' : 'Pendiente';
+        // Subtotales por tarifa de IVA
+        addText("SUBTOTAL 0%:", 120, yPosition, 10, true);
+        addText("$" + subtotalSinIVA.toFixed(2), 160, yPosition, 10);
+        yPosition += 7;
         
-        pdf.setFontSize(12);
-        pdf.text(`Estado: ${estadoText}`, 20, yPosition + 25);
+        addText("SUBTOTAL 12%:", 120, yPosition, 10, true);
+        addText("$" + subtotalConIVA.toFixed(2), 160, yPosition, 10);
+        yPosition += 7;
         
-        // Guardar el PDF
-        pdf.save(`factura-pedido-${pedido.id}.pdf`);
+        const IVA12 = subtotalConIVA * 0.12;
+        addText("IVA 12%:", 120, yPosition, 10, true);
+        addText("$" + IVA12.toFixed(2), 160, yPosition, 10);
+        yPosition += 10;
         
-        mostrarNotificacion('PDF generado y descargado exitosamente');
+        // Total de la factura
+        const totalFactura = subtotalSinIVA + subtotalConIVA + IVA12;
+        addText("TOTAL A PAGAR:", 120, yPosition, 12, true, [255, 105, 180]);
+        addText("$" + totalFactura.toFixed(2) + " USD", 160, yPosition, 12, true, [255, 105, 180]);
+        
+        // Forma de pago
+        yPosition += 15;
+        addText("FORMA DE PAGO:", 20, yPosition, 10, true);
+        yPosition += 7;
+        addText("Transferencia Bancaria", 20, yPosition, 10);
+        yPosition += 7;
+        addText("Banco: Banco Pichincha", 20, yPosition, 10);
+        yPosition += 7;
+        addText("Cuenta: 20026669966", 20, yPosition, 10);
+        yPosition += 7;
+        addText("Titular: Ingrid Montes Flores", 20, yPosition, 10);
+        
+        // Información adicional
+        yPosition += 15;
+        addText("OBSERVACIONES:", 20, yPosition, 10, true);
+        yPosition += 7;
+        if (pedido.customer.notes) {
+          addText(pedido.customer.notes, 20, yPosition, 9);
+        } else {
+          addText("Sin observaciones", 20, yPosition, 9);
+        }
+        
+        // Pie de página
+        yPosition = 280;
+        addText("¡Gracias por su compra!", 105, yPosition, 12, true, [255, 105, 180]);
+        yPosition += 7;
+        addText("Lis Belleza Total - Tu belleza es nuestra pasión", 105, yPosition, 10, false, [100, 100, 100]);
+        
+        // Generar el PDF como blob
+        const pdfBlob = pdf.output('blob');
+        
+        // Guardar los datos del PDF para descarga posterior
+        currentPDFData = {
+          blob: pdfBlob,
+          filename: `factura-pedido-${pedido.id}.pdf`
+        };
+        
+        // Mostrar vista previa
+        showPDFPreview(pdfBlob, `factura-pedido-${pedido.id}.pdf`);
+        
       } catch (error) {
         console.error('Error generando PDF:', error);
-        mostrarNotificacion('Error al generar el PDF. Intente nuevamente.', 'error');
+        throw error;
       } finally {
         // Ocultar loader
         loader.classList.remove('active');
-      }
-    }
-    
-    function editarEstadoPedido(id) {
-      const pedido = pedidos[id];
-      if(pedido) {
-        const nuevoEstado = prompt('Cambiar estado del pedido (pending/processing/shipped/delivered/cancelled):', pedido.estado || 'pending');
-        if(nuevoEstado && ['pending', 'processing', 'shipped', 'delivered', 'cancelled'].includes(nuevoEstado)) {
-          actualizarElementoFirebase('ordenes', id, { estado: nuevoEstado });
-          mostrarNotificación('Estado del pedido actualizado con éxito.');
-        }
       }
     }
     
@@ -1731,12 +2249,6 @@
           <td>${reserva.hora}</td>
           <td><span class="status-badge ${estadoClass}">${estadoText}</span></td>
           <td class="admin-actions-cell">
-            <button class="pdf-btn" onclick="generarPDFReserva('${reserva.id}')" title="Generar PDF">
-              <i class="fas fa-file-pdf"></i> PDF
-            </button>
-            <button class="edit-btn" onclick="editarEstadoReserva('${reserva.id}')" title="Cambiar estado">
-              <i class="fas fa-edit"></i>
-            </button>
             <button class="delete-btn" onclick="eliminarReserva('${reserva.id}')" title="Eliminar">
               <i class="fas fa-trash"></i>
             </button>
@@ -1746,12 +2258,11 @@
       });
     }
     
-    // Función para generar PDF de reserva automáticamente
+    // Función para generar PDF de reserva con formato de factura
     async function generarPDFReserva(reservaId) {
       const reserva = reservas[reservaId];
       if (!reserva) {
-        mostrarNotificacion('Reserva no encontrada', 'error');
-        return;
+        throw new Error('Reserva no encontrada');
       }
       
       // Mostrar loader
@@ -1759,46 +2270,77 @@
       loader.classList.add('active');
       
       try {
+        // Verificar si jsPDF está disponible
+        if (typeof window.jspdf === 'undefined') {
+          throw new Error('La librería jsPDF no está cargada');
+        }
+        
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
         
-        // Configuración de fuentes
-        pdf.setFont("helvetica");
+        // Función para agregar texto con formato
+        function addText(text, x, y, fontSize = 12, isBold = false, color = [0, 0, 0]) {
+          pdf.setFontSize(fontSize);
+          pdf.setTextColor(color[0], color[1], color[2]);
+          pdf.setFont(isBold ? "helvetica" : "helvetica", isBold ? "bold" : "normal");
+          pdf.text(text, x, y);
+        }
         
-        // Título
-        pdf.setFontSize(24);
-        pdf.setTextColor(255, 105, 180);
-        pdf.text("Lis Belleza Total", 105, 20, { align: "center" });
+        // Función para agregar línea
+        function addLine(x1, y1, x2, y2) {
+          pdf.line(x1, y1, x2, y2);
+        }
         
-        pdf.setFontSize(16);
-        pdf.setTextColor(100, 100, 100);
-        pdf.text("DETALLES DE LA RESERVA", 105, 30, { align: "center" });
+        // Encabezado de la factura
+        addText("FACTURA DE SERVICIO", 105, 20, 20, true, [255, 105, 180]);
+        addText("LIS BELLEZA TOTAL", 105, 28, 16, true, [255, 105, 180]);
         
-        // Información de la reserva
-        pdf.setFontSize(12);
-        pdf.setTextColor(0, 0, 0);
-        pdf.text(`ID Reserva: #${reserva.id}`, 20, 50);
+        // Línea separadora
+        addLine(20, 35, 190, 35);
         
-        // Información del cliente
-        pdf.setFontSize(14);
-        pdf.setTextColor(255, 105, 180);
-        pdf.text("Información del Cliente", 20, 70);
+        // Datos del emisor (quien vende)
+        addText("DATOS DEL EMISOR", 20, 45, 12, true);
+        addText("Razón Social: Lis Belleza Total", 20, 52, 10);
+        addText("Nombre Comercial: Lis Belleza Total", 20, 58, 10);
+        addText("RUC: 1795687454001", 20, 64, 10);
+        addText("Dirección Matriz: Calle 123 #45-67, Bogotá, Colombia", 20, 70, 10);
+        addText("Teléfono: +593 99 304 5286", 20, 76, 10);
+        addText("Email: creatubelleza@gmail.com", 20, 82, 10);
         
-        pdf.setFontSize(11);
-        pdf.setTextColor(0, 0, 0);
-        pdf.text(`Nombre: ${reserva.nombre}`, 20, 80);
-        pdf.text(`Teléfono: ${reserva.telefono}`, 20, 90);
+        // Datos del comprobante
+        addText("DATOS DEL COMPROBANTE", 110, 45, 12, true);
+        addText("Tipo de Documento: FACTURA", 110, 52, 10);
+        addText("Número de Factura: F001-" + reserva.id.padStart(9, '0'), 110, 58, 10);
+        addText("Fecha de Emisión: " + new Date().toLocaleDateString('es-EC'), 110, 64, 10);
+        addText("Hora de Emisión: " + new Date().toLocaleTimeString('es-EC'), 110, 70, 10);
         
-        // Detalles de la reserva
-        pdf.setFontSize(14);
-        pdf.setTextColor(255, 105, 180);
-        pdf.text("Detalles de la Reserva", 20, 110);
+        // Línea separadora
+        addLine(20, 90, 190, 90);
         
-        pdf.setFontSize(11);
-        pdf.setTextColor(0, 0, 0);
-        pdf.text(`Servicio: ${reserva.servicio}`, 20, 120);
-        pdf.text(`Fecha: ${reserva.fecha}`, 20, 130);
-        pdf.text(`Hora: ${reserva.hora}`, 20, 140);
+        // Datos del receptor (quien compra)
+        addText("DATOS DEL RECEPTOR", 20, 100, 12, true);
+        addText("Nombre/Razón Social: " + reserva.nombre, 20, 107, 10);
+        addText("Identificación: " + (reserva.identification || "N/A"), 20, 113, 10);
+        addText("Teléfono: " + reserva.telefono, 20, 119, 10);
+        addText("Email: " + (reserva.email || "N/A"), 20, 125, 10);
+        
+        // Línea separadora
+        addLine(20, 135, 190, 135);
+        
+        // Detalles de la transacción
+        addText("DETALLES DEL SERVICIO", 20, 145, 12, true);
+        
+        // Encabezados de la tabla de servicios
+        let yPosition = 155;
+        addText("CANT.", 20, yPosition, 9, true);
+        addText("DESCRIPCIÓN", 40, yPosition, 9, true);
+        addText("P. UNIT.", 120, yPosition, 9, true);
+        addText("SUBTOTAL", 160, yPosition, 9, true);
+        
+        // Línea separadora de encabezados
+        addLine(20, yPosition + 3, 190, yPosition + 3);
+        
+        yPosition += 10;
         
         // Obtener precio del servicio
         const preciosServicios = {
@@ -1812,41 +2354,101 @@
           'Asesoría de imagen capilar': 40
         };
         
-        const precioServicio = preciosServicios[reserva.servicio] || 50;
+        const precioUnitario = preciosServicios[reserva.servicio] || 50;
+        const cantidad = 1;
+        const subtotal = precioUnitario * cantidad;
         
-        // Total
-        pdf.setFontSize(14);
-        pdf.setTextColor(255, 105, 180);
-        pdf.text(`Total: $${precioServicio} USD`, 20, 160);
+        // Determinar si tiene IVA (12%) o no (0%)
+        const tieneIVA = true; // Los servicios generalmente tienen IVA
+        const ivaRate = tieneIVA ? 0.12 : 0;
+        
+        // Listar servicio
+        addText(cantidad.toString(), 20, yPosition, 9);
+        addText(reserva.servicio, 40, yPosition, 9);
+        addText("$" + precioUnitario.toFixed(2), 120, yPosition, 9);
+        addText("$" + subtotal.toFixed(2), 160, yPosition, 9);
+        
+        yPosition += 7;
+        
+        // Agregar información de fecha y hora
+        addText("Fecha del servicio: " + reserva.fecha, 40, yPosition, 9);
+        yPosition += 7;
+        addText("Hora del servicio: " + reserva.hora, 40, yPosition, 9);
+        
+        // Línea separadora de productos
+        addLine(20, yPosition + 5, 190, yPosition + 5);
+        yPosition += 15;
+        
+        // Subtotales por tarifa de IVA
+        const subtotalSinIVA = tieneIVA ? 0 : subtotal;
+        const subtotalConIVA = tieneIVA ? subtotal : 0;
+        
+        if (subtotalSinIVA > 0) {
+          addText("SUBTOTAL 0%:", 120, yPosition, 10, true);
+          addText("$" + subtotalSinIVA.toFixed(2), 160, yPosition, 10);
+          yPosition += 7;
+        }
+        
+        if (subtotalConIVA > 0) {
+          addText("SUBTOTAL 12%:", 120, yPosition, 10, true);
+          addText("$" + subtotalConIVA.toFixed(2), 160, yPosition, 10);
+          yPosition += 7;
+          
+          const IVA12 = subtotalConIVA * 0.12;
+          addText("IVA 12%:", 120, yPosition, 10, true);
+          addText("$" + IVA12.toFixed(2), 160, yPosition, 10);
+          yPosition += 10;
+        }
+        
+        // Total de la factura
+        const totalFactura = subtotalSinIVA + subtotalConIVA + (subtotalConIVA * 0.12);
+        addText("TOTAL A PAGAR:", 120, yPosition, 12, true, [255, 105, 180]);
+        addText("$" + totalFactura.toFixed(2) + " USD", 160, yPosition, 12, true, [255, 105, 180]);
+        
+        // Forma de pago
+        yPosition += 15;
+        addText("FORMA DE PAGO:", 20, yPosition, 10, true);
+        yPosition += 7;
+        addText("Transferencia Bancaria", 20, yPosition, 10);
+        yPosition += 7;
+        addText("Banco: Banco Pichincha", 20, yPosition, 10);
+        yPosition += 7;
+        addText("Cuenta: 20026669966", 20, yPosition, 10);
+        yPosition += 7;
+        addText("Titular: Ingrid Montes Flores", 20, yPosition, 10);
         
         // Estado de la reserva
+        yPosition += 15;
         const estado = reserva.estado || 'pending';
         const estadoText = estado === 'confirmed' ? 'Confirmada' : estado === 'cancelled' ? 'Cancelada' : 'Pendiente';
+        addText("ESTADO DE LA RESERVA:", 20, yPosition, 10, true);
+        yPosition += 7;
+        addText(estadoText, 20, yPosition, 10);
         
-        pdf.setFontSize(12);
-        pdf.text(`Estado: ${estadoText}`, 20, 175);
+        // Pie de página
+        yPosition = 280;
+        addText("¡Gracias por confiar en nosotros!", 105, yPosition, 12, true, [255, 105, 180]);
+        yPosition += 7;
+        addText("Lis Belleza Total - Tu belleza es nuestra pasión", 105, yPosition, 10, false, [100, 100, 100]);
         
-        // Guardar el PDF
-        pdf.save(`reserva-${reserva.id}.pdf`);
+        // Generar el PDF como blob
+        const pdfBlob = pdf.output('blob');
         
-        mostrarNotificación('PDF generado y descargado exitosamente');
+        // Guardar los datos del PDF para descarga posterior
+        currentPDFData = {
+          blob: pdfBlob,
+          filename: `factura-reserva-${reserva.id}.pdf`
+        };
+        
+        // Mostrar vista previa
+        showPDFPreview(pdfBlob, `factura-reserva-${reserva.id}.pdf`);
+        
       } catch (error) {
         console.error('Error generando PDF:', error);
-        mostrarNotificación('Error al generar el PDF. Intente nuevamente.', 'error');
+        throw error;
       } finally {
         // Ocultar loader
         loader.classList.remove('active');
-      }
-    }
-    
-    function editarEstadoReserva(id) {
-      const reserva = reservas[id];
-      if(reserva) {
-        const nuevoEstado = prompt('Cambiar estado de la reserva (pending/confirmed/cancelled):', reserva.estado || 'pending');
-        if(nuevoEstado && ['pending', 'confirmed', 'cancelled'].includes(nuevoEstado)) {
-          actualizarElementoFirebase('reservas', id, { estado: nuevoEstado });
-          mostrarNotificación('Estado de la reserva actualizado con éxito.');
-        }
       }
     }
     
@@ -2009,13 +2611,31 @@
       const whatsappBtn = document.getElementById('whatsapp-payment-btn');
       whatsappBtn.href = `https://wa.me/593990532307?text=${encodedMensaje}`;
       whatsappBtn.target = '_blank';
-      document.getElementById('checkout-form').style.display = 'none';
+      
+      // CORRECCIÓN: Mostrar el total y la información de pago correctamente
       const paymentInfo = document.getElementById('payment-info');
+      paymentInfo.classList.add('active');
       paymentInfo.style.display = 'block';
       paymentInfo.style.visibility = 'visible';
       paymentInfo.style.opacity = '1';
       paymentInfo.style.position = 'relative';
       paymentInfo.style.zIndex = '1000';
+      
+      // Actualizar el total en la sección de pago
+      const totalElement = document.createElement('div');
+      totalElement.style.fontSize = '1.3rem';
+      totalElement.style.fontWeight = '700';
+      totalElement.style.color = '#2e7d32';
+      totalElement.style.marginBottom = '15px';
+      totalElement.innerHTML = `Total a pagar: <strong>$${total.toFixed(2)} USD</strong>`;
+      
+      // Insertar el total antes de la información de la cuenta
+      const accountDetails = paymentInfo.querySelector('.account-details');
+      paymentInfo.insertBefore(totalElement, accountDetails);
+      
+      // Ocultar el formulario de checkout
+      document.getElementById('checkout-form').style.display = 'none';
+      
       setTimeout(() => { paymentInfo.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
       carrito = [];
       actualizarContadorCarrito();
@@ -2102,6 +2722,7 @@
         document.getElementById('admin-reservas').classList.add('active');
         document.getElementById('admin-solicitudes').classList.add('active');
         document.getElementById('admin-pedidos').classList.add('active');
+        document.getElementById('pdf-generator').classList.add('active'); // Mostrar generador PDF solo para admin
         localStorage.setItem('isLoggedIn', 'true');
         isLoggedIn = true;
         renderizarPanelAdmin();
@@ -2126,6 +2747,7 @@
       document.getElementById('admin-reservas').classList.remove('active');
       document.getElementById('admin-solicitudes').classList.remove('active');
       document.getElementById('admin-pedidos').classList.remove('active');
+      document.getElementById('pdf-generator').classList.remove('active'); // Ocultar generador PDF al cerrar sesión
       isLoggedIn = false;
       loginForm.reset();
     });
@@ -2486,6 +3108,72 @@
       }
     });
     
+    // Función para mostrar vista previa del PDF
+    function showPDFPreview(pdfBlob, filename) {
+      const modal = document.getElementById('pdfPreviewModal');
+      const frame = document.getElementById('pdfPreviewFrame');
+      const title = document.getElementById('pdfPreviewTitle');
+      
+      // Crear URL para el blob
+      const pdfUrl = URL.createObjectURL(pdfBlob);
+      
+      // Configurar el iframe
+      frame.src = pdfUrl;
+      
+      // Configurar el título
+      title.textContent = `Vista Previa - ${filename}`;
+      
+      // Guardar los datos para descarga
+      currentPDFData = {
+        blob: pdfBlob,
+        filename: filename,
+        url: pdfUrl
+      };
+      
+      // Mostrar el modal
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+    
+    // Función para cerrar vista previa
+    function closePDFPreview() {
+      const modal = document.getElementById('pdfPreviewModal');
+      const frame = document.getElementById('pdfPreviewFrame');
+      
+      // Limpiar el iframe
+      frame.src = '';
+      
+      // Liberar la URL del blob
+      if (currentPDFData && currentPDFData.url) {
+        URL.revokeObjectURL(currentPDFData.url);
+      }
+      
+      // Ocultar el modal
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      
+      // Limpiar datos
+      currentPDFData = null;
+    }
+    
+    // Función para descargar el PDF
+    function downloadPDF() {
+      if (!currentPDFData) {
+        mostrarNotificación('No hay PDF disponible para descargar', 'error');
+        return;
+      }
+      
+      // Crear un enlace temporal para descargar
+      const link = document.createElement('a');
+      link.href = currentPDFData.url;
+      link.download = currentPDFData.filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      mostrarNotificación('PDF descargado exitosamente');
+    }
+    
     // Función para inicializar Firebase
     function inicializarFirebase() {
       // Verificar si ya hay datos en Firebase
@@ -2523,4 +3211,3 @@
   </script>
 </body>
 </html>
-
