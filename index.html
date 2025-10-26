@@ -274,9 +274,81 @@
       50% { transform: translate(-20px, 20px) rotate(180deg); }
       75% { transform: translate(-30px, -20px) rotate(270deg); }
     }
+    
+    /* Loading spinner */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Loading overlay */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    
+    .loading-overlay.active {
+      display: flex;
+    }
+    
+    .loading-overlay .loading {
+      width: 50px;
+      height: 50px;
+      border: 5px solid var(--p);
+      border-top-color: transparent;
+    }
+    
+    /* Contenedor de carga para secciones */
+    .section-loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+    }
+    
+    .section-loading .loading {
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--p);
+      border-top-color: transparent;
+    }
+    
+    /* Estilos para imágenes con error */
+    .img-error {
+      background: #f8f8f8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 10px;
+    }
   </style>
 </head>
 <body>
+  <!-- Loading overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading"></div>
+  </div>
+  
   <!-- Elementos decorativos flotantes -->
   <div class="floating-element"></div>
   <div class="floating-element"></div>
@@ -738,95 +810,15 @@
     const database = firebase.database();
 
     // Variables globales
-    let productos = [];
-    let imagenesGaleria = [];
-    let reservas = [];
-    let solicitudesTrabajo = [];
-    let pedidos = [];
+    let productos = {};
+    let imagenesGaleria = {};
+    let reservas = {};
+    let solicitudesTrabajo = {};
+    let pedidos = {};
     let contenidoEditable = {};
     let carrito = [];
     let isLoggedIn = false;
-    let currentReserva = null; // Almacenar la reserva actual para el botón de WhatsApp
-
-    // Funciones de Firebase
-    function obtenerDatosFirebase(ruta, callback) {
-      database.ref(ruta).on('value', (snapshot) => {
-        const datos = snapshot.val();
-        if (datos) {
-          callback(datos);
-        } else {
-          switch(ruta) {
-            case 'productos': callback(productosPorDefecto); break;
-            case 'galeria': callback(imagenesGaleriaPorDefecto); break;
-            case 'contenido': callback(contenidoEditablePorDefecto); break;
-            default: callback({});
-          }
-        }
-      });
-    }
-
-    function guardarDatosFirebase(ruta, datos) {
-      database.ref(ruta).set(datos);
-    }
-
-    function añadirElementoFirebase(ruta, elemento) {
-      const nuevaRuta = database.ref(ruta).push();
-      nuevaRuta.set(elemento);
-    }
-
-    function actualizarElementoFirebase(ruta, id, datosActualizados) {
-      database.ref(`${ruta}/${id}`).update(datosActualizados);
-    }
-
-    function eliminarElementoFirebase(ruta, id) {
-      database.ref(`${ruta}/${id}`).remove();
-    }
-
-    function leerArchivoComoBase64(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
-
-    // Datos por defecto
-    const contenidoEditablePorDefecto = {
-      reservaInfo: {
-        telefono: '+593 99 304 5286',
-        email: 'creatubelleza@gmail.com',
-        direccion: 'Calle 123 #45-67, Bogotá, Colombia'
-      },
-      contactoInfo: {
-        direccion: 'Calle 123 #45-67, Bogotá, Colombia',
-        telefono: '+593 99 304 5286',
-        email: 'creatubelleza@gmail.com',
-        mapaUrl: 'https://maps.app.goo.gl/Cb275GuUDyefj1VW8'
-      }
-    };
-
-    const productosPorDefecto = [
-      {id:'1',name:'Shampoo Reparador Dipaso',price:'6.25',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/159672-800-auto?v=638705778699930000&width=800&height=auto&aspect=true',description:'Formulado con keratina y aceites naturales para reparar el cabello dañado.',badge:'Bestseller',categoria:'shampoo'},
-      {id:'2',name:'Acondicionador Nutritivo Dipaso',price:'5.50',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/161883-220-220?v=638840641064500000&width=220&height=220&aspect=true',description:'Enriquecido con vitaminas y proteínas que nutren profundamente.',badge:'Nuevo',categoria:'acondicionador'},
-      {id:'3',name:'Máscara de Tratamiento Dipaso',price:'7.50',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/160308-220-220?v=638754092827970000&width=220&height=220&aspect=true',description:'Tratamiento intensivo para reparar y revitalizar el cabello.',badge:'Premium',categoria:'tratamiento'},
-      {id:'4',name:'Sérum de Brillo Dipaso',price:'7.00',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/160627-220-220?v=638912128832870000&width=220&height=220&aspect=true',description:'Proporciona brillo intenso y control del frizz sin pesar.',badge:'Exclusivo',categoria:'accesorio'},
-      {id:'5',name:'Aceite Capilar Dipaso',price:'6.50',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/156559-220-220?v=638592493584430000&width=220&height=220&aspect=true',description:'Aceite nutritivo con argán y coco para hidratar las puntas.',badge:'Popular',categoria:'accesorio'},
-      {id:'6',name:'Espuma para Peinado Dipaso',price:'5.25',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/155989-220-220?v=638587487829000000&width=220&height=220&aspect=true',description:'Fija tu peinado con un acabado flexible y natural.',badge:'Tendencia',categoria:'accesorio'},
-      {id:'7',name:'Spray Protector Térmico Dipaso',price:'5.75',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/158525-220-220?v=638666924736970000&width=220&height=220&aspect=true',description:'Protege tu cabello de los daños causados por herramientas de calor.',badge:'Recomendado',categoria:'accesorio'},
-      {id:'8',name:'Kit Completo de Tratamiento Dipaso',price:'21.25',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/159182-800-auto?v=638689307426100000&width=800&height=auto&aspect=true',description:'Incluye shampoo, acondicionador, máscara y sérum.',badge:'Pack Ahorro',categoria:'tratamiento'}
-    ];
-
-    const imagenesGaleriaPorDefecto = [
-      {id:'1',url:'https://www.angelanapeluqueros.com/data/6306/contenidos/thumb_497886_contenidos_optimized.jpg',titulo:'Peinados Elegantes',descripcion:'Transformaciones que resaltan tu belleza natural'},
-      {id:'2',url:'https://www.grancasa.es/wp-content/uploads/sites/24/2018/02/productos-alisado-keratina.jpg',titulo:'Tratamiento de Keratina',descripcion:'Cabello liso y brillante por más tiempo'},
-      {id:'3',url:'https://termix.net/blog/wp-content/uploads/2024/10/Termix-horizontal-23.png',titulo:'Cuidado Profesional',descripcion:'Productos y técnicas de vanguardia'},
-      {id:'4',url:'https://distribuidorabelha.com/wp-content/uploads/2021/02/balayage-01.jpg',titulo:'Técnicas de Color',descripcion:'Mechas y balayage personalizados'},
-      {id:'5',url:'https://i.ytimg.com/vi/TAbgZySwUfw/maxresdefault.jpg',titulo:'Eventos Especiales',descripcion:'Peinados para momentos inolvidables'},
-      {id:'6',url:'https://www.univital.com.co/wp-content/uploads/2025/03/como-cuidar-el-cabello-tinturado-univital.jpg',titulo:'Cuidado Post-Tintura',descripcion:'Mantén tu color vibrante por más tiempo'},
-      {id:'7',url:'https://media-cdn.tripadvisor.com/media/photo-s/17/f0/6b/48/antes-y-despues-de-una.jpg',titulo:'Transformaciones',descripcion:'Resultados visibles que te encantarán'},
-      {id:'8',url:'https://m.media-amazon.com/images/S/aplus-media/sc/3b97d825-a09d-46c6-8760-7687a8827e23.__CR0,0,970,600_PT0_SX970_V1___.jpg',titulo:'Efecto Keratina',descripcion:'Cabello liso, brillante y manejable'}
-    ];
+    let currentReserva = null;
 
     // Sistema de notificaciones mejorado
     function mostrarNotificación(mensaje, tipo = 'success') {
@@ -857,115 +849,98 @@
       }, 3000);
     }
 
-    // CORREGIDO: Función para verificar el estado de autenticación al cargar la página
+    // Función para verificar el estado de autenticación al cargar la página
     function verificarEstadoAutenticacion() {
-      // Verificar si hay una sesión activa en localStorage
       isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
       
       if (isLoggedIn) {
-        // Si está logueado, mostrar el panel de administrador inmediatamente
         mostrarPanelAdmin();
         console.log('Usuario logueado detectado, mostrando panel de administrador');
       }
       
-      // Cargar todos los datos necesarios
       cargarTodosLosDatos();
     }
 
-    // CORREGIDO: Función para cargar todos los datos
+    // CORREGIDO: Función para cargar todos los datos con listeners en tiempo real
     function cargarTodosLosDatos() {
       console.log('Cargando todos los datos...');
       
-      // Cargar datos generales (siempre se cargan)
-      database.ref('productos').once('value').then(snapshot => {
+      // Mostrar loading
+      document.getElementById('loadingOverlay').classList.add('active');
+      
+      // Cargar productos con listener en tiempo real
+      database.ref('productos').on('value', (snapshot) => {
         const datos = snapshot.val();
         if (datos) {
           productos = datos;
           renderizarTienda();
-          console.log('Productos cargados:', Object.keys(productos).length);
+          if (isLoggedIn) renderizarPanelProductos();
+          console.log('Productos actualizados:', Object.keys(productos).length);
         } else {
           productos = productosPorDefecto;
           renderizarTienda();
+          if (isLoggedIn) renderizarPanelProductos();
           console.log('Usando productos por defecto');
         }
-      }).catch(error => {
-        console.error('Error al cargar productos:', error);
-        productos = productosPorDefecto;
-        renderizarTienda();
+        // Ocultar loading después de cargar productos
+        setTimeout(() => {
+          document.getElementById('loadingOverlay').classList.remove('active');
+        }, 500);
       });
       
-      database.ref('galeria').once('value').then(snapshot => {
+      // Cargar galería con listener en tiempo real
+      database.ref('galeria').on('value', (snapshot) => {
         const datos = snapshot.val();
         if (datos) {
           imagenesGaleria = datos;
           renderizarGaleria();
           if (isLoggedIn) cargarGaleriaAdmin();
-          console.log('Galería cargada:', Object.keys(imagenesGaleria).length);
+          console.log('Galería actualizada:', Object.keys(imagenesGaleria).length);
         } else {
           imagenesGaleria = imagenesGaleriaPorDefecto;
           renderizarGaleria();
           if (isLoggedIn) cargarGaleriaAdmin();
           console.log('Usando galería por defecto');
         }
-      }).catch(error => {
-        console.error('Error al cargar galería:', error);
-        imagenesGaleria = imagenesGaleriaPorDefecto;
-        renderizarGaleria();
-        if (isLoggedIn) cargarGaleriaAdmin();
       });
       
-      database.ref('contenido').once('value').then(snapshot => {
+      // Cargar contenido con listener en tiempo real
+      database.ref('contenido').on('value', (snapshot) => {
         const datos = snapshot.val();
         if (datos) {
           contenidoEditable = datos;
           aplicarContenidoEditable();
-          console.log('Contenido cargado');
+          console.log('Contenido actualizado');
         } else {
           contenidoEditable = contenidoEditablePorDefecto;
           aplicarContenidoEditable();
           console.log('Usando contenido por defecto');
         }
-      }).catch(error => {
-        console.error('Error al cargar contenido:', error);
-        contenidoEditable = contenidoEditablePorDefecto;
-        aplicarContenidoEditable();
       });
       
       // Cargar datos de administrador solo si está logueado
       if (isLoggedIn) {
         console.log('Cargando datos de administrador...');
         
-        database.ref('reservas').once('value').then(snapshot => {
+        database.ref('reservas').on('value', (snapshot) => {
           const datos = snapshot.val();
           reservas = datos || {};
           renderizarReservasAdmin();
-          console.log('Reservas cargadas:', Object.keys(reservas).length);
-        }).catch(error => {
-          console.error('Error al cargar reservas:', error);
-          reservas = {};
-          renderizarReservasAdmin();
+          console.log('Reservas actualizadas:', Object.keys(reservas).length);
         });
         
-        database.ref('solicitudes-trabajo').once('value').then(snapshot => {
+        database.ref('solicitudes-trabajo').on('value', (snapshot) => {
           const datos = snapshot.val();
           solicitudesTrabajo = datos || {};
           renderizarSolicitudesAdmin();
-          console.log('Solicitudes cargadas:', Object.keys(solicitudesTrabajo).length);
-        }).catch(error => {
-          console.error('Error al cargar solicitudes:', error);
-          solicitudesTrabajo = {};
-          renderizarSolicitudesAdmin();
+          console.log('Solicitudes actualizadas:', Object.keys(solicitudesTrabajo).length);
         });
         
-        database.ref('ordenes').once('value').then(snapshot => {
+        database.ref('ordenes').on('value', (snapshot) => {
           const datos = snapshot.val();
           pedidos = datos || {};
           renderizarPedidosAdmin();
-          console.log('Pedidos cargados:', Object.keys(pedidos).length);
-        }).catch(error => {
-          console.error('Error al cargar pedidos:', error);
-          pedidos = {};
-          renderizarPedidosAdmin();
+          console.log('Pedidos actualizados:', Object.keys(pedidos).length);
         });
       }
       
@@ -973,32 +948,92 @@
       actualizarContadorCarrito();
     }
 
+    // Datos por defecto
+    const contenidoEditablePorDefecto = {
+      reservaInfo: {
+        telefono: '+593 99 304 5286',
+        email: 'creatubelleza@gmail.com',
+        direccion: 'Calle 123 #45-67, Bogotá, Colombia'
+      },
+      contactoInfo: {
+        direccion: 'Calle 123 #45-67, Bogotá, Colombia',
+        telefono: '+593 99 304 5286',
+        email: 'creatubelleza@gmail.com',
+        mapaUrl: 'https://maps.app.goo.gl/Cb275GuUDyefj1VW8'
+      }
+    };
+
+    const productosPorDefecto = {
+      '1': {id:'1',name:'Shampoo Reparador Dipaso',price:'6.25',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/159672-800-auto?v=638705778699930000&width=800&height=auto&aspect=true',description:'Formulado con keratina y aceites naturales para reparar el cabello dañado.',badge:'Bestseller',categoria:'shampoo'},
+      '2': {id:'2',name:'Acondicionador Nutritivo Dipaso',price:'5.50',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/161883-220-220?v=638840641064500000&width=220&height=220&aspect=true',description:'Enriquecido con vitaminas y proteínas que nutren profundamente.',badge:'Nuevo',categoria:'acondicionador'},
+      '3': {id:'3',name:'Máscara de Tratamiento Dipaso',price:'7.50',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/160308-220-220?v=638754092827970000&width=220&height=220&aspect=true',description:'Tratamiento intensivo para reparar y revitalizar el cabello.',badge:'Premium',categoria:'tratamiento'},
+      '4': {id:'4',name:'Sérum de Brillo Dipaso',price:'7.00',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/160627-220-220?v=638912128832870000&width=220&height=220&aspect=true',description:'Proporciona brillo intenso y control del frizz sin pesar.',badge:'Exclusivo',categoria:'accesorio'},
+      '5': {id:'5',name:'Aceite Capilar Dipaso',price:'6.50',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/156559-220-220?v=638592493584430000&width=220&height=220&aspect=true',description:'Aceite nutritivo con argán y coco para hidratar las puntas.',badge:'Popular',categoria:'accesorio'},
+      '6': {id:'6',name:'Espuma para Peinado Dipaso',price:'5.25',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/155989-220-220?v=638587487829000000&width=220&height=220&aspect=true',description:'Fija tu peinado con un acabado flexible y natural.',badge:'Tendencia',categoria:'accesorio'},
+      '7': {id:'7',name:'Spray Protector Térmico Dipaso',price:'5.75',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/158525-220-220?v=638666924736970000&width=220&height=220&aspect=true',description:'Protege tu cabello de los daños causados por herramientas de calor.',badge:'Recomendado',categoria:'accesorio'},
+      '8': {id:'8',name:'Kit Completo de Tratamiento Dipaso',price:'21.25',imageUrl:'https://dipasoec.vtexassets.com/arquivos/ids/159182-800-auto?v=638689307426100000&width=800&height=auto&aspect=true',description:'Incluye shampoo, acondicionador, máscara y sérum.',badge:'Pack Ahorro',categoria:'tratamiento'}
+    };
+
+    const imagenesGaleriaPorDefecto = {
+      '1': {id:'1',url:'https://www.angelanapeluqueros.com/data/6306/contenidos/thumb_497886_contenidos_optimized.jpg',titulo:'Peinados Elegantes',descripcion:'Transformaciones que resaltan tu belleza natural'},
+      '2': {id:'2',url:'https://www.grancasa.es/wp-content/uploads/sites/24/2018/02/productos-alisado-keratina.jpg',titulo:'Tratamiento de Keratina',descripcion:'Cabello liso y brillante por más tiempo'},
+      '3': {id:'3',url:'https://termix.net/blog/wp-content/uploads/2024/10/Termix-horizontal-23.png',titulo:'Cuidado Profesional',descripcion:'Productos y técnicas de vanguardia'},
+      '4': {id:'4',url:'https://distribuidorabelha.com/wp-content/uploads/2021/02/balayage-01.jpg',titulo:'Técnicas de Color',descripcion:'Mechas y balayage personalizados'},
+      '5': {id:'5',url:'https://i.ytimg.com/vi/TAbgZySwUfw/maxresdefault.jpg',titulo:'Eventos Especiales',descripcion:'Peinados para momentos inolvidables'},
+      '6': {id:'6',url:'https://www.univital.com.co/wp-content/uploads/2025/03/como-cuidar-el-cabello-tinturado-univital.jpg',titulo:'Cuidado Post-Tintura',descripcion:'Mantén tu color vibrante por más tiempo'},
+      '7': {id:'7',url:'https://media-cdn.tripadvisor.com/media/photo-s/17/f0/6b/48/antes-y-despues-de-una.jpg',titulo:'Transformaciones',descripcion:'Resultados visibles que te encantarán'},
+      '8': {id:'8',url:'https://m.media-amazon.com/images/S/aplus-media/sc/3b97d825-a09d-46c6-8760-7687a8827e23.__CR0,0,970,600_PT0_SX970_V1___.jpg',titulo:'Efecto Keratina',descripcion:'Cabello liso, brillante y manejable'}
+    };
+
     // Inicialización
     document.addEventListener('DOMContentLoaded', () => {
-      AOS.init({duration:1000,once:true});
+      try {
+        AOS.init({
+          duration: 1000,
+          once: true,
+          disable: 'mobile'
+        });
+        console.log('AOS inicializado correctamente');
+      } catch (error) {
+        console.error('Error al inicializar AOS:', error);
+      }
       
-      // Verificar el estado de autenticación al cargar la página
       verificarEstadoAutenticacion();
     });
 
     // Funciones de renderizado
     function aplicarContenidoEditable() {
-      if (contenidoEditable.reservaInfo) {
-        document.getElementById('reserva-telefono').textContent = contenidoEditable.reservaInfo.telefono;
-        document.getElementById('reserva-email').textContent = contenidoEditable.reservaInfo.email;
-        document.getElementById('reserva-direccion').textContent = contenidoEditable.reservaInfo.direccion;
-      }
-      
-      if (contenidoEditable.contactoInfo) {
-        document.getElementById('contacto-direccion').textContent = contenidoEditable.contactoInfo.direccion;
-        document.getElementById('contacto-telefono').textContent = contenidoEditable.contactoInfo.telefono;
-        document.getElementById('contacto-email').textContent = contenidoEditable.contactoInfo.email;
-        document.getElementById('mapa-iframe').src = contenidoEditable.contactoInfo.mapaUrl;
+      try {
+        if (contenidoEditable.reservaInfo) {
+          const reservaTelefono = document.getElementById('reserva-telefono');
+          const reservaEmail = document.getElementById('reserva-email');
+          const reservaDireccion = document.getElementById('reserva-direccion');
+          
+          if (reservaTelefono) reservaTelefono.textContent = contenidoEditable.reservaInfo.telefono;
+          if (reservaEmail) reservaEmail.textContent = contenidoEditable.reservaInfo.email;
+          if (reservaDireccion) reservaDireccion.textContent = contenidoEditable.reservaInfo.direccion;
+        }
+        
+        if (contenidoEditable.contactoInfo) {
+          const contactoDireccion = document.getElementById('contacto-direccion');
+          const contactoTelefono = document.getElementById('contacto-telefono');
+          const contactoEmail = document.getElementById('contacto-email');
+          const mapaIframe = document.getElementById('mapa-iframe');
+          
+          if (contactoDireccion) contactoDireccion.textContent = contenidoEditable.contactoInfo.direccion;
+          if (contactoTelefono) contactoTelefono.textContent = contenidoEditable.contactoInfo.telefono;
+          if (contactoEmail) contactoEmail.textContent = contenidoEditable.contactoInfo.email;
+          if (mapaIframe) mapaIframe.src = contenidoEditable.contactoInfo.mapaUrl;
+        }
+      } catch (error) {
+        console.error('Error al aplicar contenido editable:', error);
       }
     }
 
     function renderizarTestimonios() {
       const testimoniosGrid = document.getElementById('testimonios-grid');
+      if (!testimoniosGrid) return;
+      
       testimoniosGrid.innerHTML = '';
       
       const testimoniosPorDefecto = [
@@ -1054,17 +1089,51 @@
       });
     }
 
+    // CORREGIDO: Función para renderizar la galería con manejo de errores mejorado
     function renderizarGaleria() {
       const slider = document.getElementById('galeria-slider');
       const indicatorsContainer = document.getElementById('galeria-indicators');
+      if (!slider || !indicatorsContainer) return;
+      
       slider.innerHTML = '';
       indicatorsContainer.innerHTML = '';
+      
+      // Asegurarse de que tenemos imágenes para mostrar
+      if (!imagenesGaleria || Object.keys(imagenesGaleria).length === 0) {
+        console.log('No hay imágenes en la galería, usando imágenes por defecto');
+        imagenesGaleria = imagenesGaleriaPorDefecto;
+      }
       
       Object.values(imagenesGaleria).forEach((imagen, index) => {
         const slide = document.createElement('div');
         slide.className = 'galeria-slide';
-        slide.innerHTML = `<img src="${imagen.url}" alt="${imagen.titulo}" /><div class="galeria-caption"><h3>${imagen.titulo}</h3><p>${imagen.descripcion}</p></div>`;
+        
+        // Crear elemento de imagen con manejo de errores
+        const imgElement = document.createElement('img');
+        imgElement.src = imagen.url;
+        imgElement.alt = imagen.titulo;
+        
+        // Manejar errores de carga de imagen
+        imgElement.onerror = function() {
+          console.error('Error al cargar imagen:', imagen.url);
+          // Crear un contenedor de error
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'img-error';
+          errorDiv.innerHTML = `<i class="fas fa-image"></i><br>Imagen no disponible<br><small>${imagen.titulo}</small>`;
+          this.parentNode.replaceChild(errorDiv, this);
+        };
+        
+        slide.appendChild(imgElement);
+        
+        // Añadir caption
+        const caption = document.createElement('div');
+        caption.className = 'galeria-caption';
+        caption.innerHTML = `<h3>${imagen.titulo}</h3><p>${imagen.descripcion}</p>`;
+        slide.appendChild(caption);
+        
         slider.appendChild(slide);
+        
+        // Crear indicador
         const indicator = document.createElement('div');
         indicator.className = 'galeria-indicator';
         if(index === 0) indicator.classList.add('active');
@@ -1081,24 +1150,26 @@
         });
         indicatorsContainer.appendChild(indicator);
       });
+      
       slides = document.querySelectorAll('.galeria-slide');
       totalSlides = slides.length;
       indicators = document.querySelectorAll('.galeria-indicator');
+      
+      console.log(`Galería renderizada con ${totalSlides} imágenes`);
     }
 
-    // CORREGIDO: Función para renderizar la tienda
+    // CORREGIDO: Función para renderizar la tienda con manejo de errores mejorado
     function renderizarTienda() {
       const tiendaGrid = document.getElementById('tienda-grid');
+      if (!tiendaGrid) return;
       
-      // Asegurarse de que productos sea un objeto
-      if (!productos || typeof productos !== 'object') {
+      // Asegurarse de que tenemos productos para mostrar
+      if (!productos || typeof productos !== 'object' || Object.keys(productos).length === 0) {
+        console.log('No hay productos, usando productos por defecto');
         productos = productosPorDefecto;
       }
       
-      // Convertir a array si es necesario
-      const productosArray = Array.isArray(productos) ? productos : Object.values(productos);
-      
-      // Tomar solo los primeros 3 productos
+      const productosArray = Object.values(productos);
       const productosMostrar = productosArray.slice(0, 3);
       
       tiendaGrid.innerHTML = '';
@@ -1109,7 +1180,6 @@
       }
       
       productosMostrar.forEach((producto, index) => {
-        // Asegurarse de que el producto tenga un ID
         if (!producto.id) producto.id = `producto-${index}`;
         
         const productoCard = document.createElement('div');
@@ -1120,27 +1190,63 @@
         productoCard.setAttribute('role','article');
         productoCard.setAttribute('aria-label',`Producto: ${producto.name}, Precio: $${producto.price} USD`);
         
-        productoCard.innerHTML = `
-          <div class="producto-imagen">
-            <img src="${producto.imageUrl}" alt="${producto.name}" />
-            <span class="producto-badge">${producto.badge || 'Nuevo'}</span>
-          </div>
-          <div class="producto-info">
-            <h3>${producto.name}</h3>
-            <p>${producto.description || 'Producto de alta calidad para el cuidado de tu cabello.'}</p>
-            <div class="producto-footer">
-              <span class="producto-precio">$${producto.price} USD</span>
-              <button class="producto-btn" onclick="anadirAlCarrito('${producto.id}')" aria-label="Añadir ${producto.name} al carrito">Añadir al Carrito</button>
-            </div>
+        // Crear contenedor de imagen
+        const imagenContainer = document.createElement('div');
+        imagenContainer.className = 'producto-imagen';
+        
+        // Crear elemento de imagen con manejo de errores
+        const imgElement = document.createElement('img');
+        imgElement.src = producto.imageUrl;
+        imgElement.alt = producto.name;
+        
+        // Manejar errores de carga de imagen
+        imgElement.onerror = function() {
+          console.error('Error al cargar imagen de producto:', producto.imageUrl);
+          // Crear un contenedor de error
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'img-error';
+          errorDiv.innerHTML = `<i class="fas fa-image"></i><br>Imagen no disponible<br><small>${producto.name}</small>`;
+          this.parentNode.replaceChild(errorDiv, this);
+        };
+        
+        imagenContainer.appendChild(imgElement);
+        
+        // Añadir badge
+        const badge = document.createElement('span');
+        badge.className = 'producto-badge';
+        badge.textContent = producto.badge || 'Nuevo';
+        imagenContainer.appendChild(badge);
+        
+        // Crear contenedor de información
+        const infoContainer = document.createElement('div');
+        infoContainer.className = 'producto-info';
+        infoContainer.innerHTML = `
+          <h3>${producto.name}</h3>
+          <p>${producto.description || 'Producto de alta calidad para el cuidado de tu cabello.'}</p>
+          <div class="producto-footer">
+            <span class="producto-precio">$${producto.price} USD</span>
+            <button class="producto-btn" onclick="anadirAlCarrito('${producto.id}')" aria-label="Añadir ${producto.name} al carrito">Añadir al Carrito</button>
           </div>
         `;
+        
+        productoCard.appendChild(imagenContainer);
+        productoCard.appendChild(infoContainer);
         tiendaGrid.appendChild(productoCard);
       });
+      
+      console.log(`Tienda renderizada con ${productosMostrar.length} productos`);
     }
 
     function renderizarTiendaCompleta(filtro = 'todos') {
       const tiendaModalGrid = document.getElementById('tienda-modal-grid');
-      let productosFiltrados = Array.isArray(productos) ? productos : Object.values(productos);
+      if (!tiendaModalGrid) return;
+      
+      // Asegurarse de que tenemos productos para mostrar
+      if (!productos || typeof productos !== 'object' || Object.keys(productos).length === 0) {
+        productos = productosPorDefecto;
+      }
+      
+      let productosFiltrados = Object.values(productos);
       if(filtro !== 'todos') {
         productosFiltrados = productosFiltrados.filter(p => p.categoria === filtro);
       }
@@ -1153,49 +1259,92 @@
         productoCard.setAttribute('tabindex','0');
         productoCard.setAttribute('role','article');
         productoCard.setAttribute('aria-label',`Producto: ${producto.name}, Precio: $${producto.price} USD`);
-        productoCard.innerHTML = `
-          <div class="producto-imagen">
-            <img src="${producto.imageUrl}" alt="${producto.name}" />
-            <span class="producto-badge">${producto.badge}</span>
-          </div>
-          <div class="producto-info">
-            <h3>${producto.name}</h3>
-            <p>${producto.description}</p>
-            <div class="producto-footer">
-              <span class="producto-precio">$${producto.price} USD</span>
-              <button class="producto-btn" onclick="anadirAlCarrito('${producto.id}')" aria-label="Añadir ${producto.name} al carrito">Añadir al Carrito</button>
-            </div>
+        
+        // Crear contenedor de imagen
+        const imagenContainer = document.createElement('div');
+        imagenContainer.className = 'producto-imagen';
+        
+        // Crear elemento de imagen con manejo de errores
+        const imgElement = document.createElement('img');
+        imgElement.src = producto.imageUrl;
+        imgElement.alt = producto.name;
+        
+        // Manejar errores de carga de imagen
+        imgElement.onerror = function() {
+          console.error('Error al cargar imagen de producto:', producto.imageUrl);
+          // Crear un contenedor de error
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'img-error';
+          errorDiv.innerHTML = `<i class="fas fa-image"></i><br>Imagen no disponible<br><small>${producto.name}</small>`;
+          this.parentNode.replaceChild(errorDiv, this);
+        };
+        
+        imagenContainer.appendChild(imgElement);
+        
+        // Añadir badge
+        const badge = document.createElement('span');
+        badge.className = 'producto-badge';
+        badge.textContent = producto.badge || 'Nuevo';
+        imagenContainer.appendChild(badge);
+        
+        // Crear contenedor de información
+        const infoContainer = document.createElement('div');
+        infoContainer.className = 'producto-info';
+        infoContainer.innerHTML = `
+          <h3>${producto.name}</h3>
+          <p>${producto.description}</p>
+          <div class="producto-footer">
+            <span class="producto-precio">$${producto.price} USD</span>
+            <button class="producto-btn" onclick="anadirAlCarrito('${producto.id}')" aria-label="Añadir ${producto.name} al carrito">Añadir al Carrito</button>
           </div>
         `;
+        
+        productoCard.appendChild(imagenContainer);
+        productoCard.appendChild(infoContainer);
         tiendaModalGrid.appendChild(productoCard);
       });
-      AOS.refresh();
+      
+      // Refrescar AOS si está disponible
+      if (typeof AOS !== 'undefined') {
+        AOS.refresh();
+      }
+      
+      console.log(`Tienda completa renderizada con ${productosFiltrados.length} productos`);
     }
 
     function renderizarPanelAdmin() {
-      document.getElementById('footerLoginBtn').style.display='none';
-      document.getElementById('footerUserInfo').classList.add('active');
-      document.getElementById('admin-productos').classList.add('active');
-      document.getElementById('admin-galeria-controls').classList.add('active');
-      document.getElementById('admin-content-editor').classList.add('active');
-      document.getElementById('admin-reservas').classList.add('active');
-      document.getElementById('admin-solicitudes').classList.add('active');
-      document.getElementById('admin-pedidos').classList.add('active');
-      renderizarPanelProductos();
-      renderizarReservasAdmin();
-      renderizarSolicitudesAdmin();
-      renderizarPedidosAdmin();
-      cargarGaleriaAdmin();
+      try {
+        document.getElementById('footerLoginBtn').style.display='none';
+        document.getElementById('footerUserInfo').classList.add('active');
+        document.getElementById('admin-productos').classList.add('active');
+        document.getElementById('admin-galeria-controls').classList.add('active');
+        document.getElementById('admin-content-editor').classList.add('active');
+        document.getElementById('admin-reservas').classList.add('active');
+        document.getElementById('admin-solicitudes').classList.add('active');
+        document.getElementById('admin-pedidos').classList.add('active');
+        renderizarPanelProductos();
+        renderizarReservasAdmin();
+        renderizarSolicitudesAdmin();
+        renderizarPedidosAdmin();
+        cargarGaleriaAdmin();
+      } catch (error) {
+        console.error('Error al renderizar panel admin:', error);
+      }
     }
 
     // CORREGIDO: Función para renderizar el panel de productos
     function renderizarPanelProductos() {
       const adminLista = document.getElementById('admin-lista-productos');
+      if (!adminLista) return;
+      
       adminLista.innerHTML = '';
       
-      // CORREGIDO: Asegurarse de que los productos tengan IDs correctos
+      if (!productos || Object.keys(productos).length === 0) {
+        adminLista.innerHTML = '<p>No hay productos para administrar.</p>';
+        return;
+      }
+      
       Object.entries(productos).forEach(([key, producto]) => {
-        // Asegurarse de que el producto tenga un ID
         if (!producto.id) producto.id = key;
         
         const adminItem = document.createElement('div');
@@ -1208,40 +1357,49 @@
             <div class="admin-form-group" style="grid-column: 1 / -1;"><label for="img-${producto.id}">URL de la Imagen:</label><input type="text" id="img-${producto.id}" value="${producto.imageUrl}"></div>
           </div>
           <div>
-            <button class="admin-save-btn" data-id="${producto.id}">Guardar Cambios</button>
-            <button class="admin-delete-btn" data-id="${producto.id}">Eliminar Producto</button>
+            <button class="admin-save-btn" onclick="guardarProducto('${key}')" data-id="${producto.id}">Guardar Cambios</button>
+            <button class="admin-delete-btn" onclick="eliminarProducto('${key}')" data-id="${producto.id}">Eliminar Producto</button>
           </div>
         `;
         adminLista.appendChild(adminItem);
       });
+    }
+
+    // CORREGIDO: Función para guardar producto
+    function guardarProducto(key) {
+      const producto = productos[key];
+      if (!producto) return;
       
-      adminLista.addEventListener('click', (e) => {
-        if(e.target.classList.contains('admin-save-btn')) {
-          const id = e.target.getAttribute('data-id');
-          const nuevoNombre = document.getElementById(`name-${id}`).value;
-          const nuevaImg = document.getElementById(`img-${id}`).value;
-          const nuevoPrecio = document.getElementById(`price-${id}`).value;
-          
-          // CORREGIDO: Actualizar el producto con el ID correcto
-          actualizarElementoFirebase('productos', id, {
-            name: nuevoNombre,
-            imageUrl: nuevaImg,
-            price: nuevoPrecio
-          });
-          
-          mostrarMensajeAdmin('¡Producto actualizado con éxito!');
-        } else if(e.target.classList.contains('admin-delete-btn')) {
-          const id = e.target.getAttribute('data-id');
-          if(confirm('¿Estás seguro de que quieres eliminar este producto?')) {
-            eliminarElementoFirebase('productos', id);
-            mostrarMensajeAdmin('¡Producto eliminado con éxito!');
-          }
-        }
+      const nuevoNombre = document.getElementById(`name-${producto.id}`)?.value;
+      const nuevaImg = document.getElementById(`img-${producto.id}`)?.value;
+      const nuevoPrecio = document.getElementById(`price-${producto.id}`)?.value;
+      
+      if (!nuevoNombre || !nuevaImg || !nuevoPrecio) {
+        mostrarNotificación('Por favor completa todos los campos', 'error');
+        return;
+      }
+      
+      actualizarElementoFirebase('productos', key, {
+        name: nuevoNombre,
+        imageUrl: nuevaImg,
+        price: nuevoPrecio
       });
+      
+      mostrarMensajeAdmin('¡Producto actualizado con éxito!');
+    }
+
+    // CORREGIDO: Función para eliminar producto
+    function eliminarProducto(key) {
+      if(confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+        eliminarElementoFirebase('productos', key);
+        mostrarMensajeAdmin('¡Producto eliminado con éxito!');
+      }
     }
 
     function renderizarPedidosAdmin() {
       const tbody = document.getElementById('admin-pedidos-tbody');
+      if (!tbody) return;
+      
       tbody.innerHTML = '';
       
       Object.values(pedidos).forEach(pedido => {
@@ -1291,6 +1449,8 @@
 
     function renderizarReservasAdmin() {
       const tbody = document.getElementById('admin-reservas-tbody');
+      if (!tbody) return;
+      
       tbody.innerHTML = '';
       
       Object.values(reservas).forEach(reserva => {
@@ -1320,6 +1480,8 @@
 
     function renderizarSolicitudesAdmin() {
       const tbody = document.getElementById('admin-solicitudes-tbody');
+      if (!tbody) return;
+      
       tbody.innerHTML = '';
       
       Object.values(solicitudesTrabajo).forEach(solicitud => {
@@ -1388,8 +1550,8 @@
     });
 
     async function añadirImagenGaleria() {
-      const url = document.getElementById('galeria-img-url').value.trim();
-      const titulo = document.getElementById('galeria-img-title').value.trim();
+      const url = document.getElementById('galeria-img-url')?.value?.trim();
+      const titulo = document.getElementById('galeria-img-title')?.value?.trim();
       
       if(!url || !titulo) {
         mostrarNotificación('Por favor, completa la URL y el título de la imagen.', 'error');
@@ -1397,14 +1559,17 @@
       }
       
       const descripcion = await generarDescripcionAutomatica(url);
-      document.getElementById('galeria-img-desc').value = descripcion;
+      const descInput = document.getElementById('galeria-img-desc');
+      if (descInput) descInput.value = descripcion;
       
       const nuevaImagen = {id: Date.now().toString(), url, titulo, descripcion};
       añadirElementoFirebase('galeria', nuevaImagen);
       
-      document.getElementById('galeria-img-url').value = '';
-      document.getElementById('galeria-img-title').value = '';
-      document.getElementById('galeria-img-desc').value = '';
+      const urlInput = document.getElementById('galeria-img-url');
+      const titleInput = document.getElementById('galeria-img-title');
+      if (urlInput) urlInput.value = '';
+      if (titleInput) titleInput.value = '';
+      if (descInput) descInput.value = '';
       
       mostrarNotificación('Imagen añadida a la galería con descripción automática.');
     }
@@ -1418,13 +1583,15 @@
     
     function cargarGaleriaAdmin() {
       const container = document.getElementById('galeria-imagenes-admin');
+      if (!container) return;
+      
       container.innerHTML = '';
       
       Object.values(imagenesGaleria).forEach(imagen => {
         const item = document.createElement('div');
         item.className = 'galeria-imagen-admin-item';
         item.innerHTML = `
-          <img src="${imagen.url}" alt="${imagen.titulo}" />
+          <img src="${imagen.url}" alt="${imagen.titulo}" onerror="this.src='https://via.placeholder.com/150x100?text=Imagen'" />
           <button class="delete-btn" onclick="eliminarImagenGaleria('${imagen.id}')" aria-label="Eliminar imagen">
             <i class="fas fa-trash"></i>
           </button>
@@ -1433,11 +1600,12 @@
       });
     }
     
-    document.getElementById('galeria-img-url').addEventListener('blur', async function() {
+    document.getElementById('galeria-img-url')?.addEventListener('blur', async function() {
       const url = this.value.trim();
       if(url) {
         const descripcion = await generarDescripcionAutomatica(url);
-        document.getElementById('galeria-img-desc').value = descripcion;
+        const descInput = document.getElementById('galeria-img-desc');
+        if (descInput) descInput.value = descripcion;
       }
     });
     
@@ -1483,7 +1651,7 @@
       }
     }
 
-    // Carrito - CORREGIDO Y MEJORADO
+    // Carrito
     function anadirAlCarrito(productoId) {
       const id = String(productoId);
       const producto = productos[id] || Object.values(productos).find(p => String(p.id) === id);
@@ -1508,19 +1676,25 @@
     }
     
     function actualizarContadorCarrito() {
-      const totalItems = carrito.reduce((total, item) => total + item.quantity, 0);
-      document.getElementById('cart-count').textContent = totalItems;
+      const cartCount = document.getElementById('cart-count');
+      if (cartCount) {
+        const totalItems = carrito.reduce((total, item) => total + item.quantity, 0);
+        cartCount.textContent = totalItems;
+      }
     }
     
-    // CORREGIDO: Función para renderizar el carrito
     function renderizarCarrito() {
       const container = document.getElementById('cart-items-container');
       const totalEl = document.getElementById('cart-total');
+      if (!container || !totalEl) return;
+      
       if(carrito.length === 0) {
         container.innerHTML = '<p class="empty-cart">Tu carrito está vacío.</p>';
         totalEl.textContent = 'Total: $0.00 USD';
-        document.getElementById('checkout-form').style.display = 'none';
-        document.getElementById('payment-info').classList.remove('active');
+        const checkoutForm = document.getElementById('checkout-form');
+        if (checkoutForm) checkoutForm.style.display = 'none';
+        const paymentInfo = document.getElementById('payment-info');
+        if (paymentInfo) paymentInfo.classList.remove('active');
         return;
       }
       container.innerHTML = '';
@@ -1534,7 +1708,7 @@
         itemEl.setAttribute('data-product-id', item.id);
         
         itemEl.innerHTML = `
-          <img src="${item.imageUrl}" alt="${item.name}">
+          <img src="${item.imageUrl}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/60x60?text=Producto'" />
           <div class="cart-item-details">
             <div class="cart-item-name">${item.name}</div>
             <div class="cart-item-price">$${item.price} USD c/u</div>
@@ -1549,10 +1723,10 @@
         container.appendChild(itemEl);
       });
       totalEl.textContent = `Total: $${total.toFixed(2)} USD`;
-      document.getElementById('checkout-form').style.display = 'block';
+      const checkoutForm = document.getElementById('checkout-form');
+      if (checkoutForm) checkoutForm.style.display = 'block';
     }
     
-    // CORREGIDO: Función para cambiar cantidad
     function cambiarCantidad(productoId, cambio) {
       const id = String(productoId);
       const item = carrito.find(item => String(item.id) === id);
@@ -1575,7 +1749,6 @@
       }
     }
     
-    // CORREGIDO: Función para eliminar del carrito
     function eliminarDelCarrito(productoId) {
       const id = String(productoId);
       
@@ -1587,17 +1760,18 @@
       }
     }
     
-    // CORREGIDO: Función para procesar el pago
     function proceedToPayment() {
-      const name = document.getElementById('checkout-name').value.trim();
-      const phone = document.getElementById('checkout-phone').value.trim();
-      const address = document.getElementById('checkout-address').value.trim();
-      const city = document.getElementById('checkout-city').value.trim();
-      const notes = document.getElementById('checkout-notes').value.trim();
+      const name = document.getElementById('checkout-name')?.value?.trim();
+      const phone = document.getElementById('checkout-phone')?.value?.trim();
+      const address = document.getElementById('checkout-address')?.value?.trim();
+      const city = document.getElementById('checkout-city')?.value?.trim();
+      const notes = document.getElementById('checkout-notes')?.value?.trim();
+      
       if(!name || !phone || !address || !city) {
         mostrarNotificación('Por favor, completa todos los campos obligatorios.', 'error');
         return;
       }
+      
       let total = 0;
       carrito.forEach(item => { total += parseFloat(item.price) * item.quantity; });
       const nuevoPedido = {
@@ -1611,42 +1785,44 @@
       añadirElementoFirebase('ordenes', nuevoPedido);
       
       const paymentInfo = document.getElementById('payment-info');
-      paymentInfo.classList.add('active');
-      paymentInfo.style.display = 'block';
-      paymentInfo.style.visibility = 'visible';
-      paymentInfo.style.opacity = '1';
-      paymentInfo.style.position = 'relative';
-      paymentInfo.style.zIndex = '1000';
+      if (paymentInfo) {
+        paymentInfo.classList.add('active');
+        paymentInfo.style.display = 'block';
+        paymentInfo.style.visibility = 'visible';
+        paymentInfo.style.opacity = '1';
+        paymentInfo.style.position = 'relative';
+        paymentInfo.style.zIndex = '1000';
+        
+        const totalElement = document.createElement('div');
+        totalElement.style.fontSize = '1.3rem';
+        totalElement.style.fontWeight = '700';
+        totalElement.style.color = '#2e7d32';
+        totalElement.style.marginBottom = '15px';
+        totalElement.innerHTML = `Total a pagar: <strong>$${total.toFixed(2)} USD</strong>`;
+        
+        const accountDetails = paymentInfo.querySelector('.account-details');
+        if (accountDetails) paymentInfo.insertBefore(totalElement, accountDetails);
+        
+        const checkoutForm = document.getElementById('checkout-form');
+        if (checkoutForm) checkoutForm.style.display = 'none';
+        
+        setTimeout(() => { paymentInfo.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
+      }
       
-      const totalElement = document.createElement('div');
-      totalElement.style.fontSize = '1.3rem';
-      totalElement.style.fontWeight = '700';
-      totalElement.style.color = '#2e7d32';
-      totalElement.style.marginBottom = '15px';
-      totalElement.innerHTML = `Total a pagar: <strong>$${total.toFixed(2)} USD</strong>`;
-      
-      const accountDetails = paymentInfo.querySelector('.account-details');
-      paymentInfo.insertBefore(totalElement, accountDetails);
-      
-      document.getElementById('checkout-form').style.display = 'none';
-      
-      setTimeout(() => { paymentInfo.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
       carrito = [];
       actualizarContadorCarrito();
       renderizarCarrito();
     }
     
-    // CORREGIDO: Función para enviar comprobante por WhatsApp
     function enviarComprobanteWhatsApp() {
-      const name = document.getElementById('checkout-name').value.trim();
-      const phone = document.getElementById('checkout-phone').value.trim();
-      const address = document.getElementById('checkout-address').value.trim();
-      const city = document.getElementById('checkout-city').value.trim();
-      const notes = document.getElementById('checkout-notes').value.trim();
+      const name = document.getElementById('checkout-name')?.value?.trim();
+      const phone = document.getElementById('checkout-phone')?.value?.trim();
+      const address = document.getElementById('checkout-address')?.value?.trim();
+      const city = document.getElementById('checkout-city')?.value?.trim();
+      const notes = document.getElementById('checkout-notes')?.value?.trim();
       
       let mensaje = `Hola, soy ${name} y he realizado un pedido con los siguientes productos:\n\n`;
       
-      // Recuperar los productos del último pedido
       const ultimoPedido = Object.values(pedidos).sort((a, b) => {
         return new Date(b.date) - new Date(a.date);
       })[0];
@@ -1666,12 +1842,13 @@
       mensaje += `\nHe realizado la transferencia al Banco Pichincha, cuenta 20026669966 a nombre de Ingrid Montes Flores y adjunto el comprobante.`;
       
       const encodedMensaje = encodeURIComponent(mensaje);
-      // CORREGIDO: Usar el número de teléfono correcto y abrir en una nueva pestaña
       window.open(`https://wa.me/5939930452286?text=${encodedMensaje}`, '_blank');
     }
     
     function toggleCart() {
       const modal = document.getElementById('cartModal');
+      if (!modal) return;
+      
       const isActive = modal.classList.contains('active');
       if(isActive) {
         modal.classList.remove('active');
@@ -1680,36 +1857,49 @@
         modal.classList.add('active');
         modal.setAttribute('aria-hidden','false');
         renderizarCarrito();
-        document.getElementById('checkout-form').style.display = 'block';
-        document.getElementById('payment-info').classList.remove('active');
-        document.getElementById('payment-info').style.display = 'none';
-        document.getElementById('checkout-form').reset();
+        const checkoutForm = document.getElementById('checkout-form');
+        if (checkoutForm) checkoutForm.style.display = 'block';
+        const paymentInfo = document.getElementById('payment-info');
+        if (paymentInfo) {
+          paymentInfo.classList.remove('active');
+          paymentInfo.style.display = 'none';
+        }
+        const checkoutFormElement = document.getElementById('checkout-form');
+        if (checkoutFormElement) checkoutFormElement.reset();
       }
     }
 
     // Menú móvil
     const menuToggle = document.getElementById('menuToggle');
     const navMobile = document.getElementById('navMobile');
-    menuToggle.addEventListener('click', () => {
-      const isActive = navMobile.classList.contains('active');
-      navMobile.classList.toggle('active');
-      menuToggle.setAttribute('aria-expanded', !isActive);
-      const icon = menuToggle.querySelector('i');
-      icon.classList.toggle('fa-bars');
-      icon.classList.toggle('fa-times');
-    });
-    
-    document.querySelectorAll('.nav-mobile a').forEach(link => {
-      link.addEventListener('click', () => {
-        navMobile.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded','false');
+    if (menuToggle && navMobile) {
+      menuToggle.addEventListener('click', () => {
+        const isActive = navMobile.classList.contains('active');
+        navMobile.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', !isActive);
         const icon = menuToggle.querySelector('i');
-        icon.classList.add('fa-bars');
-        icon.classList.remove('fa-times');
+        if (icon) {
+          icon.classList.toggle('fa-bars');
+          icon.classList.toggle('fa-times');
+        }
       });
-    });
+      
+      document.querySelectorAll('.nav-mobile a').forEach(link => {
+        link.addEventListener('click', () => {
+          navMobile.classList.remove('active');
+          if (menuToggle) {
+            menuToggle.setAttribute('aria-expanded','false');
+            const icon = menuToggle.querySelector('i');
+            if (icon) {
+              icon.classList.add('fa-bars');
+              icon.classList.remove('fa-times');
+            }
+          }
+        });
+      });
+    }
 
-    // Login - CORREGIDO
+    // Login
     const footerLoginBtn = document.getElementById('footerLoginBtn');
     const loginModal = document.getElementById('loginModal');
     const closeModal = document.getElementById('closeModal');
@@ -1717,99 +1907,122 @@
     const footerUserInfo = document.getElementById('footerUserInfo');
     const footerLogoutBtn = document.getElementById('footerLogoutBtn');
     
-    footerLoginBtn.addEventListener('click', () => {
-      loginModal.classList.add('active');
-      loginModal.setAttribute('aria-hidden','false');
-      setTimeout(() => document.getElementById('username').focus(), 300);
-    });
+    if (footerLoginBtn) {
+      footerLoginBtn.addEventListener('click', () => {
+        if (loginModal) {
+          loginModal.classList.add('active');
+          loginModal.setAttribute('aria-hidden','false');
+          setTimeout(() => {
+            const usernameInput = document.getElementById('username');
+            if (usernameInput) usernameInput.focus();
+          }, 300);
+        }
+      });
+    }
     
-    closeModal.addEventListener('click', () => {
-      loginModal.classList.remove('active');
-      loginModal.setAttribute('aria-hidden','true');
-    });
+    if (closeModal) {
+      closeModal.addEventListener('click', () => {
+        if (loginModal) {
+          loginModal.classList.remove('active');
+          loginModal.setAttribute('aria-hidden','true');
+        }
+      });
+    }
     
     window.addEventListener('click', (e) => {
       if(e.target === loginModal) {
-        loginModal.classList.remove('active');
-        loginModal.setAttribute('aria-hidden','true');
+        if (loginModal) {
+          loginModal.classList.remove('active');
+          loginModal.setAttribute('aria-hidden','true');
+        }
       }
     });
     
-    loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      if(username === 'creatubelleza' && password === 'montes9828') {
-        loginModal.classList.remove('active');
-        loginModal.setAttribute('aria-hidden','true');
-        localStorage.setItem('isLoggedIn', 'true');
-        isLoggedIn = true;
-        renderizarPanelAdmin();
-        loginForm.reset();
-        // CORREGIDO: Recargar datos después de iniciar sesión
-        cargarTodosLosDatos();
-      } else {
-        mostrarNotificación('Usuario o contraseña incorrectos', 'error');
-        loginForm.reset();
-      }
-    });
+    if (loginForm) {
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username')?.value;
+        const password = document.getElementById('password')?.value;
+        if(username === 'creatubelleza' && password === 'montes9828') {
+          if (loginModal) {
+            loginModal.classList.remove('active');
+            loginModal.setAttribute('aria-hidden','true');
+          }
+          localStorage.setItem('isLoggedIn', 'true');
+          isLoggedIn = true;
+          renderizarPanelAdmin();
+          if (loginForm) loginForm.reset();
+          cargarTodosLosDatos();
+        } else {
+          mostrarNotificación('Usuario o contraseña incorrectos', 'error');
+          if (loginForm) loginForm.reset();
+        }
+      });
+    }
     
-    footerLogoutBtn.addEventListener('click', () => {
-      localStorage.removeItem('isLoggedIn');
-      footerLoginBtn.style.display = 'block';
-      footerUserInfo.classList.remove('active');
-      document.getElementById('admin-productos').classList.remove('active');
-      document.getElementById('admin-galeria-controls').classList.remove('active');
-      document.getElementById('admin-content-editor').classList.remove('active');
-      document.getElementById('admin-reservas').classList.remove('active');
-      document.getElementById('admin-solicitudes').classList.remove('active');
-      document.getElementById('admin-pedidos').classList.remove('active');
-      isLoggedIn = false;
-      loginForm.reset();
-    });
+    if (footerLogoutBtn) {
+      footerLogoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('isLoggedIn');
+        if (footerLoginBtn) footerLoginBtn.style.display = 'block';
+        if (footerUserInfo) footerUserInfo.classList.remove('active');
+        
+        const adminPanels = ['admin-productos', 'admin-galeria-controls', 'admin-content-editor', 'admin-reservas', 'admin-solicitudes', 'admin-pedidos'];
+        adminPanels.forEach(id => {
+          const panel = document.getElementById(id);
+          if (panel) panel.classList.remove('active');
+        });
+        
+        isLoggedIn = false;
+        if (loginForm) loginForm.reset();
+      });
+    }
 
-    // Reservas - CORREGIDO
+    // Reservas
     const form = document.getElementById('form-reserva');
     const confirmacionReserva = document.getElementById('confirmacion-reserva');
     const telefonoInput = document.getElementById('telefono');
     
-    telefonoInput.addEventListener('input', function(e) {
-      if(e.target.value.length < 4 || e.target.value.substring(0,4) !== '+593') {
-        e.target.value = '+593';
-      }
-    });
+    if (telefonoInput) {
+      telefonoInput.addEventListener('input', function(e) {
+        if(e.target.value.length < 4 || e.target.value.substring(0,4) !== '+593') {
+          e.target.value = '+593';
+        }
+      });
+    }
     
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const nombre = form.nombre.value.trim();
-      const telefono = form.telefono.value.trim();
-      const servicio = form.servicio.value;
-      const fecha = form.fecha.value;
-      const hora = form.hora.value;
-      if(!nombre || !telefono || !servicio || !fecha || !hora) {
-        mostrarNotificación('Por favor completa todos los campos.', 'error');
-        return;
-      }
-      const nuevaReserva = {
-        id: Date.now().toString(),
-        nombre,
-        telefono,
-        servicio,
-        fecha,
-        hora,
-        estado: 'pending'
-      };
-      añadirElementoFirebase('reservas', nuevaReserva);
-      
-      // CORREGIDO: Guardar la reserva actual para usarla en el botón de WhatsApp
-      currentReserva = nuevaReserva;
-      
-      confirmacionReserva.classList.add('active');
-      form.reset();
-      telefonoInput.value = '+593';
-    });
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nombre = form.nombre?.value?.trim();
+        const telefono = form.telefono?.value?.trim();
+        const servicio = form.servicio?.value;
+        const fecha = form.fecha?.value;
+        const hora = form.hora?.value;
+        
+        if(!nombre || !telefono || !servicio || !fecha || !hora) {
+          mostrarNotificación('Por favor completa todos los campos.', 'error');
+          return;
+        }
+        
+        const nuevaReserva = {
+          id: Date.now().toString(),
+          nombre,
+          telefono,
+          servicio,
+          fecha,
+          hora,
+          estado: 'pending'
+        };
+        añadirElementoFirebase('reservas', nuevaReserva);
+        
+        currentReserva = nuevaReserva;
+        
+        if (confirmacionReserva) confirmacionReserva.classList.add('active');
+        if (form) form.reset();
+        if (telefonoInput) telefonoInput.value = '+593';
+      });
+    }
 
-    // CORREGIDO: Función para confirmar reserva por WhatsApp
     function confirmarReservaWhatsApp() {
       if (!currentReserva) {
         mostrarNotificación('No hay información de reserva disponible', 'error');
@@ -1819,7 +2032,6 @@
       const mensaje = `Hola, soy ${currentReserva.nombre}. Confirmo mi reserva para ${currentReserva.servicio} el día ${currentReserva.fecha} a las ${currentReserva.hora}. Mi teléfono es ${currentReserva.telefono}.`;
       const encodedMensaje = encodeURIComponent(mensaje);
       
-      // CORREGIDO: Usar el número de teléfono correcto y abrir en una nueva pestaña
       window.open(`https://wa.me/5939930452286?text=${encodedMensaje}`, '_blank');
     }
 
@@ -1830,120 +2042,149 @@
     const mensajeTrabajo = document.getElementById('mensaje-trabajo');
     const telefonoTrabajoInput = document.getElementById('telefono-trabajo');
     
-    document.getElementById('cv-trabajo').addEventListener('change', function(e) {
-      const fileName = e.target.files[0]?.name || 'No se ha seleccionado ningún archivo';
-      document.getElementById('cv-info').textContent = fileName;
-    });
+    const cvTrabajoInput = document.getElementById('cv-trabajo');
+    const cedulaTrabajoInput = document.getElementById('cedula-trabajo');
     
-    document.getElementById('cedula-trabajo').addEventListener('change', function(e) {
-      const fileName = e.target.files[0]?.name || 'No se ha seleccionado ningún archivo';
-      document.getElementById('cedula-info').textContent = fileName;
-    });
-    
-    function openTrabajaModal() {
-      trabajaModal.classList.add('active');
-      trabajaModal.setAttribute('aria-hidden','false');
-      setTimeout(() => document.getElementById('nombres-trabajo').focus(), 300);
+    if (cvTrabajoInput) {
+      cvTrabajoInput.addEventListener('change', function(e) {
+        const fileName = e.target.files[0]?.name || 'No se ha seleccionado ningún archivo';
+        const cvInfo = document.getElementById('cv-info');
+        if (cvInfo) cvInfo.textContent = fileName;
+      });
     }
     
-    closeTrabajaModal.addEventListener('click', () => {
-      trabajaModal.classList.remove('active');
-      trabajaModal.setAttribute('aria-hidden','true');
-    });
+    if (cedulaTrabajoInput) {
+      cedulaTrabajoInput.addEventListener('change', function(e) {
+        const fileName = e.target.files[0]?.name || 'No se ha seleccionado ningún archivo';
+        const cedulaInfo = document.getElementById('cedula-info');
+        if (cedulaInfo) cedulaInfo.textContent = fileName;
+      });
+    }
+    
+    function openTrabajaModal() {
+      if (trabajaModal) {
+        trabajaModal.classList.add('active');
+        trabajaModal.setAttribute('aria-hidden','false');
+        setTimeout(() => {
+          const nombresInput = document.getElementById('nombres-trabajo');
+          if (nombresInput) nombresInput.focus();
+        }, 300);
+      }
+    }
+    
+    if (closeTrabajaModal) {
+      closeTrabajaModal.addEventListener('click', () => {
+        if (trabajaModal) {
+          trabajaModal.classList.remove('active');
+          trabajaModal.setAttribute('aria-hidden','true');
+        }
+      });
+    }
     
     window.addEventListener('click', (e) => {
       if(e.target === trabajaModal) {
-        trabajaModal.classList.remove('active');
-        trabajaModal.setAttribute('aria-hidden','true');
+        if (trabajaModal) {
+          trabajaModal.classList.remove('active');
+          trabajaModal.setAttribute('aria-hidden','true');
+        }
       }
     });
     
-    telefonoTrabajoInput.addEventListener('input', function(e) {
-      if(e.target.value.length < 4 || e.target.value.substring(0,4) !== '+593') {
-        e.target.value = '+593';
-      }
-    });
+    if (telefonoTrabajoInput) {
+      telefonoTrabajoInput.addEventListener('input', function(e) {
+        if(e.target.value.length < 4 || e.target.value.substring(0,4) !== '+593') {
+          e.target.value = '+593';
+        }
+      });
+    }
     
-    formTrabaja.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const nombres = formTrabaja['nombres-trabajo'].value.trim();
-      const apellidos = formTrabaja['apellidos-trabajo'].value.trim();
-      const telefono = formTrabaja['telefono-trabajo'].value.trim();
-      const comentarios = formTrabaja['comentarios-trabajo'].value.trim();
-      const cvFile = document.getElementById('cv-trabajo').files[0];
-      const cedulaFile = document.getElementById('cedula-trabajo').files[0];
-      
-      if(!nombres || !apellidos || !telefono || !cvFile || !cedulaFile) {
-        mostrarNotificación('Por favor, completa todos los campos obligatorios.', 'error');
-        return;
-      }
-      
-      try {
-        const cvBase64 = await leerArchivoComoBase64(cvFile);
-        const cedulaBase64 = await leerArchivoComoBase64(cedulaFile);
+    if (formTrabaja) {
+      formTrabaja.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const nombres = formTrabaja['nombres-trabajo']?.value?.trim();
+        const apellidos = formTrabaja['apellidos-trabajo']?.value?.trim();
+        const telefono = formTrabaja['telefono-trabajo']?.value?.trim();
+        const comentarios = formTrabaja['comentarios-trabajo']?.value?.trim();
+        const cvFile = document.getElementById('cv-trabajo')?.files?.[0];
+        const cedulaFile = document.getElementById('cedula-trabajo')?.files?.[0];
         
-        const nuevaSolicitud = {
+        if(!nombres || !apellidos || !telefono || !cvFile || !cedulaFile) {
+          mostrarNotificación('Por favor, completa todos los campos obligatorios.', 'error');
+          return;
+        }
+        
+        try {
+          const cvBase64 = await leerArchivoComoBase64(cvFile);
+          const cedulaBase64 = await leerArchivoComoBase64(cedulaFile);
+          
+          const nuevaSolicitud = {
+            id: Date.now().toString(),
+            nombres,
+            apellidos,
+            telefono,
+            comentarios,
+            cvNombre: cvFile.name,
+            cvUrl: cvBase64,
+            cedulaNombre: cedulaFile.name,
+            cedulaUrl: cedulaBase64,
+            fecha: new Date().toLocaleDateString()
+          };
+          
+          añadirElementoFirebase('solicitudes-trabajo', nuevaSolicitud);
+          if (mensajeTrabajo) mensajeTrabajo.style.display = 'block';
+          if (formTrabaja) formTrabaja.reset();
+          if (telefonoTrabajoInput) telefonoTrabajoInput.value = '+593';
+          const cvInfo = document.getElementById('cv-info');
+          const cedulaInfo = document.getElementById('cedula-info');
+          if (cvInfo) cvInfo.textContent = 'No se ha seleccionado ningún archivo';
+          if (cedulaInfo) cedulaInfo.textContent = 'No se ha seleccionado ningún archivo';
+          setTimeout(() => {
+            if (mensajeTrabajo) mensajeTrabajo.style.display = 'none';
+          }, 5000);
+        } catch(error) {
+          mostrarNotificación('Error al procesar los archivos. Intenta de nuevo.', 'error');
+        }
+      });
+    }
+
+    // Formulario añadir producto
+    const formAgregarProducto = document.getElementById('form-agregar-producto');
+    if (formAgregarProducto) {
+      formAgregarProducto.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nombre = document.getElementById('new-name')?.value?.trim();
+        const precio = document.getElementById('new-price')?.value?.trim();
+        const imagen = document.getElementById('new-image')?.value?.trim();
+        
+        if(!nombre || !precio || !imagen) {
+          mostrarNotificación('Por favor, completa todos los campos para añadir el producto.', 'error');
+          return;
+        }
+        
+        const descripcion = generarDescripcionProducto(nombre);
+        const categoria = determinarCategoria(nombre);
+        
+        const nuevoProducto = {
           id: Date.now().toString(),
-          nombres,
-          apellidos,
-          telefono,
-          comentarios,
-          cvNombre: cvFile.name,
-          cvUrl: cvBase64,
-          cedulaNombre: cedulaFile.name,
-          cedulaUrl: cedulaBase64,
-          fecha: new Date().toLocaleDateString()
+          name: nombre,
+          price: precio,
+          imageUrl: imagen,
+          description: descripcion,
+          badge: 'Nuevo',
+          categoria: categoria
         };
         
-        añadirElementoFirebase('solicitudes-trabajo', nuevaSolicitud);
-        mensajeTrabajo.style.display = 'block';
-        formTrabaja.reset();
-        telefonoTrabajoInput.value = '+593';
-        document.getElementById('cv-info').textContent = 'No se ha seleccionado ningún archivo';
-        document.getElementById('cedula-info').textContent = 'No se ha seleccionado ningún archivo';
-        setTimeout(() => mensajeTrabajo.style.display = 'none', 5000);
-      } catch(error) {
-        mostrarNotificación('Error al procesar los archivos. Intenta de nuevo.', 'error');
-      }
-    });
-
-    // CORREGIDO: Formulario añadir producto con descripción automática
-    const formAgregarProducto = document.getElementById('form-agregar-producto');
-    formAgregarProducto.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const nombre = document.getElementById('new-name').value.trim();
-      const precio = document.getElementById('new-price').value.trim();
-      const imagen = document.getElementById('new-image').value.trim();
-      
-      if(!nombre || !precio || !imagen) {
-        mostrarNotificación('Por favor, completa todos los campos para añadir el producto.', 'error');
-        return;
-      }
-      
-      // Generar descripción automática
-      const descripcion = generarDescripcionProducto(nombre);
-      const categoria = determinarCategoria(nombre);
-      
-      const nuevoProducto = {
-        id: Date.now().toString(),
-        name: nombre,
-        price: precio,
-        imageUrl: imagen,
-        description: descripcion,
-        badge: 'Nuevo',
-        categoria: categoria
-      };
-      
-      añadirElementoFirebase('productos', nuevoProducto);
-      formAgregarProducto.reset();
-      mostrarMensajeAdmin('¡Producto añadido con éxito y descripción generada automáticamente!');
-    });
+        const nuevoId = añadirElementoFirebase('productos', nuevoProducto);
+        productos[nuevoId] = nuevoProducto;
+        
+        if (formAgregarProducto) formAgregarProducto.reset();
+        mostrarMensajeAdmin('¡Producto añadido con éxito y descripción generada automáticamente!');
+      });
+    }
     
-    // CORREGIDO: Función para generar descripción automática de productos
     function generarDescripcionProducto(nombreProducto) {
       const nombreLower = nombreProducto.toLowerCase();
       
-      // Palabras clave y sus descripciones correspondientes
       const descripciones = {
         'shampoo': 'Formulado con ingredientes naturales que limpian suavemente el cabello sin resecarlo.',
         'acondicionador': 'Enriquecido con vitaminas y agentes hidratantes que desenredanan y suavizan el cabello.',
@@ -1975,16 +2216,13 @@
         'calidad': 'Producto de alta gama formulado con los mejores ingredientes.'
       };
       
-      // Buscar coincidencias en el nombre del producto
       for(const clave in descripciones) {
         if(nombreLower.includes(clave)) return descripciones[clave];
       }
       
-      // Si no hay coincidencias, generar una descripción genérica
       return `Producto profesional de alta calidad diseñado para satisfacer tus necesidades capilares.`;
     }
     
-    // CORREGIDO: Función para determinar la categoría del producto
     function determinarCategoria(nombreProducto) {
       const nombreLower = nombreProducto.toLowerCase();
       if(nombreLower.includes('shampoo')) return 'shampoo';
@@ -1997,9 +2235,9 @@
     // Editor de contenido
     function guardarReservaInfo() {
       const nuevaReservaInfo = {
-        telefono: document.getElementById('edit-reserva-telefono').value,
-        email: document.getElementById('edit-reserva-email').value,
-        direccion: document.getElementById('edit-reserva-direccion').value
+        telefono: document.getElementById('edit-reserva-telefono')?.value,
+        email: document.getElementById('edit-reserva-email')?.value,
+        direccion: document.getElementById('edit-reserva-direccion')?.value
       };
       
       actualizarElementoFirebase('contenido', 'reservaInfo', nuevaReservaInfo);
@@ -2010,10 +2248,10 @@
     
     function guardarContactoInfo() {
       const nuevaContactoInfo = {
-        direccion: document.getElementById('edit-contacto-direccion').value,
-        telefono: document.getElementById('edit-contacto-telefono').value,
-        email: document.getElementById('edit-contacto-email').value,
-        mapaUrl: document.getElementById('edit-mapa-url').value
+        direccion: document.getElementById('edit-contacto-direccion')?.value,
+        telefono: document.getElementById('edit-contacto-telefono')?.value,
+        email: document.getElementById('edit-contacto-email')?.value,
+        mapaUrl: document.getElementById('edit-mapa-url')?.value
       };
       
       actualizarElementoFirebase('contenido', 'contactoInfo', nuevaContactoInfo);
@@ -2024,55 +2262,87 @@
     
     function cancelarEdicionReserva() {
       if (contenidoEditable.reservaInfo) {
-        document.getElementById('edit-reserva-telefono').value = contenidoEditable.reservaInfo.telefono;
-        document.getElementById('edit-reserva-email').value = contenidoEditable.reservaInfo.email;
-        document.getElementById('edit-reserva-direccion').value = contenidoEditable.reservaInfo.direccion;
+        const editReservaTelefono = document.getElementById('edit-reserva-telefono');
+        const editReservaEmail = document.getElementById('edit-reserva-email');
+        const editReservaDireccion = document.getElementById('edit-reserva-direccion');
+        
+        if (editReservaTelefono) editReservaTelefono.value = contenidoEditable.reservaInfo.telefono;
+        if (editReservaEmail) editReservaEmail.value = contenidoEditable.reservaInfo.email;
+        if (editReservaDireccion) editReservaDireccion.value = contenidoEditable.reservaInfo.direccion;
       }
     }
     
     function cancelarEdicionContacto() {
       if (contenidoEditable.contactoInfo) {
-        document.getElementById('edit-contacto-direccion').value = contenidoEditable.contactoInfo.direccion;
-        document.getElementById('edit-contacto-telefono').value = contenidoEditable.contactoInfo.telefono;
-        document.getElementById('edit-contacto-email').value = contenidoEditable.contactoInfo.email;
-        document.getElementById('edit-mapa-url').value = contenidoEditable.contactoInfo.mapaUrl;
+        const editContactoDireccion = document.getElementById('edit-contacto-direccion');
+        const editContactoTelefono = document.getElementById('edit-contacto-telefono');
+        const editContactoEmail = document.getElementById('edit-contacto-email');
+        const editMapaUrl = document.getElementById('edit-mapa-url');
+        
+        if (editContactoDireccion) editContactoDireccion.value = contenidoEditable.contactoInfo.direccion;
+        if (editContactoTelefono) editContactoTelefono.value = contenidoEditable.contactoInfo.telefono;
+        if (editContactoEmail) editContactoEmail.value = contenidoEditable.contactoInfo.email;
+        if (editMapaUrl) editMapaUrl.value = contenidoEditable.contactoInfo.mapaUrl;
       }
     }
 
     // Event listeners para modales
-    document.getElementById('closeCartModal').addEventListener('click', () => {
-      document.getElementById('cartModal').classList.remove('active');
-      document.getElementById('cartModal').setAttribute('aria-hidden','true');
-    });
+    const closeCartModal = document.getElementById('closeCartModal');
+    if (closeCartModal) {
+      closeCartModal.addEventListener('click', () => {
+        const cartModal = document.getElementById('cartModal');
+        if (cartModal) {
+          cartModal.classList.remove('active');
+          cartModal.setAttribute('aria-hidden','true');
+        }
+      });
+    }
     
-    document.getElementById('closeTiendaModal').addEventListener('click', () => {
-      document.getElementById('tiendaModal').classList.remove('active');
-      document.getElementById('tiendaModal').setAttribute('aria-hidden','true');
-    });
+    const closeTiendaModal = document.getElementById('closeTiendaModal');
+    if (closeTiendaModal) {
+      closeTiendaModal.addEventListener('click', () => {
+        const tiendaModal = document.getElementById('tiendaModal');
+        if (tiendaModal) {
+          tiendaModal.classList.remove('active');
+          tiendaModal.setAttribute('aria-hidden','true');
+        }
+      });
+    }
     
     window.addEventListener('click', (e) => {
-      if(e.target === document.getElementById('cartModal')) {
-        document.getElementById('cartModal').classList.remove('active');
-        document.getElementById('cartModal').setAttribute('aria-hidden','true');
+      const cartModal = document.getElementById('cartModal');
+      const tiendaModal = document.getElementById('tiendaModal');
+      
+      if(e.target === cartModal) {
+        if (cartModal) {
+          cartModal.classList.remove('active');
+          cartModal.setAttribute('aria-hidden','true');
+        }
       }
-      if(e.target === document.getElementById('tiendaModal')) {
-        document.getElementById('tiendaModal').classList.remove('active');
-        document.getElementById('tiendaModal').setAttribute('aria-hidden','true');
+      if(e.target === tiendaModal) {
+        if (tiendaModal) {
+          tiendaModal.classList.remove('active');
+          tiendaModal.setAttribute('aria-hidden','true');
+        }
       }
     });
 
     // Funciones auxiliares
     function abrirTiendaCompleta() {
       const modal = document.getElementById('tiendaModal');
-      modal.classList.add('active');
-      modal.setAttribute('aria-hidden','false');
-      renderizarTiendaCompleta();
+      if (modal) {
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden','false');
+        renderizarTiendaCompleta();
+      }
     }
     
     function filtrarProductos(categoria) {
       document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      renderizarTiendaCompleta(categoria);
+      if (event && event.target) {
+        event.target.classList.add('active');
+        renderizarTiendaCompleta(categoria);
+      }
     }
     
     function eliminarPedido(id) {
@@ -2098,9 +2368,13 @@
     
     function mostrarMensajeAdmin(mensaje) {
       const messageEl = document.getElementById('admin-message');
-      messageEl.textContent = mensaje;
-      messageEl.style.display = 'block';
-      setTimeout(() => { messageEl.style.display = 'none'; }, 3000);
+      if (messageEl) {
+        messageEl.textContent = mensaje;
+        messageEl.style.display = 'block';
+        setTimeout(() => { 
+          messageEl.style.display = 'none'; 
+        }, 3000);
+      }
     }
     
     function validarFormulario(form) {
@@ -2120,19 +2394,23 @@
       return isValid;
     }
     
-    document.getElementById('form-reserva').addEventListener('submit', function(e) {
-      if(!validarFormulario(this)) {
-        e.preventDefault();
-        mostrarNotificación('Por favor, completa todos los campos obligatorios.', 'error');
-      }
-    });
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        if(!validarFormulario(this)) {
+          e.preventDefault();
+          mostrarNotificación('Por favor, completa todos los campos obligatorios.', 'error');
+        }
+      });
+    }
     
-    document.getElementById('form-trabaja').addEventListener('submit', function(e) {
-      if(!validarFormulario(this)) {
-        e.preventDefault();
-        mostrarNotificación('Por favor, completa todos los campos obligatorios.', 'error');
-      }
-    });
+    if (formTrabaja) {
+      formTrabaja.addEventListener('submit', function(e) {
+        if(!validarFormulario(this)) {
+          e.preventDefault();
+          mostrarNotificación('Por favor, completa todos los campos obligatorios.', 'error');
+        }
+      });
+    }
 
     // Navegación suave
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2153,30 +2431,52 @@
     // Efecto scroll header
     window.addEventListener('scroll', function() {
       const header = document.querySelector('header');
-      if(window.scrollY > 50) {
-        header.style.background = 'linear-gradient(135deg, rgba(255,105,180,0.95), rgba(214,138,177,0.95))';
-      } else {
-        header.style.background = 'linear-gradient(135deg,var(--p),var(--s))';
+      if(header) {
+        if(window.scrollY > 50) {
+          header.style.background = 'linear-gradient(135deg, rgba(255,105,180,0.95), rgba(214,138,177,0.95))';
+        } else {
+          header.style.background = 'linear-gradient(135deg,var(--p),var(--s))';
+        }
       }
     });
 
-    // CORREGIDO: Inicializar Firebase sin sobreescribir datos existentes
+    // Funciones de Firebase
+    function añadirElementoFirebase(ruta, elemento) {
+      const nuevaRuta = database.ref(ruta).push();
+      nuevaRuta.set(elemento);
+      return nuevaRuta.key;
+    }
+
+    function actualizarElementoFirebase(ruta, id, datosActualizados) {
+      database.ref(`${ruta}/${id}`).update(datosActualizados);
+    }
+
+    function eliminarElementoFirebase(ruta, id) {
+      database.ref(`${ruta}/${id}`).remove();
+    }
+
+    function leerArchivoComoBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Inicializar Firebase sin sobreescribir datos existentes
     function inicializarFirebase() {
-      // Solo inicializar datos por defecto si no existen
       database.ref().once('value').then(snapshot => {
         const datos = snapshot.val();
         if (!datos || !datos.productos) {
-          // Solo crear productos si no existen
           database.ref('productos').set(productosPorDefecto);
           console.log('Productos por defecto creados');
         }
         if (!datos || !datos.galeria) {
-          // Solo crear galería si no existe
           database.ref('galeria').set(imagenesGaleriaPorDefecto);
           console.log('Galería por defecto creada');
         }
         if (!datos || !datos.contenido) {
-          // Solo crear contenido si no existe
           database.ref('contenido').set(contenidoEditablePorDefecto);
           console.log('Contenido por defecto creado');
         }
@@ -2185,7 +2485,25 @@
       });
     }
     
-    inicializarFirebase();
+    // Inicializar cuando todo esté listo
+    window.addEventListener('load', () => {
+      inicializarFirebase();
+      
+      // Forzar la carga inicial de datos si no se cargan después de 3 segundos
+      setTimeout(() => {
+        if (Object.keys(productos).length === 0) {
+          console.log('Forzando carga de productos por defecto');
+          productos = productosPorDefecto;
+          renderizarTienda();
+        }
+        
+        if (Object.keys(imagenesGaleria).length === 0) {
+          console.log('Forzando carga de galería por defecto');
+          imagenesGaleria = imagenesGaleriaPorDefecto;
+          renderizarGaleria();
+        }
+      }, 3000);
+    });
   </script>
 </body>
 </html>
