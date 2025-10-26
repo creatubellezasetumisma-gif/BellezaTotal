@@ -496,7 +496,7 @@
           <div class="confirmacion-reserva" id="confirmacion-reserva">
             <h3>¡Reserva enviada con éxito!</h3>
             <p>Por favor, confirma tu cita a través de WhatsApp:</p>
-            <a href="#" id="btn-whatsapp-confirm" class="btn-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> Confirmar Cita</a>
+            <button id="btn-whatsapp-confirm" class="btn-whatsapp" onclick="confirmarReservaWhatsApp()"><i class="fab fa-whatsapp"></i> Confirmar Cita</button>
           </div>
         </div>
         <div class="reserva-info">
@@ -714,7 +714,7 @@
           <p><strong>Titular:</strong> <span>Ingrid Montes Flores</span></p>
         </div>
         <p>Una vez realizada la transferencia, envíanos el comprobante por WhatsApp para procesar tu pedido.</p>
-        <a href="#" class="whatsapp-btn" id="whatsapp-payment-btn" target="_blank"><i class="fab fa-whatsapp"></i> Enviar Comprobante por WhatsApp</a>
+        <button class="whatsapp-btn" id="whatsapp-payment-btn" onclick="enviarComprobanteWhatsApp()"><i class="fab fa-whatsapp"></i> Enviar Comprobante por WhatsApp</button>
       </div>
     </div>
   </div>
@@ -746,6 +746,7 @@
     let contenidoEditable = {};
     let carrito = [];
     let isLoggedIn = false;
+    let currentReserva = null; // Almacenar la reserva actual para el botón de WhatsApp
 
     // Funciones de Firebase
     function obtenerDatosFirebase(ruta, callback) {
@@ -856,48 +857,78 @@
       }, 3000);
     }
 
-    // Inicialización
-    document.addEventListener('DOMContentLoaded', () => {
-      AOS.init({duration:1000,once:true});
+    // CORREGIDO: Función para verificar el estado de autenticación al cargar la página
+    function verificarEstadoAutenticacion() {
+      // Verificar si hay una sesión activa en localStorage
+      isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
       
+      if (isLoggedIn) {
+        // Si está logueado, mostrar el panel de administrador inmediatamente
+        mostrarPanelAdmin();
+        console.log('Usuario logueado detectado, mostrando panel de administrador');
+      }
+      
+      // Cargar todos los datos necesarios
+      cargarTodosLosDatos();
+    }
+
+    // CORREGIDO: Función para cargar todos los datos
+    function cargarTodosLosDatos() {
+      console.log('Cargando todos los datos...');
+      
+      // Cargar datos generales (siempre se cargan)
       obtenerDatosFirebase('productos', (datos) => {
         productos = datos;
         renderizarTienda();
+        console.log('Productos cargados:', Object.keys(productos).length);
       });
       
       obtenerDatosFirebase('galeria', (datos) => {
         imagenesGaleria = datos;
         renderizarGaleria();
         if (isLoggedIn) cargarGaleriaAdmin();
+        console.log('Galería cargada:', Object.keys(imagenesGaleria).length);
       });
       
       obtenerDatosFirebase('contenido', (datos) => {
         contenidoEditable = datos;
         aplicarContenidoEditable();
+        console.log('Contenido cargado');
       });
       
-      obtenerDatosFirebase('reservas', (datos) => {
-        reservas = datos || {};
-        if (isLoggedIn) renderizarReservasAdmin();
-      });
-      
-      obtenerDatosFirebase('solicitudes-trabajo', (datos) => {
-        solicitudesTrabajo = datos || {};
-        if (isLoggedIn) renderizarSolicitudesAdmin();
-      });
-      
-      obtenerDatosFirebase('ordenes', (datos) => {
-        pedidos = datos || {};
-        if (isLoggedIn) renderizarPedidosAdmin();
-      });
-      
-      isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-      if(isLoggedIn) {
-        mostrarPanelAdmin();
+      // Cargar datos de administrador solo si está logueado
+      if (isLoggedIn) {
+        console.log('Cargando datos de administrador...');
+        
+        obtenerDatosFirebase('reservas', (datos) => {
+          reservas = datos || {};
+          renderizarReservasAdmin();
+          console.log('Reservas cargadas:', Object.keys(reservas).length);
+        });
+        
+        obtenerDatosFirebase('solicitudes-trabajo', (datos) => {
+          solicitudesTrabajo = datos || {};
+          renderizarSolicitudesAdmin();
+          console.log('Solicitudes cargadas:', Object.keys(solicitudesTrabajo).length);
+        });
+        
+        obtenerDatosFirebase('ordenes', (datos) => {
+          pedidos = datos || {};
+          renderizarPedidosAdmin();
+          console.log('Pedidos cargados:', Object.keys(pedidos).length);
+        });
       }
       
       renderizarTestimonios();
       actualizarContadorCarrito();
+    }
+
+    // Inicialización
+    document.addEventListener('DOMContentLoaded', () => {
+      AOS.init({duration:1000,once:true});
+      
+      // Verificar el estado de autenticación al cargar la página
+      verificarEstadoAutenticacion();
     });
 
     // Funciones de renderizado
@@ -1499,19 +1530,6 @@
         estado: 'pending'
       };
       añadirElementoFirebase('ordenes', nuevoPedido);
-      let mensaje = `Hola, soy ${name} y he realizado un pedido con los siguientes productos:\n\n`;
-      carrito.forEach(item => { mensaje += `- ${item.name} (x${item.quantity}) - $${item.price} USD c/u\n`; });
-      mensaje += `\nTotal: $${total.toFixed(2)} USD\n\n`;
-      mensaje += `Datos de envío (Servientrega):\n`;
-      mensaje += `Teléfono: ${phone}\n`;
-      mensaje += `Dirección: ${address}\n`;
-      mensaje += `Ciudad: ${city}\n`;
-      if(notes) mensaje += `Observaciones: ${notes}\n`;
-      mensaje += `\nHe realizado la transferencia al Banco Pichincha, cuenta 20026669966 a nombre de Ingrid Montes Flores y adjunto el comprobante.`;
-      const encodedMensaje = encodeURIComponent(mensaje);
-      const whatsappBtn = document.getElementById('whatsapp-payment-btn');
-      whatsappBtn.href = `https://wa.me/593990532307?text=${encodedMensaje}`;
-      whatsappBtn.target = '_blank';
       
       const paymentInfo = document.getElementById('payment-info');
       paymentInfo.classList.add('active');
@@ -1537,6 +1555,40 @@
       carrito = [];
       actualizarContadorCarrito();
       renderizarCarrito();
+    }
+    
+    // CORREGIDO: Función para enviar comprobante por WhatsApp
+    function enviarComprobanteWhatsApp() {
+      const name = document.getElementById('checkout-name').value.trim();
+      const phone = document.getElementById('checkout-phone').value.trim();
+      const address = document.getElementById('checkout-address').value.trim();
+      const city = document.getElementById('checkout-city').value.trim();
+      const notes = document.getElementById('checkout-notes').value.trim();
+      
+      let mensaje = `Hola, soy ${name} y he realizado un pedido con los siguientes productos:\n\n`;
+      
+      // Recuperar los productos del último pedido
+      const ultimoPedido = Object.values(pedidos).sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      })[0];
+      
+      if (ultimoPedido && ultimoPedido.items) {
+        ultimoPedido.items.forEach(item => {
+          mensaje += `- ${item.name} (x${item.quantity}) - $${item.price} USD c/u\n`;
+        });
+        mensaje += `\nTotal: $${ultimoPedido.total} USD\n\n`;
+      }
+      
+      mensaje += `Datos de envío (Servientrega):\n`;
+      mensaje += `Teléfono: ${phone}\n`;
+      mensaje += `Dirección: ${address}\n`;
+      mensaje += `Ciudad: ${city}\n`;
+      if(notes) mensaje += `Observaciones: ${notes}\n`;
+      mensaje += `\nHe realizado la transferencia al Banco Pichincha, cuenta 20026669966 a nombre de Ingrid Montes Flores y adjunto el comprobante.`;
+      
+      const encodedMensaje = encodeURIComponent(mensaje);
+      // CORREGIDO: Usar el número de teléfono correcto y abrir en una nueva pestaña
+      window.open(`https://wa.me/5939930452286?text=${encodedMensaje}`, '_blank');
     }
     
     function toggleCart() {
@@ -1578,7 +1630,7 @@
       });
     });
 
-    // Login
+    // Login - CORREGIDO
     const footerLoginBtn = document.getElementById('footerLoginBtn');
     const loginModal = document.getElementById('loginModal');
     const closeModal = document.getElementById('closeModal');
@@ -1615,6 +1667,8 @@
         isLoggedIn = true;
         renderizarPanelAdmin();
         loginForm.reset();
+        // CORREGIDO: Recargar datos después de iniciar sesión
+        cargarTodosLosDatos();
       } else {
         mostrarNotificación('Usuario o contraseña incorrectos', 'error');
         loginForm.reset();
@@ -1635,10 +1689,9 @@
       loginForm.reset();
     });
 
-    // Reservas
+    // Reservas - CORREGIDO
     const form = document.getElementById('form-reserva');
     const confirmacionReserva = document.getElementById('confirmacion-reserva');
-    const btnWhatsAppConfirm = document.getElementById('btn-whatsapp-confirm');
     const telefonoInput = document.getElementById('telefono');
     
     telefonoInput.addEventListener('input', function(e) {
@@ -1668,13 +1721,28 @@
         estado: 'pending'
       };
       añadirElementoFirebase('reservas', nuevaReserva);
+      
+      // CORREGIDO: Guardar la reserva actual para usarla en el botón de WhatsApp
+      currentReserva = nuevaReserva;
+      
       confirmacionReserva.classList.add('active');
-      const mensaje = encodeURIComponent(`Hola, ${nombre}. Confirmo mi reserva para ${servicio} el día ${fecha} a las ${hora}. Mi teléfono es ${telefono}.`);
-      btnWhatsAppConfirm.href = `https://wa.me/593993045286?text=${mensaje}`;
-      btnWhatsAppConfirm.target = '_blank';
       form.reset();
       telefonoInput.value = '+593';
     });
+
+    // CORREGIDO: Función para confirmar reserva por WhatsApp
+    function confirmarReservaWhatsApp() {
+      if (!currentReserva) {
+        mostrarNotificación('No hay información de reserva disponible', 'error');
+        return;
+      }
+      
+      const mensaje = `Hola, soy ${currentReserva.nombre}. Confirmo mi reserva para ${currentReserva.servicio} el día ${currentReserva.fecha} a las ${currentReserva.hora}. Mi teléfono es ${currentReserva.telefono}.`;
+      const encodedMensaje = encodeURIComponent(mensaje);
+      
+      // CORREGIDO: Usar el número de teléfono correcto y abrir en una nueva pestaña
+      window.open(`https://wa.me/5939930452286?text=${encodedMensaje}`, '_blank');
+    }
 
     // Trabaja con nosotros
     const trabajaModal = document.getElementById('trabajaModal');
@@ -1999,26 +2067,28 @@
       }
     });
 
-    // Inicializar Firebase
+    // CORREGIDO: Inicializar Firebase sin sobreescribir datos existentes
     function inicializarFirebase() {
+      // Solo inicializar datos por defecto si no existen
       database.ref().once('value').then(snapshot => {
         const datos = snapshot.val();
-        if (!datos.exists()) {
-          const datosIniciales = {
-            productos: productosPorDefecto,
-            galeria: imagenesGaleriaPorDefecto,
-            contenido: contenidoEditablePorDefecto
-          };
-          database.ref().set(datosIniciales);
+        if (!datos || !datos.productos) {
+          // Solo crear productos si no existen
+          database.ref('productos').set(productosPorDefecto);
+          console.log('Productos por defecto creados');
+        }
+        if (!datos || !datos.galeria) {
+          // Solo crear galería si no existe
+          database.ref('galeria').set(imagenesGaleriaPorDefecto);
+          console.log('Galería por defecto creada');
+        }
+        if (!datos || !datos.contenido) {
+          // Solo crear contenido si no existe
+          database.ref('contenido').set(contenidoEditablePorDefecto);
+          console.log('Contenido por defecto creado');
         }
       }).catch(error => {
         console.error("Error al inicializar Firebase:", error);
-        const datosIniciales = {
-          productos: productosPorDefecto,
-          galeria: imagenesGaleriaPorDefecto,
-          contenido: contenidoEditablePorDefecto
-        };
-        database.ref().set(datosIniciales);
       });
     }
     
